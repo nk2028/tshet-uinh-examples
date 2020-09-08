@@ -111,7 +111,7 @@ function 韻母規則() {
 		else return !is('入聲') ? 'oun' : 'ak';
 	}
 	if (is('庚韻 合口 二等 或 耕韻')) return !is('入聲') ? 'oun' : 'ak';
-	if (is('庚韻 開口 三等 或 庚韻 合口 三等 或 清青韻')) return !is('入聲') ? 'ein' : 'eg';
+	if (is('庚韻 開口 三等 或 庚韻 合口 三等 或 清青韻')) return !is('入聲') ? 'ein' : 'ek';
 	// 曾攝
 	if (is('登韻')) return !is('入聲') ? 'oun' : 'ok';
 	if (is('蒸韻')) {

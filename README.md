@@ -3,9 +3,9 @@
 使用方法：
 
 ```
-https://cdn.jsdelivr.net/gh/nk2028/qieyun-examples@20200809/kyonh.js
-https://cdn.jsdelivr.net/gh/nk2028/qieyun-examples@20200809/baxter.js
-https://cdn.jsdelivr.net/gh/nk2028/qieyun-examples@20200809/unt.js
-https://cdn.jsdelivr.net/gh/nk2028/qieyun-examples@20200809/putonghua.js
-https://cdn.jsdelivr.net/gh/nk2028/qieyun-examples@20200809/baxter.js
+https://cdn.jsdelivr.net/gh/nk2028/qieyun-examples@20200908/kyonh.js
+https://cdn.jsdelivr.net/gh/nk2028/qieyun-examples@20200908/baxter.js
+https://cdn.jsdelivr.net/gh/nk2028/qieyun-examples@20200908/unt.js
+https://cdn.jsdelivr.net/gh/nk2028/qieyun-examples@20200908/putonghua.js
+https://cdn.jsdelivr.net/gh/nk2028/qieyun-examples@20200908/baxter.js
 ```
