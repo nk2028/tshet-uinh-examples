@@ -188,22 +188,27 @@ let 隔音符號 = "'";
 let 韻母 = 韻母規則();
 let 聲調 = 聲調規則();
 
-if (is('入聲'))
-	if (韻母.endsWith('m'))
+if (is('入聲')) {
+	if (韻母.endsWith('m')) {
 		韻母 = 韻母.slice(0, -1) + 'p';
-	else if (韻母.endsWith('n'))
+	} else if (韻母.endsWith('n')) {
 		韻母 = 韻母.slice(0, -1) + 't';
-	else if (韻母.endsWith('ng'))
+	} else if (韻母.endsWith('ng')) {
 		韻母 = 韻母.slice(0, -2) + 'k';
+	}
+}
 
-if (韻母.endsWith('d'))
+if (韻母.endsWith('d')) {
 	聲調 = '';
+}
 
-if (聲母.endsWith('r') && 韻母.startsWith('r'))
+if (聲母.endsWith('r') && 韻母.startsWith('r')) {
 	韻母 = 韻母.substr(1);
+}
 
-if (聲母.endsWith('j') && 韻母.startsWith('i') && 'aeou'.split('').some(x => 韻母.includes(x)))
+if (聲母.endsWith('j') && 韻母.startsWith('i') && 'aeou'.split('').some(x => 韻母.includes(x))) {
 	韻母 = 韻母.substr(1);
+}
 
 if
 ( is('幫組 一二三四等'
@@ -219,13 +224,16 @@ if
 + ' 或 云以母 三等'
 + ' 或 來母 一二三四等'
 + ' 或 日母 三等'
-))
+)) {
 	隔音符號 = '';
+}
 
-if (is('云母 一等'))  // 1444 倄小韻 i'uaix
+if (is('云母 一等')) {  // 1444 倄小韻 i'uaix
 	聲母 = 'i';
+}
 
-if (is('定母 三等'))  // 2237 地小韻 diih
+if (is('定母 三等')) {  // 2237 地小韻 diih
 	隔音符號 = '';
+}
 
 return 聲母 + 隔音符號 + 韻母 + 聲調;
