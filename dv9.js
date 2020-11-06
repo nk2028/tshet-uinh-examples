@@ -6,7 +6,7 @@
  * 函數接受音韻地位，返回對應的三日月綾香個人思考用語拼音
  */
 
-const is = x => 音韻地位.屬於(x);
+const is = (x) => 音韻地位.屬於(x);
 
 function 聲母規則() {
 	if (is('幫滂並母')) return 'h';
@@ -157,9 +157,9 @@ function 聲調規則() {
 	if (is('幫滂端透知徹精清心莊初生章昌書見溪影曉母')) {  // 全清、次清
 		if (is('平聲')) return 'ˉ';
 		if (is('上聲')) return 'ˊ';
-		if (is('去聲')) return '−';
+		if (is('去聲')) return 'ˇ';
 		if (is('入聲 深臻曾通攝')) return 'ˉ';
-		if (is('入聲')) return '−';
+		if (is('入聲')) return 'ˇ';
 	} else {
 		if (is('並定澄從邪崇俟船常羣匣母 上聲')) return 'ˇ';  // 全濁上變去
 		if (is('上聲')) return 'ˊ';

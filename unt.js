@@ -6,7 +6,7 @@
  * 函數接受音韻地位，返回對應的 unt 切韻朗讀音
  */
 
-const is = x => 音韻地位.屬於(x);
+const is = (x) => 音韻地位.屬於(x);
 
 function 聲母規則() {
 	if (is('幫母')) return 'p';
@@ -125,10 +125,8 @@ function 韻母規則() {
 	if (is('幽韻')) return 'ɥÿ';
 	if (is('尤韻')) return 'ɥ̈u';
 	if (is('侯韻')) {  // 根據設定，侯韻幫組為 u，其他為 ɘu
-		if (is('幫組'))
-			return 'u';
-		else
-			return 'ɘu';
+		if (is('幫組')) return 'u';
+		return 'ɘu';
 	}
 	// 深攝
 	if (is('侵韻')) return 'ʳim';
@@ -173,8 +171,8 @@ function 韻母規則() {
 }
 
 function 聲調規則() {
-	const is清 = is('幫滂端透知徹精清心莊初生章昌書見溪影曉母')
-		, is全濁 = is('並定澄從邪崇俟常船羣匣母');
+	const is清 = is('幫滂端透知徹精清心莊初生章昌書見溪影曉母'),
+		is全濁 = is('並定澄從邪崇俟常船羣匣母');
 		// 次濁：明泥孃疑云以來日
 
 	if (is('平聲')) return is清 ? '˦' : '˨˩';
@@ -190,54 +188,60 @@ let 聲調 = 聲調規則();
 
 // 處理重紐 [^4]
 if (韻母.startsWith('ʳ')) {
-	if (is('知莊組'))
+	if (is('知莊組')) {
 		韻母 = 'ɻ' + 韻母.substr(1);  // 無重紐對立，認定為重紐B類
-	else if (is('端精章組 或 以來日母'))
+	} else if (is('端精章組 或 以來日母')) {
 		韻母 = 韻母.substr(1);  // 無重紐對立，認定為重紐A類
-	else if (is('重紐A類'))
+	} else if (is('重紐A類')) {
 		韻母 = 韻母.substr(1);  // 有重紐對立，默認為重紐A類
-	else
+	} else {
 		韻母 = 'ɻ' + 韻母.substr(1);  // 有重紐對立，重紐B類
+	}
 }
 
 // 處理脣音
 if (is('幫組')) {
 	// 除三等C类外，其他韵母与帮组p相拼时均为开口（不含 [ʷ] 成分）。
-	if (韻母.startsWith('ɥ') && !韻母.startsWith('ɥ̈'))
+	if (韻母.startsWith('ɥ') && !韻母.startsWith('ɥ̈')) {
 		韻母 = 'j' + 韻母.substr(1);
-	else if (韻母.startsWith('w') && !韻母.startsWith('ẅ'))
+	} else if (韻母.startsWith('w') && !韻母.startsWith('ẅ')) {
 		韻母 = 韻母.substr(1);
 	// 三等C类与帮组p相拼时是ɥ̈，即 [ÿ] 对应的半元音。[^5]
-	if (is('三等') && 韻母.startsWith('ẅ'))
+	} if (is('三等') && 韻母.startsWith('ẅ')) {
 		韻母 = 'ɥ̈' + 韻母.substr(2);
+	}
 }
 
 // 調整 ɻ、w 的顺序 [^6]
-if (韻母.startsWith('wɻ') && is('知莊組'))
+if (韻母.startsWith('wɻ') && is('知莊組')) {
 	韻母 = 'ɻw' + 韻母.substr(2);
+}
 
 // 以母簡化拼式
 // 總結：以母三A/三B，以 j 或 ɥ 起始時，省略聲母
-if (is('以母 三等 支脂祭眞仙宵諄臻麻清庚蒸侵鹽韻') && (韻母.startsWith('j') || 韻母.startsWith('ɥ')))
+if (is('以母 三等 支脂祭眞仙宵諄臻麻清庚蒸侵鹽韻') && (韻母.startsWith('j') || 韻母.startsWith('ɥ'))) {
 	聲母 = '';
+}
 
 // 處理入聲韻
 if (is('入聲')) {
-	if (韻母.endsWith('m'))
+	if (韻母.endsWith('m')) {
 		韻母 = 韻母.slice(0, -1) + 'p';
-	else if (韻母.endsWith('n'))
+	} else if (韻母.endsWith('n')) {
 		韻母 = 韻母.slice(0, -1) + 't';
-	else if (韻母.endsWith('ɲ'))
+	} else if (韻母.endsWith('ɲ')) {
 		韻母 = 韻母.slice(0, -1) + 'c';
-	else if (韻母.endsWith('ŋ'))
+	} else if (韻母.endsWith('ŋ')) {
 		韻母 = 韻母.slice(0, -1) + 'k';
-	else if (韻母.endsWith('ŋʷ'))
+	} else if (韻母.endsWith('ŋʷ')) {
 		韻母 = 韻母.slice(0, -2) + 'kʷ';
+	}
 }
 
 // 當没有聲母，韻母以 ɨ 起始時，添加聲母 j̈
-if (聲母 == '' && 韻母 == 'ɨ')
+if (聲母 == '' && 韻母 == 'ɨ') {
 	聲母 = 'j̈';
+}
 
 return 聲母 + 韻母 + 聲調;
 
