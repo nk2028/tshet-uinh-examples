@@ -8,12 +8,12 @@
 
 const is = (x) => 音韻地位.屬於(x);
 
-// 一些开关
+// 开关
 const 见系非三等用小舌音 = true;
 const 晓母非三等用小舌音 = true;
 const 知组声母用卷舌塞音 = false; // 打开：ʈ，关闭：tɹ。默认关闭
 const 支鱼虞韵用渐央元音 = false; // 包括钟韵
-const 三子韵核用底层表达 = false;
+const 三子韵核用专属元音 = false;
 const 二等元音用双下横线 = false; // 打开：双下横线 a̳ (U+0333)，关闭：下等号 a͇ (U+0347)。默认关闭，但 Times New Roman 把这两个附加符号弄反了
 const 歌系韵核用前低元音 = false;
 const 豪韵韵核用半低元音 = true;
@@ -25,8 +25,9 @@ const 通江宕摄用小舌韵尾 = true;
 const 祭泰夬废用龈后韵尾 = true; // 打开：ɹ；关闭：j
 const 声调符号用五度标记 = true;
 const 声调附加符标韵核上 = true; // 关闭：标在音节前
-
 const 精组高元音省略介音 = true; // “踪”打开：tsʉɔɴ˦˧，关闭：tsɹʉɔɴ˦˧。因为会导致拼写太长，默认打开
+
+// TODO: 开关预设
 
 function getConsonant() {
 	if (is('幫母')) return 'p';
@@ -80,37 +81,23 @@ function getInitial() {
 	return result;
 }
 
-let is前元音韵 = is('支脂祭眞諄臻仙宵麻庚清蒸幽侵鹽韻');
+let is前元音三等韵 = is('支脂祭眞諄臻仙宵麻庚清蒸幽侵鹽韻');
 
 function getMedial() {
+	// 锐音声母
 	if (!is('三等')) return '';
 	if (is('莊章組 或 以云日母')) return '';
 	if (is('知組')) return 知组声母用卷舌塞音 ? 'ɹ' : '';
 	if (is('來母')) return 'ɹ';
 	if (is('端精組')) {
-		if (is前元音韵) return is('合口') ? 'ɥ' : 'j';
+		if (is前元音三等韵) return is('合口') ? 'ɥ' : 'j';
 		return 'ɹ';
 	}
-	// 其余是钝音
-	if (is('重紐A類 或 諄清麻清幽韻')) return is('合口') ? 'ɥ' : 'j';
+	// 钝音声母
+	if (is('重紐A類 或 諄麻清幽韻')) return is('合口') ? 'ɥ' : 'j';
 	if (is('重紐B類 或 臻庚蒸韻')) return 'ɹ';
 	if (is('幫組')) return 'β';
 	return is('合口') ? 'ɥ̈' : 'j̈';
-}
-
-function getCoda() {
-	if (is('通江宕攝') && 通江宕摄用小舌韵尾) return is('入聲') ? 'q' : 'ɴ';
-	if (is('通江宕梗曾攝')) return is('入聲') ? 'k' : 'ŋ';
-	if (is('深咸攝')) return is('入聲') ? 'p' : 'm';
-	if (is('微韻')) return 'i'; // 为了方便，把微韵拆成 i 韵尾
-	if (is('蟹攝')) {
-		if (is('佳韻')) return '';
-		if (is('祭泰夬廢韻') && 祭泰夬废用龈后韵尾) return 'ɹ';
-		return 'j';
-	}
-	if (is('臻山攝')) return is('入聲') ? 't' : 'n';
-	if (is('效攝')) return 'w';
-	return '';
 }
 
 function getVowel() {
@@ -143,8 +130,30 @@ function getNucleus() {
 	if (is('清韻') && 清韵韵核用次低元音) return 'ɐ';
 	if (is('覃韻') && 覃韵韵核用半低元音) return 'ʌ';
 	if (is('豪韻') && 豪韵韵核用半低元音) return 'ʌ';
-	if (is('莊組 臻攝') && 庄组臻摄用舌冠韵核) return 'ɹ̩';
-	return getVowel();
+
+	let result = getVowel();
+	if (二等元音用双下横线) {
+		result = result.replace('͇', '̳');
+	}
+	if (歌系韵核用前低元音) {
+		result = result.replace('ɑ', 'a');
+	}
+	return result;
+}
+
+function getCoda() {
+	if (is('通江宕攝') && 通江宕摄用小舌韵尾) return is('入聲') ? 'q' : 'ɴ';
+	if (is('通江宕梗曾攝')) return is('入聲') ? 'k' : 'ŋ';
+	if (is('深咸攝')) return is('入聲') ? 'p' : 'm';
+	if (is('微韻')) return 'i'; // 为了方便，把微韵拆成 i 韵尾
+	if (is('蟹攝')) {
+		if (is('佳韻')) return '';
+		if (is('祭泰夬廢韻') && 祭泰夬废用龈后韵尾) return 'ɹ';
+		return 'j';
+	}
+	if (is('臻山攝')) return is('入聲') ? 't' : 'n';
+	if (is('效攝')) return 'w';
+	return '';
 }
 
 function getTone() {
@@ -172,19 +181,18 @@ let nucleus = getNucleus();
 let coda = getCoda();
 let tone = getTone();
 
-if (!三子韵核用底层表达) {
+if (!三子韵核用专属元音) {
 	if (nucleus == 'ɪ') {
-		nucleus = is前元音韵 ? 'i' : is('合口') ? 'ʉ' : 'ɨ';
+		nucleus = is前元音三等韵 ? 'i' : is('合口') ? 'ʉ' : 'ɨ';
+		if (庄组臻摄用舌冠韵核 && is('莊組 臻攝')) {
+			nucleus = 'ɹ̩';
+		}
 	} else if (nucleus == 'ɜ') {
-		nucleus = is前元音韵 ? 'e' : 'ə';
+		nucleus = is前元音三等韵 ? 'e' : 'ə';
 	} else if (nucleus == 'ɐ') {
 		nucleus = 'æ';
 	}
 }
-
-if (二等元音用双下横线) nucleus = nucleus.replace('͇', '̳');
-
-if (歌系韵核用前低元音) nucleus = nucleus.replace('ɑ', 'a');
 
 if (nucleus.startsWith('i') && (medial == 'j' || medial == 'ɥ')
 	|| nucleus.startsWith('ɨ') && (medial == 'j̈')
@@ -192,10 +200,14 @@ if (nucleus.startsWith('i') && (medial == 'j' || medial == 'ɥ')
 	medial = '';
 }
 
-if (精组高元音省略介音 && is('精組') && (nucleus.startsWith('ɨ') || nucleus.startsWith('ʉ'))) {
+if (精组高元音省略介音 && is('精組')
+	&& (nucleus.startsWith('ɨ') || nucleus.startsWith('ʉ'))) {
 	medial = '';
 }
 
 if (声调符号用五度标记) return initial + medial + nucleus + coda + tone;
+
 if (声调附加符标韵核上) return initial + medial + nucleus + tone + coda;
-return ' ' + tone + initial + medial + nucleus + coda;
+
+// 需要用无中断空格，否则位于行首的空格可能被浏览器忽略
+return '\xA0' + tone + initial + medial + nucleus + coda;
