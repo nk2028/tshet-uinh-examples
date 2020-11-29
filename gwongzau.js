@@ -1,5 +1,4 @@
 /* 推導廣州音 (Beta)
- * <link>
  *
  * 説明
  * 以下內容為生成推導廣州音的函數體
@@ -55,7 +54,10 @@ function 聲母規則() {
 		return '';
 	}
 	if (is('曉匣母')) return 'h';  // 曉匣母：h+f >> w
-	if (is('以母')) return 'j';
+	if (is('以母')) {
+		if (is('三等')) return 'j';
+		return '';
+	}
 
 	throw new Error('無聲母規則');
 }
@@ -76,7 +78,7 @@ function 韻母規則() {
 
 	// 止攝
 	if (is('支脂之韻 開口')) {
-		if (is('幫端組 或 來見溪羣曉匣母')) return 'ei';
+		if (is('幫端組 或 來孃見溪羣曉匣母')) return 'ei';
 		return 'i';
 	}
 	if (is('微韻 開口')) {
@@ -104,9 +106,9 @@ function 韻母規則() {
 	if (is('魚虞韻')) {
 		if (is('幫滂並母')) return 'u';
 		if (is('明母')) return 'ou';
-		if (is('端精組 或 來見溪羣曉匣母')) return 'eoi';
-		if (is('知章組 或 日疑影云以母')) return 'yu';
-		return 'o';  // 莊組
+		if (is('端精組 或 來孃見溪羣曉匣母')) return 'eoi';
+		if (is('莊組')) return 'o';
+		return 'yu';
 	}
 
 	// 蟹攝
@@ -246,8 +248,7 @@ function 聲調規則() {
 		if (is('平聲')) return '1';
 		if (is('上聲')) return '2';
 		if (is('去聲')) return '3';
-		if (is('入聲 深臻曾通攝')) return '1';
-		if (is('入聲')) return '3';
+		if (is('入聲')) return 'x';  // 據元音長短判斷，詳後
 	} else {
 		if (is('平聲')) return '4';
 		if (is('並定澄從邪崇俟船常羣匣母 上聲')) return '6';  // 全濁上變去
@@ -262,26 +263,8 @@ let 聲母 = 聲母規則();
 let 韻母 = 韻母規則();
 let 聲調 = 聲調規則();
 
-if (is('合口') && (韻母.startsWith('a') || 韻母.startsWith('i') || 韻母.startsWith('o'))) {
-	if (聲母 === 'g') 聲母 = 'gw';
-	if (聲母 === 'k') 聲母 = 'kw';
-	if (聲母 === '') 聲母 = 'w';
-}
-
-if (is('合口') && 聲母 === 'h') {
-	聲母 = 'f';
-}
-
-if (聲母 === 'ng' && (韻母.startsWith('i') || 韻母.startsWith('u') || 韻母.startsWith('yu'))) {
-	聲母 = '';
-}
-
-if (聲母 === '' && (韻母.startsWith('i') || 韻母.startsWith('yu'))) {
-	聲母 = 'j';
-}
-
-if (聲母 === '' && 韻母 === 'u') {
-	聲母 = 'w';
+if (韻母 == null) {
+	throw new Error('該音韻地位有音無字，無法判斷');
 }
 
 if (is('入聲')) {
@@ -292,6 +275,47 @@ if (is('入聲')) {
 	} else if (韻母.endsWith('ng')) {
 		韻母 = 韻母.slice(0, -2) + 'k';
 	}
+}
+
+if (聲調 === 'x') {
+	const is長元音 = {
+		'aap': true, 'aat': true, 'ak': false, 'ap': false, 'at': false,
+		'eot': false,
+		'ik': false, 'ip': true, 'it': true,
+		'oek': true, 'ok': true, 'ot': true,
+		'uk': false, 'ut': true,
+		'yut': true
+	}[韻母];
+	if (is長元音 == null) {
+		throw new Error('無法判斷元音長短：' + 韻母);
+	}
+	聲調 = is長元音 ? '3' : '1';
+}
+
+if (is('合口') && (韻母.startsWith('a') || 韻母.startsWith('i') || (韻母.startsWith('o') && !韻母.startsWith('oe')))) {
+	if (聲母 === 'g') 聲母 = 'gw';
+	if (聲母 === 'k') 聲母 = 'kw';
+	if (聲母 === '') 聲母 = 'w';
+}
+
+if (is('合口') && 聲母 === 'h' && !['eoi', 'oe', 'yun', 'yut'].includes(韻母)) {
+	聲母 = 'f';
+}
+
+if (聲母 === 'h' && 韻母 === 'u') {
+	聲母 = 'f';
+}
+
+if (聲母 === 'ng' && (韻母.startsWith('i') || 韻母.startsWith('u') || 韻母.startsWith('yu') || 韻母.startsWith('oe'))) {
+	聲母 = '';
+}
+
+if (聲母 === '' && (韻母.startsWith('i') || 韻母.startsWith('yu') || 韻母.startsWith('oe'))) {
+	聲母 = 'j';
+}
+
+if (聲母 === '' && ['u', 'ui', 'un', 'ut'].includes(韻母)) {
+	聲母 = 'w';
 }
 
 return 聲母 + 韻母 + 聲調;
