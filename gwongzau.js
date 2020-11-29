@@ -10,15 +10,15 @@ const is = (x) => 音韻地位.屬於(x);
 
 function 聲母規則() {
 	if (is('幫母')) {
-		if (is('合口 三等')) return 'f';
+		if (is('東韻 三等 或 鍾微虞廢文元陽尤凡韻')) return 'f';
 		return 'b';
 	}
 	if (is('滂母')) {
-		if (is('合口 三等')) return 'f';
+		if (is('東韻 三等 或 鍾微虞廢文元陽尤凡韻')) return 'f';
 		return 'p';
 	}
 	if (is('並母')) {
-		if (is('合口 三等')) return 'f';
+		if (is('東韻 三等 或 鍾微虞廢文元陽尤凡韻')) return 'f';
 		if (is('平聲')) return 'p';
 		return 'b';
 	}
