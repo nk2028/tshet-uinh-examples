@@ -1,8 +1,12 @@
-const is = (x) => 音韻地位.屬於(x);
+/* 推導廣州音 (Beta)
+ * <link>
+ *
+ * 説明
+ * 以下內容為生成推導廣州音的函數體
+ * 函數接受音韻地位，返回對應的推導廣州音
+ */
 
-const is脣音 = is('幫組');
-const is舌齒 = is('端知精莊章組 或 來日母');
-const is牙喉 = !is脣音 && !is舌齒;
+const is = (x) => 音韻地位.屬於(x);
 
 function 聲母規則() {
 	if (is('幫母')) {
@@ -15,7 +19,7 @@ function 聲母規則() {
 	}
 	if (is('並母')) {
 		if (is('合口 三等')) return 'f';
-		if (is('平上聲')) return 'p';
+		if (is('平聲')) return 'p';
 		return 'b';
 	}
 	if (is('明母')) return 'm';
@@ -23,69 +27,44 @@ function 聲母規則() {
 	if (is('端母')) return 'd';
 	if (is('透母')) return 't';
 	if (is('定母')) {
-		if (is('平上聲')) return 't';
+		if (is('平聲')) return 't';
 		return 'd';
 	}
-	if (is('泥母')) return 'n';
+	if (is('泥孃母')) return 'n';
+	if (is('來母')) return 'l';
 
-	if (is('知母')) return 'z';
-	if (is('徹母')) return 'c';
-	if (is('澄母')) {
-		if (is('平上聲')) return 'c';
+	if (is('知精邪莊俟章母')) return 'z';  // 邪母：z > c ≈ s
+	if (is('徹清初昌母')) return 'c';
+	if (is('澄從崇母')) {
+		if (is('平聲')) return 'c';
 		return 'z';
 	}
-	if (is('孃母')) return 'n';
-
-	if (is('精母')) return 'z';
-	if (is('清母')) return 'c';
-	if (is('從母')) {
-		if (is('平上聲')) return 'c';
-		return 'z';
-	}
-	if (is('心母')) return 's';
-	if (is('邪母')) return 's';
-
-	if (is('莊母')) return 'z';
-	if (is('初母')) return 'c';
-	if (is('崇母')) {
-		if (is('平上聲')) return 'c';
-		return 'z';
-	}
-	if (is('生母')) return 's';
-	if (is('俟母')) return 'z';
-
-	if (is('章母')) return 'z';
-	if (is('昌母')) return 'c';
-	if (is('常母')) {
-		if (is('平上聲')) return 'c';
-		return 'z';
-	}
-	if (is('書母')) return 's';
-	if (is('船母')) return 'z';
+	if (is('心生常書船母')) return 's';
+	if (is('日母')) return 'j';
 
 	if (is('見母')) return 'g';
-	if (is('溪母')) return 'k';
+	if (is('溪母')) return 'h';  // 溪母：h+f >> k
 	if (is('羣母')) {
-		if (is('平上聲')) return 'k';
+		if (is('平聲')) return 'k';
 		return 'g';
 	}
 	if (is('疑母')) return 'ng';
 
-	if (is('影母')) {
-		if (is('三等')) return 'j';
+	if (is('影云母')) {
+		if (is('三四等 開口')) return 'j';  // 合口 w-
 		return '';
 	}
-	if (is('曉母')) return 'h';
-	if (is('匣母')) return 'h';
-	if (is('云母')) return 'j';
+	if (is('曉匣母')) return 'h';  // 曉匣母：h+f >> w
 	if (is('以母')) return 'j';
-	if (is('來母')) return 'l';
-	if (is('日母')) return 'j';
 
 	throw new Error('無聲母規則');
 }
 
 function 韻母規則() {
+	const is脣音 = is('幫組');
+	const is舌齒 = is('端知精莊章組 或 來日母');
+	const is牙喉 = !is脣音 && !is舌齒;
+
 	// 通攝
 	if (is('東冬鍾韻')) return 'ung';
 
@@ -283,16 +262,26 @@ let 聲母 = 聲母規則();
 let 韻母 = 韻母規則();
 let 聲調 = 聲調規則();
 
-const 合口介音 = is('合口') &&
-	(聲母.startsWith('g') || 聲母.startsWith('k')) &&
-	(韻母.startsWith('a') || 韻母.startsWith('i') || 韻母.startsWith('o')) ? 'w' : '';
-
-if (聲母 == 'ng' && (韻母.startsWith('i') || 韻母.startsWith('yu'))) {
-	聲母 = 'j';  // ng- 聲母不接細音
+if (is('合口') && (韻母.startsWith('a') || 韻母.startsWith('i') || 韻母.startsWith('o'))) {
+	if (聲母 === 'g') 聲母 = 'gw';
+	if (聲母 === 'k') 聲母 = 'kw';
+	if (聲母 === '') 聲母 = 'w';
 }
 
-if (聲母 == '' && (韻母.startsWith('i') || 韻母.startsWith('yu'))) {
+if (is('合口') && 聲母 === 'h') {
+	聲母 = 'f';
+}
+
+if (聲母 === 'ng' && (韻母.startsWith('i') || 韻母.startsWith('u') || 韻母.startsWith('yu'))) {
+	聲母 = '';
+}
+
+if (聲母 === '' && (韻母.startsWith('i') || 韻母.startsWith('yu'))) {
 	聲母 = 'j';
+}
+
+if (聲母 === '' && 韻母 === 'u') {
+	聲母 = 'w';
 }
 
 if (is('入聲')) {
@@ -305,4 +294,4 @@ if (is('入聲')) {
 	}
 }
 
-return 聲母 + 合口介音 + 韻母 + 聲調;
+return 聲母 + 韻母 + 聲調;
