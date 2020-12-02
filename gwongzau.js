@@ -1,4 +1,5 @@
-/* 推導廣州音 (Beta)
+/* 推導廣州音
+ * https://ayaka.shn.hk/teoi/
  *
  * 説明
  * 以下內容為生成推導廣州音的函數體
@@ -251,6 +252,12 @@ function 聲調規則() {
 	throw new Error('無聲調規則');
 }
 
+function is長元音(韻母) {
+	if (['aap', 'aat', 'ip', 'it', 'oek', 'ok', 'ot', 'ut', 'yut'].includes(韻母)) return true;
+	if (['ak', 'ap', 'at', 'eot', 'ik', 'uk'].includes(韻母)) return false;
+	throw new Error('無法判斷元音長短：' + 韻母);
+}
+
 let 聲母 = 聲母規則();
 let 韻母 = 韻母規則();
 let 聲調 = 聲調規則();
@@ -266,19 +273,7 @@ if (is('入聲')) {
 }
 
 if (聲調 === 'x') {
-	const is長元音 = {
-		'aap': true, 'aat': true,
-		'ak': false, 'ap': false, 'at': false,
-		'eot': false,
-		'ik': false, 'ip': true, 'it': true,
-		'oek': true, 'ok': true, 'ot': true,
-		'uk': false, 'ut': true,
-		'yut': true
-	}[韻母];
-	if (is長元音 == null) {
-		throw new Error('無法判斷元音長短：' + 韻母);
-	}
-	聲調 = is長元音 ? '3' : '1';
+	聲調 = is長元音(韻母) ? '3' : '1';
 }
 
 if (is('合口') && (韻母.startsWith('a') || 韻母.startsWith('i') || (韻母.startsWith('o') && !韻母.startsWith('oe')))) {
