@@ -1,12 +1,12 @@
 # 《切韻》音系自動推導實例
 
-使用方法：
+## 使用方法
 
 ```
 https://cdn.jsdelivr.net/gh/nk2028/qieyun-examples@<commit-sha>/<filename>
 ```
 
-## 本倉庫收錄實例列表
+## 收錄實例列表
 
 中文名稱 | 英文名稱 | 檔案名
 :- | :- | :-
