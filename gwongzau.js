@@ -39,7 +39,6 @@ function 聲母規則() {
 		return 'z';
 	}
 	if (is('心生常書船母')) return 's';
-	if (is('日母')) return 'j';
 
 	if (is('見母')) return 'g';
 	if (is('溪母')) return 'h';  // 溪母：h+f >> k
@@ -54,8 +53,8 @@ function 聲母規則() {
 		return '';
 	}
 	if (is('曉匣母')) return 'h';  // 曉匣母：h+f >> w
-	if (is('以母')) {
-		if (is('三等')) return 'j';
+	if (is('日以母')) {
+		if (is('三四等')) return 'j';
 		return '';
 	}
 
@@ -194,7 +193,10 @@ function 韻母規則() {
 	// 果攝
 	if (is('歌戈韻 一等')) return 'o';
 	if (is('戈韻 三等 開口')) return 'e';
-	if (is('戈韻 三等 合口')) return 'oe';
+	if (is('戈韻 三等 合口')) {
+		if (is脣音) return 'e';
+		return 'oe';
+	}
 
 	// 假攝
 	if (is('麻韻 二等')) return 'aa';
@@ -220,25 +222,15 @@ function 韻母規則() {
 	if (is('尤侯幽韻')) return 'au';
 
 	// 深攝
-	if (is('侵韻')) {
-		if (is脣音) return 'an';
-		return 'am';
-	}
+	if (is('侵韻')) return 'am';  // 脣音 -n，詳後
 
 	// 咸攝
 	if (is('覃談凡韻')) {
-		if (is脣音) return 'aan';
-		if (is舌齒) return 'aam';
-		return 'am';
+		if (is牙喉) return 'am';
+		return 'aam';  // 脣音 -n，詳後
 	}
-	if (is('咸銜韻')) {
-		if (is脣音) return 'aan';
-		return 'aam';
-	}
-	if (is('鹽添嚴韻')) {
-		if (is脣音) return 'in';
-		return 'im';
-	}
+	if (is('咸銜韻')) return 'aam';  // 脣音 -n，詳後
+	if (is('鹽添嚴韻')) return 'im';  // 脣音 -n，詳後
 
 	throw new Error('無韻母規則');
 }
@@ -268,18 +260,15 @@ if (韻母 == null) {
 }
 
 if (is('入聲')) {
-	if (韻母.endsWith('m')) {
-		韻母 = 韻母.slice(0, -1) + 'p';
-	} else if (韻母.endsWith('n')) {
-		韻母 = 韻母.slice(0, -1) + 't';
-	} else if (韻母.endsWith('ng')) {
-		韻母 = 韻母.slice(0, -2) + 'k';
-	}
+	if (韻母.endsWith('m')) 韻母 = 韻母.slice(0, -1) + 'p';
+	else if (韻母.endsWith('n')) 韻母 = 韻母.slice(0, -1) + 't';
+	else if (韻母.endsWith('ng')) 韻母 = 韻母.slice(0, -2) + 'k';
 }
 
 if (聲調 === 'x') {
 	const is長元音 = {
-		'aap': true, 'aat': true, 'ak': false, 'ap': false, 'at': false,
+		'aap': true, 'aat': true,
+		'ak': false, 'ap': false, 'at': false,
 		'eot': false,
 		'ik': false, 'ip': true, 'it': true,
 		'oek': true, 'ok': true, 'ot': true,
@@ -298,7 +287,7 @@ if (is('合口') && (韻母.startsWith('a') || 韻母.startsWith('i') || (韻母
 	if (聲母 === '') 聲母 = 'w';
 }
 
-if (is('合口') && 聲母 === 'h' && !['eoi', 'oe', 'yun', 'yut'].includes(韻母)) {
+if (is('合口') && 聲母 === 'h' && !(韻母.startsWith('eo') || 韻母.startsWith('oe') || 韻母.startsWith('yu'))) {
 	聲母 = 'f';
 }
 
@@ -306,16 +295,21 @@ if (聲母 === 'h' && 韻母 === 'u') {
 	聲母 = 'f';
 }
 
-if (聲母 === 'ng' && (韻母.startsWith('i') || 韻母.startsWith('u') || 韻母.startsWith('yu') || 韻母.startsWith('oe'))) {
+if (聲母 === 'ng' && (韻母.startsWith('i') || 韻母.startsWith('u') || 韻母.startsWith('oe') || 韻母.startsWith('yu'))) {
 	聲母 = '';
 }
 
-if (聲母 === '' && (韻母.startsWith('i') || 韻母.startsWith('yu') || 韻母.startsWith('oe'))) {
+if (聲母 === '' && (韻母.startsWith('i') || 韻母.startsWith('oe') || 韻母.startsWith('yu'))) {
 	聲母 = 'j';
 }
 
 if (聲母 === '' && ['u', 'ui', 'un', 'ut'].includes(韻母)) {
 	聲母 = 'w';
+}
+
+if (['b', 'p', 'm', 'f'].includes(聲母)) {
+	if (韻母.endsWith('m')) 韻母 = 韻母.slice(0, -1) + 'n';
+	else if (韻母.endsWith('p')) 韻母 = 韻母.slice(0, -1) + 't';
 }
 
 return 聲母 + 韻母 + 聲調;
