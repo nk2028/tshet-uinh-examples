@@ -112,19 +112,20 @@ function velarToUvular(consonant) {
 }
 
 function getGlide() {
+	if (is('云母 灰韻')) return 'ɹ'; // “倄”小韵
+
 	// 一二四等无介音
 	if (!is('三等')) return '';
-	
-	// 庄组庚韵一律归二等
-	if (is('莊組庚韻')) return '';
 
 	// 锐音声母三等介音一律用 /ɹ/
 	if (is锐) return 'ɹ';
 
 	// 钝音声母分三 A、B、C
 	// 蒸韵帮组和合口归三 B，“抑𡊁”二字也归三 B，其余归三 A
+	// 云母前元音韵归三 B
 	if (is('重紐B類 或 庚臻韻')) return 'ɹ';
-	if (is('幫組蒸韻 或 合口蒸韻') || '抑𡊁'.includes(字頭)) return 'ɹ';
+	if (is('幫組 蒸韻 或 合口 蒸韻') || '抑𡊁'.includes(字頭)) return 'ɹ';
+	if (is('云母 支脂祭眞諄臻仙宵麻庚清蒸幽侵鹽韻')) return 'ɹ';
 	if (is('重紐A類 或 麻蒸清諄幽韻')) return 'j';
 	return 'j̈'; // 三 C
 }
@@ -157,7 +158,8 @@ function getNucleus() {
 	if (is('　青添齊先蕭韻')) return 'e'; // −high, −low, +front, −back, −rnd, +tense
 	if (is('　登覃咍痕豪韻')) return 'ə'; // −high, −low, +front, −back, −rnd, +tense
 	if (is('模冬　灰魂　韻')) return 'o'; // −high, −low, +front, −back, −rnd, +tense
-	if (is('麻庚銜夬刪肴韻 二等')) return 'a͇'; // −high, +low, divII,    −rnd, +tense
+	if (is('麻庚銜夬刪肴韻 二等') ||
+		is('莊組 庚韻')) return 'a͇';      // −high, +low, divII,         −rnd, +tense; 庄组庚韵一律归二等
 	if (is('麻庚清　　　韻 三等') ||
 		is('歌陽談泰寒　韻') ||
 		is('戈唐　　桓　韻')) return 'a'; // −high, +low, −front, −back, −rnd, +tense
@@ -234,7 +236,7 @@ if (initial == 'jʷ') initial = 'ɥ';
      j -> ɹ / {[+low], [−high, −tense]}__
 */
 if (nucleus.includes('a') || nucleus == 'ɜ') {
-	if (glide == 'j') glide = 'ɹ';
+	if (coda == 'j') coda = 'ɹ';
 }
 
 /**
@@ -244,7 +246,7 @@ if (nucleus.includes('a') || nucleus == 'ɜ') {
      ɜ -> e / [COR]__
           ə / 其他环境
 */
-if ('ɹjɥ'.includes(glide) || is锐) {
+if ([...'ɹjɥ'].includes(glide) || is锐) {
 	if (nucleus == 'ɪ') nucleus = 'i';
 	if (nucleus == 'ɜ') nucleus = 'e';
 } else {
@@ -258,26 +260,26 @@ if ('ɹjɥ'.includes(glide) || is锐) {
        -> ɜ / [−front]__
 */
 if (nucleus == 'iə') nucleus = 'iɛ';
-if (nucleus == 'ɨə') nucleus = 'iɛ';
+if (nucleus == 'ɨə') nucleus = 'ɨɜ';
 
 /**
 (7)  一等韵的韵核 /a/ 实现为 [ɑ]
      三等韵的韵核 /a/ 在钝音后实现为 [ɑ]；在锐音后实现为 [a]，但锐音是唇化的除外（->［戈三合］），韵尾是软腭音也除外（->［阳韵］）
-     a -> a / [COR, −rnd]ɹ__#
-       -> a / [非COR]ɹ__[DOR]
+     a -> a / #{[COR, +ant, −rnd]G, [COR, −ant]}__#
+       -> a / 非COR[COR, −ant]__
        -> ɑ / 其他环境
 */
 if (nucleus == 'a') {
-	nucleus == 'ɑ';
-	if (is锐 && glide == 'ɹ' && !initial.includes('ʷ') && !coda) nucleus = 'a';
-	if (!is锐 && glide == 'ɹ' && 'ŋk'.includes(coda)) nucleus = 'a';
+	nucleus = 'ɑ';
+	if ((is锐 && glide && !initial.includes('ʷ') || is('知莊章組 或 日以母')) && !coda) nucleus = 'a';
+	if (!is锐 && [...'ɹjɥ'].includes(glide)) nucleus = 'a';
 }
 
 /**
 (8)  央高元音被唇音或唇化声母同化（包括二合元音 ɨɜ -> ʉɜ［虞韵］）
      ɨ -> ʉ / {[LAB], [+rnd]}__
 */
-if (initial.includes('ʷ') || glide == 'β') {
+if (initial.includes('ʷ') || initial == 'ɥ' || glide == 'β') {
 	nucleus = nucleus.replace('ɨ', 'ʉ');
 }
 
@@ -285,49 +287,58 @@ if (initial.includes('ʷ') || glide == 'β') {
 (9)  卷舌咝音和龈韵尾之间的 i 舌冠化为 ɹ̩（［庄组真臻欣韵］） <>
      i -> ɹ̩ / [卷舌, +fric]__[COR]
 */
-if (is('莊組') && 'nt'.includes(coda)) {
+if (is('莊組') && [...'nt'].includes(coda)) {
 	if (nucleus == 'i') nucleus = 'ɹ̩';
 }
 
 /**
 (10) 央中元音在唇音或唇化韵尾前实现为后元音（［豪覃韵］）<>
-     ə -> ʌ / __{[LAB], [+rnd]}
+     ə -> ʌ / 非G__{[LAB], [+rnd]}
 */
-if ('mpw'.includes(coda)) {
+if (!glide && [...'mpw'].includes(coda)) {
 	if (nucleus == 'ə') nucleus = 'ʌ';
 }
 
 /**
-(11) 央前元音在软腭韵尾前实现为次低元音（［清韵］）<>
-     e -> æ / __[软腭]
+(11) 三等央前元音在软腭韵尾前实现为次低元音（［清韵］）<>
+     e -> æ / #{[COR, +ant]G, [COR, −ant]}__[软腭]
+	   -> æ / [COR, −ant; DOR]__[软腭]
 */
-if ('ŋk'.includes(coda)) {
+if ((is锐 && glide || is('知莊章組 或 日以母') || [...'jɥ'].includes(glide)) && [...'ŋk'].includes(coda)) {
 	if (nucleus == 'e') nucleus = 'æ';
 }
 
 /**
-(12) 齿龈阻音［端精组］后的介音接前元音时被同化（唇化时可选）
-     ɹ -> j / [COR, +ant, −son, −rnd]__[+front]
+(12) ［𠑆𦑣䎎小韵］
+     e -> ə / [COR, +ant, +rnd]G__[LAB]
+*/
+if (is锐 && initial.includes('ʷ') && [...'mp'].includes(coda)) {
+	if (nucleus == 'e') nucleus = 'ə';
+}
+
+/**
+(13) 齿龈阻音［端精组］后的介音接前元音时被同化（唇化时可选）
+     G -> j / [COR, +ant, −son, −rnd]__[+front]
           ɥ / [COR, +ant, −son, +rnd]__[+front] <>
 */
-if (is('端精組') && 'iea'.includes(nucleus[0])) {
+if (is('端精組') && 'ieæa'.includes(nucleus[0])) {
 	if (!initial.includes('ʷ')) {
-		if (glide == 'ɹ') glide = 'j';
-	} else {
-		if (glide == 'ɹ') glide = 'ɥ';
+		if (glide) glide = 'j';
+	} else if (false) {
+		if (glide) glide = 'ɥ';
 	}
 }
 
 /**
-(13) i 在唇音或唇化声母和软腭韵尾之间［蒸幽韵］增生 ɹ 滑音（可选）
+(14) i 在唇音或唇化声母和软腭韵尾之间［蒸幽韵］增生 ɹ 滑音（可选）
      G -> ɹ / {[LAB], [+rnd]}__i[软腭]
 */
-if ((initial.includes('ʷ') || glide == 'β') && nucleus == 'i' && 'ŋkw'.includes(coda)) {
+if ((initial.includes('ʷ') || glide == 'β') && nucleus == 'i' && [...'ŋkw'].includes(coda)) {
 	glide = 'ɹ';
 }
 
 /**
-(14) 接介音的 ɣ［云母］实现为 ɹ <>
+(15) 接介音的 ɣ［云母］实现为 ɹ <>
      ɣG -> ɹ
      ɣʷG -> ɹʷ
 */
@@ -337,7 +348,7 @@ if (initial.includes('ɣ') && glide) {
 }
 
 /**
-(15) 软腭音直接后接元音时［见系和匣母非三等］实现为软腭后音
+(16) 软腭音直接后接元音时［见系和匣母非三等］实现为软腭后音
      [软腭] -> [软腭后] / __V
 */
 if (!glide) {
@@ -345,35 +356,33 @@ if (!glide) {
 }
 
 /**
-(16) h 直接后接元音时［晓母非三等］实现为软腭后音
+(17) h 直接后接元音时［晓母非三等］实现为软腭后音
      h -> χ / __V
 */
 if (!glide) {
-	if (initial == 'h') initial = 'χ';
+	initial = initial.replace('h', 'χ');
 }
 
 /**
-(17) 后元音后的软腭韵尾［通江宕摄］实现为软腭后音
+(18) 后元音后的软腭韵尾［通江宕摄］实现为软腭后音
      [软腭] -> [软腭后] / {[+round], [+low, +back]}__
 */
-if ('uoœɑ'.includes(nucleus[0])) {
+if ('ʉuoœɑ'.includes(nucleus[0])) {
 	coda = velarToUvular(coda);
 }
 
 /**
-(18) 钝音声母和无介音齿/龈声母后的 u［侯韵］裂化
+(19) 钝音声母和无介音齿/龈声母后的 u［侯韵］裂化
      u -> u / [COR, −ant]__#
-	      u / G__#
 	      ɘu / 其他__#
 */
 if (nucleus == 'u' && !coda) {
-	nucleus == 'ɘu';
-	if (is('知莊章組 或 云日以母')) nucleus = 'u';
-	if (glide) nucleus = 'u';
+	nucleus = 'ɘu';
+	if (is('知莊章組 或 云日以母') || glide) nucleus = 'u';
 }
 
 /**
-(19) 高元音+半元音［微幽韵］实现为二合元音
+(20) 高元音+半元音［微幽韵］实现为二合元音
      j -> i / [+high]__
      w -> u / [+high]__
 */
@@ -383,7 +392,7 @@ if ('iɨʉuɪ'.includes(nucleus)) {
 }
 
 /**
-(20) 移除与韵核同部位介音
+(21) 移除与韵核同部位介音
      [DOR, +son] -> ∅ / C__[+high, −back]
 */
 if ('iɨʉ'.includes(nucleus[0])) {
@@ -391,7 +400,7 @@ if ('iɨʉ'.includes(nucleus[0])) {
 }
 
 /**
-(21) 齿龈音［端精组］非后高元音省略介音
+(22) 齿龈音［端精组］非后高元音省略介音
      G -> ∅ / [COR, +ant]__[+high, −back]
 */
 if (is('端精組') && 'iɨʉ'.includes(nucleus[0])) {
@@ -413,10 +422,11 @@ if (is('端精組') && 'iɨʉ'.includes(nucleus[0])) {
 */
 
 if (二等元音用双下横线) {
-	result = result.replace('͇', '̳');
+	nucleus = nucleus.replace('͇', '̳');
 }
+
 if (歌系韵核用前低元音) {
-	result = result.replace('ɑ', 'a');
+	nucleus = nucleus.replace('ɑ', 'a');
 }
 
 
