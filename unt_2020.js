@@ -9,12 +9,20 @@
 
 const is = (x) => 音韻地位.屬於(x);
 
-/**
+/** 目录
+一、流程控制开关
+二、区别性特征
+三、音韵地位对应音位（及其代码实现）
+四、音系规则（及其代码实现）
+五、后处理（及其代码实现）
+*/
+
+/** 一、开关
 
 开关用 < > 写出。
 */
 
-// 开关
+
 const 见系非三等用小舌音 = true;                       // k→q/_。默认打开
 const 匣母非三等用小舌音 = true && 见系非三等用小舌音; // ɣ→ʁ。默认打开，需要上一条打开才起效
 const 晓母非三等用小舌音 = true && 匣母非三等用小舌音; // h→χ。默认打开，需要上一条打开才起效
@@ -34,7 +42,7 @@ const 声调符号用五度标记 = true;
 const 声调附加符标韵核上 = true; // 关闭：标在音节前
 const 精组高元音省略介音 = true; // “踪”打开：tsʉɔɴ˦˧，关闭：tsɹʉɔɴ˦˧。因为会导致拼写太长，默认打开
 
-// TODO: 开关预设
+// 二、开关
 
 /**
 辅音的特征
@@ -60,14 +68,14 @@ function getInitialWithoutRounding() {
 	if (is('精母')) return 'ts' ; if (is('清母')) return 'tsʰ'; if (is('從母')) return 'dz' ;                             ; // +stop, +fric; COR, +ant      齿龈塞擦音［精组/齿头音］
 	if (is('心母')) return 's'  ;                             ; if (is('邪母')) return 'z'  ;                             ; // −stop, +fric; COR, +ant      齿龈擦音  ［精组/齿头音］
 	                            ;                             ;                             ; if (is('來母')) return 'l'  ; // −stop, −fric; COR, +ant      齿龈近音  ［来母/半舌音］
-	if (is('知母')) return 'tɹ' ; if (is('徹母')) return 'tɹʰ'; if (is('澄母')) return 'dɹ' ; if (is('孃母')) return 'nɹ' ; // +stop, −fric; COR, −ant      卷舌塞音  ［知组/舌上音］
-	if (is('莊母')) return 'tʂ' ; if (is('初母')) return 'tʂʰ'; if (is('崇母')) return 'dʐ' ;                             ; // +stop, +fric; COR, −ant      卷舌塞擦音［庄组/正齿音］
-	if (is('生母')) return 'ʂ'  ;                             ; if (is('俟母')) return 'ʐ'  ;                             ; // −stop, +fric; COR, −ant      卷舌擦音  ［庄组/正齿音］
-	                            ;                             ;                             ; /* 钝音三 B 介音 ------ ɹ */; // −stop, −fric; COR, −ant      龈后近音
-	                            ;                             ;                             ; if (is('日母')) return 'ɲ'  ; // +stop, −fric; COR, −ant; DOR 龈腭擦音  ［日母/半齿音］
-	if (is('章母')) return 'tɕ' ; if (is('昌母')) return 'tɕʰ'; if (is('常母')) return 'dʑ' ;                             ; // +stop, +fric; COR, −ant; DOR 龈腭塞擦音［章组/正齿音］
-	if (is('書母')) return 'ɕ'  ;                             ; if (is('船母')) return 'ʑ'  ;                             ; // −stop, +fric; COR, −ant; DOR 龈腭擦音  ［章组/正齿音］
-	                            ;                             ;                             ; if (is('以母')) return 'j'  ; // −stop, −fric; COR, −ant; DOR 硬腭近音  ［以母/喉音］
+	if (is('知母')) return 'tɹ' ; if (is('徹母')) return 'tɹʰ'; if (is('澄母')) return 'dɹ' ; if (is('孃母')) return 'nɹ' ; // +stop, −fric; COR, −ant, +r  卷舌塞音  ［知组/舌上音］
+	if (is('莊母')) return 'tʂ' ; if (is('初母')) return 'tʂʰ'; if (is('崇母')) return 'dʐ' ;                             ; // +stop, +fric; COR, −ant, +r  卷舌塞擦音［庄组/正齿音］
+	if (is('生母')) return 'ʂ'  ;                             ; if (is('俟母')) return 'ʐ'  ;                             ; // −stop, +fric; COR, −ant, +r  卷舌擦音  ［庄组/正齿音］
+	                            ;                             ;                             ; /* 钝音三 B 介音 ------ ɹ */; // −stop, −fric; COR, −ant, +r  龈后近音
+	                            ;                             ;                             ; if (is('日母')) return 'ɲ'  ; // +stop, −fric; COR, −ant, −r  龈腭擦音  ［日母/半齿音］
+	if (is('章母')) return 'tɕ' ; if (is('昌母')) return 'tɕʰ'; if (is('常母')) return 'dʑ' ;                             ; // +stop, +fric; COR, −ant, −r  龈腭塞擦音［章组/正齿音］
+	if (is('書母')) return 'ɕ'  ;                             ; if (is('船母')) return 'ʑ'  ;                             ; // −stop, +fric; COR, −ant, −r  龈腭擦音  ［章组/正齿音］
+	                            ;                             ;                             ; if (is('以母')) return 'j'  ; // −stop, −fric; COR, −ant, −r  硬腭近音  ［以母/喉音］
 	if (is('見母')) return 'k'  ; if (is('溪母')) return 'kʰ' ; if (is('羣母')) return 'ɡ'  ; if (is('疑母')) return 'ŋ'  ; // +stop, −fric; DOR (+high)    软腭前塞音［见组/牙音］
 	                            ;                             ; if (is('匣云母')) return 'ɣ';                             ; // −stop, +fric; DOR (+high)    软腭前擦音［影组/喉音］
 	                            ;                             ;                             ; /* 见系三 C 介音 ------ j̈ */; // −stop, −fric; DOR (+high)    软腭前近音
@@ -75,18 +83,22 @@ function getInitialWithoutRounding() {
 	/*(晓母非三等 --------- χ)  ;                             ;   (匣母 --------------- ʁ)*/;                             ; // −stop, +fric; DOR (−high)    软腭后擦音
 	if (is('影母')) return 'ʔ'  ;                             ;                             ;                             ; // +stop, −fric                 喉塞音    ［影组/喉音］
 	if (is('曉母')) return 'h'  ;                             ;                             ;                             ; // −stop, +fric                 喉擦音    ［影组/喉音］
-	// 注意 /h/［晓母三等］是 +sg
+	// 注意 [h]［晓母三等］理论上是 [+sg]，但本方案为了和“全清”对应，算作 [−sg]
 
 	throw new Error('无辅音规则');
 }
 
-const is清   = is('幫端精心知莊生章書見影母') || // −voi, −sg, −son
-			   is('滂透清　徹初　昌　溪曉母');   // −voi, +sg, −son
-const is全浊 = is('並定從邪澄崇俟常船羣匣母');   // +voi, −sg, −son
-     // 次浊:      明泥 來 孃　　日以疑云母         +voi, −sg, +son
-	 // 注意云母已按推导后的结果 [ɹ] 算入次浊
+const is全清 = is('幫端精心知莊生章書見影曉母'); // [−voi, −sg, −son]
+const is次清 = is('滂透清　徹初　昌　溪　　母'); // [−voi, +sg, −son]
+const is全浊 = is('並定從邪澄崇俟常船羣　匣母'); // [+voi, −sg, −son]
+const is次浊 = is('明泥來　孃　　日以疑云　母'); // [+voi, −sg, +son]
+const is清 = is全清 || is次清;
+// 注意云母已按推导后的结果 [ɹ] 算入次浊
 
-const is锐 = is('端精知莊章組 或 來日以母'); // [COR]
+const is锐前 = is('端精組 或 來母 一二四等');           // [COR, +ant]
+const is锐后 = is('知莊章組 或 日以母'); // [COR, −ant]
+const is锐 = is锐前 || is锐后 || is('來母');                         // [COR]
+// 注意来母按推导后只有非三等 [l] 算入锐前，但三等 [lɹ] 也不算入锐后
 
 /**
 没有开合对立的韵母一般视为开口，但虞韵视为鱼韵对应的合口；平行地，钟韵也视为合口
@@ -134,7 +146,7 @@ function getGlide() {
              i  ɨ (ʉ) u  ɪ  +high, −low
        e͇  œ͇  e  ə     o  ɜ  −high, −low
        a͇        a           −high, +low
-divII  1  1
+divII  +  +
 front        +  −  −  −
 back         −  −  −  +
 round  −  +  −  −  +  +
@@ -143,9 +155,9 @@ tense  +  +  +  +  +  +  −
 
 function getNucleus() {
 	// 三子韵及其对应的三寅韵是松元音
-	// 韵尾: ŋ m     j   n         w
-	if (is('　侵　　微　眞諄臻欣文　韻')) return 'ɪ';     // +high, −tense
-	if (is('清鹽嚴凡祭廢仙　　元　宵韻')) return 'ɜ'; // −high, −tense
+	// 韵尾: m     j   n         w
+	if (is('侵　　微　眞諄臻欣文　韻')) return 'ɪ';     // +high, −tense
+	if (is('鹽嚴凡祭廢仙　　元　宵韻')) return 'ɜ'; // −high, −tense
 
 	// 三丑韵及其对应的三寅韵，以及非三等韵是紧元音
 	// 脂韵、尤韵的韵基也可分别视为 /ɪj/、/ɪw/，这里从简，直接视为紧元音 /i/、/u/
@@ -153,20 +165,22 @@ function getNucleus() {
 	if (is('脂蒸　　　幽韻')) return 'i'; // +high, −low, +front, −back, −rnd, +tense
 	if (is('之　　　　　韻')) return 'ɨ'; // +high, −low, −front, −back, −rnd, +tense
 	if (is('尤東　　　侯韻')) return 'u'; // +high, −low, −front, +back, +rnd, +tense
-	if (is('佳耕咸皆山　韻')) return 'e͇'; // −high, −low, divII,         −rnd, +tense
-	if (is('　江　　　　韻')) return 'œ͇'; // −high, −low, divII,         +rnd, +tense
+	if (is('佳耕咸皆山　韻')) return 'e͇'; // −high, −low, +divII,        −rnd, +tense
+	if (is('　江　　　　韻')) return 'œ͇'; // −high, −low, +divII,        +rnd, +tense
 	if (is('　青添齊先蕭韻')) return 'e'; // −high, −low, +front, −back, −rnd, +tense
 	if (is('　登覃咍痕豪韻')) return 'ə'; // −high, −low, +front, −back, −rnd, +tense
 	if (is('模冬　灰魂　韻')) return 'o'; // −high, −low, +front, −back, −rnd, +tense
-	if (is('麻庚銜夬刪肴韻 二等') ||
-		is('莊組 庚韻')) return 'a͇';      // −high, +low, divII,         −rnd, +tense; 庄组庚韵一律归二等
-	if (is('麻庚清　　　韻 三等') ||
-		is('歌陽談泰寒　韻') ||
-		is('戈唐　　桓　韻')) return 'a'; // −high, +low, −front, −back, −rnd, +tense
+	if (is('麻庚銜夬刪肴韻 二等')) return 'a͇';
+	                                      // −high, +low, +divII,        −rnd, +tense
+	if (is('麻庚　　　　韻 三等') ||
+		is('歌唐談泰寒　韻') ||
+		is('戈　　　桓　韻')) return 'a'; // −high, +low, −front, −back, −rnd, +tense
 
 	// 二合元音
 	if (is('支韻')) return 'iə';     // +front, −back, −rnd, +tense
 	if (is('魚虞鍾韻')) return 'ɨə'; // −front, −back, −rnd, +tense
+	if (is('清韻')) return 'ia';     // +front, −back, −rnd, +tense
+	if (is('陽韻')) return 'ɨa';     // +front, −back, −rnd, +tense
 
 	throw new Error('无元音规则');
 }
@@ -264,15 +278,20 @@ if (nucleus == 'ɨə') nucleus = 'ɨɜ';
 
 /**
 (7)  一等韵的韵核 /a/ 实现为 [ɑ]
-     三等韵的韵核 /a/ 在钝音后实现为 [ɑ]；在锐音后实现为 [a]，但锐音是唇化的除外（->［戈三合］），韵尾是软腭音也除外（->［阳韵］）
-     a -> a / #{[COR, +ant, −rnd]G, [COR, −ant]}__#
-       -> a / 非COR[COR, −ant]__
+     三等韵的韵核 /a/ 在 i 后［清韵］实现为 [æ]；
+					  在其他锐音后实现为 [a]，但锐音是唇化［戈三合］的除外
+	                  在钝音后［歌戈阳韵］实现为 [ɑ]
+     a -> æ / i__
+	   -> a / {[COR, +ant, −rnd]G, [COR, −ant]}__
        -> ɑ / 其他环境
 */
+if (nucleus == 'ia') nucleus = 'iæ';
+if (nucleus == 'ɨa') nucleus = 'ɨɑ';
 if (nucleus == 'a') {
 	nucleus = 'ɑ';
-	if ((is锐 && glide && !initial.includes('ʷ') || is('知莊章組 或 日以母')) && !coda) nucleus = 'a';
-	if (!is锐 && [...'ɹjɥ'].includes(glide)) nucleus = 'a';
+	if (is锐 && glide && !initial.includes('ʷ') || is锐后 || !is锐 && [...'ɹjɥ'].includes(glide)) {
+		if ('ŋk'.includes(coda)) nucleus = 'a'; // 音系规则本来不限制韵尾，但章组谈韵有“㶒譫”两小韵，需要归到 ɑ，所以在这里过滤
+	}
 }
 
 /**
@@ -284,10 +303,10 @@ if (initial.includes('ʷ') || initial == 'ɥ' || glide == 'β') {
 }
 
 /**
-(9)  卷舌咝音和龈韵尾之间的 i 舌冠化为 ɹ̩（［庄组真臻欣韵］） <>
-     i -> ɹ̩ / [卷舌, +fric]__[COR]
+(9)  卷舌咝音和龈韵尾之间的 i 舌冠化为 ɹ̩（［庄组真臻欣韵开口］） <>
+     i -> ɹ̩ / [卷舌, +fric, −rnd]__[COR]
 */
-if (is('莊組') && [...'nt'].includes(coda)) {
+if (is('莊組') && !initial.includes('ʷ') && [...'nt'].includes(coda)) {
 	if (nucleus == 'i') nucleus = 'ɹ̩';
 }
 
@@ -300,16 +319,7 @@ if (!glide && [...'mpw'].includes(coda)) {
 }
 
 /**
-(11) 三等央前元音在软腭韵尾前实现为次低元音（［清韵］）<>
-     e -> æ / #{[COR, +ant]G, [COR, −ant]}__[软腭]
-	   -> æ / [COR, −ant; DOR]__[软腭]
-*/
-if ((is锐 && glide || is('知莊章組 或 日以母') || [...'jɥ'].includes(glide)) && [...'ŋk'].includes(coda)) {
-	if (nucleus == 'e') nucleus = 'æ';
-}
-
-/**
-(12) ［𠑆𦑣䎎小韵］
+(11) ［𠑆𦑣䎎小韵］
      e -> ə / [COR, +ant, +rnd]G__[LAB]
 */
 if (is锐 && initial.includes('ʷ') && [...'mp'].includes(coda)) {
@@ -317,11 +327,11 @@ if (is锐 && initial.includes('ʷ') && [...'mp'].includes(coda)) {
 }
 
 /**
-(13) 齿龈阻音［端精组］后的介音接前元音时被同化（唇化时可选）
+(12) 齿龈阻音［端精组］后的介音接前元音时被同化（唇化时可选）
      G -> j / [COR, +ant, −son, −rnd]__[+front]
           ɥ / [COR, +ant, −son, +rnd]__[+front] <>
 */
-if (is('端精組') && 'ieæa'.includes(nucleus[0])) {
+if (is锐前 && 'ieæa'.includes(nucleus[0])) {
 	if (!initial.includes('ʷ')) {
 		if (glide) glide = 'j';
 	} else if (false) {
@@ -330,15 +340,15 @@ if (is('端精組') && 'ieæa'.includes(nucleus[0])) {
 }
 
 /**
-(14) i 在唇音或唇化声母和软腭韵尾之间［蒸幽韵］增生 ɹ 滑音（可选）
-     G -> ɹ / {[LAB], [+rnd]}__i[软腭]
+(13) i 在唇音或唇化声母和软腭韵尾之间［蒸幽韵］增生 ɹ 滑音（可选）
+     G -> ɹ / {[LAB], [+rnd]}__i[DOR]
 */
 if ((initial.includes('ʷ') || glide == 'β') && nucleus == 'i' && [...'ŋkw'].includes(coda)) {
 	glide = 'ɹ';
 }
 
 /**
-(15) 接介音的 ɣ［云母］实现为 ɹ <>
+(14) 接介音的 ɣ［云母］实现为 ɹ <>
      ɣG -> ɹ
      ɣʷG -> ɹʷ
 */
@@ -348,7 +358,7 @@ if (initial.includes('ɣ') && glide) {
 }
 
 /**
-(16) 软腭音直接后接元音时［见系和匣母非三等］实现为软腭后音
+(15) 软腭音直接后接元音时［见系和匣母非三等］实现为软腭后音
      [软腭] -> [软腭后] / __V
 */
 if (!glide) {
@@ -356,7 +366,7 @@ if (!glide) {
 }
 
 /**
-(17) h 直接后接元音时［晓母非三等］实现为软腭后音
+(16) h 直接后接元音时［晓母非三等］实现为软腭后音
      h -> χ / __V
 */
 if (!glide) {
@@ -364,25 +374,25 @@ if (!glide) {
 }
 
 /**
-(18) 后元音后的软腭韵尾［通江宕摄］实现为软腭后音
-     [软腭] -> [软腭后] / {[+round], [+low, +back]}__
+(17) 后元音后的软腭韵尾［通江宕摄］实现为软腭后音
+     [DOR] -> [+back] / {[+round], [+low, +back]}__
 */
-if ('ʉuoœɑ'.includes(nucleus[0])) {
+if ('ʉuoœ'.includes(nucleus[0]) || nucleus.includes('ɑ')) {
 	coda = velarToUvular(coda);
 }
 
 /**
-(19) 钝音声母和无介音齿/龈声母后的 u［侯韵］裂化
+(18) 钝音声母和无介音齿/龈声母后的 u［侯韵］裂化
      u -> u / [COR, −ant]__#
 	      ɘu / 其他__#
 */
 if (nucleus == 'u' && !coda) {
 	nucleus = 'ɘu';
-	if (is('知莊章組 或 云日以母') || glide) nucleus = 'u';
+	if (is锐后 || is('云母') || glide) nucleus = 'u';
 }
 
 /**
-(20) 高元音+半元音［微幽韵］实现为二合元音
+(19) 高元音+半元音［微幽韵］实现为二合元音
      j -> i / [+high]__
      w -> u / [+high]__
 */
@@ -392,7 +402,7 @@ if ('iɨʉuɪ'.includes(nucleus)) {
 }
 
 /**
-(21) 移除与韵核同部位介音
+(20) 移除与韵核同部位介音
      [DOR, +son] -> ∅ / C__[+high, −back]
 */
 if ('iɨʉ'.includes(nucleus[0])) {
@@ -400,11 +410,13 @@ if ('iɨʉ'.includes(nucleus[0])) {
 }
 
 /**
-(22) 齿龈音［端精组］非后高元音省略介音
-     G -> ∅ / [COR, +ant]__[+high, −back]
+(21) 齿龈音［端精组］非后高元音省略介音
+     {j, ɥ} -> ∅ / [COR, +ant, −son]__[+high, +front, −back]
+	 G      -> ∅ / [COR, +ant, −son]__[+high, −front, −back]
 */
-if (is('端精組') && 'iɨʉ'.includes(nucleus[0])) {
-	glide = '';
+if (is锐前) {
+	if (nucleus[0] == 'i' && [...'jɥ'].includes(glide))	glide = '';
+	if ('ɨʉ'.includes(nucleus[0])) glide = '';
 }
 
 /**
