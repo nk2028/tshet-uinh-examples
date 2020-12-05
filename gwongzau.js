@@ -33,7 +33,7 @@ function 聲母規則() {
 	if (is('泥孃母')) return 'n';
 	if (is('來母')) return 'l';
 
-	if (is('知精邪莊俟章母')) return 'z';  // 邪母：z > c ≈ s
+	if (is('知精邪莊俟章母')) return 'z';  // 邪母：z 多於 c/s
 	if (is('徹清初昌母')) return 'c';
 	if (is('澄從崇母')) {
 		if (is('平聲')) return 'c';
@@ -42,7 +42,7 @@ function 聲母規則() {
 	if (is('心生常書船母')) return 's';
 
 	if (is('見母')) return 'g';
-	if (is('溪母')) return 'h';  // 溪母：h+f >> k
+	if (is('溪母')) return 'h';  // 溪母：h+f 多於 k
 	if (is('羣母')) {
 		if (is('平聲')) return 'k';
 		return 'g';
@@ -53,7 +53,7 @@ function 聲母規則() {
 		if (is('三四等 開口')) return 'j';  // 合口 w-
 		return '';
 	}
-	if (is('曉匣母')) return 'h';  // 曉匣母：h+f >> w
+	if (is('曉匣母')) return 'h';  // 曉匣母：h+f 多於 w
 	if (is('日以母')) {
 		if (is('三四等')) return 'j';
 		return '';
@@ -227,7 +227,7 @@ function 韻母規則() {
 
 	// 咸攝
 	if (is('覃談凡韻')) {
-		if (is牙喉) return 'am';
+		if (is牙喉) return 'om';  // om > am，詳後
 		return 'aam';  // 脣音 -n，詳後
 	}
 	if (is('咸銜韻')) return 'aam';  // 脣音 -n，詳後
@@ -253,8 +253,8 @@ function 聲調規則() {
 }
 
 function is長元音(韻母) {
-	if (['aap', 'aat', 'ip', 'it', 'oek', 'ok', 'ot', 'ut', 'yut'].includes(韻母)) return true;
-	if (['ak', 'ap', 'at', 'eot', 'ik', 'uk'].includes(韻母)) return false;
+	if (['aam', 'aan', 'im', 'in', 'om', 'on', 'ong', 'oeng', 'un', 'yun'].includes(韻母)) return true;
+	if (['am', 'an', 'ang', 'eon', 'ing', 'ung'].includes(韻母)) return false;
 	throw new Error('無法判斷元音長短：' + 韻母);
 }
 
@@ -266,14 +266,18 @@ if (韻母 == null) {
 	throw new Error('該音韻地位有音無字，無法判斷');
 }
 
+if (聲調 === 'x') {
+	聲調 = is長元音(韻母) ? '3' : '1';
+}
+
+if (韻母 === 'om') {
+	韻母 = 'am';
+}
+
 if (is('入聲')) {
 	if (韻母.endsWith('m')) 韻母 = 韻母.slice(0, -1) + 'p';
 	else if (韻母.endsWith('n')) 韻母 = 韻母.slice(0, -1) + 't';
 	else if (韻母.endsWith('ng')) 韻母 = 韻母.slice(0, -2) + 'k';
-}
-
-if (聲調 === 'x') {
-	聲調 = is長元音(韻母) ? '3' : '1';
 }
 
 if (is('合口') && (韻母.startsWith('a') || 韻母.startsWith('i') || (韻母.startsWith('o') && !韻母.startsWith('oe')))) {
