@@ -17,46 +17,45 @@ const is = (x) => 音韻地位.屬於(x);
 四、音系规则（及其代码实现）
 五、后处理的代码实现
 
-说明
-对应的音韵学术语将用全角尖括号〈〉在语音学术语后注明
+下面语音学术语对应的音韵学术语将用全角尖括号〈〉在语音学术语后注明。
 */
 
 /** 一、流程控制开关
 
-开关用 < > 写出。
+开关用半角尖括号 < > 表明。
 */
 
-let switches = new Map();
+let switches = {};
 // 音韵地位对应音位开关
-switches.豪韵韵核归为a          = false;
+switches.豪韵韵核归为a          = false; // 关闭：əw（实现为 ʌw），打开：aw
 
 // 音系规则开关
-switches.祭泰夬废韵尾推导为ɹ    = true; // 音系规则 (4)
-switches.要推导松元音           = true; // 音系规则 (5)
-switches.要推导二合元音         = true; // 音系规则 (6)
-switches.要推导a                = true; // 音系规则 (6)
-switches.庄组臻摄开口推导为ɹ̩    = true; // 不包括合口“率”小韵
-switches.豪覃韵韵核推导为ʌ      = true;
-switches.精组合口介音推导为ɥ    = false;
-switches.蒸幽韵合口增生ɹ滑音    = true;
-switches.云母实现为ɹ            = true;
-switches.见系非三实现为软腭后音 = true;
-switches.晓母非三实现为软腭后音 = true;
-switches.通江宕摄实现为软腭后音 = true;
-switches.侯韵裂化为ɘu           = true;
-switches.精组非后高元音省略介音 = true; // “踪”打开：tsʉɔɴ˦˧，关闭：tsɹʉɔɴ˦˧。因为会导致拼写太长，默认打开
+switches.祭泰夬废韵尾推导为ɹ    = true;  // 音系规则 (4)。关闭：-j，打开：-ɹ
+switches.要推导松元音           = true;  // 音系规则 (5)
+switches.要推导二合元音         = true;  // 音系规则 (6)。关闭：iə ɨə ia ɨa，打开：iɛ ɨɜ iæ ɨɐ
+switches.要推导a                = true;  // 音系规则 (7)。关闭：a，打开：a ɑ
+switches.庄组臻摄开口推导为ɹ̩    = true;  // 音系规则 (9)。关闭：in，打开：ɹ̩n。不包括合口“率”小韵
+switches.豪覃韵韵核推导为ʌ      = true;  // 音系规则 (10)。关闭：əw əm，打开：ʌw ʌm
+switches.精三寅合口介音推导为ɥ  = false; // 音系规则 (12)。关闭：sʷɹ-，打开：sʷɥ-
+switches.蒸幽韵合口增生ɹ滑音    = true;  // 音系规则 (13)。“冰”，关闭：piŋ˦˧，打开：pɹiŋ˦˧
+switches.云母推导为ɹ            = true;  // 音系规则 (14)。关闭：ɣɹ- ɣj̈-，打开：ɹ-。不论三 B 还是三 C
+switches.见系非三推导为软腭后音 = true;  // 音系规则 (15)
+switches.晓母非三推导为软腭后音 = true;  // 音系规则 (16)。按常理，需要 <见系非三推导为软腭后音> 打开才能打开
+switches.通江宕摄推导为软腭后音 = true;  // 音系规则 (17)。如果 <要推导a> 没有打开，那么不推导宕摄韵尾
+switches.侯韵裂化为ɘu           = true;  // 音系规则 (18)。关闭：u，打开：ɘu
+switches.精组非后高元音省略介音 = true;  // 音系规则 (21)。“踪”，关闭：tsɹʉɜɴ˦˧，打开：tsʉɜɴ˦˧。不打开会导致拼写太长
 
 // 后处理开关
-switches.知组写成卷舌塞音       = false;
-switches.中元音写成半低元音     = false;
+switches.知组写成卷舌塞音       = false; // 关闭：tɹ，打开：二等 ʈ、三等 ʈɹ
+switches.中元音写成半低元音     = false; // 关闭：e o，打开：ɛ ɔ。不转换 ə
 switches.ɑ写成a	                = true;
 switches.半元音介音写成元音	    = false;
 switches.半元音韵尾写成元音	    = false;
 switches.二等元音写成r音钩	    = false;
-switches.二等元音写成双下横线	= false; // 打开：双下横线 a̳ (U+0333)，关闭：下等号 a͇ (U+0347)。默认关闭，但 Times New Roman 把这两个附加符号弄反了
-switches.声调写成五度标记	    = true;
-switches.声调附加符号写在音节前 = false;
+switches.二等元音写成双下横线	= false; // 关闭：下等号 a͇ (U+0347)，打开：双下横线 a̳ (U+0333)。Times New Roman 把这两个附加符号弄反了，为了显示的效果要打开
 switches.声调不分阴阳	        = false;
+switches.声调写成五度标记	    = true;
+switches.声调附加符号写在音节前 = false; // 只在 <声调写成五度标记> 关闭时有效
 
 /** 二、音节结构
 
@@ -92,7 +91,8 @@ C：辅音，作为韵尾（coda）。韵核和韵尾加在一起叫作韵基（
   [±r]:   r 色彩
 [DOR]：   舌面（dorsal）
   [±high]:高，对辅音而言 [DOR, +high] 是软腭音，[DOR, −high] 是小舌音，正好符合三等、非三等之分。
-          本文将软腭音分为软腭前音（prevelar）、软腭后音（postvelar）两组，分别用软腭音和小舌音的记号表示（可以通过开关 <TODO> 关闭）
+          本文将软腭音分为软腭前音（prevelar）、软腭后音（postvelar）两组，分别用软腭音和小舌音的记号表示，
+		  通过 <见系非三推导为软腭后音>、<晓母非三推导为软腭后音>、<通江宕摄推导为软腭后音> 控制。
 
 2. 音韵地位对应辅音音位
 
@@ -281,7 +281,8 @@ function semivowelToVowel(consonant) {
 /**
 5. 声调
 
-本文从简，声调无视音系层级范式，直接转换为最终形式。开关 <???> 也在这里应用。详见下面代码实现。
+本文从简，声调无视音系层级范式，直接转换为最终形式。
+<声调写成五度标记>、<声调不分阴阳>、<声调附加符号写在音节前> 也在这里应用。详见下面代码实现。
 */
 
 // 函数：将声调的音韵地位转换为语音
@@ -379,31 +380,28 @@ if (switches.要推导松元音) {
 (6)  二合元音的后滑音（off-glide）部分被元音的前后同化
      ə -> ɛ / [vowel, +front]__
        -> ɜ / [vowel, −front]__
+	 a -> æ / i__
+	   -> ɐ / ɨ__
 */
 if (switches.要推导二合元音) {
 	if (nucleus == 'iə') nucleus = 'iɛ';
 	if (nucleus == 'ɨə') nucleus = 'ɨɜ';
+	if (nucleus == 'ia') nucleus = 'iæ';
+	if (nucleus == 'ɨa') nucleus = 'ɨɐ';
 }
 
 /**
 (7)  一等韵的韵核 /a/ 实现为 [ɑ]
-     三等韵的韵核 /a/ 在 i 后〈清韵〉实现为 [æ]；
-                      在其他锐音后实现为 [a]，但锐音是唇化〈戈三合〉的除外
-                      在钝音后〈歌戈阳韵〉实现为 [ɑ]
-     a -> æ / i__
-       -> a / {[COR, +ant, −rnd]G, [COR, −ant]}__
+     三等韵的韵核 /a/ 在锐音后实现为 [a]，但锐音是唇化〈戈三合〉的除外；在钝音后〈歌戈韵〉实现为 [ɑ]
+     a -> a / {[COR, +ant, −rnd]G, [COR, −ant]}__
        -> ɑ / 其他环境
 */
-if (switches.要推导a) {
-	if (nucleus == 'ia') nucleus = 'iæ';
-	if (nucleus == 'ɨa') nucleus = 'ɨɑ';
-	if (nucleus == 'a') {
-		nucleus = 'ɑ';
-		if (is锐 && glide && !initial.includes('ʷ') || is锐后 || !is锐 && [...'ɹjɥ'].includes(glide)) {
-			// 音系规则本来不限制韵尾，但章组谈韵有“㶒譫”两小韵，需要归到 ɑ，所以在这里过滤
-			// 注意 'ŋk'.includes(coda) 包含的是 ŋ、k 和零韵尾这 3 种
-			if ('ŋk'.includes(coda)) nucleus = 'a';
-		}
+if (switches.要推导a && nucleus == 'a') {
+	nucleus = 'ɑ';
+	if (is锐 && glide && !initial.includes('ʷ') || is锐后 || !is锐 && [...'ɹjɥ'].includes(glide)) {
+		// 音系规则本来不限制韵尾，但章组谈韵有“㶒譫”两小韵，需要归到 ɑ，所以在这里过滤
+		// 注意 'ŋk'.includes(coda) 包含的是 ŋ、k 和零韵尾这 3 种
+		if ('ŋk'.includes(coda)) nucleus = 'a';
 	}
 }
 
@@ -416,7 +414,7 @@ if (initial.includes('ʷ') || initial == 'ɥ' || glide == 'β') {
 }
 
 /**
-(9)  卷舌咝音和龈韵尾之间的 i 舌冠化为 ɹ̩（〈庄组真臻欣韵开口〉） <>
+(9)  卷舌咝音和龈韵尾之间的 i 舌冠化为 ɹ̩（〈庄组真臻欣韵开口〉）
      i -> ɹ̩ / [COR, −ant, +r, +fric, −rnd]__[COR]
 */
 if (switches.庄组臻摄开口推导为ɹ̩ && is('莊組') && !initial.includes('ʷ') && [...'nt'].includes(coda)) {
@@ -424,7 +422,7 @@ if (switches.庄组臻摄开口推导为ɹ̩ && is('莊組') && !initial.include
 }
 
 /**
-(10) 央中元音在唇音或唇化韵尾前实现为后元音（〈豪覃韵〉）<>
+(10) 央中元音在唇音或唇化韵尾前实现为后元音（〈豪覃韵〉）
      ə -> ʌ / 非G__[LAB]
 */
 if (switches.豪覃韵韵核推导为ʌ && !glide && [...'mpw'].includes(coda)) {
@@ -447,7 +445,7 @@ if (is锐 && initial.includes('ʷ') && [...'mp'].includes(coda)) {
 if (is锐前 && 'ieæa'.includes(nucleus[0])) {
 	if (!initial.includes('ʷ')) {
 		if (glide) glide = 'j';
-	} else if (switches.精组合口介音推导为ɥ) {
+	} else if (switches.精三寅合口介音推导为ɥ) {
 		if (glide) glide = 'ɥ';
 	}
 }
@@ -465,7 +463,7 @@ if (switches.蒸幽韵合口增生ɹ滑音 && (initial.includes('ʷ') || glide =
      ɣG -> ɹ
      ɣʷG -> ɹʷ
 */
-if (switches.云母实现为ɹ && initial.includes('ɣ') && glide) {
+if (switches.云母推导为ɹ && initial.includes('ɣ') && glide) {
 	initial = initial.replace('ɣ', 'ɹ'); // ɹ 视为声母
 	glide = '';
 }
@@ -474,7 +472,7 @@ if (switches.云母实现为ɹ && initial.includes('ɣ') && glide) {
 (15) 软腭音直接后接元音时〈见系和匣母非三等〉实现为软腭后音
      [DOR] -> [−high] / __V
 */
-if (switches.见系非三实现为软腭后音 && !glide) {
+if (switches.见系非三推导为软腭后音 && !glide) {
 	initial = velarToUvular(initial);
 }
 
@@ -482,16 +480,16 @@ if (switches.见系非三实现为软腭后音 && !glide) {
 (16) h 直接后接元音时〈晓母非三等〉实现为软腭后音
      h -> χ / __V
 */
-if (switches.晓母非三实现为软腭后音 && !glide) {
+if (switches.晓母非三推导为软腭后音 && !glide) {
 	initial = initial.replace('h', 'χ');
 }
 
 /**
 (17) 后元音后的软腭韵尾〈通江宕摄〉实现为软腭后音
-     [DOR] -> [+back] / {[+round], [+low, +back]}__
+     [DOR] -> [+back] / {[+round], [+low, −front}__
 */
-if (switches.通江宕摄实现为软腭后音) {
-	if ('ʉuoœ'.includes(nucleus[0]) || nucleus.includes('ɑ')) {
+if (switches.通江宕摄推导为软腭后音) {
+	if ('ʉuoœɑ'.includes(nucleus[0]) || (nucleus.includes('ɐ') && switches.要推导a)) {
 		coda = velarToUvular(coda);
 	}
 }
