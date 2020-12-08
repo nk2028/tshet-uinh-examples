@@ -47,18 +47,9 @@ function 聲母規則() {
 		if (is('平聲')) return 'k';
 		return 'g';
 	}
-	if (is('疑母')) return 'ng';
+	if (is('曉母')) return 'h';  // 曉母：h+f 多於 w
 
-	if (is('影云母')) {
-		if (is('三四等 開口')) return 'j';  // 合口 w-
-		return '';
-	}
-	if (is('曉匣母')) return 'h';  // 曉匣母：h+f 多於 w
-	if (is('日以母')) {
-		if (is('三四等')) return 'j';
-		return '';
-	}
-
+	if (is('疑影云匣日以母')) return 'x';  // 據韻母判斷，詳後
 	throw new Error('無聲母規則');
 }
 
@@ -266,24 +257,47 @@ if (韻母 == null) {
 	throw new Error('該音韻地位有音無字，無法判斷');
 }
 
+// 據元音長短判斷聲調
 if (聲調 === 'x') {
 	聲調 = is長元音(韻母) ? '3' : '1';
 }
 
+// -om 韻併入 -am 韻
 if (韻母 === 'om') {
 	韻母 = 'am';
-}
-
-if (is('入聲')) {
-	if (韻母.endsWith('m')) 韻母 = 韻母.slice(0, -1) + 'p';
-	else if (韻母.endsWith('n')) 韻母 = 韻母.slice(0, -1) + 't';
-	else if (韻母.endsWith('ng')) 韻母 = 韻母.slice(0, -2) + 'k';
 }
 
 if (is('合口') && (韻母.startsWith('a') || 韻母.startsWith('i') || (韻母.startsWith('o') && !韻母.startsWith('oe')))) {
 	if (聲母 === 'g') 聲母 = 'gw';
 	if (聲母 === 'k') 聲母 = 'kw';
 	if (聲母 === '') 聲母 = 'w';
+}
+
+// 據韻母判斷聲母
+if (is('疑母')) {
+	聲母 = 韻母.startsWith('i') || 韻母.startsWith('oe') || 韻母.startsWith('yu') ? 'j' :
+		韻母 === 'ung' && is('三四等') ? 'j' :
+		韻母 === 'ung' ? '' :
+		韻母.startsWith('u') ? 'w' :
+		'ng';
+} else if (is('影云母')) {
+	聲母 = is('模韻') ? 'w' :
+		is('三四等 開口') ? 'j' :
+		is('一二等 開口') ? '' :
+		韻母.startsWith('yu') ? 'j' :
+		韻母.startsWith('ung') ? '' :
+		'w';
+} else if (is('匣母')) {
+	聲母 = is('模韻') ? 'w' :
+		is('開口') ? 'h' :
+		韻母.startsWith('yu') ? 'j' :
+		韻母.startsWith('ung') ? '' :
+		'w';
+} else if (is('日以母')) {
+	聲母 = is('三四等 合口') && 韻母.startsWith('a') ? 'w' :
+		is('三四等') ? 'j' :
+		is('合口') ? 'w' :
+		'';
 }
 
 if (is('合口') && 聲母 === 'h' && !(韻母.startsWith('eo') || 韻母.startsWith('oe') || 韻母.startsWith('yu'))) {
@@ -294,21 +308,16 @@ if (聲母 === 'h' && 韻母 === 'u') {
 	聲母 = 'f';
 }
 
-if (聲母 === 'ng' && (韻母.startsWith('i') || 韻母.startsWith('u') || 韻母.startsWith('oe') || 韻母.startsWith('yu'))) {
-	聲母 = '';
-}
-
-if (聲母 === '' && (韻母.startsWith('i') || 韻母.startsWith('oe') || 韻母.startsWith('yu'))) {
-	聲母 = 'j';
-}
-
-if (聲母 === '' && ['u', 'ui', 'un', 'ut'].includes(韻母)) {
-	聲母 = 'w';
-}
-
+// 脣音聲母排斥脣音韻尾
 if (['b', 'p', 'm', 'f'].includes(聲母)) {
 	if (韻母.endsWith('m')) 韻母 = 韻母.slice(0, -1) + 'n';
-	else if (韻母.endsWith('p')) 韻母 = 韻母.slice(0, -1) + 't';
+}
+
+// 將陽聲韻尾變換為入聲韻尾
+if (is('入聲')) {
+	if (韻母.endsWith('m')) 韻母 = 韻母.slice(0, -1) + 'p';
+	else if (韻母.endsWith('n')) 韻母 = 韻母.slice(0, -1) + 't';
+	else if (韻母.endsWith('ng')) 韻母 = 韻母.slice(0, -2) + 'k';
 }
 
 return 聲母 + 韻母 + 聲調;
