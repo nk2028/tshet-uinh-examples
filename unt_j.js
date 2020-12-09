@@ -51,15 +51,15 @@ switches.精组非后高元音省略介音 = true;  // 音系规则 (21)。“�
 // 后处理开关
 switches.知组写成卷舌塞音       = false; // 关闭：tɹ，打开：二等 ʈ、三等 ʈɹ
 switches.中元音写成半低元音     = false; // 关闭：e o，打开：ɛ ɔ。不转换 ə
-switches.ɑ写成a	                = true;  // 默认打开
-switches.半元音介音写成元音	    = false;
-switches.半元音韵尾写成元音	    = false;
-switches.二等元音写成r音钩	    = false;
-switches.二等元音写成双下横线	= false; // 关闭：下等号 a͇（U+0347），打开：双下横线 a̳（U+0333）。一些字体（如 Times New Roman、Arial）把这两个附加符号弄反了，为了显示的效果要打开。只在 <二等元音写成r音钩> 关闭时有效
+switches.ɑ写成a                 = true;  // 默认打开
+switches.半元音介音写成元音     = false;
+switches.半元音韵尾写成元音     = false;
+switches.二等元音写成r音钩      = false;
+switches.二等元音写成双下横线   = false; // 关闭：下等号 a͇（U+0347），打开：双下横线 a̳（U+0333）。一些字体（如 Times New Roman、Arial）把这两个附加符号弄反了，为了显示的效果要打开。只在 <二等元音写成r音钩> 关闭时有效
 
 // 声调开关
-switches.声调分阴阳	            = true;  // 默认打开
-switches.声调写成五度标记	    = true;  // 默认打开
+switches.声调分阴阳             = true;  // 默认打开
+switches.声调写成五度标记       = true;  // 默认打开
 switches.声调附加符号写在音节前 = false; // 只在 <声调写成五度标记> 关闭时有效
 
 /** 二、音节结构
@@ -83,21 +83,21 @@ C：辅音，作为韵尾（coda）。韵核和韵尾加在一起叫作韵基（
 
 [±voi]:   带声（voice）
 [±sg]:    展声门（spread glottis），即辅音送气。注意 [h]〈晓母三等〉按照理论是 [+sg]，但本文为了和“全清”对应，算作 [−sg]
-[±son]:   响音（sonorant），包括鼻音和近音（本文的响音不包含元音）。相反的 [−son] 是阻音（obstruent）
+[±son]:   响音（sonorant）性，包括鼻音和近音（本文的响音不包含元音）。相反的 [−son] 是阻音（obstruent）
 [±stop]:  塞音性，包括鼻塞音（即鼻音）和口塞音（即爆发音和塞擦音）。包含鼻音的“塞音”严格来说应该叫 occlusive 而非 stop，本文从简直接用 [±stop]
 [±fric]:  擦音（fricative）性。本文将塞擦音也算入 [+fric]，不使用现代音系学常用的 [±delayed release]（延缓除阻）
 
 调音部位：
 
 [LAB]:    唇（labial）
-  [±rnd]：圆唇（round），包括唇化辅音和圆唇元音
-[COR]：   舌冠（coronal），即锐音。本文为了简便将硬腭辅音也算入舌冠音。本文从简仍然使用“锐音、钝音”的叫法，但不用 [±grave]
-  [±ant]：前部（anterior）。前部锐音包括齿、龈，后部锐音包括龈后、卷舌、龈–腭等
+  [±rnd]: 圆唇（round），包括唇化辅音和圆唇元音
+[COR]:    舌冠（coronal），即锐音。本文为了简便将硬腭辅音也算入舌冠音。本文从简仍然使用“锐音、钝音”的叫法，但不用 [∓grave]
+  [±ant]: 前部（anterior）。前部锐音包括齿、龈，后部锐音包括龈后、卷舌、龈–腭等
   [±r]:   r 色彩
-[DOR]：   舌面（dorsal）
+[DOR]:    舌面（dorsal）
   [±high]:高，对辅音而言 [DOR, +high] 是软腭音，[DOR, −high] 是小舌音，正好符合三等、非三等之分。
           本文将软腭音分为软腭前音（prevelar）、软腭后音（postvelar）两组，分别用软腭音和小舌音的记号表示，
-		  通过 <见系非三推导为软腭后音>、<晓母非三推导为软腭后音>、<通江宕摄推导为软腭后音> 控制。
+          通过 <见系非三推导为软腭后音>、<晓母非三推导为软腭后音>、<通江宕摄推导为软腭后音> 控制。
 
 2. 音韵地位对应辅音音位
 
@@ -112,22 +112,22 @@ function getInitialWithoutRounding() {
 	//	不送气清阻音〈全清〉     送气清阻音〈次清〉       浊阻音〈全浊〉           浊响音〈次浊〉
 	//	−voi, −sg, −son          −voi, +sg, −son          +voi, −sg, −son          +voi, −sg, +son
 		case '幫': return 'p'  ; case '滂': return 'pʰ' ; case '並': return 'b'  ; case '明': return 'm'  ; // +stop, −fric; LAB            双唇塞音  〈帮组/唇音〉
-							   ;                        ;                        ; /*(帮组三 C 介音   β)*/; // −stop, −fric; LAB            双唇近音
+		                       ;                        ;                        ; /*(帮组三 C 介音   β)*/; // −stop, −fric; LAB            双唇近音
 		case '端': return 't'  ; case '透': return 'tʰ' ; case '定': return 'd'  ; case '泥': return 'n'  ; // +stop, −fric; COR, +ant      齿龈塞音  〈端组/舌头音〉
 		case '精': return 'ts' ; case '清': return 'tsʰ'; case '從': return 'dz' ;                        ; // +stop, +fric; COR, +ant      齿龈塞擦音〈精组/齿头音〉
 		case '心': return 's'  ;                        ; case '邪': return 'z'  ;                        ; // −stop, +fric; COR, +ant      齿龈擦音  〈精组/齿头音〉
-							   ;                        ;                        ; case '來': return 'l'  ; // −stop, −fric; COR, +ant      齿龈近音  〈来母/半舌音〉
+		                       ;                        ;                        ; case '來': return 'l'  ; // −stop, −fric; COR, +ant      齿龈近音  〈来母/半舌音〉
 		case '知': return 'tɹ' ; case '徹': return 'tɹʰ'; case '澄': return 'dɹ' ; case '孃': return 'nɹ' ; // +stop, −fric; COR, −ant, +r  卷舌塞音  〈知组/舌上音〉
 		case '莊': return 'tʂ' ; case '初': return 'tʂʰ'; case '崇': return 'dʐ' ;                        ; // +stop, +fric; COR, −ant, +r  卷舌塞擦音〈庄组/正齿音〉
 		case '生': return 'ʂ'  ;                        ; case '俟': return 'ʐ'  ;                        ; // −stop, +fric; COR, −ant, +r  卷舌擦音  〈庄组/正齿音〉
-							   ;                        ;                        ; /* 钝音三 B 介音   ɹ */; // −stop, −fric; COR, −ant, +r  龈后近音
-							   ;                        ;                        ; case '日': return 'ɲ'  ; // +stop, −fric; COR, −ant, −r  龈腭擦音  〈日母/半齿音〉
+		                       ;                        ;                        ; /* 钝音三 B 介音   ɹ */; // −stop, −fric; COR, −ant, +r  龈后近音
+		                       ;                        ;                        ; case '日': return 'ɲ'  ; // +stop, −fric; COR, −ant, −r  龈腭塞音  〈日母/半齿音〉
 		case '章': return 'tɕ' ; case '昌': return 'tɕʰ'; case '常': return 'dʑ' ;                        ; // +stop, +fric; COR, −ant, −r  龈腭塞擦音〈章组/正齿音〉
 		case '書': return 'ɕ'  ;                        ; case '船': return 'ʑ'  ;                        ; // −stop, +fric; COR, −ant, −r  龈腭擦音  〈章组/正齿音〉
-							   ;                        ;                        ; case '以': return 'j'  ; // −stop, −fric; COR, −ant, −r  硬腭近音  〈以母/喉音〉
+		                       ;                        ;                        ; case '以': return 'j'  ; // −stop, −fric; COR, −ant, −r  硬腭近音  〈以母/喉音〉
 		case '見': return 'k'  ; case '溪': return 'kʰ' ; case '羣': return 'ɡ'  ; case '疑': return 'ŋ'  ; // +stop, −fric; DOR (+high)    软腭前塞音〈见组/牙音〉
-							   ;                        ; case '匣': return 'ɣ'  ; case '云': return 'ɣ'  ; // −stop, +fric; DOR (+high)    软腭前擦音〈影组/喉音〉
-							   ;                        ;                        ; /* 见系三 C 介音   j̈ */; // −stop, −fric; DOR (+high)    软腭前近音
+		                       ;                        ; case '匣': return 'ɣ'  ; case '云': return 'ɣ'  ; // −stop, +fric; DOR (+high)    软腭前擦音〈影组/喉音〉
+		                       ;                        ;                        ; /* 见系三 C 介音   j̈ */; // −stop, −fric; DOR (+high)    软腭前近音
 		/*(见_非三等       q)  ;   (溪_非三等       qʰ) ;                        ;   (疑_非三等       ɴ)*/; // +stop, −fric; DOR (−high)    软腭后塞音
 		/*(晓_非三等       χ)  ;                        ;   (匣              ʁ)*/;                        ; // −stop, +fric; DOR (−high)    软腭后擦音
 		case '影': return 'ʔ'  ;                        ;                        ;                        ; // +stop, −fric                 喉塞音    〈影组/喉音〉
@@ -217,7 +217,7 @@ function getCoda() {
 [±low]:   低
 [±front]: 前
 [±back]:  后
-[±rnd]：  圆唇（round）
+[±rnd]:   圆唇（round）
 [±tense]: 紧。三子韵及其对应的三寅韵是松元音，三丑韵及其对应的三寅韵是紧元音，非三等韵都是紧元音
 [±divII]: 二等（division-II）。本文不指定它的具体语音实现
 
