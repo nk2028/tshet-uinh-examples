@@ -40,13 +40,13 @@ switches.要推导a                = true;  // 音系规则 (7)。关闭：a，�
 switches.庄组臻摄开口推导为ɹ̩    = true;  // 音系规则 (9)。关闭：in，打开：ɹ̩n。不包括合口“率”小韵
 switches.豪覃韵韵核推导为ʌ      = true;  // 音系规则 (10)。关闭：əw əm，打开：ʌw ʌm
 switches.精三寅合口介音推导为ɥ  = false; // 音系规则 (12)。关闭：sʷɹ-，打开：sʷɥ-。关闭
-switches.蒸幽韵合口增生ɹ滑音    = true;  // 音系规则 (13)。“冰”，关闭：piŋ˦˧，打开：pɹiŋ˦˧
+switches.蒸幽韵合口增生ɹ滑音    = true;  // 音系规则 (13)。“冰”，关闭：pîŋ，打开：pɹîŋ
 switches.云母推导为ɹ            = true;  // 音系规则 (14)。关闭：ɣɹ- ɣj̈-，打开：ɹ-。不论三 B 还是三 C
 switches.见系非三推导为软腭后音 = true;  // 音系规则 (15)。包含匣母
 switches.晓母非三推导为软腭后音 = true;  // 音系规则 (16)。按常理，需要 <见系非三推导为软腭后音> 打开才能打开
 switches.通江宕摄推导为软腭后音 = true;  // 音系规则 (17)。如果 <要推导a> 没有打开，那么不推导宕摄韵尾
 switches.侯韵裂化为ɘu           = true;  // 音系规则 (18)。关闭：u，打开：ɘu
-switches.精组非后高元音省略介音 = true;  // 音系规则 (21)。“踪”，关闭：tsɹʉɜɴ˦˧，打开：tsʉɜɴ˦˧
+switches.精组非后高元音省略介音 = true;  // 音系规则 (21)。“踪”，关闭：tsɹʉ̂ɜɴ，打开：tsʉ̂ɜɴ
 
 // 后处理开关
 switches.知组写成卷舌塞音       = false; // 关闭：tɹ，打开：二等 ʈ、三等 ʈɹ
@@ -59,7 +59,7 @@ switches.二等元音写成双下横线   = false; // 关闭：下等号 a͇（U
 
 // 声调开关
 switches.声调分阴阳             = true;  // 默认打开
-switches.声调写成五度标记       = true;  // 默认打开
+switches.声调写成五度标记       = false;
 switches.声调附加符号写在音节前 = false; // 只在 <声调写成五度标记> 关闭时有效
 
 /** 二、音节结构
@@ -92,7 +92,7 @@ C：辅音，作为韵尾（coda）。韵核和韵尾加在一起叫作韵基（
 [LAB]:    唇（labial）
   [±rnd]: 圆唇（round），包括唇化辅音和圆唇元音
 [COR]:    舌冠（coronal），即锐音。本文为了简便将硬腭辅音也算入舌冠音。本文从简仍然使用“锐音、钝音”的叫法，但不用 [∓grave]
-  [±ant]: 前部（anterior）。前部锐音包括齿、龈，后部锐音包括龈后、卷舌、龈–腭等
+  [±ant]: 前部（anterior）。前部锐音包括齿–龈、龈，后部锐音包括龈后、卷舌、龈–腭等
   [±r]:   r 色彩
 [DOR]:    舌面（dorsal）
   [±high]:高，对辅音而言 [DOR, +high] 是软腭音，[DOR, −high] 是小舌音，正好符合三等、非三等之分。
@@ -151,7 +151,7 @@ const is锐 = is锐前 || is锐后 || is('來母');  // [COR]
 // 函数：将声母的音韵地位转换为音位，包含开合信息
 function getInitial() {
 	let result = getInitialWithoutRounding();
-	// 音韵学术语开合对应 [±rnd]。如果主要调音部位就是 [LAB]〈唇音〉，那么本文一律视为 [−rnd]
+	// 音韵学术语开合对应 [±rnd]。如果主要调音部位就是 [LAB]〈帮组〉，那么本文一律视为 [−rnd]
 	// 没有开合对立的韵母一般视为开口，但虞韵本文视为鱼韵对应的合口；平行地，钟韵也视为合口
 	if (is('合口 或 鍾韻') && !is('幫組')) { // [+rnd]
 		result += 'ʷ';
@@ -306,14 +306,14 @@ function getTone() {
 		}
 	} else {
 		if (switches.声调分阴阳) {
-			if (is('平聲')) return is清    ? '᷇' : '᷅';
+			if (is('平聲')) return is清    ? '̂' : '̏';
 			if (is('上聲')) return !is全浊 ? '̋' : '̌';
-			if (is('去聲')) return is清    ? '̂' : '̏';
+			if (is('去聲')) return is清    ? '᷇' : '᷅';
 			if (is('入聲')) return !is全浊 ? '́' : '̀';
 		} else {
-			if (is('平聲')) return switches.声调附加符号写在音节前 ? 'ˉ' : '̄'; // 写在音节前时直接用独立的附加符号
+			if (is('平聲')) return switches.声调附加符号写在音节前 ? 'ˋ' : '̀'; // 写在音节前时直接用独立的附加符号
 			if (is('上聲')) return switches.声调附加符号写在音节前 ? 'ˊ' : '́';
-			if (is('去聲')) return switches.声调附加符号写在音节前 ? 'ˋ' : '̀';
+			if (is('去聲')) return switches.声调附加符号写在音节前 ? 'ˉ' : '̄';
 			if (is('入聲')) return '';
 		}
 	}
@@ -490,7 +490,7 @@ if (switches.晓母非三推导为软腭后音 && !glide) {
 
 /**
 (17) 圆唇元音和低非前元音后的软腭韵尾〈通江宕摄〉实现为软腭后音
-     [DOR] -> [+back] / {[+round], [+low, −front}__
+     [DOR] -> [+back] / {[+round], [+low, −front]}__
 */
 if (switches.通江宕摄推导为软腭后音) {
 	if ('ʉuoœɑ'.includes(nucleus[0]) || (nucleus.includes('ɐ') && switches.要推导a)) {
@@ -578,5 +578,5 @@ if (switches.声调附加符号写在音节前) {
 }
 
 // 声调附加符号写在韵核主体上
-if (nucleus == 'ɘu' || nucleus == 'ɹ̩') return initial + glide + nucleus + tone + coda;
+if (nucleus.includes('͇') || nucleus.includes('̳') || nucleus == 'ɘu' || nucleus == 'ɹ̩') return initial + glide + nucleus + tone + coda;
 return initial + glide + nucleus[0] + tone + nucleus.substring(1) + coda;
