@@ -1,5 +1,5 @@
 /* 綾香思考音系
- * https://ayaka.shn.hk/dv9/
+ * https://ayaka.shn.hk/v8/
  *
  * 説明
  * 以下內容為生成綾香思考音系的函數體
@@ -24,7 +24,7 @@ function 聲母規則() {
 	if (is('日母')) return 'z';
 	if (is('見溪羣曉匣母')) return 'k';
 	if (is('疑母')) return 'g';
-	if (is('影云以母')) return '';  // 影母細音 q-，詳後
+	if (is('影云以母')) return '';
 	throw new Error('無聲母規則');
 }
 
@@ -141,43 +141,34 @@ function 韻母規則() {
 	throw new Error('無韻母規則');
 }
 
-let 聲母 = 聲母規則();
-let 韻母 = 韻母規則();
-
-let 合口介音 =
-	!( (is('見組 合口 或 曉匣母 合口') && (韻母.startsWith('a') || 韻母.startsWith('e')))
-	|| (is('精莊章組 合口 或 影云以日母 合口') && 韻母.startsWith('a'))
-	) ? '' : 'w';
-
-if (is('影母') && 韻母.startsWith('i')) {
-	聲母 = 'h';
-}
-
 function 聲調規則() {
-	if (is('幫滂端透知徹精清心莊初生章昌書見溪影曉母')) {  // 全清、次清
+	if (is('幫滂端透知徹精清心莊初生章昌書見溪影曉母')) { // 全清、次清
 		if (is('平聲')) return 'ˉ';
 		if (is('上聲')) return 'ˊ';
 		if (is('去聲')) return 'ˇ';
 		if (is('入聲 深臻曾通攝')) return 'ˉ';
 		if (is('入聲')) return 'ˇ';
 	} else {
-		if (is('並定澄從邪崇俟船常羣匣母 上聲')) return 'ˇ';  // 全濁上變去
+		if (is('並定澄從邪崇俟船常羣匣母 上聲')) return 'ˇ'; // 全濁上變去
 		if (is('上聲')) return 'ˊ';
 		if (is('平去入聲')) return 'ˇ';
 	}
 	throw new Error('無聲調規則');
 }
 
+let 聲母 = 聲母規則();
+let 韻母 = 韻母規則();
+let 合口介音 = !(is('見組 合口 或 曉匣母 合口') && (韻母.startsWith('a') || 韻母.startsWith('e'))) ? '' : 'w';
 let 聲調 = 聲調規則();
 
-if (聲母 == '' && 韻母.startsWith('i')) {
+if (聲母 === '' && 韻母.startsWith('i')) {
 	聲母 = 'j';
 	if (韻母.length > 1 && 'aiueo'.includes(韻母[1])) {
 		韻母 = 韻母.substr(1);
 	}
-} else if (聲母 == '' && 韻母.startsWith('y')) {
+} else if (聲母 === '' && 韻母.startsWith('y')) {
 	聲母 = 'j';
-} else if (聲母 == '' && 韻母.startsWith('u')) {
+} else if (聲母 === '' && 韻母.startsWith('u')) {
 	聲母 = 'w';
 	if (韻母.length > 1 && 'aiueo'.includes(韻母[1])) {
 		韻母 = 韻母.substr(1);
