@@ -17,3 +17,4 @@ unt 切韻擬音 J | unt's _Qieyun_ Reconstruction J | `unt_j.js`
 推導普通話 | Extrapolated Putonghua | `putonghua.js`
 推導廣州音 | Extrapolated Cantonese | `gwongzau.js`
 綾香思考音系 | | `ayaka_v8.js`
+推導日語漢音 | Extrapolated Japanese Kanon | `japanese-kanon.js`
