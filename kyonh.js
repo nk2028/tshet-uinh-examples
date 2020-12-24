@@ -9,170 +9,158 @@
 const is = (x) => 音韻地位.屬於(x);
 
 function 聲母規則() {
-	if (is('幫母')) return 'p';
-	if (is('滂母')) return 'ph';
-	if (is('並母')) return 'b';
-	if (is('明母')) return 'm';
-	if (is('端母')) return 't';
-	if (is('透母')) return 'th';
-	if (is('定母')) return 'd';
-	if (is('泥母')) return 'n';
-	if (is('知母')) return 'tr';
-	if (is('徹母')) return 'thr';
-	if (is('澄母')) return 'dr';
-	if (is('孃母')) return 'nr';
-	if (is('精母')) return 'c';
-	if (is('清母')) return 'ch';
-	if (is('從母')) return 'z';
-	if (is('心母')) return 's';
-	if (is('邪母')) return 'zs';
-	if (is('莊母')) return 'cr';
-	if (is('初母')) return 'chr';
-	if (is('崇母')) return 'zr';
-	if (is('生母')) return 'sr';
-	if (is('俟母')) return 'zsr';
-	if (is('章母')) return 'cj';
-	if (is('昌母')) return 'chj';
-	if (is('船母')) return 'zsj';
-	if (is('書母')) return 'sj';
-	if (is('常母')) return 'zj';
-	if (is('見母')) return 'k';
-	if (is('溪母')) return 'kh';
-	if (is('羣母')) return 'g';
-	if (is('疑母')) return 'ng';
-	if (is('影母')) return 'q';
-	if (is('曉母')) return 'h';
-	if (is('匣母')) return 'gh';
-	if (is('云母')) return '';
-	if (is('以母')) return 'j';
-	if (is('來母')) return 'l';
-	if (is('日母')) return 'nj';
-	throw new Error('無聲母規則');
+	switch (音韻地位.母) {
+		case '幫': return 'p';
+		case '滂': return 'ph';
+		case '並': return 'b';
+		case '明': return 'm';
+		case '端': return 't';
+		case '透': return 'th';
+		case '定': return 'd';
+		case '泥': return 'n';
+		case '知': return 'tr';
+		case '徹': return 'thr';
+		case '澄': return 'dr';
+		case '孃': return 'nr';
+		case '精': return 'c';
+		case '清': return 'ch';
+		case '從': return 'z';
+		case '心': return 's';
+		case '邪': return 'zs';
+		case '莊': return 'cr';
+		case '初': return 'chr';
+		case '崇': return 'zr';
+		case '生': return 'sr';
+		case '俟': return 'zsr';
+		case '章': return 'cj';
+		case '昌': return 'chj';
+		case '船': return 'zsj';
+		case '書': return 'sj';
+		case '常': return 'zj';
+		case '見': return 'k';
+		case '溪': return 'kh';
+		case '羣': return 'g';
+		case '疑': return 'ng';
+		case '影': return 'q';
+		case '曉': return 'h';
+		case '匣': return 'gh';
+		case '云': return '';
+		case '以': return 'j';
+		case '來': return 'l';
+		case '日': return 'nj';
+		default: throw new Error('無聲母規則');
+	}
 }
 
 function 韻母規則() {
-	// 果攝
-	if (is('開口 一等 歌韻')) return 'a';
-	if (is('開口 三等 戈韻')) return 'ia';
-	if (is('合口 一等 戈韻')) return 'ua';
-	if (is('合口 三等 戈韻')) return 'ya';
-	// 假攝
-	if (is('開口 二等 麻韻')) return 'ra';
-	if (is('開口 三等 麻韻')) return 'ia';
-	if (is('合口 二等 麻韻')) return 'rua';
-	// 遇攝
-	if (is('一等 模韻')) return 'o';
-	if (is('三等 魚韻')) return 'io';
-	if (is('三等 虞韻')) return 'yo';
-	// 蟹攝
-	if (is('開口 一等 咍韻')) return 'ai';
-	if (is('開口 二等 佳韻')) return 're';
-	if (is('開口 二等 皆韻')) return 'rai';
-	if (is('開口 四等 齊韻')) return 'e';
-	if (is('開口 一等 泰韻')) return 'ad';
-	if (is('開口 二等 夬韻')) return 'rad';
-	if (is('開口 三等 祭韻 重紐A類')) return 'jed';
-	if (is('開口 三等 祭韻')) return 'ied';
-	if (is('開口 三等 廢韻')) return 'iad';
-	if (is('合口 一等 灰韻')) return 'uai';
-	if (is('合口 二等 佳韻')) return 'rue';
-	if (is('合口 二等 皆韻')) return 'ruai';
-	if (is('合口 四等 齊韻')) return 'ue';
-	if (is('合口 一等 泰韻')) return 'uad';
-	if (is('合口 二等 夬韻')) return 'ruad';
-	if (is('合口 三等 祭韻')) return 'yed';
-	if (is('合口 三等 廢韻')) return 'yad';
-	// 止攝
-	if (is('開口 三等 支韻 重紐A類')) return 'je';
-	if (is('開口 三等 支韻')) return 'ie';
-	if (is('開口 三等 脂韻 重紐A類')) return 'jii';
-	if (is('開口 三等 脂韻')) return 'ii';
-	if (is('開口 三等 之韻')) return 'i';
-	if (is('開口 三等 微韻')) return 'ioi';
-	if (is('合口 三等 支韻 重紐A類')) return 'jye';
-	if (is('合口 三等 支韻')) return 'ye';
-	if (is('合口 三等 脂韻 重紐A類')) return 'jyi';
-	if (is('合口 三等 脂韻')) return 'yi';
-	if (is('合口 三等 微韻')) return 'yoi';
-	// 效攝
-	if (is('一等 豪韻')) return 'au';
-	if (is('二等 肴韻')) return 'rau';
-	if (is('三等 宵韻 重紐A類')) return 'jeu';
-	if (is('三等 宵韻')) return 'ieu';
-	if (is('四等 蕭韻')) return 'eu';
-	// 流攝
-	if (is('一等 侯韻')) return 'u';
-	if (is('三等 尤韻')) return 'iu';
-	if (is('三等 幽韻')) return 'y';
-	// 咸攝
-	if (is('開口 一等 談韻')) return 'am';
-	if (is('開口 二等 銜韻')) return 'ram';
-	if (is('開口 二等 咸韻')) return 'rem';
-	if (is('開口 三等 鹽韻 重紐A類')) return 'jem';
-	if (is('開口 三等 鹽韻')) return 'iem';
-	if (is('開口 三等 嚴韻')) return 'iam';
-	if (is('開口 四等 添韻')) return 'em';
-	if (is('開口 一等 覃韻')) return 'om';
-	if (is('合口 三等 凡韻')) return 'yam';
-	// 深攝
-	if (is('三等 侵韻 重紐A類')) return 'jim';
-	if (is('三等 侵韻')) return 'im';
-	// 山攝
-	if (is('開口 一等 寒韻')) return 'an';
-	if (is('開口 二等 刪韻')) return 'ran';
-	if (is('開口 二等 山韻')) return 'ren';
-	if (is('開口 三等 仙韻 重紐A類')) return 'jen';
-	if (is('開口 三等 仙韻')) return 'ien';
-	if (is('開口 四等 先韻')) return 'en';
-	if (is('合口 一等 桓韻')) return 'uan';
-	if (is('合口 二等 刪韻')) return 'ruan';
-	if (is('合口 二等 山韻')) return 'ruen';
-	if (is('合口 三等 仙韻 重紐A類')) return 'jyen';
-	if (is('合口 三等 仙韻')) return 'yen';
-	if (is('合口 四等 先韻')) return 'uen';
-	// 臻攝
-	if (is('開口 一等 痕韻')) return 'on';
-	if (is('開口 三等 眞韻 重紐A類')) return 'jin';
-	if (is('開口 三等 眞韻')) return 'in';
-	if (is('開口 三等 臻韻')) return 'in';
-	if (is('開口 三等 欣韻')) return 'ion';
-	if (is('開口 三等 元韻')) return 'ian';
-	if (is('合口 一等 魂韻')) return 'uon';
-	if (is('合口 三等 眞韻')) return 'yn';
-	if (is('合口 三等 諄韻 重紐A類')) return 'jyn';
-	if (is('合口 三等 諄韻')) return 'yn';
-	if (is('合口 三等 文韻')) return 'yon';
-	if (is('合口 三等 元韻')) return 'yan';
-	// 宕攝
-	if (is('開口 一等 唐韻')) return 'ang';
-	if (is('開口 三等 陽韻')) return 'iang';
-	if (is('合口 一等 唐韻')) return 'uang';
-	if (is('合口 三等 陽韻')) return 'yang';
-	// 梗攝
-	if (is('開口 二等 庚韻')) return 'rang';
-	if (is('開口 二等 耕韻')) return 'reng';
-	if (is('開口 三等 庚韻')) return 'ieng';
-	if (is('開口 三等 清韻 重紐A類')) return 'jeng';
-	if (is('開口 三等 清韻')) return 'ieng';
-	if (is('開口 四等 青韻')) return 'eng';
-	if (is('合口 二等 庚韻')) return 'ruang';
-	if (is('合口 二等 耕韻')) return 'rueng';
-	if (is('合口 三等 庚韻')) return 'yeng';
-	if (is('合口 三等 清韻 重紐A類')) return 'jyeng';
-	if (is('合口 三等 清韻')) return 'yeng';
-	if (is('合口 四等 青韻')) return 'ueng';
-	// 曾攝
-	if (is('開口 一等 登韻')) return 'ong';
-	if (is('開口 三等 蒸韻')) return 'ing';
-	if (is('合口 一等 登韻')) return 'uong';
-	if (is('合口 三等 蒸韻')) return 'yng';
 	// 通攝
-	if (is('一等 東韻')) return 'ung';
-	if (is('三等 鍾韻')) return 'yung';
-	if (is('一等 冬韻')) return 'uung';
-	if (is('三等 東韻')) return 'iung';
+	if (is('東韻 一等')) return 'ung';
+	if (is('東韻 三等')) return 'iung';
+	if (is('冬韻')) return 'uung';
+	if (is('鍾韻')) return 'yung';
 	// 江攝
-	if (is('二等 江韻')) return 'rung';
+	if (is('江韻')) return 'rung';
+	// 止攝
+	if (is('支韻 開口')) return is('重紐A類') ? 'je' : 'ie';
+	if (is('支韻 合口')) return is('重紐A類') ? 'jye' : 'ye';
+	if (is('脂韻 開口')) return is('重紐A類') ? 'jii' : 'ii';
+	if (is('脂韻 合口')) return is('重紐A類') ? 'jyi' : 'yi';
+	if (is('之韻')) return 'i';
+	if (is('微韻 開口')) return 'ioi';
+	if (is('微韻 合口')) return 'yoi';
+	// 遇攝
+	if (is('魚韻')) return 'io';
+	if (is('虞韻')) return 'yo';
+	if (is('模韻')) return 'o';
+	// 蟹攝
+	if (is('齊韻 開口')) return 'e';
+	if (is('齊韻 合口')) return 'ue';
+	if (is('祭韻 開口')) return is('重紐A類') ? 'jed' : 'ied';
+	if (is('祭韻 合口')) return 'yed';
+	if (is('泰韻 開口')) return 'ad';
+	if (is('泰韻 合口')) return 'uad';
+	if (is('佳韻 開口')) return 're';
+	if (is('佳韻 合口')) return 'rue';
+	if (is('皆韻 開口')) return 'rai';
+	if (is('皆韻 合口')) return 'ruai';
+	if (is('夬韻 合口')) return 'ruad';
+	if (is('夬韻 開口')) return 'rad';
+	if (is('灰韻')) return 'uai';
+	if (is('咍韻')) return 'ai';
+	if (is('廢韻 開口')) return 'iad';
+	if (is('廢韻 合口')) return 'yad';
+	// 臻攝
+	if (is('眞韻 開口')) return is('重紐A類') ? 'jin' : 'in';
+	if (is('眞韻 合口')) return 'yn';
+	if (is('諄韻')) return is('重紐A類') ? 'jyn' : 'yn';
+	if (is('臻韻')) return 'in';
+	if (is('文韻')) return 'yon';
+	if (is('欣韻')) return 'ion';
+	if (is('元韻 開口')) return 'ian';
+	if (is('元韻 合口')) return 'yan';
+	if (is('魂韻')) return 'uon';
+	if (is('痕韻')) return 'on';
+	// 山攝
+	if (is('寒韻')) return 'an';
+	if (is('桓韻')) return 'uan';
+	if (is('刪韻 開口')) return 'ran';
+	if (is('刪韻 合口')) return 'ruan';
+	if (is('山韻 開口')) return 'ren';
+	if (is('山韻 合口')) return 'ruen';
+	if (is('仙韻 開口')) return is('重紐A類') ? 'jen' : 'ien';
+	if (is('仙韻 合口')) return is('重紐A類') ? 'jyen' : 'yen';
+	if (is('先韻 開口')) return 'en';
+	if (is('先韻 合口')) return 'uen';
+	// 效攝
+	if (is('蕭韻')) return 'eu';
+	if (is('宵韻')) return is('重紐A類') ? 'jeu' : 'ieu';
+	if (is('肴韻')) return 'rau';
+	if (is('豪韻')) return 'au';
+	// 果攝
+	if (is('歌韻')) return 'a';
+	if (is('戈韻 合口 一等')) return 'ua';
+	if (is('戈韻 開口 三等')) return 'ia';
+	if (is('戈韻 合口 三等')) return 'ya';
+	// 假攝
+	if (is('麻韻 開口 二等')) return 'ra';
+	if (is('麻韻 合口 二等')) return 'rua';
+	if (is('麻韻 開口 三等')) return 'ia';
+	// 宕攝
+	if (is('陽韻 合口')) return 'yang';
+	if (is('陽韻 開口')) return 'iang';
+	if (is('唐韻 開口')) return 'ang';
+	if (is('唐韻 合口')) return 'uang';
+	// 梗攝
+	if (is('庚韻 開口 二等')) return 'rang';
+	if (is('庚韻 合口 二等')) return 'ruang';
+	if (is('庚韻 開口 三等')) return 'ieng';
+	if (is('庚韻 合口 三等')) return 'yeng';
+	if (is('耕韻 開口')) return 'reng';
+	if (is('耕韻 合口')) return 'rueng';
+	if (is('清韻 開口')) return is('重紐A類') ? 'jeng' : 'ieng';
+	if (is('清韻 合口')) return is('重紐A類') ? 'jyeng' : 'yeng';
+	if (is('青韻 開口')) return 'eng';
+	if (is('青韻 合口')) return 'ueng';
+	// 曾攝
+	if (is('蒸韻 開口')) return 'ing';
+	if (is('蒸韻 合口')) return 'yng';
+	if (is('登韻 開口')) return 'ong';
+	if (is('登韻 合口')) return 'uong';
+	// 流攝
+	if (is('尤韻')) return 'iu';
+	if (is('侯韻')) return 'u';
+	if (is('幽韻')) return 'y';
+	// 深攝
+	if (is('侵韻')) return is('重紐A類') ? 'jim' : 'im';
+	// 咸攝
+	if (is('覃韻')) return 'om';
+	if (is('談韻')) return 'am';
+	if (is('鹽韻')) return is('重紐A類') ? 'jem' : 'iem';
+	if (is('添韻')) return 'em';
+	if (is('咸韻')) return 'rem';
+	if (is('銜韻')) return 'ram';
+	if (is('嚴韻')) return 'iam';
+	if (is('凡韻')) return 'yam';
 	throw new Error('無韻母規則');
 }
 
@@ -206,12 +194,12 @@ if (聲母.endsWith('r') && 韻母.startsWith('r')) {
 	韻母 = 韻母.substr(1);
 }
 
-if (聲母.endsWith('j') && 韻母.startsWith('i') && 'aeou'.split('').some(x => 韻母.includes(x))) {
+if (聲母.endsWith('j') && 韻母.startsWith('i') && [...'aeou'].some((x) => 韻母.includes(x))) {
 	韻母 = 韻母.substr(1);
 }
 
 if
-( is('幫組 一二三四等'
+(is('幫組 一二三四等'
 + ' 或 端組 一四等'
 + ' 或 知組 二三等'
 + ' 或 精組 一三四等'
@@ -228,12 +216,8 @@ if
 	隔音符號 = '';
 }
 
-if (is('云母 一等')) {  // 1444 倄小韻 i'uaix
-	聲母 = 'i';
-}
+if (is('云母 一等')) 聲母 = 'i'; // 1444 倄小韻 i'uaix
 
-if (is('定母 三等')) {  // 2237 地小韻 diih
-	隔音符號 = '';
-}
+if (is('定母 三等')) 隔音符號 = ''; // 2237 地小韻 diih
 
 return 聲母 + 隔音符號 + 韻母 + 聲調;
