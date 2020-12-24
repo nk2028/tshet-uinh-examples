@@ -29,44 +29,54 @@ if (!開關.小假名)
 
 function 聲母規則() {
     switch (音韻地位.母) {
-        case '幫': return 'f';
-        case '滂': return 'f';
-        case '並': return 'f';
-        case '明': return 'm';
-        case '端': return 't';
-        case '透': return 't';
-        case '定': return 't';
-        case '泥': return 'd';
-        case '知': return 't';
-        case '徹': return 't';
-        case '澄': return 't';
-        case '孃': return 'd';
-        case '精': return 's';
-        case '清': return 's';
-        case '從': return 's';
-        case '心': return 's';
-        case '邪': return 's';
-        case '莊': return 's';
-        case '初': return 's';
-        case '崇': return 's';
-        case '生': return 's';
-        case '俟': return 's';
-        case '章': return 's';
-        case '昌': return 's';
-        case '船': return 's';
-        case '書': return 's';
-        case '常': return 's';
-        case '見': return 'k';
-        case '溪': return 'k';
-        case '羣': return 'k';
-        case '疑': return 'g';
-        case '影': return '0';
-        case '曉': return 'k';
-        case '匣': return 'k';
-        case '云': return '0';
-        case '以': return '0';
-        case '來': return 'r';
-        case '日': return 'z';
+        case '幫':
+        case '滂':
+        case '並':
+            return 'f';
+        case '明':
+            return 'm';
+        case '端':
+        case '透':
+        case '定':
+        case '知':
+        case '徹':
+        case '澄':
+            return 't';
+        case '泥':
+        case '孃':
+            return 'd';
+        case '精':
+        case '清':
+        case '從':
+        case '心':
+        case '邪':
+        case '莊':
+        case '初':
+        case '崇':
+        case '生':
+        case '俟':
+        case '章':
+        case '昌':
+        case '船':
+        case '書':
+        case '常':
+            return 's';
+        case '見':
+        case '溪':
+        case '羣':
+        case '曉':
+        case '匣':
+            return 'k';
+        case '疑':
+            return 'g';
+        case '影':
+        case '云':
+        case '以':
+            return '0';
+        case '來':
+            return 'r';
+        case '日':
+            return 'z';
         default: throw new Error('無聲母規則');
     }
 }
