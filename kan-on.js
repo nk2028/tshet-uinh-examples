@@ -299,7 +299,7 @@ function 片假名化(拉丁轉寫) {
     }
 
     if (拉丁轉寫 == 'gwiyau') {
-        if (開關.kwiyau && 開關.wiwe)
+        if (開關.kwiyau)
             return 開關.小假名wiwe ? 'グ𛅤ャウ' : 'グヰヤウ'
     }
 
