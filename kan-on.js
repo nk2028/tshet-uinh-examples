@@ -18,48 +18,50 @@ const 開關 = {};
 開關.分mn = true; // 開：サム　關：サン
 開關.wiwe = true; // 開：ク𛅥ン　關：ケン
 開關.小假名wiwe = true; // 開：ク𛅥ン　關：クヱン
-開關.kwiyau = true;  // 開：ク𛅥ャウ　關：キャウ
+開關.kwiyau = true; // 開：ク𛅥ャウ　關：キャウ
 
 function 聲母規則() {
-    if (is('幫母')) return 'f';
-    if (is('滂母')) return 'f';
-    if (is('並母')) return 'f';
-    if (is('明母')) return 'm';
-    if (is('端母')) return 't';
-    if (is('透母')) return 't';
-    if (is('定母')) return 't';
-    if (is('泥母')) return 'd';
-    if (is('知母')) return 't';
-    if (is('徹母')) return 't';
-    if (is('澄母')) return 't';
-    if (is('孃母')) return 'd';
-    if (is('精母')) return 's';
-    if (is('清母')) return 's';
-    if (is('從母')) return 's';
-    if (is('心母')) return 's';
-    if (is('邪母')) return 's';
-    if (is('莊母')) return 's';
-    if (is('初母')) return 's';
-    if (is('崇母')) return 's';
-    if (is('生母')) return 's';
-    if (is('俟母')) return 's';
-    if (is('章母')) return 's';
-    if (is('昌母')) return 's';
-    if (is('船母')) return 's';
-    if (is('書母')) return 's';
-    if (is('常母')) return 's';
-    if (is('見母')) return 'k';
-    if (is('溪母')) return 'k';
-    if (is('羣母')) return 'k';
-    if (is('疑母')) return 'g';
-    if (is('影母')) return '0';
-    if (is('曉母')) return 'k';
-    if (is('匣母')) return 'k';
-    if (is('云母')) return '0';
-    if (is('以母')) return '0';
-    if (is('來母')) return 'r';
-    if (is('日母')) return 'z';
-    throw new Error('無聲母規則');
+    switch (音韻地位.母) {
+        case '幫': return 'f';
+        case '滂': return 'f';
+        case '並': return 'f';
+        case '明': return 'm';
+        case '端': return 't';
+        case '透': return 't';
+        case '定': return 't';
+        case '泥': return 'd';
+        case '知': return 't';
+        case '徹': return 't';
+        case '澄': return 't';
+        case '孃': return 'd';
+        case '精': return 's';
+        case '清': return 's';
+        case '從': return 's';
+        case '心': return 's';
+        case '邪': return 's';
+        case '莊': return 's';
+        case '初': return 's';
+        case '崇': return 's';
+        case '生': return 's';
+        case '俟': return 's';
+        case '章': return 's';
+        case '昌': return 's';
+        case '船': return 's';
+        case '書': return 's';
+        case '常': return 's';
+        case '見': return 'k';
+        case '溪': return 'k';
+        case '羣': return 'k';
+        case '疑': return 'g';
+        case '影': return '0';
+        case '曉': return 'k';
+        case '匣': return 'k';
+        case '云': return '0';
+        case '以': return '0';
+        case '來': return 'r';
+        case '日': return 'z';
+        default: throw new Error('無聲母規則');
+    }
 }
 
 function 韻母規則() {
@@ -220,12 +222,12 @@ if (is('影母') && (is('模韻') || is('東韻'))) {
 // == 韻頭規則 ==
 
 // PyV > PV
-if (is('幫組 三等') && (韻母.startsWith('y'))) {
+if (is('幫組 三等') && 韻母.startsWith('y')) {
     韻母 = 韻母.slice(1)
 }
 
 // JwV > JV
-if (is('以母 合口') && (韻母.startsWith('w'))) {
+if (is('以母 合口') && 韻母.startsWith('w')) {
     韻母 = 韻母.slice(1)
 }
 
