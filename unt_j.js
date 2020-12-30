@@ -30,7 +30,7 @@ const is = (x) => 音韻地位.屬於(x);
 
 const switches = {};
 // 音韵地位对应音位开关
-switches.豪韵韵核归为a          = false; // 关闭：əw（实现为 ʌw），打开：aw
+switches.肴豪韵韵核归为低元音   = false; // 关闭：e͇w əw（实现为 œ͇w ʌw），打开：a͇w aw
 
 // 音系规则开关
 switches.祭泰夬废韵尾推导为ɹ    = true;  // 音系规则 (4)。关闭：-j，打开：-ɹ
@@ -39,6 +39,7 @@ switches.要推导二合元音         = true;  // 音系规则 (6)。关闭：i
 switches.要推导a                = true;  // 音系规则 (7)。关闭：a，打开：a ɑ
 switches.庄组臻摄开口推导为ɹ̩    = true;  // 音系规则 (9)。关闭：in，打开：ɹ̩n。不包括合口“率”小韵
 switches.豪覃韵韵核推导为ʌ      = true;  // 音系规则 (10)。关闭：əw əm，打开：ʌw ʌm
+switches.肴凡韵韵核推导为œ      = true;  // 音系规则 (11)。关闭：e͇w βəm，打开：œ͇w βœm
 switches.精三寅合口介音推导为ɥ  = false; // 音系规则 (12)。关闭：sʷɹ-，打开：sʷɥ-。关闭
 switches.蒸幽韵合口增生ɹ滑音    = true;  // 音系规则 (13)。“冰”，关闭：pîŋ，打开：pɹîŋ
 switches.云母推导为ɹ            = true;  // 音系规则 (14)。关闭：ɣɹ- ɣj̈-，打开：ɹ-。不论三 B 还是三 C
@@ -245,18 +246,21 @@ function getNucleus() {
 	if (is('鹽嚴凡祭廢仙　　元　宵韻')) return 'ɜ'; // −high, −tense
 
 	// 紧元音
-	if (switches.豪韵韵核归为a && is('豪韻')) return 'a';
+	if (switches.肴豪韵韵核归为低元音) {
+		if (is('肴韻')) return 'a͇';
+		if (is('豪韻')) return 'a';
+	}
 	// 脂韵、尤韵的韵基也可分别视为 /ɪj/、/ɪw/，本文从简直接视为紧元音 /i/、/u/
 	// 韵尾:   ŋ m j n w
 	if (is('脂蒸　　　幽韻')) return 'i'; // +high, −low, +front, −back, −rnd, +tense
 	if (is('之　　　　　韻')) return 'ɨ'; // +high, −low, −front, −back, −rnd, +tense
 	if (is('尤東　　　侯韻')) return 'u'; // +high, −low, −front, +back, +rnd, +tense
-	if (is('佳耕咸皆山　韻')) return 'e͇'; // −high, −low, +divII,        −rnd, +tense
+	if (is('佳耕咸皆山肴韻')) return 'e͇'; // −high, −low, +divII,        −rnd, +tense
 	if (is('　江　　　　韻')) return 'œ͇'; // −high, −low, +divII,        +rnd, +tense
 	if (is('　青添齊先蕭韻')) return 'e'; // −high, −low, +front, −back, −rnd, +tense
 	if (is('　登覃咍痕豪韻')) return 'ə'; // −high, −low, +front, −back, −rnd, +tense
 	if (is('模冬　灰魂　韻')) return 'o'; // −high, −low, +front, −back, −rnd, +tense
-	if (is('麻庚銜夬刪肴韻 二等')) return 'a͇';
+	if (is('麻庚銜夬刪　韻 二等')) return 'a͇';
 	                                      // −high, +low, +divII,        −rnd, +tense
 	if (is('麻庚　　　　韻 三等') ||
 		is('歌唐談泰寒　韻') ||
@@ -434,12 +438,19 @@ if (switches.豪覃韵韵核推导为ʌ && !glide && [...'mpw'].includes(coda)) 
 }
 
 /**
-(11) 转换𠑆𦑣䎎小韵。注意这 3 个小韵的存在是违反三子韵原则的，但既然存在，这里就转换之
-     e -> ə / [COR, +ant, +rnd]G__[LAB]
+(11) e͇w〈肴韵〉、βəm〈凡韵〉的韵核实现为圆唇元音
+     e͇      -> œ͇ / __w
+	 {e, ə} -> œ / [LAB]G__m
 */
+// 先转换𠑆𦑣䎎小韵，它们属于凡韵
 if (is锐 && initial.includes('ʷ') && [...'mp'].includes(coda)) {
 	if (nucleus == 'e') nucleus = 'ə';
 }
+if (switches.肴凡韵韵核推导为œ) {
+	if (nucleus == 'e͇' && coda == 'w') nucleus = 'œ͇';
+	if (nucleus == 'ə' && (initial.includes('ʷ') || is('幫組')) && [...'mp'].includes(coda)) nucleus = 'œ';
+}
+
 
 /**
 (12) 齿龈阻音〈端精组〉后的介音接前元音时被同化（圆唇时可选）
