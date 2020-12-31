@@ -45,12 +45,12 @@ const 拗音表 = {
 
 const 韻尾表 = {
   '': '', i: 'イ', u: 'ウ',
-  p: 'フ', t: 'ツ', k: 'ク', // g: 'キ',
   m: 'ム', n: 'ン', ng: 'ゥ', // ng: 'ィ',
+  p: 'フ', t: 'ツ', k: 'ク', // k: 'キ',
 };
 
 function roma2kata(s) {
-  const r = /^([kgsztdnhbmyrw]?w??[yw]?)([aiueo])([ptkmngiu]*)$/g;
+  const r = /^([kgsztdnpbmyrw]?w??[yw]?)([aiueo])([ptkmngiu]*)$/g;
   const match = r.exec(s);
   if (match == null) {
     throw new Error(`無法轉換為假名：${s}`);
@@ -270,20 +270,19 @@ if (韻母.startsWith('w') && (!is牙喉 || is('重紐A類 或 以母'))) 韻母
 
 if (開關.歷史性音變) 開關.綾香的音變 = false; // 二者不可同時開啓
 
-if (開關.歷史性音變 || 開關.綾香的音變) {
-  if (聲母 === 'p') 聲母 = 'h'; // 甫 pu -> hu
-  if (韻母 === 'iu') 韻母 = 'yuu'; // 宙 tiu -> tyuu
-  else if (韻母.endsWith('au')) 韻母 = `${韻母.slice(0, -3)}ou`; // 高 kau -> kou
-  else if (韻母.endsWith('ang')) 韻母 = `${韻母.slice(0, -3)}ong`; // 相 syang -> syong
-  else if (韻母.endsWith('eu')) 韻母 = `${韻母.slice(0, -2)}you`; // 遙 eu -> you
-}
-
 if (開關.歷史性音變) {
   if (韻母.startsWith('w')) 韻母 = 韻母.slice(1); // 園 wen -> en
-  if (韻母.endsWith('ep')) 韻母 = `${韻母.slice(0, -2)}you`; // 鄴 gep -> gyou
+  if (韻母.endsWith('p')) 韻母 = `${韻母.slice(0, -1)}u`; // 鄴 gep -> geu
   else if (韻母.endsWith('m')) 韻母 = `${韻母.slice(0, -1)}n`; // 南 dam -> dan
   else if (韻母.endsWith('eng')) 韻母 = `${韻母.slice(0, -2)}i`; // 生 seng -> sei
-  else if (韻母.endsWith('ng')) 韻母 = `${韻母.slice(0, -2)}u`; // 窮 kyung -> kyuu
+  else if (韻母.endsWith('ng')) 韻母 = `${韻母.slice(0, -2)}u`; // 相 syang -> syau
+}
+
+if (開關.歷史性音變 || 開關.綾香的音變) {
+  if (韻母.endsWith('au')) 韻母 = `${韻母.slice(0, -2)}ou`; // 高 kau -> kou
+  else if (韻母.endsWith('iu')) 韻母 = `${韻母.slice(0, -2)}yuu`; // 宙 tiu -> tyuu
+  else if (韻母.endsWith('eu')) 韻母 = `${韻母.slice(0, -2)}you`; // 遙 eu -> you
+  else if (韻母.endsWith('ang')) 韻母 = `${韻母.slice(0, -3)}ong`; // 相 syang -> syong
 }
 
 if (開關.綾香的音變) {
@@ -292,49 +291,53 @@ if (開關.綾香的音變) {
 }
 
 if (開關.假名) {
-  let s = roma2kata(`${聲母}${韻母}`);
-  if (!開關.ヰヱヲ小假名) s = small2large(s);
-  if (!開關.片假名) s = kata2hira(s);
-  return s + 聲調;
+  let 聲韻 = roma2kata(`${聲母}${韻母}`);
+  if (!開關.ヰヱヲ小假名) 聲韻 = small2large(聲韻);
+  if (!開關.片假名) 聲韻 = kata2hira(聲韻);
+  return `${聲韻}${聲調}`;
+}
+
+if (開關.歷史性音變 || 開關.綾香的音變) {
+  if (聲母 === 'p') 聲母 = 'h'; // 甫 pu -> hu
 }
 
 if (開關.歷史性音變) {
-  if (韻母.endsWith('ek')) 韻母 = `${韻母}i`; // 席 sek -> seki
+  if (韻母.endsWith('t')) 韻母 = `${韻母}u`; // 遏 at -> atu
+  else if (韻母.endsWith('ek')) 韻母 = `${韻母}i`; // 席 sek -> seki
   else if (韻母.endsWith('k')) 韻母 = `${韻母}u`; // 澤 tak -> taku
 }
 
 if (開關.綾香的音變) {
   if (聲母 === 'r') 聲母 = 'l'; // 籟 rai -> lai
+  if (韻母.endsWith('t')) 韻母 = `${韻母.slice(0, -1)}s`; // 遏 at -> as
+  else if (韻母.endsWith('p')) 韻母 = `${韻母.slice(0, -1)}f`; // 鄴 gep -> gef
 }
 
-if (開關.日本式羅馬字) {
-  if (開關.歷史性音變) {
-    if (韻母.endsWith('t')) 韻母 = `${韻母}u`; // 遏 at -> atu
-  }
-  if (開關.綾香的音變) {
-    if (韻母.endsWith('t')) 韻母 = `${韻母.slice(0, -1)}s`; // 遏 at -> as
-    else if (韻母.endsWith('p')) 韻母 = `${韻母.slice(0, -1)}f`; // 鄴 gep -> gef
-  }
-  return `${聲母}${韻母}${聲調}`;
-}
+if (開關.日本式羅馬字) return `${聲母}${韻母}${聲調}`;
 
 if (開關.歷史性音變 || 開關.綾香的音變) {
-  if (聲母 === 'h' && 韻母.startsWith('u')) 聲母 = 'f'; // 不 hut -> fut
+  if (聲母 === 's' && 韻母.startsWith('i')) 聲母 = 'sh'; // 四 si -> shi
+  else if (聲母 === 'z' && 韻母.startsWith('i')) 聲母 = 'j'; // 人 zin -> jin
   else if (聲母 === 't' && 韻母.startsWith('i')) 聲母 = 'ch'; // 地 ti -> chi
   else if (聲母 === 't' && 韻母.startsWith('u')) 聲母 = 'ts'; // 追 tui -> tsui
-  else if (聲母 === 'z' && 韻母.startsWith('i')) 聲母 = 'j'; // 人 zin -> jin
+  else if (聲母 === 'h' && 韻母.startsWith('u')) 聲母 = 'f'; // 甫 hu -> fu
 }
 
 if (開關.歷史性音變) {
-  if (聲母 === 'd' && 韻母.startsWith('i')) 聲母 = 'j'; // 膩 di -> ji
-  else if (聲母 === 't' && 韻母.startsWith('y')) { 聲母 = 'ch'; 韻母 = 韻母.slice(1); } // 柱 tyuu -> chuu
-  else if (聲母 === 's' && 韻母.startsWith('y')) { 聲母 = 'sh'; 韻母 = 韻母.slice(1); } // 相 syou -> shou
+  if (聲母 === 's' && 韻母.startsWith('y')) { 聲母 = 'sh'; 韻母 = 韻母.slice(1); } // 相 syou -> shou
   else if (聲母 === 'z' && 韻母.startsWith('y')) { 聲母 = 'j'; 韻母 = 韻母.slice(1); } // 仍 zyou -> jou
-  if (韻母.endsWith('t')) 韻母 = `${韻母}su`; // 遏 at -> atsu
+  else if (聲母 === 't' && 韻母.startsWith('y')) { 聲母 = 'ch'; 韻母 = 韻母.slice(1); } // 兆 tyou -> chou
+  else if (聲母 === 'd' && 韻母.startsWith('i')) 聲母 = 'j'; // 膩 di -> ji
+  else if (聲母 === 'd' && 韻母.startsWith('y')) { 聲母 = 'j'; 韻母 = 韻母.slice(1); } // 紐 dyuu -> juu
+  if (韻母.endsWith('tu')) 韻母 = `${韻母.slice(0, -1)}su`; // 遏 atu -> atsu
 }
 
 if (開關.綾香的音變) {
-  if (聲母 === 't' && 韻母.startsWith('y')) 聲母 = 'c'; // 柱 tyuu -> cyuu
+  if (韻母 !== 'yuu' && 韻母 !== 'yun') {
+    if (聲母 === 's' && 韻母.startsWith('y')) { 聲母 = 'sh'; 韻母 = 韻母.slice(1); } // 相 syong -> shong
+    else if (聲母 === 't' && 韻母.startsWith('y')) { 聲母 = 'ch'; 韻母 = 韻母.slice(1); } // 兆 tyou -> chou
+  }
+  if (聲母 === 'z' && 韻母.startsWith('y')) { 聲母 = 'j'; 韻母 = 韻母.slice(1); } // 仍 zyong -> jong
 }
 
 return `${聲母}${韻母}${聲調}`;
