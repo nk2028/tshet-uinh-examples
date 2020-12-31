@@ -103,20 +103,20 @@ function 聲母規則() {
 }
 
 function 韻母規則() {
-	if (is('東韻 一等 或 冬韻')) return is舒聲 ? 'ong' : 'ok';
+	if (is('東韻 一等 或 冬韻')) return 'ong';
 	if (is('東韻 三等')) {
 		if (is('幫滂並母')) return is舒聲 ? 'ong' : 'uk';
-		if (is('明母')) return is舒聲 ? 'ong' : 'ok';
-		if (is('精莊章組')) return is舒聲 ? 'yung' : 'yuk';
+		if (is('明母')) return 'ong';
+		if (is('精莊章組')) return 'yung';
 		if (is舌齒) return is舒聲 ? 'yung' : 'ik';
 		if (is('影母')) return is舒聲 ? 'yung' : 'wik';
 		if (is牙喉) return is舒聲 ? 'yung' : 'ik';
 	}
 	if (is('鍾韻')) {
-		if (is脣音) return is舒聲 ? 'ong' : 'ok';
-		if (is舌齒 || is牙喉) return is舒聲 ? 'yong' : 'yok';
+		if (is脣音) return 'ong';
+		if (is舌齒 || is牙喉) return 'yong';
 	}
-	if (is('江韻')) return is舒聲 ? 'ang' : 'ak';
+	if (is('江韻')) return 'ang';
 	if (is('支脂微韻 開口 或 之韻')) return 'i';
 	if (is('支脂微韻 合口')) {
 		if (is脣音) return 'i';
@@ -144,25 +144,25 @@ function 韻母規則() {
 	if (is('祭廢齊韻 開口')) return 'ei';
 	if (is('祭齊韻 合口')) return 'wei';
 	if (is('廢韻 合口')) return 'wai';
-	if (is('痕魂韻')) return is舒聲 ? 'on' : 'ot';
-	if (is('眞韻 開口 或 臻欣韻')) return is舒聲 ? 'in' : 'it';
-	if (is('元韻 開口')) return is舒聲 ? 'en' : 'et';
-	if (is('眞韻 合口')) return is舒聲 ? 'win' : 'wit';
+	if (is('痕魂韻')) return 'on';
+	if (is('眞韻 開口 或 臻欣韻')) return 'in';
+	if (is('元韻 開口')) return 'en';
+	if (is('眞韻 合口')) return 'win';
 	if (is('諄韻')) {
-		if (is('來母')) return is舒聲 ? 'in' : 'it';
+		if (is('來母')) return 'in';
 		if (is('莊組')) return is舒聲 ? 'on' : 'it';
 		if (is舌齒) return is舒聲 ? 'yun' : 'ot';
-		if (is牙喉) return is舒聲 ? 'in' : 'it';
+		if (is牙喉) return 'in';
 	}
-	if (is('文韻 合口')) return is舒聲 ? 'un' : 'ut';
+	if (is('文韻 合口')) return 'un';
 	if (is('元韻 合口')) {
-		if (is脣音) return is舒聲 ? 'an' : 'at';
-		if (is牙喉) return is舒聲 ? 'wen' : 'wet';
+		if (is脣音) return 'an';
+		if (is牙喉) return 'wen';
 	}
-	if (is('寒韻 或 刪山韻 開口')) return is舒聲 ? 'an' : 'at';
-	if (is('桓韻 或 刪山韻 合口')) return is舒聲 ? 'wan' : 'wat';
-	if (is('仙先韻 開口')) return is舒聲 ? 'en' : 'et';
-	if (is('仙先韻 合口')) return is舒聲 ? 'wen' : 'wet';
+	if (is('寒韻 或 刪山韻 開口')) return 'an';
+	if (is('桓韻 或 刪山韻 合口')) return 'wan';
+	if (is('仙先韻 開口')) return 'en';
+	if (is('仙先韻 合口')) return 'wen';
 	if (is('豪韻')) {
 		if (is脣音) return 'ou';
 		if (is舌齒 || is牙喉) return 'au';
@@ -172,35 +172,35 @@ function 韻母規則() {
 	if (is('歌韻 或 麻韻 開口 二等')) return 'a';
 	if (is('戈韻 合口 一等 或 麻韻 合口 二等 或 戈韻 合口 三等')) return 'wa';
 	if (is('戈韻 開口 三等 或 麻韻 開口 三等')) return 'ya';
-	if (is('唐韻 開口')) return is舒聲 ? 'ang' : 'ak';
-	if (is('唐韻 合口')) return is舒聲 ? 'wang' : 'wak';
+	if (is('唐韻 開口')) return 'ang';
+	if (is('唐韻 合口')) return 'wang';
 	if (is('陽韻 開口')) {
-		if (is脣音) return is舒聲 ? 'ang' : 'ak';
-		if (is('莊組')) return is舒聲 ? 'ang' : 'ak';
-		if (is舌齒) return is舒聲 ? 'yang' : 'yak';
-		if (is牙喉) return is舒聲 ? 'yang' : 'yak';
+		if (is脣音) return 'ang';
+		if (is('莊組')) return 'ang';
+		if (is舌齒) return 'yang';
+		if (is牙喉) return 'yang';
 	}
 	if (is('陽韻 合口')) {
-		if (is脣音 || is舌齒) return is舒聲 ? 'ang' : 'ak';
-		if (is('影云母')) return is舒聲 ? 'wang' : 'wak';
-		if (is牙喉) return is舒聲 ? 'wyang' : 'wyak';
+		if (is脣音 || is舌齒) return 'ang';
+		if (is('影云母')) return 'wang';
+		if (is牙喉) return 'wyang';
 	}
 	if (is('庚韻 開口 二等 或 耕韻 開口 二等')) {
 		if ([...'牲狌猩生甥笙貹鉎鼪'].includes(字頭)) return 'eng';
-		return is舒聲 ? 'ang' : 'ak';
+		return 'ang';
 	}
-	if (is('庚韻 合口 二等 或 耕韻 合口 二等')) return is舒聲 ? 'wang' : 'wak';
-	if (is('庚韻 開口 三等 或 清青韻 開口')) return is舒聲 ? 'eng' : 'ek';
-	if (is('庚韻 合口 三等 或 清青韻 合口')) return is舒聲 ? 'weng' : 'wek';
-	if (is('登韻')) return is舒聲 ? 'ong' : 'ok';
+	if (is('庚韻 合口 二等 或 耕韻 合口 二等')) return 'wang';
+	if (is('庚韻 開口 三等 或 清青韻 開口')) return 'eng';
+	if (is('庚韻 合口 三等 或 清青韻 合口')) return 'weng';
+	if (is('登韻')) return 'ong';
 	if (is('蒸韻 開口')) {
-		if (is('莊組')) return is舒聲 ? 'ong' : 'ok';
-		return is舒聲 ? 'yong' : 'yok';
+		if (is('莊組')) return 'ong';
+		return 'yong';
 	}
 	if (is('蒸韻 合口')) {
-		if (is脣音 || is舌齒) return is舒聲 ? 'yong' : 'yok';
-		if (is('影云母')) return is舒聲 ? 'yong' : 'yok';
-		if (is牙喉) return is舒聲 ? 'wyong' : 'wyok';
+		if (is脣音 || is舌齒) return 'yong';
+		if (is('影云母')) return 'yong';
+		if (is牙喉) return 'wyong';
 	}
 	if (is('侯韻')) return 'ou';
 	if (is('尤韻')) {
@@ -211,12 +211,12 @@ function 韻母規則() {
 		if (is牙喉) return 'iu';
 	}
 	if (is('幽韻')) return 'iu';
-	if (is('侵韻')) return is舒聲 ? 'im' : 'ip';
-	if (is('覃談咸銜韻')) return is舒聲 ? 'am' : 'ap';
-	if (is('鹽嚴添韻')) return is舒聲 ? 'em' : 'ep';
+	if (is('侵韻')) return 'im';
+	if (is('覃談咸銜韻')) return 'am';
+	if (is('鹽嚴添韻')) return 'em';
 	if (is('凡韻')) {
-		if (is脣音) return is舒聲 ? 'am' : 'ap';
-		if (is舌齒 || is牙喉) return is舒聲 ? 'em' : 'ep';
+		if (is脣音) return 'am';
+		if (is舌齒 || is牙喉) return 'em';
 	}
 	throw new Error('無韻母規則');
 }
@@ -239,6 +239,12 @@ function 聲調規則() {
 let 聲母 = 聲母規則();
 let 韻母 = 韻母規則();
 let 聲調 = 聲調規則();
+
+if (is('入聲')) {
+	if (韻母.endsWith('m')) 韻母 = `${韻母.slice(0, -1)}p`;
+	else if (韻母.endsWith('n')) 韻母 =`${韻母.slice(0, -1)}t`;
+	else if (韻母.endsWith('ng')) 韻母 = `${韻母.slice(0, -2)}k`;
+}
 
 if (!開關.聲調) 聲調 = '';
 
