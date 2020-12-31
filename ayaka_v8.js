@@ -12,17 +12,13 @@ const 開關 = {};
 
 開關.假名 = false;
 開關.ヰヱヲ小假名 = true; // 僅當開啓假名時生效
-開關.歷史性音變 = true;
-開關.綾香的音變 = true;
+開關.歷史性音變 = false;
+開關.綾香的音變 = true; // 僅當關閉歷史性音變時生效，因「充」字演化方向不同
 開關.聲調 = true;
-
-if (開關.綾香的音變) {
-	開關.歷史性音變 = false; // 當開啓綾香的音變時，關閉歷史性音變，因「充」字演化方向不同
-}
 
 /* 2. 輔助函數 */
 
-ROMA_MAP = {
+假名表 = {
 	'a':  'ア', 'i':  'イ', 'u':  'ウ', 'e':  'エ', 'o':  'オ',
 	'ka': 'カ', 'ki': 'キ', 'ku': 'ク', 'ke': 'ケ', 'ko': 'コ',
 	'ga': 'ガ', 'gi': 'ギ', 'gu': 'グ', 'ge': 'ゲ', 'go': 'ゴ',
@@ -39,17 +35,16 @@ ROMA_MAP = {
 	'wa': 'ワ', 'wi': 'ヰ',             'we': 'ヱ', 'wo': 'ヲ',
 }
 
-ROMA_韻尾 = {
-	'': '',
-	'p': 'フ', 't': 'ツ', 'k': 'ク', // 'g': 'キ',
-	'm': 'ム', 'n': 'ン', 'ng': 'ゥ', // 'ng': 'ィ',
-	'i': 'イ', 'u': 'ウ',
-}
-
-ROMA_拗音 = {
+拗音表 = {
 	'wya': 'ヰャ', 'wyo': 'ヰョ',
 	'ya': 'ャ', 'yu': 'ュ', 'yo': 'ョ',
 	'wa': 'ヮ', 'wi': '𛅤', 'we': '𛅥', 'wo': '𛅦',
+}
+
+韻尾表 = {
+	'': '', 'i': 'イ', 'u': 'ウ',
+	'p': 'フ', 't': 'ツ', 'k': 'ク', // 'g': 'キ',
+	'm': 'ム', 'n': 'ン', 'ng': 'ゥ', // 'ng': 'ィ',
 }
 
 function roma2kana(s) {
@@ -59,16 +54,18 @@ function roma2kana(s) {
 		throw new Error(`無法轉換為假名：${s}`);
 	}
 	const { 1: 韻頭, 2: 主要元音, 3: 韻尾 } = match;
-	let 假名韻尾 = ROMA_韻尾[韻尾];
+	let 假名韻尾;
 	if (主要元音 === 'e') {
 		if (韻尾 === 'k') 假名韻尾 = 'キ';
 		if (韻尾 === 'ng') 假名韻尾 = 'ィ';
+	} else {
+		假名韻尾 = 韻尾表[韻尾];
 	}
 	if (韻頭.length <= 1) {
-		return ROMA_MAP[韻頭 + 主要元音] + 假名韻尾;
+		return 假名表[韻頭 + 主要元音] + 假名韻尾;
 	}
 	填充元音 = 韻頭[1] === 'w' ? 'u' : 'i'; // 韻頭[1] can only be 'w' or 'y', restricted by the regex
-	return ROMA_MAP[韻頭[0] + 填充元音] + ROMA_拗音[韻頭.substr(1) + 主要元音] + 假名韻尾;
+	return 假名表[韻頭[0] + 填充元音] + 拗音表[韻頭.substr(1) + 主要元音] + 假名韻尾;
 }
 
 /* 3. 推導規則 */
@@ -238,7 +235,7 @@ function 聲調規則() {
 
 let 聲母 = 聲母規則();
 let 韻母 = 韻母規則();
-let 聲調 = 聲調規則();
+let 聲調 = !開關.聲調 ? '' : 聲調規則();
 
 if (is('入聲')) {
 	if (韻母.endsWith('m')) 韻母 = `${韻母.slice(0, -1)}p`;
@@ -246,19 +243,21 @@ if (is('入聲')) {
 	else if (韻母.endsWith('ng')) 韻母 = `${韻母.slice(0, -2)}k`;
 }
 
-if (!開關.聲調) 聲調 = '';
-
 if (韻母.startsWith('w') && (!is牙喉 || is('重紐A類 或 以母'))) 韻母 = 韻母.substr(1);
 
+/* 4. 音變規則 */
+
+if (開關.歷史性音變) 開關.綾香的音變 = false; // 二者不可同時開啓
+
 if (開關.歷史性音變 || 開關.綾香的音變) {
-	if (韻母.endsWith('au')) 韻母 = `${韻母.slice(0, -3)}ou`; // 高 kau -> kou
+	if (韻母 === 'iu') 韻母 = 'yuu'; // 宙 tiu -> tyuu
+	else if (韻母.endsWith('au')) 韻母 = `${韻母.slice(0, -3)}ou`; // 高 kau -> kou
 	else if (韻母.endsWith('ang')) 韻母 = `${韻母.slice(0, -3)}ong`; // 相 syang -> syong
 	else if (韻母.endsWith('eu')) 韻母 = `${韻母.slice(0, -2)}you`; // 遙 eu -> you
 }
 
 if (開關.歷史性音變) {
 	if (韻母.startsWith('w')) 韻母 = 韻母.substr(1); // 園 wen -> en
-	if (韻母 === 'iu') 韻母 = 'yuu'; // 宙 tiu -> tyuu
 	if (韻母.endsWith('ep')) 韻母 = `${韻母.slice(0, -2)}you`; // 鄴 gep -> gyou
 	else if (韻母.endsWith('m')) 韻母 = `${韻母.slice(0, -1)}n`; // 南 dam -> dan
 	else if (韻母.endsWith('eng')) 韻母 = `${韻母.slice(0, -2)}i`; // 生 seng -> sei
@@ -266,8 +265,8 @@ if (開關.歷史性音變) {
 }
 
 if (開關.綾香的音變) {
-	if (韻母.endsWith('yung')) 韻母 = `${韻母.slice(0, -1)}`; // 窮 kyung -> kyun
 	if (韻母 === 'uu') 韻母 = `${韻母.slice(0, -1)}`; // 愁 suu -> su
+	else if (韻母.endsWith('yung')) 韻母 = `${韻母.slice(0, -1)}`; // 窮 kyung -> kyun
 }
 
 if (開關.假名) {
@@ -281,7 +280,7 @@ if (開關.假名) {
 if (開關.歷史性音變 || 開關.綾香的音變) {
 	if (聲母 === 'h' && 韻母.startsWith('u')) 聲母 = 'f'; // 不 hut -> fut
 	else if (聲母 === 't' && 韻母.startsWith('i')) 聲母 = 'ch'; // 地 ti -> chi
-	else if (聲母 === 't' && 韻母.startsWith('u')) 聲母 = 'ts';
+	else if (聲母 === 't' && 韻母.startsWith('u')) 聲母 = 'ts'; // 追 tui -> tsui
 	else if (聲母 === 'z' && 韻母.startsWith('i')) 聲母 = 'j'; // 人 zin -> jin
 }
 
@@ -296,7 +295,7 @@ if (開關.歷史性音變) {
 }
 
 if (開關.綾香的音變) {
-	if (聲母 === 'r') 聲母 = 'l';
+	if (聲母 === 'r') 聲母 = 'l'; // 籟 rai -> lai
 	else if (聲母 === 't' && 韻母.startsWith('y')) 聲母 = 'c'; // 柱 tyuu -> cyuu
 	if (韻母.endsWith('t')) 韻母 = `${韻母.slice(0, -1)}s`; // 遏 at -> as
 	else if (韻母.endsWith('p')) 韻母 = `${韻母.slice(0, -1)}f`; // 鄴 gep -> gef
