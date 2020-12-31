@@ -10,10 +10,12 @@
 
 const 開關 = {};
 
-開關.假名 = false;
-開關.ヰヱヲ小假名 = true; // 僅當開啓假名時生效
-開關.歷史性音變 = false;
-開關.綾香的音變 = true; // 僅當關閉歷史性音變時生效，因「充」字演化方向不同
+開關.假名 = false; // 開啓：機 キ 關閉：機 ki
+開關.ヰヱヲ小假名 = true; // 開啓：迥 ク𛅥ィ 關閉：迥 クヱィ。僅當開啓假名時生效。
+開關.片假名 = true; // 開啓：機 キ 關閉：機 き。僅當開啓假名時生效。
+開關.日本式羅馬字 = true; // 開啓：地 ti 關閉：地 chi。僅當關閉假名時生效。
+開關.歷史性音變 = false; // 開啓：宙 チウ tyuu 關閉：宙 チュウ tiu。
+開關.綾香的音變 = true; // 僅當關閉歷史性音變時生效，因「充」字演化方向不同。
 開關.聲調 = true;
 
 /* 2. 輔助函數 */
@@ -47,25 +49,42 @@ const 開關 = {};
 	'm': 'ム', 'n': 'ン', 'ng': 'ゥ', // 'ng': 'ィ',
 }
 
-function roma2kana(s) {
+function roma2kata(s) {
 	const r = /^([kgsztdnhbmyrw]?w??[yw]?)([aiueo])([ptkmngiu]*)$/g;
 	const match = r.exec(s);
 	if (match == null) {
 		throw new Error(`無法轉換為假名：${s}`);
 	}
 	const { 1: 韻頭, 2: 主要元音, 3: 韻尾 } = match;
-	let 假名韻尾;
+	let 假名韻尾 = 韻尾表[韻尾];
 	if (主要元音 === 'e') {
 		if (韻尾 === 'k') 假名韻尾 = 'キ';
 		if (韻尾 === 'ng') 假名韻尾 = 'ィ';
-	} else {
-		假名韻尾 = 韻尾表[韻尾];
 	}
 	if (韻頭.length <= 1) {
 		return 假名表[韻頭 + 主要元音] + 假名韻尾;
 	}
 	填充元音 = 韻頭[1] === 'w' ? 'u' : 'i'; // 韻頭[1] can only be 'w' or 'y', restricted by the regex
 	return 假名表[韻頭[0] + 填充元音] + 拗音表[韻頭.substr(1) + 主要元音] + 假名韻尾;
+}
+
+function kata2hira(s) {
+	const diff = 'ぁ'.charCodeAt(0) - 'ァ'.charCodeAt(0);
+	return [...s].map((c) => {
+		if (c === '𛅤') return '𛅐';
+		if (c === '𛅥') return '𛅑';
+		if (c === '𛅦') return '𛅒';
+		return String.fromCharCode(c.charCodeAt(0) + diff);
+	}).join('');
+}
+
+function small2large(s) {
+	return [...s].map((c) => {
+		if (c === '𛅤') return 'ヰ';
+		if (c === '𛅥') return 'ヱ';
+		if (c === '𛅦') return 'ヲ';
+		return c;
+	}).join('');
 }
 
 /* 3. 推導規則 */
@@ -219,15 +238,17 @@ function 韻母規則() {
 }
 
 function 聲調規則() {
-	if (is清) { // 全清、次清
+	if (is清) {
 		if (is('平聲')) return 'ˉ';
 		if (is('上聲')) return 'ˊ';
 		if (is('去聲')) return 'ˇ';
-		if (is全濁 && is('入聲')) return 'ˇ';
-		if (is('入聲')) return 'ˉ'; // 次濁入歸陰入
+		if (is('入聲')) {
+			if (is('通梗曾深攝 或 眞諄臻文欣痕韻') || (is('魂韻') && is牙喉)) return 'ˉ';
+			return 'ˇ';
+		}
 	} else {
-		if (is全濁 && is('上聲')) return 'ˇ'; // 全濁上變去
-		if (is('上聲')) return 'ˊ';
+		if (is('上聲')) return 'ˇ'; // 全濁上變去
+		if (is全濁 && is('上聲')) return 'ˊ';
 		if (is('平去入聲')) return 'ˇ';
 	}
 	throw new Error('無聲調規則');
@@ -270,11 +291,30 @@ if (開關.綾香的音變) {
 }
 
 if (開關.假名) {
-	const s = roma2kana(`${聲母}${韻母}`) + 聲調;
-	if (!開關.ヰヱヲ小假名) {
-		return s.replace('𛅤', 'ヰ').replace('𛅥', 'ヱ').replace('𛅦', 'ヲ');
+	let s = roma2kata(`${聲母}${韻母}`);
+	if (!開關.ヰヱヲ小假名) s = small2large(s);
+	if (!開關.片假名) s = kata2hira(s);
+	return s + 聲調;
+}
+
+if (開關.歷史性音變) {
+	if (韻母.endsWith('ek')) 韻母 = `${韻母}i`; // 席 sek -> seki
+	else if (韻母.endsWith('k')) 韻母 = `${韻母}u`; // 澤 tak -> taku
+}
+
+if (開關.綾香的音變) {
+	if (聲母 === 'r') 聲母 = 'l'; // 籟 rai -> lai
+}
+
+if (開關.日本式羅馬字) {
+	if (開關.歷史性音變) {
+		if (韻母.endsWith('t')) 韻母 = `${韻母}u`; // 遏 at -> atu
 	}
-	return s;
+	if (開關.綾香的音變) {
+		if (韻母.endsWith('t')) 韻母 = `${韻母.slice(0, -1)}s`; // 遏 at -> as
+		else if (韻母.endsWith('p')) 韻母 = `${韻母.slice(0, -1)}f`; // 鄴 gep -> gef
+	}
+	return `${聲母}${韻母}${聲調}`;
 }
 
 if (開關.歷史性音變 || 開關.綾香的音變) {
@@ -290,15 +330,10 @@ if (開關.歷史性音變) {
 	else if (聲母 === 's' && 韻母.startsWith('y')) { 聲母 = 'sh'; 韻母 = 韻母.substr(1); } // 相 syou -> shou
 	else if (聲母 === 'z' && 韻母.startsWith('y')) { 聲母 = 'j'; 韻母 = 韻母.substr(1); } // 仍 zyou -> jou
 	if (韻母.endsWith('t')) 韻母 = `${韻母}su`; // 遏 at -> atsu
-	else if (韻母.endsWith('ek')) 韻母 = `${韻母}i`; // 席 sek -> seki
-	else if (韻母.endsWith('k')) 韻母 = `${韻母}u`; // 澤 tak -> taku
 }
 
 if (開關.綾香的音變) {
-	if (聲母 === 'r') 聲母 = 'l'; // 籟 rai -> lai
-	else if (聲母 === 't' && 韻母.startsWith('y')) 聲母 = 'c'; // 柱 tyuu -> cyuu
-	if (韻母.endsWith('t')) 韻母 = `${韻母.slice(0, -1)}s`; // 遏 at -> as
-	else if (韻母.endsWith('p')) 韻母 = `${韻母.slice(0, -1)}f`; // 鄴 gep -> gef
+	if (聲母 === 't' && 韻母.startsWith('y')) 聲母 = 'c'; // 柱 tyuu -> cyuu
 }
 
 return `${聲母}${韻母}${聲調}`;
