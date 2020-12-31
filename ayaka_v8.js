@@ -65,7 +65,7 @@ function roma2kata(s) {
 		return 假名表[韻頭 + 主要元音] + 假名韻尾;
 	}
 	填充元音 = 韻頭[1] === 'w' ? 'u' : 'i'; // 韻頭[1] can only be 'w' or 'y', restricted by the regex
-	return 假名表[韻頭[0] + 填充元音] + 拗音表[韻頭.substr(1) + 主要元音] + 假名韻尾;
+	return 假名表[韻頭[0] + 填充元音] + 拗音表[韻頭.slice(1) + 主要元音] + 假名韻尾;
 }
 
 function kata2hira(s) {
@@ -264,7 +264,7 @@ if (is('入聲')) {
 	else if (韻母.endsWith('ng')) 韻母 = `${韻母.slice(0, -2)}k`;
 }
 
-if (韻母.startsWith('w') && (!is牙喉 || is('重紐A類 或 以母'))) 韻母 = 韻母.substr(1);
+if (韻母.startsWith('w') && (!is牙喉 || is('重紐A類 或 以母'))) 韻母 = 韻母.slice(1);
 
 /* 4. 音變規則 */
 
@@ -278,7 +278,7 @@ if (開關.歷史性音變 || 開關.綾香的音變) {
 }
 
 if (開關.歷史性音變) {
-	if (韻母.startsWith('w')) 韻母 = 韻母.substr(1); // 園 wen -> en
+	if (韻母.startsWith('w')) 韻母 = 韻母.slice(1); // 園 wen -> en
 	if (韻母.endsWith('ep')) 韻母 = `${韻母.slice(0, -2)}you`; // 鄴 gep -> gyou
 	else if (韻母.endsWith('m')) 韻母 = `${韻母.slice(0, -1)}n`; // 南 dam -> dan
 	else if (韻母.endsWith('eng')) 韻母 = `${韻母.slice(0, -2)}i`; // 生 seng -> sei
@@ -326,9 +326,9 @@ if (開關.歷史性音變 || 開關.綾香的音變) {
 
 if (開關.歷史性音變) {
 	if (聲母 === 'd' && 韻母.startsWith('i')) 聲母 = 'j'; // 膩 di -> ji
-	else if (聲母 === 't' && 韻母.startsWith('y')) { 聲母 = 'ch'; 韻母 = 韻母.substr(1); } // 柱 tyuu -> chuu
-	else if (聲母 === 's' && 韻母.startsWith('y')) { 聲母 = 'sh'; 韻母 = 韻母.substr(1); } // 相 syou -> shou
-	else if (聲母 === 'z' && 韻母.startsWith('y')) { 聲母 = 'j'; 韻母 = 韻母.substr(1); } // 仍 zyou -> jou
+	else if (聲母 === 't' && 韻母.startsWith('y')) { 聲母 = 'ch'; 韻母 = 韻母.slice(1); } // 柱 tyuu -> chuu
+	else if (聲母 === 's' && 韻母.startsWith('y')) { 聲母 = 'sh'; 韻母 = 韻母.slice(1); } // 相 syou -> shou
+	else if (聲母 === 'z' && 韻母.startsWith('y')) { 聲母 = 'j'; 韻母 = 韻母.slice(1); } // 仍 zyou -> jou
 	if (韻母.endsWith('t')) 韻母 = `${韻母}su`; // 遏 at -> atsu
 }
 
