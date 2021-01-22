@@ -59,37 +59,37 @@ function 韻母規則() {
   // 江攝
   if (is('江韻')) return 'ɻæŋʷ';
   // 止攝
-  if (is('支韻 開口')) return 'ʳjɛ';
   if (is('支韻 合口')) return 'ʳɥɛ';
-  if (is('脂韻 開口')) return 'ʳi';
+  if (is('支韻')) return 'ʳjɛ';
   if (is('脂韻 合口')) return 'ʳɥi';
+  if (is('脂韻')) return 'ʳi';
   if (is('之韻')) return 'ɨ';
-  if (is('微韻 合口')) return 'ẅɨj';
   if (is('微韻 開口')) return 'ɨj';
+  if (is('微韻')) return 'ẅɨj';
   // 遇攝
   if (is('魚韻')) return 'j̈ə';
   if (is('虞韻')) return 'ẅɔ';
   if (is('模韻')) return 'o';
   // 蟹攝
-  if (is('齊韻 開口')) return 'ej';
   if (is('齊韻 合口')) return 'wej';
-  if (is('祭韻 開口')) return 'ʳjɛjɕ';
+  if (is('齊韻')) return 'ej';
   if (is('祭韻 合口')) return 'ʳɥɛjɕ';
-  if (is('泰韻 開口')) return 'ɑjɕ';
+  if (is('祭韻')) return 'ʳjɛjɕ';
   if (is('泰韻 合口')) return 'wɑjɕ';
-  if (is('佳韻 開口')) return 'ɻæ';
+  if (is('泰韻')) return 'ɑjɕ';
   if (is('佳韻 合口')) return 'wɻæ';
-  if (is('皆韻 開口')) return 'ɻæj';
+  if (is('佳韻')) return 'ɻæ';
   if (is('皆韻 合口')) return 'wɻæj';
-  if (is('夬韻 開口')) return 'ɻajɕ';
+  if (is('皆韻')) return 'ɻæj';
   if (is('夬韻 合口')) return 'wɻajɕ';
+  if (is('夬韻')) return 'ɻajɕ';
   if (is('咍韻')) return 'ɐj';
   if (is('灰韻')) return 'wɔ̞j';
   if (is('廢韻 開口')) return 'j̈əjɕ';
-  if (is('廢韻 合口')) return 'ẅəjɕ';
+  if (is('廢韻')) return 'ẅəjɕ';
   // 臻攝
-  if (is('眞韻 開口')) return 'ʳin';
   if (is('眞韻 合口')) return 'ʳɥin';
+  if (is('眞韻')) return 'ʳin';
   if (is('臻韻')) { // [^1]
     if (is('平入聲')) return 'ɻi˞n';
     if (is('上聲')) return 'ɨn';
@@ -98,20 +98,20 @@ function 韻母規則() {
   if (is('欣韻')) return 'ɨn';
   if (is('文韻')) return 'ẅun';
   if (is('元韻 開口')) return 'j̈ən';
-  if (is('元韻 合口')) return 'ẅən';
+  if (is('元韻')) return 'ẅən';
   if (is('痕韻')) return 'ɘn';
   if (is('魂韻')) return 'won';
   // 山攝
   if (is('寒韻 開口')) return 'ɑn';
-  if (is('寒韻 合口')) return 'wɑn';
-  if (is('刪韻 開口')) return 'ɻan';
+  if (is('寒韻')) return 'wɑn';
   if (is('刪韻 合口')) return 'wɻan';
-  if (is('山韻 開口')) return 'ɻæn';
+  if (is('刪韻')) return 'ɻan';
   if (is('山韻 合口')) return 'wɻæn';
-  if (is('仙韻 開口')) return 'ʳjɛn';
+  if (is('山韻')) return 'ɻæn';
   if (is('仙韻 合口')) return 'ʳɥɛn';
-  if (is('先韻 開口')) return 'en';
+  if (is('仙韻')) return 'ʳjɛn';
   if (is('先韻 合口')) return 'wen';
+  if (is('先韻')) return 'en';
   // 效攝
   if (is('蕭韻')) return 'ew';
   if (is('宵韻')) return 'ʳjɛw';
@@ -119,34 +119,34 @@ function 韻母規則() {
   if (is('豪韻')) return 'ɑw';
   // 果攝
   if (is('歌韻 一等 開口')) return 'ɑ';
-  if (is('歌韻 一等 合口')) return 'wɑ';
+  if (is('歌韻 一等')) return 'wɑ';
   if (is('歌韻 三等 開口')) return 'j̈ɑ';
-  if (is('歌韻 三等 合口')) return 'ẅɑ';
+  if (is('歌韻 三等')) return 'ẅɑ';
   // 假攝
-  if (is('麻韻 二等 開口')) return 'ɻa';
   if (is('麻韻 二等 合口')) return 'wɻa';
-  if (is('麻韻 三等 開口')) return 'ja';
+  if (is('麻韻 二等')) return 'ɻa';
+  if (is('麻韻 三等')) return 'ja';
   // 宕攝
   if (is('陽韻 開口')) return 'j̈ɐŋ';
-  if (is('陽韻 合口')) return 'ẅɐŋ';
-  if (is('唐韻 開口')) return 'ɑŋ';
+  if (is('陽韻')) return 'ẅɐŋ';
   if (is('唐韻 合口')) return 'wɑŋ';
+  if (is('唐韻')) return 'ɑŋ';
   // 梗攝
-  if (is('庚韻 二等 開口')) return 'ɻaɲ';
   if (is('庚韻 二等 合口')) return 'wɻaɲ';
-  if (is('庚韻 三等 開口')) return 'ɻjaɲ';
+  if (is('庚韻 二等')) return 'ɻaɲ';
   if (is('庚韻 三等 合口')) return 'ɻɥaɲ';
-  if (is('耕韻 開口')) return 'ɻæɲ';
+  if (is('庚韻 三等')) return 'ɻjaɲ';
   if (is('耕韻 合口')) return 'wɻæɲ';
-  if (is('清韻 開口')) return 'ʳjɛɲ'; // [^2]
+  if (is('耕韻')) return 'ɻæɲ';
   if (is('清韻 合口')) return 'ɥɛɲ';
-  if (is('青韻 開口')) return 'eɲ';
+  if (is('清韻')) return 'ʳjɛɲ'; // [^2]
   if (is('青韻 合口')) return 'weɲ';
+  if (is('青韻')) return 'eɲ';
   // 曾攝
-  if (is('蒸韻 開口')) return 'ʳiŋ'; // [^2]
   if (is('蒸韻 合口')) return 'ʳɥiŋ'; // [^2]
-  if (is('登韻 開口')) return 'ɘŋ';
+  if (is('蒸韻')) return 'ʳiŋ'; // [^2]
   if (is('登韻 合口')) return 'wɘŋ';
+  if (is('登韻')) return 'ɘŋ';
   // 流攝
   if (is('尤韻')) return 'ɥ̈u';
   if (is('侯韻')) { // 根據設定，侯韻幫組為 u，其他為 ɘu
