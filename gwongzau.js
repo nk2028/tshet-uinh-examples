@@ -54,9 +54,9 @@ function 聲母規則() {
 }
 
 function 韻母規則() {
-  const is脣音 = is('幫組');
-  const is舌齒 = is('端知精莊章組 或 來日母');
-  const is牙喉 = !is脣音 && !is舌齒;
+  const is脣音 = is('脣音');
+  const is舌齒 = is('舌齒音');
+  const is牙喉 = is('牙喉音');
 
   // 通攝
   if (is('東冬鍾韻')) return 'ung';
@@ -152,21 +152,17 @@ function 韻母規則() {
     return 'an';
   }
   if (is('眞韻 合口')) {
-    if (is牙喉) return 'an';
-    return null;
-  }
-  if (is('臻韻')) return 'an';
-  if (is('諄韻')) {
     if (is舌齒) return 'eon';
     return 'an';
   }
+  if (is('臻韻')) return 'an';
 
   // 山攝
-  if (is('寒韻')) {
+  if (is('寒韻 開口')) {
     if (is舌齒) return 'aan';
     return 'on';
   }
-  if (is('桓韻')) {
+  if (is('寒韻 合口')) {
     if (is舌齒) return 'yun';
     return 'un';
   }
@@ -183,9 +179,9 @@ function 韻母規則() {
   if (is('宵蕭韻')) return 'iu';
 
   // 果攝
-  if (is('歌戈韻 一等')) return 'o';
-  if (is('戈韻 三等 開口')) return 'e';
-  if (is('戈韻 三等 合口')) {
+  if (is('歌韻 一等')) return 'o';
+  if (is('歌韻 三等 開口')) return 'e';
+  if (is('歌韻 三等 合口')) {
     if (is脣音) return 'e';
     return 'oe';
   }
@@ -227,20 +223,16 @@ function 韻母規則() {
   throw new Error('無韻母規則');
 }
 
-const is清 = is('幫滂端透知徹精清心莊初生章昌書見溪影曉母');
-const is全濁 = is('並定澄從邪崇俟船常羣匣母');
-
 function 聲調規則() {
-  if (is清) {
+  if (is('全清 或 次清')) {
     if (is('平聲')) return '1';
     if (is('上聲')) return '2';
     if (is('去聲')) return '3';
     if (is('入聲')) return 'x'; // 據元音長短判斷，詳後
   } else {
     if (is('平聲')) return '4';
-    if (is全濁 && is('上聲')) return '6'; // 全濁上變去
+    if (is('全濁 上聲 或 去聲')) return '6'; // 全濁上變去
     if (is('上聲')) return '5';
-    if (is('去聲')) return '6';
     if (is('入聲')) return '6';
   }
   throw new Error('無聲調規則');

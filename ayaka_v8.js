@@ -163,20 +163,19 @@ function 韻母規則() {
   if (is('痕魂韻')) return 'on';
   if (is('眞韻 開口 或 臻欣韻')) return 'in';
   if (is('元韻 開口')) return 'en';
-  if (is('眞韻 合口')) return 'win';
-  if (is('諄韻')) {
+  if (is('眞韻 合口')) {
     if (is('來母')) return 'in';
     if (is('莊組')) return is舒聲 ? 'on' : 'it';
     if (is舌齒) return is舒聲 ? 'yun' : 'ot';
-    if (is牙喉) return 'in';
+    if (is牙喉) return 'win';
   }
   if (is('文韻 合口')) return 'un';
   if (is('元韻 合口')) {
     if (is脣音) return 'an';
     if (is牙喉) return 'wen';
   }
-  if (is('寒韻 或 刪山韻 開口')) return 'an';
-  if (is('桓韻 或 刪山韻 合口')) return 'wan';
+  if (is('寒刪山韻 開口')) return 'an';
+  if (is('寒刪山韻 合口')) return 'wan';
   if (is('仙先韻 開口')) return 'en';
   if (is('仙先韻 合口')) return 'wen';
   if (is('豪韻')) {
@@ -185,9 +184,9 @@ function 韻母規則() {
   }
   if (is('肴韻')) return 'au';
   if (is('宵蕭韻')) return 'eu';
-  if (is('歌韻 或 麻韻 開口 二等')) return 'a';
-  if (is('戈韻 合口 一等 或 麻韻 合口 二等 或 戈韻 合口 三等')) return 'wa';
-  if (is('戈韻 開口 三等 或 麻韻 開口 三等')) return 'ya';
+  if (is('歌韻 開口 一等 或 麻韻 開口 二等')) return 'a';
+  if (is('歌韻 合口 一等 或 麻韻 合口 二等 或 歌韻 合口 三等')) return 'wa';
+  if (is('歌韻 開口 三等 或 麻韻 開口 三等')) return 'ya';
   if (is('唐韻 開口')) return 'ang';
   if (is('唐韻 合口')) return 'wang';
   if (is('陽韻 開口')) {

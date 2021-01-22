@@ -83,26 +83,25 @@ function 韻母規則() {
   if (is('佳韻 合口')) return 'rue';
   if (is('皆韻 開口')) return 'rai';
   if (is('皆韻 合口')) return 'ruai';
-  if (is('夬韻 合口')) return 'ruad';
   if (is('夬韻 開口')) return 'rad';
-  if (is('灰韻')) return 'uai';
+  if (is('夬韻 合口')) return 'ruad';
   if (is('咍韻')) return 'ai';
+  if (is('灰韻')) return 'uai';
   if (is('廢韻 開口')) return 'iad';
   if (is('廢韻 合口')) return 'yad';
   // 臻攝
   if (is('眞韻 開口')) return is('重紐A類') ? 'jin' : 'in';
-  if (is('眞韻 合口')) return 'yn';
-  if (is('諄韻')) return is('重紐A類') ? 'jyn' : 'yn';
+  if (is('眞韻 合口')) return is('重紐A類') ? 'jyn' : 'yn';
   if (is('臻韻')) return 'in';
-  if (is('文韻')) return 'yon';
   if (is('欣韻')) return 'ion';
+  if (is('文韻')) return 'yon';
   if (is('元韻 開口')) return 'ian';
   if (is('元韻 合口')) return 'yan';
-  if (is('魂韻')) return 'uon';
   if (is('痕韻')) return 'on';
+  if (is('魂韻')) return 'uon';
   // 山攝
-  if (is('寒韻')) return 'an';
-  if (is('桓韻')) return 'uan';
+  if (is('寒韻 開口')) return 'an';
+  if (is('寒韻 合口')) return 'uan';
   if (is('刪韻 開口')) return 'ran';
   if (is('刪韻 合口')) return 'ruan';
   if (is('山韻 開口')) return 'ren';
@@ -117,17 +116,17 @@ function 韻母規則() {
   if (is('肴韻')) return 'rau';
   if (is('豪韻')) return 'au';
   // 果攝
-  if (is('歌韻')) return 'a';
-  if (is('戈韻 合口 一等')) return 'ua';
-  if (is('戈韻 開口 三等')) return 'ia';
-  if (is('戈韻 合口 三等')) return 'ya';
+  if (is('歌韻 開口 一等')) return 'a';
+  if (is('歌韻 合口 一等')) return 'ua';
+  if (is('歌韻 開口 三等')) return 'ia';
+  if (is('歌韻 合口 三等')) return 'ya';
   // 假攝
   if (is('麻韻 開口 二等')) return 'ra';
   if (is('麻韻 合口 二等')) return 'rua';
   if (is('麻韻 開口 三等')) return 'ia';
   // 宕攝
-  if (is('陽韻 合口')) return 'yang';
   if (is('陽韻 開口')) return 'iang';
+  if (is('陽韻 合口')) return 'yang';
   if (is('唐韻 開口')) return 'ang';
   if (is('唐韻 合口')) return 'uang';
   // 梗攝
