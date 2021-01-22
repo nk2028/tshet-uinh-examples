@@ -61,90 +61,90 @@ function 韻母規則() {
   // 江攝
   if (is('江韻')) return 'rung';
   // 止攝
-  if (is('支韻 開口')) return is('重紐A類') ? 'je' : 'ie';
   if (is('支韻 合口')) return is('重紐A類') ? 'jye' : 'ye';
-  if (is('脂韻 開口')) return is('重紐A類') ? 'jii' : 'ii';
+  if (is('支韻')) return is('重紐A類') ? 'je' : 'ie';
   if (is('脂韻 合口')) return is('重紐A類') ? 'jyi' : 'yi';
+  if (is('脂韻')) return is('重紐A類') ? 'jii' : 'ii';
   if (is('之韻')) return 'i';
   if (is('微韻 開口')) return 'ioi';
-  if (is('微韻 合口')) return 'yoi';
+  if (is('微韻')) return 'yoi';
   // 遇攝
   if (is('魚韻')) return 'io';
   if (is('虞韻')) return 'yo';
   if (is('模韻')) return 'o';
   // 蟹攝
-  if (is('齊韻 開口')) return 'e';
   if (is('齊韻 合口')) return 'ue';
-  if (is('祭韻 開口')) return is('重紐A類') ? 'jed' : 'ied';
+  if (is('齊韻')) return 'e';
   if (is('祭韻 合口')) return 'yed';
-  if (is('泰韻 開口')) return 'ad';
+  if (is('祭韻')) return is('重紐A類') ? 'jed' : 'ied';
   if (is('泰韻 合口')) return 'uad';
-  if (is('佳韻 開口')) return 're';
+  if (is('泰韻')) return 'ad';
   if (is('佳韻 合口')) return 'rue';
-  if (is('皆韻 開口')) return 'rai';
+  if (is('佳韻')) return 're';
   if (is('皆韻 合口')) return 'ruai';
-  if (is('夬韻 開口')) return 'rad';
+  if (is('皆韻')) return 'rai';
   if (is('夬韻 合口')) return 'ruad';
+  if (is('夬韻')) return 'rad';
   if (is('咍韻')) return 'ai';
   if (is('灰韻')) return 'uai';
   if (is('廢韻 開口')) return 'iad';
-  if (is('廢韻 合口')) return 'yad';
+  if (is('廢韻')) return 'yad';
   // 臻攝
-  if (is('眞韻 開口')) return is('重紐A類') ? 'jin' : 'in';
   if (is('眞韻 合口')) return is('重紐A類') ? 'jyn' : 'yn';
+  if (is('眞韻')) return is('重紐A類') ? 'jin' : 'in';
   if (is('臻韻')) return 'in';
   if (is('欣韻')) return 'ion';
   if (is('文韻')) return 'yon';
   if (is('元韻 開口')) return 'ian';
-  if (is('元韻 合口')) return 'yan';
+  if (is('元韻')) return 'yan';
   if (is('痕韻')) return 'on';
   if (is('魂韻')) return 'uon';
   // 山攝
   if (is('寒韻 開口')) return 'an';
-  if (is('寒韻 合口')) return 'uan';
-  if (is('刪韻 開口')) return 'ran';
+  if (is('寒韻')) return 'uan';
   if (is('刪韻 合口')) return 'ruan';
-  if (is('山韻 開口')) return 'ren';
+  if (is('刪韻')) return 'ran';
   if (is('山韻 合口')) return 'ruen';
-  if (is('仙韻 開口')) return is('重紐A類') ? 'jen' : 'ien';
+  if (is('山韻')) return 'ren';
   if (is('仙韻 合口')) return is('重紐A類') ? 'jyen' : 'yen';
-  if (is('先韻 開口')) return 'en';
+  if (is('仙韻')) return is('重紐A類') ? 'jen' : 'ien';
   if (is('先韻 合口')) return 'uen';
+  if (is('先韻')) return 'en';
   // 效攝
   if (is('蕭韻')) return 'eu';
   if (is('宵韻')) return is('重紐A類') ? 'jeu' : 'ieu';
   if (is('肴韻')) return 'rau';
   if (is('豪韻')) return 'au';
   // 果攝
-  if (is('歌韻 開口 一等')) return 'a';
-  if (is('歌韻 合口 一等')) return 'ua';
-  if (is('歌韻 開口 三等')) return 'ia';
-  if (is('歌韻 合口 三等')) return 'ya';
+  if (is('歌韻 一等 開口')) return 'a';
+  if (is('歌韻 一等')) return 'ua';
+  if (is('歌韻 三等 開口')) return 'ia';
+  if (is('歌韻 三等')) return 'ya';
   // 假攝
-  if (is('麻韻 開口 二等')) return 'ra';
-  if (is('麻韻 合口 二等')) return 'rua';
-  if (is('麻韻 開口 三等')) return 'ia';
+  if (is('麻韻 二等 合口')) return 'rua';
+  if (is('麻韻 二等')) return 'ra';
+  if (is('麻韻 三等')) return 'ia';
   // 宕攝
   if (is('陽韻 開口')) return 'iang';
-  if (is('陽韻 合口')) return 'yang';
-  if (is('唐韻 開口')) return 'ang';
+  if (is('陽韻')) return 'yang';
   if (is('唐韻 合口')) return 'uang';
+  if (is('唐韻')) return 'ang';
   // 梗攝
-  if (is('庚韻 開口 二等')) return 'rang';
-  if (is('庚韻 合口 二等')) return 'ruang';
-  if (is('庚韻 開口 三等')) return 'ieng';
-  if (is('庚韻 合口 三等')) return 'yeng';
-  if (is('耕韻 開口')) return 'reng';
+  if (is('庚韻 二等 合口')) return 'ruang';
+  if (is('庚韻 二等')) return 'rang';
+  if (is('庚韻 三等 合口')) return 'yeng';
+  if (is('庚韻 三等')) return 'ieng';
   if (is('耕韻 合口')) return 'rueng';
-  if (is('清韻 開口')) return is('重紐A類') ? 'jeng' : 'ieng';
+  if (is('耕韻')) return 'reng';
   if (is('清韻 合口')) return is('重紐A類') ? 'jyeng' : 'yeng';
-  if (is('青韻 開口')) return 'eng';
+  if (is('清韻')) return is('重紐A類') ? 'jeng' : 'ieng';
   if (is('青韻 合口')) return 'ueng';
+  if (is('青韻')) return 'eng';
   // 曾攝
-  if (is('蒸韻 開口')) return 'ing';
   if (is('蒸韻 合口')) return 'yng';
-  if (is('登韻 開口')) return 'ong';
+  if (is('蒸韻')) return 'ing';
   if (is('登韻 合口')) return 'uong';
+  if (is('登韻')) return 'ong';
   // 流攝
   if (is('尤韻')) return 'iu';
   if (is('侯韻')) return 'u';
