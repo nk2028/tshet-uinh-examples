@@ -110,8 +110,8 @@ C：辅音，作为韵尾（coda）。韵核和韵尾加在一起叫作韵基（
 // 同样地，条件变体在下面用括号标注列出
 function getInitialWithoutRounding() {
   switch (音韻地位.母) {
-  //  不送气清阻音〈全清〉     送气清阻音〈次清〉       浊阻音〈全浊〉           浊响音〈次浊〉
-  //  −voi, −sg, −son          −voi, +sg, −son          +voi, −sg, −son          +voi, −sg, +son
+  // 不送气清阻音〈全清〉     送气清阻音〈次清〉       浊阻音〈全浊〉           浊响音〈次浊〉
+  // −voi, −sg, −son          −voi, +sg, −son          +voi, −sg, −son          +voi, −sg, +son
     case '幫': return 'p'  ; case '滂': return 'pʰ' ; case '並': return 'b'  ; case '明': return 'm'  ; // +stop, −fric; LAB            双唇塞音  〈帮组/唇音〉
                            ;                        ;                        ; /*(帮组三 C 介音   β)*/; // −stop, −fric; LAB            双唇近音
     case '端': return 't'  ; case '透': return 'tʰ' ; case '定': return 'd'  ; case '泥': return 'n'  ; // +stop, −fric; COR, +ant      齿龈塞音  〈端组/舌头音〉
@@ -263,8 +263,8 @@ function getNucleus() {
   if (is('麻庚銜夬刪　韻 二等')) return 'a͇';
                                         // −high, +low, +divII,        −rnd, +tense
   if (is('麻庚　　　　韻 三等') ||
-    is('歌唐談泰寒　韻') ||
-    is('戈　　　桓　韻')) return 'a'; // −high, +low, −front, −back, −rnd, +tense
+      is('歌唐談泰寒　韻') ||
+      is('戈　　　桓　韻')) return 'a'; // −high, +low, −front, −back, −rnd, +tense
 
   // 二合元音
   if (is('支韻'))     return 'iə'; // +front, −back, −rnd, +tense
@@ -450,7 +450,6 @@ if (switches.肴凡韵韵核推导为œ) {
   if (nucleus == 'e͇' && coda == 'w') nucleus = 'œ͇';
   if (nucleus == 'ə' && (initial.includes('ʷ') || is('幫組')) && [...'mp'].includes(coda)) nucleus = 'œ';
 }
-
 
 /**
 (12) 齿龈阻音〈端精组〉后的介音接前元音时被同化（圆唇时可选）
