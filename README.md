@@ -17,19 +17,3 @@ unt 切韻擬音 J | unt's _Qieyun_ Reconstruction J | `unt_j.js`
 推導普通話 | Extrapolated Putonghua | `putonghua.js`
 推導廣州音 | Extrapolated Cantonese | `gwongzau.js`
 綾香思考音系 | | `ayaka_v8.js`
-
-## 備註
-
-本項目遵從 [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript)（非強制）。
-
-首先安裝 Linter：
-
-```sh
-npm install
-```
-
-提交前請使用如下命令檢查，並儘可能修復錯誤：
-
-```sh
-./lint.sh <filename>
-```
