@@ -137,10 +137,10 @@ function getInitialWithoutRounding() {
   throw new Error('无辅音规则');
 }
 
-const is全清 = is('幫端精心知莊生章書見影曉母'); // [−voi, −sg, −son]
-const is次清 = is('滂透清　徹初　昌　溪　　母'); // [−voi, +sg, −son]
-const is全浊 = is('並定從邪澄崇俟常船羣　匣母'); // [+voi, −sg, −son]
-const is次浊 = is('明泥來　孃　　日以疑云　母'); // [+voi, −sg, +son]
+const is全清 = is('全清'); // [−voi, −sg, −son]
+const is次清 = is('次清'); // [−voi, +sg, −son]
+const is全浊 = is('全濁'); // [+voi, −sg, −son]
+const is次浊 = is('次濁'); // [+voi, −sg, +son]
 const is清 = is全清 || is次清;
 // 云母已按推导后的结果 [ɹ] 算入次浊
 
@@ -154,7 +154,7 @@ function getInitial() {
   let result = getInitialWithoutRounding();
   // 音韵学术语开合对应 [±rnd]。如果主要调音部位就是 [LAB]〈帮组〉，那么本文一律视为 [−rnd]
   // 没有开合对立的韵母一般视为开口，但虞韵本文视为鱼韵对应的合口；平行地，钟韵也视为合口
-  if (is('合口 或 鍾韻') && !is('幫組')) { // [+rnd]
+  if (is('合口 或 虞鍾韻')) { // [+rnd]
     result += 'ʷ';
     result = result.replace('ʰʷ', 'ʷʰ');
   } // else [−rnd]
@@ -195,8 +195,8 @@ function getGlide() {
   // 钝音声母分三 A、B、C
   if (is('重紐B類 或 庚臻韻')) return 'ɹ';
   if ('抑𡊁'.includes(字頭)) return 'ɹ'; // 蒸韵“抑𡊁”二字归三 B
-  if (is('云母 支脂祭眞諄臻仙宵麻庚清蒸幽侵鹽韻')) return 'ɹ'; // 云母前元音韵归三 B
-  if (is('重紐A類 或 麻蒸清諄幽韻')) return 'j'; // 三 A
+  if (is('云母 支脂祭眞臻仙宵麻庚清蒸幽侵鹽韻')) return 'ɹ'; // 云母前元音韵归三 B
+  if (is('重紐A類 或 麻蒸清臻幽韻')) return 'j'; // 三 A
   return 'j̈'; // 三 C
 }
 
@@ -241,9 +241,9 @@ divII  +  +  −  −  −  −  −
 // 函数：将韵核的音韵地位转换为音位
 function getNucleus() {
   // 松元音
-  // 韵尾: m     j   n         w
-  if (is('侵　　微　眞諄臻欣文　韻')) return 'ɪ'; // +high, −tense
-  if (is('鹽嚴凡祭廢仙　　元　宵韻')) return 'ɜ'; // −high, −tense
+  // 韵尾: m     j   n       w
+  if (is('侵　　微　眞臻欣文　韻')) return 'ɪ'; // +high, −tense
+  if (is('鹽嚴凡祭廢仙　元　宵韻')) return 'ɜ'; // −high, −tense
 
   // 紧元音
   if (switches.肴豪韵韵核归为低元音) {
@@ -263,8 +263,7 @@ function getNucleus() {
   if (is('麻庚銜夬刪　韻 二等')) return 'a͇';
                                         // −high, +low, +divII,        −rnd, +tense
   if (is('麻庚　　　　韻 三等') ||
-      is('歌唐談泰寒　韻') ||
-      is('戈　　　桓　韻')) return 'a'; // −high, +low, −front, −back, −rnd, +tense
+      is('歌唐談泰寒　韻')) return 'a'; // −high, +low, −front, −back, −rnd, +tense
 
   // 二合元音
   if (is('支韻'))     return 'iə'; // +front, −back, −rnd, +tense
