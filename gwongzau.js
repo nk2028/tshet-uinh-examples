@@ -8,8 +8,7 @@
 
 const is = (x) => 音韻地位.屬於(x);
 
-// 重新定義開合口
-const is合口 = is('合口 或 開合中立 微廢元寒歌陽韻');
+const is合口 = is('合口 或 微廢元寒歌陽韻 脣音');
 const is開口 = !is合口;
 
 function 聲母規則() {
