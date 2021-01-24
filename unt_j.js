@@ -109,32 +109,32 @@ C：辅音，作为韵尾（coda）。韵核和韵尾加在一起叫作韵基（
 // 介音音位的特征也在下面用 /* */ 注释列出，以说明其区别性特征
 // 同样地，条件变体在下面用括号标注列出
 function getInitialWithoutRounding() {
-	switch (音韻地位.母) {
-	//	不送气清阻音〈全清〉     送气清阻音〈次清〉       浊阻音〈全浊〉           浊响音〈次浊〉
-	//	−voi, −sg, −son          −voi, +sg, −son          +voi, −sg, −son          +voi, −sg, +son
-		case '幫': return 'p'  ; case '滂': return 'pʰ' ; case '並': return 'b'  ; case '明': return 'm'  ; // +stop, −fric; LAB            双唇塞音  〈帮组/唇音〉
-		                       ;                        ;                        ; /*(帮组三 C 介音   β)*/; // −stop, −fric; LAB            双唇近音
-		case '端': return 't'  ; case '透': return 'tʰ' ; case '定': return 'd'  ; case '泥': return 'n'  ; // +stop, −fric; COR, +ant      齿龈塞音  〈端组/舌头音〉
-		case '精': return 'ts' ; case '清': return 'tsʰ'; case '從': return 'dz' ;                        ; // +stop, +fric; COR, +ant      齿龈塞擦音〈精组/齿头音〉
-		case '心': return 's'  ;                        ; case '邪': return 'z'  ;                        ; // −stop, +fric; COR, +ant      齿龈擦音  〈精组/齿头音〉
-		                       ;                        ;                        ; case '來': return 'l'  ; // −stop, −fric; COR, +ant      齿龈近音  〈来母/半舌音〉
-		case '知': return 'tɹ' ; case '徹': return 'tɹʰ'; case '澄': return 'dɹ' ; case '孃': return 'nɹ' ; // +stop, −fric; COR, −ant, +r  卷舌塞音  〈知组/舌上音〉
-		case '莊': return 'tʂ' ; case '初': return 'tʂʰ'; case '崇': return 'dʐ' ;                        ; // +stop, +fric; COR, −ant, +r  卷舌塞擦音〈庄组/正齿音〉
-		case '生': return 'ʂ'  ;                        ; case '俟': return 'ʐ'  ;                        ; // −stop, +fric; COR, −ant, +r  卷舌擦音  〈庄组/正齿音〉
-		                       ;                        ;                        ; /* 钝音三 B 介音   ɹ */; // −stop, −fric; COR, −ant, +r  龈后近音
-		                       ;                        ;                        ; case '日': return 'ɲ'  ; // +stop, −fric; COR, −ant, −r  龈腭塞音  〈日母/半齿音〉
-		case '章': return 'tɕ' ; case '昌': return 'tɕʰ'; case '常': return 'dʑ' ;                        ; // +stop, +fric; COR, −ant, −r  龈腭塞擦音〈章组/正齿音〉
-		case '書': return 'ɕ'  ;                        ; case '船': return 'ʑ'  ;                        ; // −stop, +fric; COR, −ant, −r  龈腭擦音  〈章组/正齿音〉
-		                       ;                        ;                        ; case '以': return 'j'  ; // −stop, −fric; COR, −ant, −r  硬腭近音  〈以母/喉音〉
-		case '見': return 'k'  ; case '溪': return 'kʰ' ; case '羣': return 'ɡ'  ; case '疑': return 'ŋ'  ; // +stop, −fric; DOR (+high)    软腭前塞音〈见组/牙音〉
-		                       ;                        ; case '匣': return 'ɣ'  ; case '云': return 'ɣ'  ; // −stop, +fric; DOR (+high)    软腭前擦音〈影组/喉音〉
-		                       ;                        ;                        ; /* 见系三 C 介音   j̈ */; // −stop, −fric; DOR (+high)    软腭前近音
-		/*(见_非三等       q)  ;   (溪_非三等       qʰ) ;                        ;   (疑_非三等       ɴ)*/; // +stop, −fric; DOR (−high)    软腭后塞音
-		/*(晓_非三等       χ)  ;                        ;   (匣              ʁ)*/;                        ; // −stop, +fric; DOR (−high)    软腭后擦音
-		case '影': return 'ʔ'  ;                        ;                        ;                        ; // +stop, −fric                 喉塞音    〈影组/喉音〉
-		case '曉': return 'h'  ;                        ;                        ;                        ; // −stop, +fric                 喉擦音    〈影组/喉音〉
-	}
-	throw new Error('无辅音规则');
+  switch (音韻地位.母) {
+  //  不送气清阻音〈全清〉     送气清阻音〈次清〉       浊阻音〈全浊〉           浊响音〈次浊〉
+  //  −voi, −sg, −son          −voi, +sg, −son          +voi, −sg, −son          +voi, −sg, +son
+    case '幫': return 'p'  ; case '滂': return 'pʰ' ; case '並': return 'b'  ; case '明': return 'm'  ; // +stop, −fric; LAB            双唇塞音  〈帮组/唇音〉
+                           ;                        ;                        ; /*(帮组三 C 介音   β)*/; // −stop, −fric; LAB            双唇近音
+    case '端': return 't'  ; case '透': return 'tʰ' ; case '定': return 'd'  ; case '泥': return 'n'  ; // +stop, −fric; COR, +ant      齿龈塞音  〈端组/舌头音〉
+    case '精': return 'ts' ; case '清': return 'tsʰ'; case '從': return 'dz' ;                        ; // +stop, +fric; COR, +ant      齿龈塞擦音〈精组/齿头音〉
+    case '心': return 's'  ;                        ; case '邪': return 'z'  ;                        ; // −stop, +fric; COR, +ant      齿龈擦音  〈精组/齿头音〉
+                           ;                        ;                        ; case '來': return 'l'  ; // −stop, −fric; COR, +ant      齿龈近音  〈来母/半舌音〉
+    case '知': return 'tɹ' ; case '徹': return 'tɹʰ'; case '澄': return 'dɹ' ; case '孃': return 'nɹ' ; // +stop, −fric; COR, −ant, +r  卷舌塞音  〈知组/舌上音〉
+    case '莊': return 'tʂ' ; case '初': return 'tʂʰ'; case '崇': return 'dʐ' ;                        ; // +stop, +fric; COR, −ant, +r  卷舌塞擦音〈庄组/正齿音〉
+    case '生': return 'ʂ'  ;                        ; case '俟': return 'ʐ'  ;                        ; // −stop, +fric; COR, −ant, +r  卷舌擦音  〈庄组/正齿音〉
+                           ;                        ;                        ; /* 钝音三 B 介音   ɹ */; // −stop, −fric; COR, −ant, +r  龈后近音
+                           ;                        ;                        ; case '日': return 'ɲ'  ; // +stop, −fric; COR, −ant, −r  龈腭塞音  〈日母/半齿音〉
+    case '章': return 'tɕ' ; case '昌': return 'tɕʰ'; case '常': return 'dʑ' ;                        ; // +stop, +fric; COR, −ant, −r  龈腭塞擦音〈章组/正齿音〉
+    case '書': return 'ɕ'  ;                        ; case '船': return 'ʑ'  ;                        ; // −stop, +fric; COR, −ant, −r  龈腭擦音  〈章组/正齿音〉
+                           ;                        ;                        ; case '以': return 'j'  ; // −stop, −fric; COR, −ant, −r  硬腭近音  〈以母/喉音〉
+    case '見': return 'k'  ; case '溪': return 'kʰ' ; case '羣': return 'ɡ'  ; case '疑': return 'ŋ'  ; // +stop, −fric; DOR (+high)    软腭前塞音〈见组/牙音〉
+                           ;                        ; case '匣': return 'ɣ'  ; case '云': return 'ɣ'  ; // −stop, +fric; DOR (+high)    软腭前擦音〈影组/喉音〉
+                           ;                        ;                        ; /* 见系三 C 介音   j̈ */; // −stop, −fric; DOR (+high)    软腭前近音
+    /*(见_非三等       q)  ;   (溪_非三等       qʰ) ;                        ;   (疑_非三等       ɴ)*/; // +stop, −fric; DOR (−high)    软腭后塞音
+    /*(晓_非三等       χ)  ;                        ;   (匣              ʁ)*/;                        ; // −stop, +fric; DOR (−high)    软腭后擦音
+    case '影': return 'ʔ'  ;                        ;                        ;                        ; // +stop, −fric                 喉塞音    〈影组/喉音〉
+    case '曉': return 'h'  ;                        ;                        ;                        ; // −stop, +fric                 喉擦音    〈影组/喉音〉
+  }
+  throw new Error('无辅音规则');
 }
 
 const is全清 = is('幫端精心知莊生章書見影曉母'); // [−voi, −sg, −son]
@@ -151,64 +151,64 @@ const is锐 = is锐前 || is锐后 || is('來母');  // [COR]
 
 // 函数：将声母的音韵地位转换为音位，包含开合信息
 function getInitial() {
-	let result = getInitialWithoutRounding();
-	// 音韵学术语开合对应 [±rnd]。如果主要调音部位就是 [LAB]〈帮组〉，那么本文一律视为 [−rnd]
-	// 没有开合对立的韵母一般视为开口，但虞韵本文视为鱼韵对应的合口；平行地，钟韵也视为合口
-	if (is('合口 或 鍾韻') && !is('幫組')) { // [+rnd]
-		result += 'ʷ';
-		result = result.replace('ʰʷ', 'ʷʰ');
-	} // else [−rnd]
-	return result;
+  let result = getInitialWithoutRounding();
+  // 音韵学术语开合对应 [±rnd]。如果主要调音部位就是 [LAB]〈帮组〉，那么本文一律视为 [−rnd]
+  // 没有开合对立的韵母一般视为开口，但虞韵本文视为鱼韵对应的合口；平行地，钟韵也视为合口
+  if (is('合口 或 鍾韻') && !is('幫組')) { // [+rnd]
+    result += 'ʷ';
+    result = result.replace('ʰʷ', 'ʷʰ');
+  } // else [−rnd]
+  return result;
 }
 
 // 函数：将软腭前音转换为软腭后音
 function velarToUvular(consonant) {
-	switch (consonant[0]) {
-		case 'k': return 'q' + consonant.substring(1);
-		case 'ɡ': return 'ɢ' + consonant.substring(1);
-		case 'ŋ': return 'ɴ' + consonant.substring(1);
-		case 'ɣ': return 'ʁ' + consonant.substring(1);
-	}
-	return consonant;
+  switch (consonant[0]) {
+    case 'k': return 'q' + consonant.substring(1);
+    case 'ɡ': return 'ɢ' + consonant.substring(1);
+    case 'ŋ': return 'ɴ' + consonant.substring(1);
+    case 'ɣ': return 'ʁ' + consonant.substring(1);
+  }
+  return consonant;
 }
 
 // 函数：将知组转换为卷舌塞音
 function retroflexToStop(consonant) {
-	switch (consonant.substring(0, 2)) {
-		case 'tɹ': return 'ʈ' + consonant.substring(2);
-		case 'dɹ': return 'ɖ' + consonant.substring(2);
-		case 'nɹ': return 'ɳ' + consonant.substring(2);
-	}
-	return consonant;
+  switch (consonant.substring(0, 2)) {
+    case 'tɹ': return 'ʈ' + consonant.substring(2);
+    case 'dɹ': return 'ɖ' + consonant.substring(2);
+    case 'nɹ': return 'ɳ' + consonant.substring(2);
+  }
+  return consonant;
 }
 
 // 函数：将介音的音韵地位转换为音位，不含开合信息
 function getGlide() {
-	if (is('云母 灰韻')) return 'ɹ'; // “倄”小韵
+  if (is('云母 灰韻')) return 'ɹ'; // “倄”小韵
 
-	// 一二四等无介音
-	if (!is('三等')) return '';
+  // 一二四等无介音
+  if (!is('三等')) return '';
 
-	// 锐音声母三等介音一律用 /ɹ/
-	if (is锐) return 'ɹ';
+  // 锐音声母三等介音一律用 /ɹ/
+  if (is锐) return 'ɹ';
 
-	// 钝音声母分三 A、B、C
-	if (is('重紐B類 或 庚臻韻')) return 'ɹ';
-	if ('抑𡊁'.includes(字頭)) return 'ɹ'; // 蒸韵“抑𡊁”二字归三 B
-	if (is('云母 支脂祭眞諄臻仙宵麻庚清蒸幽侵鹽韻')) return 'ɹ'; // 云母前元音韵归三 B
-	if (is('重紐A類 或 麻蒸清諄幽韻')) return 'j'; // 三 A
-	return 'j̈'; // 三 C
+  // 钝音声母分三 A、B、C
+  if (is('重紐B類 或 庚臻韻')) return 'ɹ';
+  if ('抑𡊁'.includes(字頭)) return 'ɹ'; // 蒸韵“抑𡊁”二字归三 B
+  if (is('云母 支脂祭眞諄臻仙宵麻庚清蒸幽侵鹽韻')) return 'ɹ'; // 云母前元音韵归三 B
+  if (is('重紐A類 或 麻蒸清諄幽韻')) return 'j'; // 三 A
+  return 'j̈'; // 三 C
 }
 
 // 函数：将韵尾的音韵地位转换为音位
 function getCoda() {
-	if (is('通江宕梗曾攝')) return is('入聲') ? 'k' : 'ŋ';
-	if (is('深咸攝'))       return is('入聲') ? 'p' : 'm';
-	if (is('臻山攝'))       return is('入聲') ? 't' : 'n';
-	if (is('佳韻'))         return ''; // 从蟹摄中排除无韵尾的佳韵
-	if (is('微韻 或 蟹攝')) return 'j';
-	if (is('幽韻 或 效攝')) return 'w';
-	return '';
+  if (is('通江宕梗曾攝')) return is('入聲') ? 'k' : 'ŋ';
+  if (is('深咸攝'))       return is('入聲') ? 'p' : 'm';
+  if (is('臻山攝'))       return is('入聲') ? 't' : 'n';
+  if (is('佳韻'))         return ''; // 从蟹摄中排除无韵尾的佳韵
+  if (is('微韻 或 蟹攝')) return 'j';
+  if (is('幽韻 或 效攝')) return 'w';
+  return '';
 }
 
 /**
@@ -240,51 +240,51 @@ divII  +  +  −  −  −  −  −
 
 // 函数：将韵核的音韵地位转换为音位
 function getNucleus() {
-	// 松元音
-	// 韵尾: m     j   n         w
-	if (is('侵　　微　眞諄臻欣文　韻')) return 'ɪ'; // +high, −tense
-	if (is('鹽嚴凡祭廢仙　　元　宵韻')) return 'ɜ'; // −high, −tense
+  // 松元音
+  // 韵尾: m     j   n         w
+  if (is('侵　　微　眞諄臻欣文　韻')) return 'ɪ'; // +high, −tense
+  if (is('鹽嚴凡祭廢仙　　元　宵韻')) return 'ɜ'; // −high, −tense
 
-	// 紧元音
-	if (switches.肴豪韵韵核归为低元音) {
-		if (is('肴韻')) return 'a͇';
-		if (is('豪韻')) return 'a';
-	}
-	// 脂韵、尤韵的韵基也可分别视为 /ɪj/、/ɪw/，本文从简直接视为紧元音 /i/、/u/
-	// 韵尾:   ŋ m j n w
-	if (is('脂蒸　　　幽韻')) return 'i'; // +high, −low, +front, −back, −rnd, +tense
-	if (is('之　　　　　韻')) return 'ɨ'; // +high, −low, −front, −back, −rnd, +tense
-	if (is('尤東　　　侯韻')) return 'u'; // +high, −low, −front, +back, +rnd, +tense
-	if (is('佳耕咸皆山肴韻')) return 'e͇'; // −high, −low, +divII,        −rnd, +tense
-	if (is('　江　　　　韻')) return 'œ͇'; // −high, −low, +divII,        +rnd, +tense
-	if (is('　青添齊先蕭韻')) return 'e'; // −high, −low, +front, −back, −rnd, +tense
-	if (is('　登覃咍痕豪韻')) return 'ə'; // −high, −low, +front, −back, −rnd, +tense
-	if (is('模冬　灰魂　韻')) return 'o'; // −high, −low, +front, −back, −rnd, +tense
-	if (is('麻庚銜夬刪　韻 二等')) return 'a͇';
-	                                      // −high, +low, +divII,        −rnd, +tense
-	if (is('麻庚　　　　韻 三等') ||
-		is('歌唐談泰寒　韻') ||
-		is('戈　　　桓　韻')) return 'a'; // −high, +low, −front, −back, −rnd, +tense
+  // 紧元音
+  if (switches.肴豪韵韵核归为低元音) {
+    if (is('肴韻')) return 'a͇';
+    if (is('豪韻')) return 'a';
+  }
+  // 脂韵、尤韵的韵基也可分别视为 /ɪj/、/ɪw/，本文从简直接视为紧元音 /i/、/u/
+  // 韵尾:   ŋ m j n w
+  if (is('脂蒸　　　幽韻')) return 'i'; // +high, −low, +front, −back, −rnd, +tense
+  if (is('之　　　　　韻')) return 'ɨ'; // +high, −low, −front, −back, −rnd, +tense
+  if (is('尤東　　　侯韻')) return 'u'; // +high, −low, −front, +back, +rnd, +tense
+  if (is('佳耕咸皆山肴韻')) return 'e͇'; // −high, −low, +divII,        −rnd, +tense
+  if (is('　江　　　　韻')) return 'œ͇'; // −high, −low, +divII,        +rnd, +tense
+  if (is('　青添齊先蕭韻')) return 'e'; // −high, −low, +front, −back, −rnd, +tense
+  if (is('　登覃咍痕豪韻')) return 'ə'; // −high, −low, +front, −back, −rnd, +tense
+  if (is('模冬　灰魂　韻')) return 'o'; // −high, −low, +front, −back, −rnd, +tense
+  if (is('麻庚銜夬刪　韻 二等')) return 'a͇';
+                                        // −high, +low, +divII,        −rnd, +tense
+  if (is('麻庚　　　　韻 三等') ||
+    is('歌唐談泰寒　韻') ||
+    is('戈　　　桓　韻')) return 'a'; // −high, +low, −front, −back, −rnd, +tense
 
-	// 二合元音
-	if (is('支韻'))     return 'iə'; // +front, −back, −rnd, +tense
-	if (is('魚虞鍾韻')) return 'ɨə'; // −front, −back, −rnd, +tense
-	if (is('清韻'))     return 'ia'; // +front, −back, −rnd, +tense
-	if (is('陽韻'))     return 'ɨa'; // +front, −back, −rnd, +tense
+  // 二合元音
+  if (is('支韻'))     return 'iə'; // +front, −back, −rnd, +tense
+  if (is('魚虞鍾韻')) return 'ɨə'; // −front, −back, −rnd, +tense
+  if (is('清韻'))     return 'ia'; // +front, −back, −rnd, +tense
+  if (is('陽韻'))     return 'ɨa'; // +front, −back, −rnd, +tense
 
-	throw new Error('无元音规则');
+  throw new Error('无元音规则');
 }
 
 // 函数：将半元音转换为元音
 function semivowelToVowel(consonant) {
-	switch (consonant) {
-		case 'j': return 'i';
-		case 'ɥ': return 'y';
-		case 'j̈': return 'ɨ';
-		case 'ɥ̈': return 'ʉ';
-		case 'w': return 'u';
-	}
-	return consonant;
+  switch (consonant) {
+    case 'j': return 'i';
+    case 'ɥ': return 'y';
+    case 'j̈': return 'ɨ';
+    case 'ɥ̈': return 'ʉ';
+    case 'w': return 'u';
+  }
+  return consonant;
 }
 
 /**
@@ -296,32 +296,32 @@ function semivowelToVowel(consonant) {
 
 // 函数：将声调的音韵地位转换为语音
 function getTone() {
-	if (switches.声调写成五度标记) {
-		if (switches.声调分阴阳) {
-			if (is('平聲')) return is清    ? '˦˧' : '˨˩';
-			if (is('上聲')) return !is全浊 ? '˦˥' : '˨˧';
-			if (is('去聲')) return is清    ? '˥˦˥' : '˧˨˧';
-			if (is('入聲')) return !is全浊 ? '˥' : '˨˩';
-		} else {
-			if (is('平聲')) return '˧˩';
-			if (is('上聲')) return '˧˥';
-			if (is('去聲')) return '˦˨˦';
-			if (is('入聲')) return '˧';
-		}
-	} else {
-		if (switches.声调分阴阳) {
-			if (is('平聲')) return is清    ? '̂' : '̏';
-			if (is('上聲')) return !is全浊 ? '̋' : '̌';
-			if (is('去聲')) return is清    ? '᷇' : '᷅';
-			if (is('入聲')) return !is全浊 ? '́' : '̀';
-		} else {
-			if (is('平聲')) return switches.声调附加符号写在音节前 ? 'ˋ' : '̀'; // 写在音节前时直接用独立的附加符号
-			if (is('上聲')) return switches.声调附加符号写在音节前 ? 'ˊ' : '́';
-			if (is('去聲')) return switches.声调附加符号写在音节前 ? 'ˉ' : '̄';
-			if (is('入聲')) return '';
-		}
-	}
-	throw new Error('无声调规则');
+  if (switches.声调写成五度标记) {
+    if (switches.声调分阴阳) {
+      if (is('平聲')) return is清    ? '˦˧' : '˨˩';
+      if (is('上聲')) return !is全浊 ? '˦˥' : '˨˧';
+      if (is('去聲')) return is清    ? '˥˦˥' : '˧˨˧';
+      if (is('入聲')) return !is全浊 ? '˥' : '˨˩';
+    } else {
+      if (is('平聲')) return '˧˩';
+      if (is('上聲')) return '˧˥';
+      if (is('去聲')) return '˦˨˦';
+      if (is('入聲')) return '˧';
+    }
+  } else {
+    if (switches.声调分阴阳) {
+      if (is('平聲')) return is清    ? '̂' : '̏';
+      if (is('上聲')) return !is全浊 ? '̋' : '̌';
+      if (is('去聲')) return is清    ? '᷇' : '᷅';
+      if (is('入聲')) return !is全浊 ? '́' : '̀';
+    } else {
+      if (is('平聲')) return switches.声调附加符号写在音节前 ? 'ˋ' : '̀'; // 写在音节前时直接用独立的附加符号
+      if (is('上聲')) return switches.声调附加符号写在音节前 ? 'ˊ' : '́';
+      if (is('去聲')) return switches.声调附加符号写在音节前 ? 'ˉ' : '̄';
+      if (is('入聲')) return '';
+    }
+  }
+  throw new Error('无声调规则');
 }
 
 /** 四、音系规则（及其代码实现）
@@ -347,9 +347,9 @@ if (is('知莊章組 或 日以母')) glide = '';
           β / [LAB, −rnd]__
 */
 if (initial.includes('ʷ')) {
-	glide = glide.replace('j', 'ɥ');
+  glide = glide.replace('j', 'ɥ');
 } else if (is('幫組')) {
-	if (glide == 'j̈') glide = 'β';
+  if (glide == 'j̈') glide = 'β';
 }
 
 /**
@@ -363,9 +363,9 @@ if (initial == 'jʷ') initial = 'ɥ';
      j -> ɹ / {[+low], [−high, −tense]}__
 */
 if (switches.祭泰夬废韵尾推导为ɹ) {
-	if (nucleus.includes('a') || nucleus == 'ɜ') {
-		if (coda == 'j') coda = 'ɹ';
-	}
+  if (nucleus.includes('a') || nucleus == 'ɜ') {
+    if (coda == 'j') coda = 'ɹ';
+  }
 }
 
 /**
@@ -376,13 +376,13 @@ if (switches.祭泰夬废韵尾推导为ɹ) {
           ə / 其他环境
 */
 if (switches.要推导松元音) {
-	if ([...'ɹjɥ'].includes(glide) || is锐) { // 不包含 glide 为零的情况，所以用 [...'ɹjɥ']
-		if (nucleus == 'ɪ') nucleus = 'i';
-		if (nucleus == 'ɜ') nucleus = 'e';
-	} else {
-		if (nucleus == 'ɪ') nucleus = 'ɨ';
-		if (nucleus == 'ɜ') nucleus = 'ə';
-	}
+  if ([...'ɹjɥ'].includes(glide) || is锐) { // 不包含 glide 为零的情况，所以用 [...'ɹjɥ']
+    if (nucleus == 'ɪ') nucleus = 'i';
+    if (nucleus == 'ɜ') nucleus = 'e';
+  } else {
+    if (nucleus == 'ɪ') nucleus = 'ɨ';
+    if (nucleus == 'ɜ') nucleus = 'ə';
+  }
 }
 
 /**
@@ -393,10 +393,10 @@ if (switches.要推导松元音) {
        -> ɐ / ɨ__
 */
 if (switches.要推导二合元音) {
-	if (nucleus == 'iə') nucleus = 'iɛ';
-	if (nucleus == 'ɨə') nucleus = 'ɨɜ';
-	if (nucleus == 'ia') nucleus = 'iæ';
-	if (nucleus == 'ɨa') nucleus = 'ɨɐ';
+  if (nucleus == 'iə') nucleus = 'iɛ';
+  if (nucleus == 'ɨə') nucleus = 'ɨɜ';
+  if (nucleus == 'ia') nucleus = 'iæ';
+  if (nucleus == 'ɨa') nucleus = 'ɨɐ';
 }
 
 /**
@@ -406,11 +406,11 @@ if (switches.要推导二合元音) {
        -> ɑ / 其他环境
 */
 if (switches.要推导a && nucleus == 'a') {
-	nucleus = 'ɑ';
-	if (is锐 && glide && !initial.includes('ʷ') || is锐后 || !is锐 && [...'ɹjɥ'].includes(glide)) {
-		// 音系规则本来不限制韵尾，但章组谈韵有“㶒譫”两小韵，需要归到 ɑ，所以在这里过滤
-		if ('ŋk'.includes(coda)) nucleus = 'a'; // 注意 'ŋk'.includes(coda) 包含的是 ŋ、k 和零韵尾这 3 种
-	}
+  nucleus = 'ɑ';
+  if (is锐 && glide && !initial.includes('ʷ') || is锐后 || !is锐 && [...'ɹjɥ'].includes(glide)) {
+    // 音系规则本来不限制韵尾，但章组谈韵有“㶒譫”两小韵，需要归到 ɑ，所以在这里过滤
+    if ('ŋk'.includes(coda)) nucleus = 'a'; // 注意 'ŋk'.includes(coda) 包含的是 ŋ、k 和零韵尾这 3 种
+  }
 }
 
 /**
@@ -418,7 +418,7 @@ if (switches.要推导a && nucleus == 'a') {
      ɨ -> ʉ / [LAB]__
 */
 if (initial.includes('ʷ') || initial == 'ɥ' || glide == 'β') {
-	nucleus = nucleus.replace('ɨ', 'ʉ');
+  nucleus = nucleus.replace('ɨ', 'ʉ');
 }
 
 /**
@@ -426,7 +426,7 @@ if (initial.includes('ʷ') || initial == 'ɥ' || glide == 'β') {
      i -> ɹ̩ / [COR, −ant, +r, +fric, −rnd]__[COR]
 */
 if (switches.庄组臻摄开口推导为ɹ̩ && is('莊組') && !initial.includes('ʷ') && [...'nt'].includes(coda)) {
-	if (nucleus == 'i') nucleus = 'ɹ̩';
+  if (nucleus == 'i') nucleus = 'ɹ̩';
 }
 
 /**
@@ -434,21 +434,21 @@ if (switches.庄组臻摄开口推导为ɹ̩ && is('莊組') && !initial.include
      ə -> ʌ / 非G__[LAB]
 */
 if (switches.豪覃韵韵核推导为ʌ && !glide && [...'mpw'].includes(coda)) {
-	if (nucleus == 'ə') nucleus = 'ʌ';
+  if (nucleus == 'ə') nucleus = 'ʌ';
 }
 
 /**
 (11) e͇w〈肴韵〉、βəm〈凡韵〉的韵核实现为圆唇元音
      e͇      -> œ͇ / __w
-	 {e, ə} -> œ / [LAB]G__m
+   {e, ə} -> œ / [LAB]G__m
 */
 // 先转换𠑆𦑣䎎小韵，它们属于凡韵
 if (is锐 && initial.includes('ʷ') && [...'mp'].includes(coda)) {
-	if (nucleus == 'e') nucleus = 'ə';
+  if (nucleus == 'e') nucleus = 'ə';
 }
 if (switches.肴凡韵韵核推导为œ) {
-	if (nucleus == 'e͇' && coda == 'w') nucleus = 'œ͇';
-	if (nucleus == 'ə' && (initial.includes('ʷ') || is('幫組')) && [...'mp'].includes(coda)) nucleus = 'œ';
+  if (nucleus == 'e͇' && coda == 'w') nucleus = 'œ͇';
+  if (nucleus == 'ə' && (initial.includes('ʷ') || is('幫組')) && [...'mp'].includes(coda)) nucleus = 'œ';
 }
 
 
@@ -458,11 +458,11 @@ if (switches.肴凡韵韵核推导为œ) {
           ɥ / [COR, +ant, −son, +rnd]__[+front]
 */
 if (is锐前 && 'ieæa'.includes(nucleus[0])) {
-	if (!initial.includes('ʷ')) {
-		if (glide) glide = 'j';
-	} else if (switches.精三寅合口介音推导为ɥ) {
-		if (glide) glide = 'ɥ';
-	}
+  if (!initial.includes('ʷ')) {
+    if (glide) glide = 'j';
+  } else if (switches.精三寅合口介音推导为ɥ) {
+    if (glide) glide = 'ɥ';
+  }
 }
 
 /**
@@ -470,7 +470,7 @@ if (is锐前 && 'ieæa'.includes(nucleus[0])) {
      G -> ɹ / [LAB]__i[DOR]
 */
 if (switches.蒸幽韵合口增生ɹ滑音 && (initial.includes('ʷ') || is('幫組')) && nucleus == 'i' && [...'ŋkw'].includes(coda)) {
-	glide = 'ɹ';
+  glide = 'ɹ';
 }
 
 /**
@@ -479,8 +479,8 @@ if (switches.蒸幽韵合口增生ɹ滑音 && (initial.includes('ʷ') || is('幫
      ɣʷG -> ɹʷ
 */
 if (switches.云母推导为ɹ && initial.includes('ɣ') && glide) {
-	initial = initial.replace('ɣ', 'ɹ'); // ɹ 视为声母
-	glide = '';
+  initial = initial.replace('ɣ', 'ɹ'); // ɹ 视为声母
+  glide = '';
 }
 
 /**
@@ -488,7 +488,7 @@ if (switches.云母推导为ɹ && initial.includes('ɣ') && glide) {
      [DOR] -> [−high] / __V
 */
 if (switches.见系非三推导为软腭后音 && !glide) {
-	initial = velarToUvular(initial);
+  initial = velarToUvular(initial);
 }
 
 /**
@@ -496,7 +496,7 @@ if (switches.见系非三推导为软腭后音 && !glide) {
      h -> χ / __V
 */
 if (switches.晓母非三推导为软腭后音 && !glide) {
-	initial = initial.replace('h', 'χ');
+  initial = initial.replace('h', 'χ');
 }
 
 /**
@@ -504,9 +504,9 @@ if (switches.晓母非三推导为软腭后音 && !glide) {
      [DOR] -> [+back] / {[+round], [+low, −front]}__
 */
 if (switches.通江宕摄推导为软腭后音) {
-	if ('ʉuoœɑ'.includes(nucleus[0]) || (nucleus.includes('ɐ') && switches.要推导a)) {
-		coda = velarToUvular(coda);
-	}
+  if ('ʉuoœɑ'.includes(nucleus[0]) || (nucleus.includes('ɐ') && switches.要推导a)) {
+    coda = velarToUvular(coda);
+  }
 }
 
 /**
@@ -515,8 +515,8 @@ if (switches.通江宕摄推导为软腭后音) {
           ɘu / 其他__#
 */
 if (switches.侯韵裂化为ɘu && nucleus == 'u' && !coda) {
-	nucleus = 'ɘu';
-	if (is锐后 || is('云母') || glide) nucleus = 'u';
+  nucleus = 'ɘu';
+  if (is锐后 || is('云母') || glide) nucleus = 'u';
 }
 
 /**
@@ -525,8 +525,8 @@ if (switches.侯韵裂化为ɘu && nucleus == 'u' && !coda) {
      w -> u / [+high]__
 */
 if ('iɨʉuɪ'.includes(nucleus)) {
-	if (coda == 'j') coda = 'i';
-	if (coda == 'w') coda = 'u';
+  if (coda == 'j') coda = 'i';
+  if (coda == 'w') coda = 'u';
 }
 
 /**
@@ -534,7 +534,7 @@ if ('iɨʉuɪ'.includes(nucleus)) {
      [DOR, +son] -> ∅ / C__[+high, −back]
 */
 if ('iɨʉ'.includes(nucleus[0])) {
-	if (['j', 'ɥ', 'j̈', 'ɥ̈'].includes(glide)) glide = '';
+  if (['j', 'ɥ', 'j̈', 'ɥ̈'].includes(glide)) glide = '';
 }
 
 /**
@@ -543,49 +543,49 @@ if ('iɨʉ'.includes(nucleus[0])) {
      G      -> ∅ / [COR, +ant, −son]__[+high, −front, −back]
 */
 if (switches.精组非后高元音省略介音 && is锐前) {
-	if (nucleus[0] == 'i' && [...'jɥ'].includes(glide)) glide = '';
-	if ('ɨʉ'.includes(nucleus[0])) glide = '';
+  if (nucleus[0] == 'i' && [...'jɥ'].includes(glide)) glide = '';
+  if ('ɨʉ'.includes(nucleus[0])) glide = '';
 }
 
 /** 五、后处理的代码实现
 */
 
 if (switches.知组写成卷舌塞音 && is('知組 或 來母')) {
-	initial = retroflexToStop(initial);
-	if (is('知組 三等')) glide = 'ɹ'; // 还原出三等介音
-	if ('iɨʉ'.includes(nucleus[0])) glide = ''; // 再次应用音系规则 (21)。平行地，也要应用给来母
+  initial = retroflexToStop(initial);
+  if (is('知組 三等')) glide = 'ɹ'; // 还原出三等介音
+  if ('iɨʉ'.includes(nucleus[0])) glide = ''; // 再次应用音系规则 (21)。平行地，也要应用给来母
 }
 
 if (switches.中元音写成半低元音) {
-	nucleus = nucleus.replace('e', 'ɛ');
-	nucleus = nucleus.replace('o', 'ɔ');
+  nucleus = nucleus.replace('e', 'ɛ');
+  nucleus = nucleus.replace('o', 'ɔ');
 }
 
 if (switches.ɑ写成a) {
-	nucleus = nucleus.replace('ɑ', 'a');
+  nucleus = nucleus.replace('ɑ', 'a');
 }
 
 if (switches.半元音介音写成元音) {
-	glide = semivowelToVowel(glide);
+  glide = semivowelToVowel(glide);
 }
 
 if (switches.半元音韵尾写成元音) {
-	coda = semivowelToVowel(coda);
+  coda = semivowelToVowel(coda);
 }
 
 if (is('二等')) {
-	if (switches.二等元音写成r音钩) {
-		nucleus = nucleus.replace('͇', '˞');
-	} else if (switches.二等元音写成双下横线) {
-		nucleus = nucleus.replace('͇', '̳');
-	}
+  if (switches.二等元音写成r音钩) {
+    nucleus = nucleus.replace('͇', '˞');
+  } else if (switches.二等元音写成双下横线) {
+    nucleus = nucleus.replace('͇', '̳');
+  }
 }
 
 if (switches.声调写成五度标记) return initial + glide + nucleus + coda + tone;
 
 if (switches.声调附加符号写在音节前) {
-	if (switches.声调分阴阳) return '\xA0' + tone + initial + glide + nucleus + coda; // 需要用无中断空格（U+00A0），否则位于行首的空格可能被浏览器忽略
-	return tone + initial + glide + nucleus + coda;
+  if (switches.声调分阴阳) return '\xA0' + tone + initial + glide + nucleus + coda; // 需要用无中断空格（U+00A0），否则位于行首的空格可能被浏览器忽略
+  return tone + initial + glide + nucleus + coda;
 }
 
 // 声调附加符号写在韵核主体上
