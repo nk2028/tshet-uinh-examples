@@ -110,8 +110,8 @@ C：辅音，作为韵尾（coda）。韵核和韵尾加在一起叫作韵基（
 // 同样地，条件变体在下面用括号标注列出
 function getInitialWithoutRounding() {
   switch (音韻地位.母) {
-  // 不送气清阻音〈全清〉     送气清阻音〈次清〉       浊阻音〈全浊〉           浊响音〈次浊〉
-  // −voi, −sg, −son          −voi, +sg, −son          +voi, −sg, −son          +voi, −sg, +son
+  // 不送气清阻音〈全清〉    送气清阻音〈次清〉       浊阻音〈全浊〉           浊响音〈次浊〉
+  // −voi, −sg, −son         −voi, +sg, −son          +voi, −sg, −son          +voi, −sg, +son
     case '幫': return 'p'  ; case '滂': return 'pʰ' ; case '並': return 'b'  ; case '明': return 'm'  ; // +stop, −fric; LAB            双唇塞音  〈帮组/唇音〉
                            ;                        ;                        ; /*(帮组三 C 介音   β)*/; // −stop, −fric; LAB            双唇近音
     case '端': return 't'  ; case '透': return 'tʰ' ; case '定': return 'd'  ; case '泥': return 'n'  ; // +stop, −fric; COR, +ant      齿龈塞音  〈端组/舌头音〉
@@ -137,10 +137,10 @@ function getInitialWithoutRounding() {
   throw new Error('无辅音规则');
 }
 
-const is全清 = is('全清'); // [−voi, −sg, −son]
-const is次清 = is('次清'); // [−voi, +sg, −son]
-const is全浊 = is('全濁'); // [+voi, −sg, −son]
-const is次浊 = is('次濁'); // [+voi, −sg, +son]
+const is全清 = is('幫端精心知莊生章書見影曉母'); // [−voi, −sg, −son]
+const is次清 = is('滂透清　徹初　昌　溪　　母'); // [−voi, +sg, −son]
+const is全浊 = is('並定從邪澄崇俟常船羣　匣母'); // [+voi, −sg, −son]
+const is次浊 = is('明泥來　孃　　日以疑云　母'); // [+voi, −sg, +son]
 const is清 = is全清 || is次清;
 // 云母已按推导后的结果 [ɹ] 算入次浊
 
@@ -196,7 +196,7 @@ function getGlide() {
   if (is('重紐B類 或 庚臻韻')) return 'ɹ';
   if ('抑𡊁'.includes(字頭)) return 'ɹ'; // 蒸韵“抑𡊁”二字归三 B
   if (is('云母 支脂祭眞臻仙宵麻庚清蒸幽侵鹽韻')) return 'ɹ'; // 云母前元音韵归三 B
-  if (is('重紐A類 或 麻蒸清臻幽韻')) return 'j'; // 三 A
+  if (is('重紐A類 或 麻蒸清幽韻')) return 'j'; // 三 A
   return 'j̈'; // 三 C
 }
 
@@ -400,7 +400,7 @@ if (switches.要推导二合元音) {
 
 /**
 (7)  一等韵的韵核 /a/ 实现为 [ɑ]
-     三等韵的韵核 /a/ 在锐音后实现为 [a]，但锐音是唇化〈戈三合〉的除外；在钝音后〈歌戈韵〉实现为 [ɑ]
+     三等韵的韵核 /a/ 在锐音后实现为 [a]，但锐音是唇化〈歌三合〉的除外；在钝音后〈歌韵〉实现为 [ɑ]
      a -> a / {[COR, +ant, −rnd]G, [COR, −ant]}__
        -> ɑ / 其他环境
 */
