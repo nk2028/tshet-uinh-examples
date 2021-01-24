@@ -8,6 +8,10 @@
 
 const is = (x) => 音韻地位.屬於(x);
 
+// 重新定義開合口
+const is合口 = is('合口 或 開合中立 微廢元寒歌陽韻');
+const is開口 = !is合口;
+
 function 聲母規則() {
   if (is('幫母')) {
     if (is('東韻 三等 或 鍾微虞廢文元陽尤凡韻')) return 'f';
@@ -54,9 +58,9 @@ function 聲母規則() {
 }
 
 function 韻母規則() {
-  const is脣音 = is('幫組');
-  const is舌齒 = is('端知精莊章組 或 來日母');
-  const is牙喉 = !is脣音 && !is舌齒;
+  const is脣音 = is('脣音');
+  const is舌齒 = is('舌齒音');
+  const is牙喉 = is('牙喉音');
 
   // 通攝
   if (is('東冬鍾韻')) return 'ung';
@@ -68,21 +72,21 @@ function 韻母規則() {
   }
 
   // 止攝
-  if (is('支脂之韻 開口')) {
+  if (is('支脂之韻') && is開口) {
     if (is('幫端組 或 來孃見溪羣曉匣母')) return 'ei';
     return 'i';
   }
-  if (is('微韻 開口')) {
+  if (is('微韻') && is開口) {
     if (is('幫組 或 見溪羣曉匣母')) return 'ei';
     if (is舌齒) return null;
     return 'i';
   }
-  if (is('支脂韻 合口')) {
+  if (is('支脂韻') && is合口) {
     if (is脣音) return 'ei';
     if (is舌齒) return 'eoi';
     return 'ai';
   }
-  if (is('微韻 合口')) {
+  if (is('微韻') && is合口) {
     if (is脣音) return 'ei';
     if (is舌齒) return null;
     return 'ai';
@@ -107,24 +111,24 @@ function 韻母規則() {
     if (is脣音) return 'ui';
     return 'oi';
   }
-  if (is('泰韻 開口')) {
+  if (is('泰韻') && is開口) {
     if (is脣音) return 'ui';
     if (is舌齒) return 'aai';
     return 'oi';
   }
-  if (is('泰韻 合口') || is('灰韻')) {
+  if (is('泰韻') && is合口 || is('灰韻')) {
     if (is脣音) return 'ui';
     if (is舌齒) return 'eoi';
     if (is('疑母')) return 'oi';
     return 'ui';
   }
-  if (is('蟹攝 二等 開口')) return 'aai';
-  if (is('蟹攝 二等 合口')) {
+  if (is('蟹攝 二等') && is開口) return 'aai';
+  if (is('蟹攝 二等') && is合口) {
     if (is舌齒) return 'eoi';
     return 'aai';
   }
-  if (is('蟹攝 三四等 開口')) return 'ai';
-  if (is('蟹攝 三四等 合口')) {
+  if (is('蟹攝 三四等') && is開口) return 'ai';
+  if (is('蟹攝 三四等') && is合口) {
     if (is舌齒) return 'eoi';
     return 'ai';
   }
@@ -136,43 +140,39 @@ function 韻母規則() {
     if (is舌齒) return 'yun';
     return 'an';
   }
-  if (is('元韻 開口')) {
+  if (is('元韻') && is開口) {
     if (is脣音) return 'aan';
     if (is舌齒) return null;
     return 'in';
   }
-  if (is('元韻 合口')) {
+  if (is('元韻') && is合口) {
     if (is脣音) return 'aan';
     if (is舌齒) return null;
     return 'yun';
   }
   if (is('文欣韻')) return 'an';
-  if (is('眞韻 開口')) {
+  if (is('眞韻') && is開口) {
     if (is('端精組 或 來母')) return 'eon';
     return 'an';
   }
-  if (is('眞韻 合口')) {
-    if (is牙喉) return 'an';
-    return null;
-  }
-  if (is('臻韻')) return 'an';
-  if (is('諄韻')) {
+  if (is('眞韻') && is合口) {
     if (is舌齒) return 'eon';
     return 'an';
   }
+  if (is('臻韻')) return 'an';
 
   // 山攝
-  if (is('寒韻')) {
+  if (is('寒韻') && is開口) {
     if (is舌齒) return 'aan';
     return 'on';
   }
-  if (is('桓韻')) {
+  if (is('寒韻') && is合口) {
     if (is舌齒) return 'yun';
     return 'un';
   }
   if (is('刪山韻')) return 'aan';
-  if (is('仙先韻 開口')) return 'in';
-  if (is('仙先韻 合口')) {
+  if (is('仙先韻') && is開口) return 'in';
+  if (is('仙先韻') && is合口) {
     if (is脣音) return 'in';
     return 'yun';
   }
@@ -183,9 +183,9 @@ function 韻母規則() {
   if (is('宵蕭韻')) return 'iu';
 
   // 果攝
-  if (is('歌戈韻 一等')) return 'o';
-  if (is('戈韻 三等 開口')) return 'e';
-  if (is('戈韻 三等 合口')) {
+  if (is('歌韻 一等')) return 'o';
+  if (is('歌韻 三等') && is開口) return 'e';
+  if (is('歌韻 三等') && is合口) {
     if (is脣音) return 'e';
     return 'oe';
   }
@@ -196,11 +196,11 @@ function 韻母規則() {
 
   // 宕攝
   if (is('唐韻')) return 'ong';
-  if (is('陽韻 開口')) {
+  if (is('陽韻') && is開口) {
     if (is脣音 || is('莊組')) return 'ong';
     return 'oeng';
   }
-  if (is('陽韻 合口')) return 'ong';
+  if (is('陽韻') && is合口) return 'ong';
 
   // 梗攝
   if (is('梗攝 二等')) return 'ang';
@@ -227,20 +227,16 @@ function 韻母規則() {
   throw new Error('無韻母規則');
 }
 
-const is清 = is('幫滂端透知徹精清心莊初生章昌書見溪影曉母');
-const is全濁 = is('並定澄從邪崇俟船常羣匣母');
-
 function 聲調規則() {
-  if (is清) {
+  if (is('全清 或 次清')) {
     if (is('平聲')) return '1';
     if (is('上聲')) return '2';
     if (is('去聲')) return '3';
     if (is('入聲')) return 'x'; // 據元音長短判斷，詳後
   } else {
     if (is('平聲')) return '4';
-    if (is全濁 && is('上聲')) return '6'; // 全濁上變去
+    if (is('全濁 上聲 或 去聲')) return '6'; // 全濁上變去
     if (is('上聲')) return '5';
-    if (is('去聲')) return '6';
     if (is('入聲')) return '6';
   }
   throw new Error('無聲調規則');
@@ -257,7 +253,7 @@ let 韻母 = 韻母規則();
 let 聲調 = 聲調規則();
 
 if (韻母 == null) {
-  throw new Error('該音韻地位有音無字，無法判斷');
+  return '?';
 }
 
 // 據元音長短判斷聲調
@@ -270,7 +266,7 @@ if (韻母 === 'om') {
   韻母 = 'am';
 }
 
-if (is('合口') && (韻母.startsWith('a') || 韻母.startsWith('i') || (韻母.startsWith('o') && !韻母.startsWith('oe')))) {
+if (is合口 && (韻母.startsWith('a') || 韻母.startsWith('i') || (韻母.startsWith('o') && !韻母.startsWith('oe')))) {
   if (聲母 === 'g') 聲母 = 'gw';
   if (聲母 === 'k') 聲母 = 'kw';
   if (聲母 === '') 聲母 = 'w';
@@ -285,25 +281,25 @@ if (is('疑母')) {
           : 'ng';
 } else if (is('影云母')) {
   聲母 = is('模韻') ? 'w'
-    : is('三四等 開口') ? 'j'
-      : is('一二等 開口') ? ''
+    : is('三四等') && is開口 ? 'j'
+      : is('一二等') && is開口 ? ''
         : 韻母.startsWith('yu') ? 'j'
           : 韻母.startsWith('ung') ? ''
             : 'w';
 } else if (is('匣母')) {
   聲母 = is('模韻') ? 'w'
-    : is('開口') ? 'h'
+    : is開口 ? 'h'
       : 韻母.startsWith('yu') ? 'j'
         : 韻母.startsWith('ung') ? ''
           : 'w';
 } else if (is('日以母')) {
-  聲母 = is('三四等 合口') && 韻母.startsWith('a') ? 'w'
+  聲母 = is('三四等') && is合口 && 韻母.startsWith('a') ? 'w'
     : is('三四等') ? 'j'
-      : is('合口') ? 'w'
+      : is合口 ? 'w'
         : '';
 }
 
-if (is('合口') && 聲母 === 'h' && !(韻母.startsWith('eo') || 韻母.startsWith('oe') || 韻母.startsWith('yu'))) {
+if (is合口 && 聲母 === 'h' && !(韻母.startsWith('eo') || 韻母.startsWith('oe') || 韻母.startsWith('yu'))) {
   聲母 = 'f';
 }
 
