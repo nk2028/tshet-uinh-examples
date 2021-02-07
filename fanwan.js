@@ -79,23 +79,28 @@ function 聲母規則() {
 }
 
 function 韻母規則() {
+  // 通攝
   if (is('東冬鍾韻')) return 'ung';
 
+  // 江攝
   if (is('江韻 幫組')) return 'ong';
   if (is('江韻 舌齒音')) return 'oeng';
   if (is('江韻 牙喉音')) return 'ong';
 
+  // 止攝
   if (is('支脂之微韻 幫組')) return 'i';
   if (is('支脂之微韻 開口')) return 'i'; // i 在 z/c/s 前為 ii，詳後
   if (is('支脂之微韻 合口 舌齒音')) return 'eoi';
   if (is('支脂之微韻 合口 牙喉音')) return 'ai';
 
+  // 遇攝
   if (is('魚虞韻 幫組')) return 'u';
   if (is('魚虞韻 莊組')) return 'o';
   if (is('魚虞韻')) return 'yu';
   if (is('模韻 疑母')) return '';
   if (is('模韻')) return 'u';
 
+  // 蟹攝
   if (is('齊韻')) return 'ai';
   if (is('祭韻 幫組')) return 'ai';
   if (is('祭韻 開口')) return 'ai';
@@ -116,6 +121,7 @@ function 韻母規則() {
   if (is('咍韻')) return 'oi';
   if (is('廢韻')) return 'ai';
 
+  // 臻攝
   if (is('眞韻 幫組')) return 'an';
   if (is('眞韻 開口 來母')) return 'eon';
   if (is('眞韻 開口 知組')) return 'an';
@@ -137,6 +143,7 @@ function 韻母規則() {
   if (is('魂韻 牙喉音')) return 'an';
   if (is('痕韻')) return 'an';
 
+  // 山攝
   if (is('寒韻 幫組')) return 'un';
   if (is('寒韻 開口 舌齒音')) return 'aan';
   if (is('寒韻 開口 牙喉音')) return 'on';
@@ -147,33 +154,43 @@ function 韻母規則() {
   if (is('仙先韻 開口')) return 'in';
   if (is('仙先韻 合口')) return 'yun';
 
+  // 效攝
   if (is('蕭宵韻')) return 'iu';
   if (is('肴韻')) return 'aau';
   if (is('豪韻')) return 'u';
 
+  // 果攝
   if (is('歌韻 一等')) return 'o';
   if (is('歌韻 三等')) return 'e';
 
+  // 假攝
   if (is('麻韻 二等')) return 'aa';
   if (is('麻韻 三等')) return 'e';
 
+  // 宕攝
   if (is('陽韻 幫組')) return 'ong';
   if (is('陽韻 開口 莊組')) return 'ong';
   if (is('陽韻 開口')) return 'oeng';
   if (is('陽韻 合口')) return 'ong';
   if (is('唐韻')) return 'ong';
 
+  // 梗攝
   if (is('庚韻 二等')) return 'ang';
   if (is('庚韻 三等')) return 'ing';
   if (is('耕韻')) return 'ang';
   if (is('清青韻')) return 'ing';
+
+  // 曾攝
   if (is('蒸韻')) return 'ing';
   if (is('登韻')) return 'ang';
 
+  // 流攝
   if (is('尤侯幽韻')) return 'au';
 
+  // 深攝
   if (is('侵韻')) return 'am'; // m 韻尾在聲母為脣音時為 n，詳後，下同
 
+  // 咸攝
   if (is('覃韻 舌齒音')) return 'aam';
   if (is('覃韻 牙喉音')) return 'om';
   if (is('談韻 幫組')) return 'aam';
