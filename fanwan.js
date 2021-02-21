@@ -3,7 +3,7 @@
  *
  * 説明
  * 以下內容為生成推導《分韻撮要》音系的函數體
- * 函數接受音韻地位，返回對應的推導《分韻撮要》音系發音
+ * 函數接受音韻地位，返回對應的推導《分韻撮要》音系擬音
  */
 
 const is = (x) => 音韻地位.屬於(x);
@@ -191,11 +191,9 @@ function 韻母規則() {
   if (is('侵韻')) return 'am'; // m 韻尾在聲母為脣音時為 n，詳後，下同
 
   // 咸攝
-  if (is('覃韻 舌齒音')) return 'aam';
-  if (is('覃韻 牙喉音')) return 'om';
-  if (is('談韻 幫組')) return 'aam';
-  if (is('談韻 舌齒音')) return 'aam';
-  if (is('談韻 牙喉音')) return 'om';
+  if (is('覃談韻 幫組')) return 'aam';
+  if (is('覃談韻 舌齒音')) return 'aam';
+  if (is('覃談韻 牙喉音')) return 'om';
   if (is('鹽添嚴韻')) return 'im';
   if (is('咸銜凡韻')) return 'aam';
 
@@ -222,20 +220,20 @@ let 聲母 = 聲母規則();
 let 韻母 = 韻母規則();
 let 聲調 = 聲調規則();
 
-if (is('合口 或 模韻') && !韻母.startsWith('yu')) { // 合口字
-  if (聲母 === 'g') 聲母 = 'gw';
-  else if (聲母 === 'k') 聲母 = 'kw';
-  else if (聲母 === 'h' && !韻母.startsWith('i')) 聲母 = 'f';
-  else if (聲母 === 'j') 聲母 = 'w';
-  else if (聲母 === '') 聲母 = 'w';
-}
-
 // i 在 z/c/s 前為 ii
 if (['z', 'c', 's'].includes(聲母) && 韻母 === 'i') 韻母 = 'ii';
 
 // ng 拼細音時為 nj
 const is細音 = ['eo', 'i', 'oe', 'u', 'yu'].some((x) => 韻母.startsWith(x));
 if (聲母 === 'ng' && is細音) 聲母 = 'nj';
+
+if (is('合口 或 模韻') && !['eo', 'oe', 'yu'].some((x) => 韻母.startsWith(x))) { // 合口字
+  if (聲母 === 'g') 聲母 = 'gw';
+  else if (聲母 === 'k') 聲母 = 'kw';
+  else if (聲母 === 'h' && !韻母.startsWith('i')) 聲母 = 'f';
+  else if (聲母 === 'j') 聲母 = 'w';
+  else if (聲母 === '') 聲母 = 'w';
+}
 
 // m 韻尾在聲母為脣音時為 n
 if (is('幫組') && 韻母.endsWith('m')) 韻母 = 韻母.slice(0, -1) + 'n';
