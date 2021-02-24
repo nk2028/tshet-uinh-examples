@@ -194,7 +194,7 @@ function getGlide() {
 
   // 钝音声母分三 A、B、C
   if (is('重紐B類 或 庚臻韻')) return 'ɹ';
-  if ('抑𡊁'.includes(字頭)) return 'ɹ'; // 蒸韵“抑𡊁”二字归三 B
+  if ('抑𡊁烋'.includes(字頭)) return 'ɹ'; // 蒸韵“抑𡊁”二字、幽韵“烋”字归三 B
   if (is('云母 支脂祭眞臻仙宵麻庚清蒸幽侵鹽韻')) return 'ɹ'; // 云母前元音韵归三 B
   if (is('重紐A類 或 麻蒸清幽韻')) return 'j'; // 三 A
   return 'j̈'; // 三 C
