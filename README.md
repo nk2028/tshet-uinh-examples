@@ -12,10 +12,11 @@ https://cdn.jsdelivr.net/gh/nk2028/qieyun-examples@<commit-sha>/<filename>
 
 Chinese Name | English Name | File
 :- | :- | :-
-古韻羅馬字 | Koxyonh Romanization | `kyonh.js`
+古韻羅馬字 | Koxyonh’s Romanization | `kyonh.js`
 有女羅馬字 | Blankego’s Romanization | `blankego.js`
 白一平轉寫 | Baxter’s Transcription | `baxter.js`
-隋拼 | ? | `zyepheng.js`
+隋拼 | Zyepheng | `zyepheng.js`
+潘悟雲擬音 | Pan Wuyun's Reconstruction | `panwuyun.js`
 unt 切韻朗讀音 | unt’s Reading Pronunciation of Qieyun | `unt.js`
 unt 切韻擬音 J | unt’s Qieyun Reconstruction J | `unt_j.js`
 推導《分韻撮要》音系 | Extrapolated Phonological System of _Fan-Wan Ts'üt-Iú_ | `fanwan.js` |
