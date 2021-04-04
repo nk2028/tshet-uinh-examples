@@ -154,7 +154,8 @@ function getInitial() {
   let result = getInitialWithoutRounding();
   // 音韵学术语开合对应 [±rnd]。如果主要调音部位就是 [LAB]〈帮组〉，那么本文一律视为 [−rnd]
   // 没有开合对立的韵母一般视为开口，但虞韵本文视为鱼韵对应的合口；平行地，钟韵也视为合口
-  if (is('合口 或 虞鍾韻') && !is('幫組')) { // [+rnd]
+  // 𠑆𦑣䎎小韵算合口
+  if (is('合口 或 虞鍾韻 或 知組 嚴凡韻') && !is('幫組')) { // [+rnd]
     result += 'ʷ';
     result = result.replace('ʰʷ', 'ʷʰ');
   } // else [−rnd]
@@ -439,7 +440,7 @@ if (switches.豪覃韵韵核推导为ʌ && !glide && [...'mpw'].includes(coda)) 
 /**
 (11) e͇w〈肴韵〉、βəm〈凡韵〉的韵核实现为圆唇元音
      e͇      -> œ͇ / __w
-   {e, ə} -> œ / [LAB]G__m
+     {e, ə} -> œ / [LAB]G__m
 */
 // 先转换𠑆𦑣䎎小韵，它们属于凡韵
 if (is锐 && initial.includes('ʷ') && [...'mp'].includes(coda)) {
