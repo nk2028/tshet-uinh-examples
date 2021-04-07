@@ -25,6 +25,7 @@ https://cdn.jsdelivr.net/gh/nk2028/qieyun-examples@<commit-sha>/<filename>
 
 **推導後世音系 extrapolated later phonological system**
 
+- 推導《聲音唱和圖》音系 (Extrapolated Phonological System of _Shing-im Chiang-xhua Dhu_): `chiangxhua.js`
 - 推導《分韻撮要》音系 (Extrapolated Phonological System of _Fan-Wan Ts'üt-Iú_): `fanwan.js`
 - 推導普通話 (Extrapolated Putonghua): `putonghua.js`
 - 推導廣州音 (Extrapolated Cantonese): `gwongzau.js`
