@@ -22,6 +22,7 @@ https://cdn.jsdelivr.net/gh/nk2028/qieyun-examples@<commit-sha>/<filename>
 - 潘悟雲擬音 (Pan Wuyun's Reconstruction): `panwuyun.js`
 - unt 切韻朗讀音 (unt’s Reading Pronunciation of Qieyun): `unt.js`
 - unt 切韻擬音 J (unt’s Qieyun Reconstruction J): `unt_j.js`
+- msoeg 中古拟音 V8 (msoeg’s Middle Chinese Reconstruction V8)
 
 **推導後世音系 extrapolated later phonological system**
 
