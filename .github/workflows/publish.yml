@@ -21,7 +21,7 @@ jobs:
       - name: Install Node.js packages
         run: npm ci
       - name: Build
-        run: python build.py
+        run: python build.py > index.js
       - name: Publish
         run: npm publish
         env:
