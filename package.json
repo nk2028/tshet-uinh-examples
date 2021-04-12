@@ -1,0 +1,28 @@
+{
+  "name": "qieyun-examples",
+  "version": "20210412.0.0",
+  "description": "JavaScript code examples to generate the derivatives of the Qieyun phonological system using qieyun-js",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nk2028/qieyun-examples.git"
+  },
+  "keywords": [
+    "historical-linguistics",
+    "middle-chinese",
+    "qieyun"
+  ],
+  "author": "nk2028",
+  "license": "CC0-1.0",
+  "bugs": {
+    "url": "https://github.com/nk2028/qieyun-examples/issues"
+  },
+  "homepage": "https://github.com/nk2028/qieyun-examples#readme",
+  "dependencies": {
+    "qieyun": "^0.12.2"
+  }
+}

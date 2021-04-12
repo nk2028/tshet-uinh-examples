@@ -12,9 +12,9 @@ https://cdn.jsdelivr.net/gh/nk2028/qieyun-examples@<commit-sha>/<filename>
 
 **切韻音系拼音或轉寫 romanization/transcription of the Qieyun phonological system**
 
+- 白一平轉寫 (Baxter’s Transcription): `baxter.js`
 - 有女羅馬字 (Blankego’s Romanization): `blankego.js`
 - 古韻羅馬字 (Koxyonh’s Romanization): `kyonh.js`
-- 白一平轉寫 (Baxter’s Transcription): `baxter.js`
 - 隋拼 (Zyepheng): `zyepheng.js`
 
 **切韻音系擬音 reconstruction of the Qieyun phonological system**
