@@ -1,11 +1,14 @@
 /* 白一平轉寫
  * Baxter, H. William, and Laurent Sagart. Old Chinese: A New Reconstruction. Oxford University Press, 2014.
- * https://github.com/BYVoid/ytenx/blob/master/ytenx/sync/kyonh/PrengQim.txt
  *
  * 説明
  * 以下內容為生成白一平轉寫的函數體
  * 函數接受音韻地位，返回對應的白一平轉寫
  */
+
+const 開關 = {
+  版本: '2014',
+};
 
 const is = (x) => 音韻地位.屬於(x);
 
@@ -20,11 +23,10 @@ const 聲母 = {
   影: "'",   曉: 'x',    匣: 'h',                                          云: 'h',
 }[音韻地位.母];
 
-let { 韻, 等 } = 音韻地位;
-const 韻與等 = 韻 + ([...'東歌麻庚'].includes(韻) ? 等 : '');
+const 含多個等的韻 = '東歌麻庚';
 
 let 韻母 = {
-  // 一等
+  // 一等韻
   東一: 'uwng',
   冬: 'owng',
   模: 'u',
@@ -95,10 +97,10 @@ let 韻母 = {
   鹽: 'jem',
   嚴: 'jaem',
   凡: 'jom',
-}[韻與等];
+}[音韻地位.韻 + ([...含多個等的韻].includes(音韻地位.韻) ? 音韻地位.等 : '')];
 
 if (is('章組 或 日以母') && 韻母.startsWith('j')) {
-  韻母 = 韻母.slice(1);
+  韻母 = 韻母.slice(1); // 章組或日以母只與三等韻相拼，省去韻母起始的 j
 }
 
 if (is('重紐A類')) {
