@@ -1,5 +1,6 @@
 /* 白一平轉寫
- * Baxter, H. William, and Laurent Sagart. Old Chinese: A New Reconstruction. Oxford University Press, 2014.
+ * Baxter, W. H. (1992). A Handbook of Old Chinese Phonology. De Gruyter Mouton.
+ * Baxter, W. H., & Sagart, L. (2014). Old Chinese: A New Reconstruction. Oxford University Press.
  *
  * 説明
  * 以下內容為生成白一平轉寫的函數體
@@ -7,12 +8,15 @@
  */
 
 const 開關 = {
+  // 版本可選 '1992' 或 '2014'，預設值為 '2014'
   版本: '2014',
 };
 
 const is = (x) => 音韻地位.屬於(x);
 
-const 聲母 = {
+const 含多個等的韻 = '東歌麻庚';
+
+let 聲母 = {
   幫: 'p',   滂: 'ph',   並: 'b',   明: 'm',
   端: 't',   透: 'th',   定: 'd',   泥: 'n',  來: 'l',
   知: 'tr',  徹: 'trh',  澄: 'dr',  孃: 'nr',
@@ -23,7 +27,9 @@ const 聲母 = {
   影: "'",   曉: 'x',    匣: 'h',                                          云: 'h',
 }[音韻地位.母];
 
-const 含多個等的韻 = '東歌麻庚';
+if (開關.版本 === '1992' && 聲母 === "'") {
+  聲母 = 'ʔ';
+}
 
 let 韻母 = {
   // 一等韻
@@ -99,15 +105,23 @@ let 韻母 = {
   凡: 'jom',
 }[音韻地位.韻 + ([...含多個等的韻].includes(音韻地位.韻) ? 音韻地位.等 : '')];
 
-if (is('章組 或 日以母') && 韻母.startsWith('j')) {
-  韻母 = 韻母.slice(1); // 章組或日以母只與三等韻相拼，省去韻母起始的 j
+if (開關.版本 === '1992') {
+  if (韻母 === 'ea') 韻母 = 'ɛɨ';
+  韻母 = 韻母.replace('+', 'ɨ').replace('ae', 'æ').replace('ea', 'ɛ');
 }
 
+// 章組或日以母只與三等韻相拼，省去韻母起始的 j
+if (is('章組 或 日以母') && 韻母.startsWith('j')) {
+  韻母 = 韻母.slice(1);
+}
+
+// 重紐 A 類添加 j 或 i
 if (is('重紐A類')) {
   if (韻母.startsWith('j')) 韻母 = 'ji' + 韻母.slice(1);
   else 韻母 = 'j' + 韻母;
 }
 
+// 合口字添加 w
 if (is('合口 或 灰魂韻') && !is('文凡韻')) {
   if (韻母.startsWith('j')) 韻母 = 'jw' + 韻母.slice(1);
   else 韻母 = 'w' + 韻母;
