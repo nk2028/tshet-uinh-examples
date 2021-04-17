@@ -138,13 +138,7 @@ function 韻母規則() {
 
   // 臻攝
   if (is('眞韻 幫組')) return 'an';
-  if (is('眞韻 開口 來母')) return 'eon';
-  if (is('眞韻 開口 知組')) return 'an';
-  if (is('眞韻 開口 精組')) return 'eon';
-  if (is('眞韻 開口 莊組')) return 'an';
-  if (is('眞韻 開口 章組')) return 'an';
-  if (is('眞韻 開口 日母')) return 'an';
-  if (is('眞韻 開口 牙喉音')) return 'an';
+  if (is('眞韻 開口')) return 'an';
   if (is('眞韻 合口 舌齒音')) return 'eon';
   if (is('眞韻 合口 牙喉音')) return 'an';
   if (is('臻文欣韻')) return 'an';
