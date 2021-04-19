@@ -187,6 +187,7 @@ function 韻母規則() {
 
   // 梗攝
   if (is('庚韻 二等')) return 'ang';
+  if (is('庚韻 三等 莊組')) return 'ang';
   if (is('庚韻 三等')) return 'ing';
   if (is('耕韻')) return 'ang';
   if (is('清青韻')) return 'ing';
