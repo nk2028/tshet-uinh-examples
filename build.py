@@ -22,14 +22,11 @@ def handle_file(filename):
         print(' * @return {string} 音韻地位對應的' + name)
         print(' */')
         print('export function ' + filename + '(音韻地位, 字頭) {')
-        for line in code.split('\n'):
-            if line:
-                line = '  ' + line
-            print(line)
+        print(code)
         print('}')
         print()
 
 with open('README.md') as f:
-    for match in re.finditer(r'`(.+)\.js`', f.read()):
+    for match in re.finditer(r'`([a-z0-9_]+)\.js`', f.read()):
         filename = match[1]
         handle_file(filename)
