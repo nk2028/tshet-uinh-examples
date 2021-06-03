@@ -1,9 +1,6 @@
 /* 古韻羅馬字
- * https://zh.wikipedia.org/wiki/User:Polyhedron/中古漢語拼音
  *
- * 説明
- * 以下內容為生成古韻羅馬字的函數體
- * 函數接受音韻地位，返回對應的古韻羅馬字
+ * https://zh.wikipedia.org/wiki/User:Polyhedron/中古漢語拼音
  */
 
 const is = (x) => 音韻地位.屬於(x);

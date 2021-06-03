@@ -1,9 +1,6 @@
 /* 推導廣州音
- * https://ayaka.shn.hk/teoi/
  *
- * 説明
- * 以下內容為生成推導廣州音的函數體
- * 函數接受音韻地位，返回對應的推導廣州音
+ * https://ayaka.shn.hk/teoi/
  */
 
 const is = (x) => 音韻地位.屬於(x);

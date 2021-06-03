@@ -1,9 +1,6 @@
 /* 推導《分韻撮要》擬音
- * https://ayaka.shn.hk/fanwan/
  *
- * 説明
- * 以下內容為生成推導《分韻撮要》擬音的函數體
- * 函數接受音韻地位，返回對應的推導《分韻撮要》擬音
+ * https://ayaka.shn.hk/fanwan/
  */
 
 const is = (x) => 音韻地位.屬於(x);

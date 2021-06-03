@@ -1,10 +1,8 @@
 /* unt 切韵拟音 J
- * 音系规则和代码实现 - https://zhuanlan.zhihu.com/p/305516512
- * 语音描写和拟音说明 - https://zhuanlan.zhihu.com/p/313005024
  *
- * 帮助
- * 以下内容为生成 unt 切韵拟音 J 的函数体
- * 函数接受音韵地位，返回对应的 unt 切韵拟音 J
+ * - 音系规则和代码实现 - https://zhuanlan.zhihu.com/p/305516512
+ * - 语音描写和拟音说明 - https://zhuanlan.zhihu.com/p/313005024
+ *
  * J 为拟音的版本号
  *
  * 之前的 unt 切韵朗读音推导方案已归档，请查看 https://github.com/nk2028/qieyun-examples/blob/main/unt.js

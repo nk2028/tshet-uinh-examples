@@ -1,10 +1,7 @@
 /* 白一平轉寫
- * Baxter, W. H. (1992). A Handbook of Old Chinese Phonology. De Gruyter Mouton.
- * Baxter, W. H., & Sagart, L. (2014). Old Chinese: A New Reconstruction. Oxford University Press.
  *
- * 説明
- * 以下內容為生成白一平轉寫的函數體
- * 函數接受音韻地位，返回對應的白一平轉寫
+ * - Baxter, W. H. (1992). A Handbook of Old Chinese Phonology. De Gruyter Mouton.
+ * - Baxter, W. H., & Sagart, L. (2014). Old Chinese: A New Reconstruction. Oxford University Press.
  */
 
 if (!音韻地位) return {

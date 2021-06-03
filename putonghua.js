@@ -1,10 +1,6 @@
 /* 推導普通話
- * https://github.com/BYVoid/ytenx/blob/master/ytenx/sync/kyonh/Dauh.txt
  *
- * 説明
- * 以下內容為生成推導普通話的函數體
- * 函數接受音韻地位，返回對應的推導普通話音
- * 部分音資料暫缺，以問號表示
+ * https://github.com/BYVoid/ytenx/blob/master/ytenx/sync/kyonh/Dauh.txt
  */
 
 return {
