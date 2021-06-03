@@ -17,7 +17,6 @@ def handle_file(filename):
         print('/**')
         print(' * ' + name)
         print(comment)
-        print(' *')
         print(' * @param {Qieyun.音韻地位} 音韻地位 切韻音系音韻地位')
         print(' * @param {string} 字頭 字頭')
         print(' * @param {Object} 選項 選項')

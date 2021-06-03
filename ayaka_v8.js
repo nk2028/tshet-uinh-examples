@@ -1,6 +1,8 @@
 /* 綾香思考音系
  *
  * https://ayaka.shn.hk/v8/
+ *
+ * @author Ayaka
  */
 
 // 1. 選項

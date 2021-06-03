@@ -1,6 +1,8 @@
 /* 推導《分韻撮要》擬音
  *
  * https://ayaka.shn.hk/fanwan/
+ *
+ * @author Ayaka
  */
 
 const is = (x) => 音韻地位.屬於(x);

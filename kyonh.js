@@ -1,6 +1,8 @@
 /* 古韻羅馬字
  *
  * https://zh.wikipedia.org/wiki/User:Polyhedron/中古漢語拼音
+ *
+ * @author Ayaka
  */
 
 const is = (x) => 音韻地位.屬於(x);

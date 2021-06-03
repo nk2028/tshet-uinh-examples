@@ -1,6 +1,8 @@
 /* 推導廣州音
  *
  * https://ayaka.shn.hk/teoi/
+ *
+ * @author Ayaka
  */
 
 const is = (x) => 音韻地位.屬於(x);

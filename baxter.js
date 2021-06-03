@@ -2,6 +2,8 @@
  *
  * - Baxter, W. H. (1992). A Handbook of Old Chinese Phonology. De Gruyter Mouton.
  * - Baxter, W. H., & Sagart, L. (2014). Old Chinese: A New Reconstruction. Oxford University Press.
+ *
+ * @author Ayaka
  */
 
 if (!音韻地位) return {

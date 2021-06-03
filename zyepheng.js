@@ -1,6 +1,8 @@
 /* 隋拼
  *
  * https://github.com/Magnezone462/Zyevio
+ *
+ * @author N/A
  */
 
 return {

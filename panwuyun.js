@@ -1,4 +1,6 @@
 /* 潘悟雲擬音
+ *
+ * @author N/A
  */
 
 return {

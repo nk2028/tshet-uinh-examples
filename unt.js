@@ -1,6 +1,8 @@
 /* unt 切韻朗讀音
  *
  * https://zhuanlan.zhihu.com/p/58227457
+ *
+ * @author Ayaka
  */
 
 const is = (x) => 音韻地位.屬於(x);

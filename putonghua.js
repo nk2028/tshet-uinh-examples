@@ -1,6 +1,8 @@
 /* 推導普通話
  *
  * https://github.com/BYVoid/ytenx/blob/master/ytenx/sync/kyonh/Dauh.txt
+ *
+ * @author N/A
  */
 
 return {

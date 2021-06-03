@@ -1,6 +1,8 @@
 /* msoeg 中古拟音 V8
  *
  * https://zhuanlan.zhihu.com/p/145409852
+ *
+ * @author N/A
  */
 
 return {
