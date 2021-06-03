@@ -10,7 +10,7 @@
  * 之前的 unt 切韵朗读音推导方案已归档，请查看 https://github.com/nk2028/qieyun-examples/blob/main/unt.js
  */
 
-const is = (x) => 音韻地位.屬於(x.replace(/　/g,''));
+const is = (x) => 音韻地位.屬於(x.replace(/　/g, ''));
 
 /** 目录
 
