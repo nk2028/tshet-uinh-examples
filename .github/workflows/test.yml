@@ -1,11 +1,13 @@
-name: Publish
+name: Test
 
 on:
-  release:
-    types: [created]
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
 
 jobs:
-  publish-npm:
+  test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -18,7 +20,5 @@ jobs:
         run: npm ci
       - name: Build
         run: python build.py > index.js
-      - name: Publish
-        run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
+      - name: Test
+        run: npm test
