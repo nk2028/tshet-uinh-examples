@@ -40,7 +40,7 @@ function perform(input, 音韻地位, 字頭, 選項) {
  * @return {{音韻地位: Qieyun.音韻地位, 解釋: string, 擬音: string | string[]}[]} 音韻地位、解釋、音韻地位對應的擬音或擬音陣列
  */
 export function from字頭(schema, 字頭, 選項) {
-  Qieyun.query字頭(字頭).map(result => ({
+  return Qieyun.query字頭(字頭).map(result => ({
     ...result,
     擬音: schema.map
       ? schema.map(schema => perform(schemas[schema], result.音韻地位, result.字頭, 選項))
