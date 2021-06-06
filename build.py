@@ -9,7 +9,8 @@ function perform(input, 音韻地位, 字頭, 選項) {
   字頭 = typeof 字頭 === 'string' ? 字頭 : null;
   選項 = typeof 選項 === 'object' ? 選項 : {};
   try {
-    Object.keys(input(null, null, null)).forEach((key, value) => {
+    const 選項模板 = input(null, null, null);
+    選項模板.forEach(([key, value]) => {
       if (Array.isArray(value)) {
         if (!(選項 && key in 選項 && value.slice(1).includes(選項[key])))
           選項[key] =
