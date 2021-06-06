@@ -34,16 +34,10 @@ function perform(input, 音韻地位, 字頭, 選項) {
 
 /**
  * 查詢字頭的擬音。
- * @param {string} schema 推導方案
+ * @param {string | string[]} schema 推導方案或推導方案陣列
  * @param {string} 字頭 要查詢的字頭
  * @param {Object=} 選項 選項（可選）
- * @return {{音韻地位: Qieyun.音韻地位, 解釋: string, 擬音: string}[]} 音韻地位、解釋、音韻地位對應的擬音
- *//**
- * 查詢字頭的擬音。
- * @param {string[]} schema 推導方案陣列
- * @param {string} 字頭 要查詢的字頭
- * @param {Object=} 選項 選項（可選）
- * @return {{音韻地位: Qieyun.音韻地位, 解釋: string, 擬音: string[]}[]} 音韻地位、解釋、音韻地位對應的擬音陣列
+ * @return {{音韻地位: Qieyun.音韻地位, 解釋: string, 擬音: string | string[]}[]} 音韻地位、解釋、音韻地位對應的擬音或擬音陣列
  */
 export function from字頭(schema, 字頭, 選項) {
   Qieyun.query字頭(字頭).map(result => ({
