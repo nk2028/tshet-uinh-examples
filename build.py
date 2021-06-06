@@ -37,11 +37,19 @@ function perform(input, 音韻地位, 字頭, 選項) {
  * @param {string} 字頭 要查詢的字頭
  * @param {Object=} 選項 選項（可選）
  * @return {{音韻地位: Qieyun.音韻地位, 解釋: string, 擬音: string}[]} 音韻地位、解釋、音韻地位對應的擬音
+ *//**
+ * 查詢字頭的擬音。
+ * @param {string[]} schema 推導方案陣列
+ * @param {string} 字頭 要查詢的字頭
+ * @param {Object=} 選項 選項（可選）
+ * @return {{音韻地位: Qieyun.音韻地位, 解釋: string, 擬音: string[]}[]} 音韻地位、解釋、音韻地位對應的擬音陣列
  */
 export function from字頭(schema, 字頭, 選項) {
   Qieyun.query字頭(字頭).map(result => ({
     ...result,
-    擬音: perform(schemas[schema], 音韻地位, 字頭, 選項)
+    擬音: schema.map
+      ? schema.map(schema => perform(schemas[schema], result.音韻地位, result.字頭, 選項))
+      : perform(schemas[schema], result.音韻地位, result.字頭, 選項),
   }));
 }
 ''')
@@ -58,7 +66,7 @@ def handle_file(filename):
         code = code.strip()
 
         print(f'schemas.{filename} = function (音韻地位, 字頭, 選項) {{')
-        print('  ' + code.replace('\n', '  \n'))
+        print('  ' + code.replace('\n', '\n  '))
         print(f'}};')
         print()
         print('/**')
