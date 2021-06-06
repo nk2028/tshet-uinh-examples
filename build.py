@@ -66,7 +66,7 @@ def handle_file(filename):
         code = code.strip()
 
         print(f'schemas.{filename} = function (音韻地位, 字頭, 選項) {{')
-        print('  ' + code.replace('\n', '\n  '))
+        print('  ' + code)
         print(f'}};')
         print()
         print('/**')
