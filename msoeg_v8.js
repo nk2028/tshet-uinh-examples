@@ -1,9 +1,8 @@
 /* msoeg 中古拟音 V8
+ *
  * https://zhuanlan.zhihu.com/p/145409852
  *
- * 説明
- * 以下內容為生成 msoeg 中古拟音 V8 的函數體
- * 函數接受音韻地位，返回對應的 msoeg 中古拟音 V8
+ * @author N/A
  */
 
 return {

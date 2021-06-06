@@ -1,9 +1,8 @@
 /* unt 切韻朗讀音
+ *
  * https://zhuanlan.zhihu.com/p/58227457
  *
- * 説明
- * 以下內容為生成 unt 切韻朗讀音的函數體
- * 函數接受音韻地位，返回對應的 unt 切韻朗讀音
+ * @author Ayaka
  */
 
 const is = (x) => 音韻地位.屬於(x);

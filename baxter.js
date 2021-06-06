@@ -1,16 +1,15 @@
 /* 白一平轉寫
- * Baxter, W. H. (1992). A Handbook of Old Chinese Phonology. De Gruyter Mouton.
- * Baxter, W. H., & Sagart, L. (2014). Old Chinese: A New Reconstruction. Oxford University Press.
  *
- * 説明
- * 以下內容為生成白一平轉寫的函數體
- * 函數接受音韻地位，返回對應的白一平轉寫
+ * - Baxter, W. H. (1992). A Handbook of Old Chinese Phonology. De Gruyter Mouton.
+ * - Baxter, W. H., & Sagart, L. (2014). Old Chinese: A New Reconstruction. Oxford University Press.
+ *
+ * @author Ayaka
  */
 
-const 開關 = {
+if (!音韻地位) return [
   // 版本可選 '1992' 或 '2014'，預設值為 '2014'
-  版本: '2014',
-};
+  ['版本', [2, '1992', '2014']],
+];
 
 const is = (x) => 音韻地位.屬於(x);
 
@@ -25,7 +24,7 @@ let 聲母 = {
   影: "'",   曉: 'x',    匣: 'h',                                          云: 'h',
 }[音韻地位.母];
 
-if (開關.版本 === '1992' && 聲母 === "'") {
+if (選項.版本 === '1992' && 聲母 === "'") {
   聲母 = 'ʔ';
 }
 
@@ -108,7 +107,7 @@ if (is('東歌麻庚韻 三等')) {
   韻母 = 'j' + 韻母;
 }
 
-if (開關.版本 === '1992') {
+if (選項.版本 === '1992') {
   if (韻母 === 'ea') 韻母 = 'ɛɨ';
   韻母 = 韻母.replace('+', 'ɨ').replace('ae', 'æ').replace('ea', 'ɛ');
 }

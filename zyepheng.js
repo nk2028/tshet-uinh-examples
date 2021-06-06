@@ -1,9 +1,8 @@
 /* 隋拼
+ *
  * https://github.com/Magnezone462/Zyevio
  *
- * 説明
- * 以下內容為生成隋拼的函數體
- * 函數接受音韻地位，返回對應的隋拼
+ * @author N/A
  */
 
 return {
