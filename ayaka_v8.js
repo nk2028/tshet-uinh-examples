@@ -20,14 +20,20 @@ if (!音韻地位) return [
   ['ヰヱヲ小假名', true],
 
   // null: 宙 チウ tiu；南 ダム dam；愁 スウ suu
-  // '日語': 宙 チュウ tyuu；南 ダン dan；愁 スウ suu
-  // '綾香': 宙 チュウ tyuu；南 ダム dam；愁 ス su
-  ['音變', [3, null, '日語', '綾香']],
+  // '現代日語': 宙 チュウ tyuu；南 ダン dan；愁 スウ suu
+  ['音變', [1, null, '現代日語']],
 
   // null: 無聲調
-  // '漢音八聲': 八聲家的聲調
-  // '綾香': 綾香的聲調
-  ['聲調', [3, null, '漢音八聲', '綾香']],
+  // '四聲': 四聲
+  // '四聲（數字）': 四聲，以數字方式展示
+  // '四聲（調值）': 四聲，以調值方式展示
+  // '六聲（調值）': 六聲，以調值方式展示
+  // '六聲（符號）': 六聲，以符號方式展示
+  // '八聲': 八聲
+  // '八聲（數字）': 八聲，以數字方式展示
+  // '八聲（調值）': 八聲，以調值方式展示
+  // 參考：尉遲治平. 日本悉曇家所傳古漢語調值.
+  ['聲調', [1, null, '四聲', '四聲（數字）', '四聲（調值）', '六聲（調值）', '六聲（符號）', '八聲', '八聲（數字）', '八聲（調值）']],
 ];
 
 // 2. 輔助函數
@@ -292,40 +298,8 @@ function 韻母規則() {
   throw new Error('無韻母規則');
 }
 
-function 聲調規則() {
-  if (選項.聲調 === '漢音八聲') {
-    if (!is('全濁')) {
-      if (is('平聲')) return '꜀';
-      if (is('上聲')) return '꜂';
-      if (is('去聲')) return '꜄';
-      if (is('入聲')) return '꜆';
-    } else {
-      if (is('平聲')) return '꜁';
-      if (is('上聲')) return '꜃';
-      if (is('去聲')) return '꜅';
-      if (is('入聲')) return '꜇';
-    }
-    throw new Error('無聲調規則');
-  } else if (選項.聲調 === '綾香') {
-    if (is('全清 或 次清')) {
-      if (is('平聲')) return 'ˉ';
-      if (is('上聲')) return 'ˊ';
-      if (is('去聲')) return 'ˋ';
-      if (is('入聲')) return is('通梗曾深攝 或 眞臻文欣痕韻 或 魂韻 牙喉音') ? 'ˉ' : 'ˇ';
-    } else {
-      if (is('平聲')) return 'ˇ';
-      if (is('上聲')) return is('全濁') ? 'ˇ' : 'ˊ';
-      if (is('去聲')) return 'ˇ';
-      if (is('入聲')) return 'ˇ';
-    }
-    throw new Error('無聲調規則');
-  }
-  return '';
-}
-
 let 聲母 = 聲母規則();
 let 韻母 = 韻母規則();
-let 聲調 = 聲調規則();
 
 if (is('入聲')) {
   if (韻母.endsWith('m')) 韻母 = 韻母.slice(0, -1) + 'p';
@@ -333,29 +307,79 @@ if (is('入聲')) {
   else if (韻母.endsWith('ng')) 韻母 = 韻母.slice(0, -2) + 'k';
 }
 
+function 聲調規則() {
+  if (['四聲', '四聲（數字）', '四聲（調值）'].includes(選項.聲調)) {
+    const idx = ['四聲', '四聲（數字）', '四聲（調值）'].indexOf(選項.聲調);
+    if (is('平聲')) return ['꜀', '1', '11'][idx];
+    if (is('上聲')) return ['꜂', '2', '55'][idx];
+    if (is('去聲')) return ['꜄', '3', '15'][idx];
+    if (is('入聲')) return ['꜆', '4', '1'][idx];
+    throw new Error('無聲調規則');
+  }
+
+  if (選項.聲調 === '六聲（調值）') {
+    if (is('平聲 全濁')) return '11';
+    if (is('平聲')) return '51';
+    if (is('上去聲 全濁')) return '15';
+    if (is('上去聲')) return '55';
+    if (is('入聲 全濁')) return '1';
+    if (is('入聲')) return '5';
+    throw new Error('無聲調規則');
+  }
+
+  if (選項.聲調 === '六聲（符號）') {
+    if (is('平聲 全濁')) return 'z';
+    if (is('平聲')) return '';
+    if (is('上去聲 全濁')) return 'h';
+    if (is('上去聲')) return 'x';
+    if (is('入聲 全濁')) {
+      if (韻母.endsWith('p')) 韻母 = 韻母.slice(0, -1) + 'b';
+      else if (韻母.endsWith('t')) 韻母 = 韻母.slice(0, -1) + 'd';
+      else if (韻母.endsWith('k')) 韻母 = 韻母.slice(0, -1) + 'g';
+
+      return '';
+    }
+    if (is('入聲')) return '';
+    throw new Error('無聲調規則');
+  }
+
+  if (['八聲', '八聲（數字）', '八聲（調值）'].includes(選項.聲調)) {
+    const idx = ['八聲', '八聲（數字）', '八聲（調值）'].indexOf(選項.聲調);
+    if (!is('全濁')) {
+      if (is('平聲')) return ['꜀', '1', '51'][idx];
+      if (is('上聲')) return ['꜂', '2', '55'][idx];
+      if (is('去聲')) return ['꜄', '3', '535'][idx];
+      if (is('入聲')) return ['꜆', '4', '5'][idx];
+    } else {
+      if (is('平聲')) return ['꜁', '5', '11'][idx];
+      if (is('上聲')) return ['꜃', '6', '15'][idx];
+      if (is('去聲')) return ['꜅', '7', '315'][idx];
+      if (is('入聲')) return ['꜇', '8', '1'][idx];
+    }
+    throw new Error('無聲調規則');
+  }
+
+  return '';
+}
+
+let 聲調 = 聲調規則();
+
 if (韻母.startsWith('w') && (!is('牙喉音') || is('重紐A類 或 以母'))) 韻母 = 韻母.slice(1);
 
 // 4. 音變規則
 
-if (選項.音變 === '日語') {
+if (選項.音變 === '現代日語') {
   if (韻母.startsWith('w')) 韻母 = 韻母.slice(1); // 園 wen -> en
 
   if (韻母.endsWith('p')) 韻母 = 韻母.slice(0, -1) + 'u'; // 鄴 gep -> geu
   else if (韻母.endsWith('m')) 韻母 = 韻母.slice(0, -1) + 'n'; // 南 dam -> dan
   else if (韻母.endsWith('eng')) 韻母 = 韻母.slice(0, -2) + 'i'; // 生 seng -> sei
   else if (韻母.endsWith('ng')) 韻母 = 韻母.slice(0, -2) + 'u'; // 相 syang -> syau
-}
 
-if (['日語', '綾香'].includes(選項.音變)) {
   if (韻母.endsWith('au')) 韻母 = 韻母.slice(0, -2) + 'ou'; // 高 kau -> kou
   else if (韻母.endsWith('iu')) 韻母 = 韻母.slice(0, -2) + 'yuu'; // 宙 tiu -> tyuu
   else if (韻母.endsWith('eu')) 韻母 = 韻母.slice(0, -2) + 'you'; // 遙 eu -> you
   else if (韻母.endsWith('ang')) 韻母 = 韻母.slice(0, -3) + 'ong'; // 相 syang -> syong
-}
-
-if (選項.音變 === '綾香') {
-  if (韻母 === 'uu') 韻母 = 韻母.slice(0, -1); // 愁 suu -> su
-  else if (韻母.endsWith('yung')) 韻母 = 韻母.slice(0, -1); // 窮 kyung -> kyun
 }
 
 let 聲韻;
@@ -365,27 +389,16 @@ if (['平假名', '片假名'].includes(選項.書寫系統)) {
   if (!選項.ヰヱヲ小假名) 聲韻 = small2large(聲韻);
   if (選項.書寫系統 === '平假名') 聲韻 = kata2hira(聲韻);
 } else {
-  if (['日語', '綾香'].includes(選項.音變)) {
+  if (選項.音變 === '現代日語') {
     if (聲母 === 'p') 聲母 = 'h'; // 甫 pu -> hu
-  }
 
-  if (選項.音變 === '日語') {
     if (韻母.endsWith('t')) 韻母 = 韻母 + 'u'; // 遏 at -> atu
     else if (韻母.endsWith('ek')) 韻母 = 韻母 + 'i'; // 席 sek -> seki
     else if (韻母.endsWith('k')) 韻母 = 韻母 + 'u'; // 澤 tak -> taku
   }
 
-  if (選項.音變 === '綾香') {
-    if (聲母 === 'r') 聲母 = 'l'; // 籟 rai -> lai
-    if (韻母.endsWith('t')) 韻母 = 韻母.slice(0, -1) + 's'; // 遏 at -> as
-    else if (韻母.endsWith('p')) 韻母 = 韻母.slice(0, -1) + 'f'; // 鄴 gep -> gef
-
-    if (韻母.endsWith('eng')) 韻母 = 韻母.slice(0, -3) + 'ein'; // 傾 keng -> kein
-    else if (韻母.endsWith('ong')) 韻母 = 韻母.slice(0, -3) + 'oun'; // 同 tong -> toun
-  }
-
   if (選項.書寫系統 === '平文式羅馬字') {
-    if (['日語', '綾香'].includes(選項.音變)) {
+    if (選項.音變 === '現代日語') {
       if (聲母 === 's' && 韻母.startsWith('i')) 聲母 = 'sh'; // 四 si -> shi
       else if (聲母 === 'z' && 韻母.startsWith('i')) 聲母 = 'j'; // 人 zin -> jin
       else if (聲母 === 't' && 韻母.startsWith('i')) 聲母 = 'ch'; // 地 ti -> chi
@@ -394,9 +407,7 @@ if (['平假名', '片假名'].includes(選項.書寫系統)) {
       else if (聲母 === 's' && 韻母.startsWith('y')) { 聲母 = 'sh'; 韻母 = 韻母.slice(1); } // 小 syou -> shou
       else if (聲母 === 'z' && 韻母.startsWith('y')) { 聲母 = 'j'; 韻母 = 韻母.slice(1); } // 繞 zyou -> jou
       else if (聲母 === 't' && 韻母.startsWith('y')) { 聲母 = 'ch'; 韻母 = 韻母.slice(1); } // 兆 tyou -> chou
-    }
 
-    if (選項.音變 === '日語') {
       if (聲母 === 'd' && 韻母.startsWith('i')) 聲母 = 'j'; // 膩 di -> ji
       else if (聲母 === 'd' && 韻母.startsWith('y')) { 聲母 = 'j'; 韻母 = 韻母.slice(1); } // 紐 dyuu -> juu
 
