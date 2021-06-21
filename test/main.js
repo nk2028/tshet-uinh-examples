@@ -36,4 +36,4 @@ assert_equal(chiangxhua(音韻地位), "ʂɉɐ́w \n[ʂj̈ɐ́w]");
 assert_equal(fanwan(音韻地位), "shiu2");
 assert_equal(putonghua(音韻地位), "shao3");
 assert_equal(gwongzau(音韻地位), "siu2");
-assert_equal(ayaka_v8(音韻地位), "syouˊ");
+assert_equal(ayaka_v8(音韻地位), "seu");
