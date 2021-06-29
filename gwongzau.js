@@ -38,7 +38,7 @@ function 聲母規則() {
   if (is('清母')) return 'c';
   if (is('從母')) return is('平聲') ? 'c' : 'z';
   if (is('心母')) return 's';
-  if (is('邪母')) return is('平聲') ? 'c' : is('合口')　? 's' : 'z';
+  if (is('邪母')) return is('平聲') ? 'c' : is('合口') ? 's' : 'z';
 
   if (is('莊母')) return 'z';
   if (is('初母')) return 'c';
