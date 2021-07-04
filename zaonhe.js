@@ -498,12 +498,12 @@ function 顎化規則(音節) {
 }
 
 function 主流層選擇規則(音們) {
-  let 音們_主流度們 = [];
+  let 音們_非主流度們 = [];
   音們.forEach((音) => {
-    音們_主流度們.push({ '音': 音, '主流度': (音.match(/▽/g) || []).length });
+    音們_非主流度們.push({ '音': 音, '非主流度': (音.match(/▽/g) || []).length });
   });
-  return 音們_主流度們.reduce(function (prev, curr) {
-    return prev.主流度 < curr.主流度 ? prev : curr;
+  return 音們_非主流度們.reduce(function (prev, curr) {
+    return prev.非主流度 < curr.非主流度 ? prev : curr;
   }).音;
 }
 
