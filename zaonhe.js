@@ -549,11 +549,11 @@ function finalise(音節) {
   return 音節;
 }
 
-let 文讀聲母 = 聲母規則(文讀 = true);
-let 白讀聲母 = 聲母規則(文讀 = false);
+let 文讀聲母 = 聲母規則(true);
+let 白讀聲母 = 聲母規則(false);
 
-let 文讀韻母 = 韻母規則(文讀 = true);
-let 白讀韻母 = 韻母規則(文讀 = false);
+let 文讀韻母 = 韻母規則(true);
+let 白讀韻母 = 韻母規則(false);
 
 let 文讀音 = 文讀聲母 + 文讀韻母;
 let 白讀音 = 白讀聲母 + 白讀韻母;
