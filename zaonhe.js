@@ -1,5 +1,5 @@
 /* 
- * 推導中派上海閑話
+ * 推導上海話
  *
  * https://zhuanlan.zhihu.com/p/386456940
  *
