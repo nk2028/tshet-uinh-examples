@@ -543,7 +543,7 @@ function 聲調規則(音節) {
 }
 
 function finalise(音節) {
-  音節 = 音節.replaceAll('▽', '');
+  音節 = 音節.replace(/▽/g, '');
   音節 = 顎化規則(音節);
   音節 = 聲調規則(音節);
   return 音節;
