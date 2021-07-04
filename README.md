@@ -30,6 +30,7 @@ https://cdn.jsdelivr.net/gh/nk2028/qieyun-examples@<commit-sha>/<filename>
 - 推導《分韻撮要》擬音 (Extrapolated Reconstruction of _Fan-Wan Ts'üt-Iú_): `fanwan.js`
 - 推導普通話 (Extrapolated Putonghua): `putonghua.js`
 - 推導廣州音 (Extrapolated Cantonese): `gwongzau.js`
+- 推導上海話 (Extrapolated Shanghaiese): `zaonhe.js`
 
 **人造音系 artificial phonological system**
 
