@@ -43,6 +43,7 @@ const 元音Re = new RegExp("[" + 元音 + "]");
 const 閉前元音 = 'iy';
 const 元音附標 = '̃̈';
 const 顎化分尖團 = {
+  'n': 'ɲ',
   'k': 'tɕ',
   'tsʰ': 'tɕʰ',
   'h': 'ɕ',
@@ -429,7 +430,7 @@ function 韻母規則(文讀) {
   if (is('幽韻 脣音')) return 'iɔ';
   if (is('幽韻 舌齒音 精組')) return 'iɤ';
   if (is('幽韻 舌齒音 泥來孃母')) return 'iɤ';
-  if (is('尤侯韻 尤韻 舌齒音 日母')) return 文讀 ? 'ɤ' : 'iɤ▽';
+  if (is('幽韻 尤韻 舌齒音 日母')) return 文讀 ? 'ɤ' : 'iɤ▽';
   if (is('幽韻 舌齒音')) return 'ɤ';
   if (is('幽韻 牙喉音')) return 'iɤ';
 
