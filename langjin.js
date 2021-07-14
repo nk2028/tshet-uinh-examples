@@ -20,7 +20,7 @@ function 聲母規則() {
   if (is('端母')) return is('二等') ? 'z' : 'd';
   if (is('透母')) return 't';
   if (is('定母')) {
-    if (is('二等 平聲')) return 'ch';//“窀”
+    if (is('二等')) return 'ch';//“窀”
     return is('平聲') ? 't' : 'd';//平送氣仄不送氣
   }
   if (is('泥來孃母')) return 'l';
@@ -55,11 +55,10 @@ function 聲母規則() {
   if (is('章母')) return is('清韻 合口') ? 'z' : 'zh';//僅“𦳮”平舌
   if (is('昌母')) return 'ch';
   if (is('常母')) {
-     if(is('之脂韻 平聲')) return 'sh'; 
-     return is('鍾韻 上聲 或 平聲 或 一等') ? 'ch' : 'sh';
+    if (is('曾攝 入聲')) return 'zh';
+    return is('平聲 或 一等') ? 'ch' : 'sh';
   }
-  if (is('書母')) return is('鍾韻 平聲') ? 'ch' : 'sh';
-  if (is('船母')) return is('合口 平聲') ? 'ch' : 'sh';
+  if (is('船書母')) return is('平聲 通攝 或 平聲 合口 山臻攝') ? 'ch' : 'sh';//章組擦音分化律
   if (is('日母')) {    
     if(is('四等')) return 'l'; 
     return is('支之脂韻 或 眞侵韻 入聲') ?  '' : 'r';
@@ -80,15 +79,10 @@ function 聲母規則() {
   }
   if (is('疑母'))
   {
-    if (is('四等'))
-    {
-      if ( is('齊韻 平聲 或 先韻 入聲')) return 'l';
-    }
-    if (is('三等'))
-    {
-      if ( is('尤蒸韻 平聲 或 庚仙蒸陽韻 入聲 或 之韻 上聲')) return 'l';
-    }
-    return '';
+    if(is('之韻 上聲')) return 'l';
+    if(is('一二等')) return '';
+    //剩下三四等
+    return is('尤蒸齊韻 平聲 或 先仙陽庚韻 入聲') ? 'l' : '';
   }
   if (is('匣曉母')) return is(buohua) ? 'h' : 'x';
   if (is('以母')) return is('合口 祭韻') ? 'r' : '';
