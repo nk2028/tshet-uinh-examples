@@ -20,12 +20,12 @@ function 聲母規則() {
   if (is('端母')) return is('二等') ? 'z' : 'd';
   if (is('透母')) return 't';
   if (is('定母')) {
-    if (is('二等 平聲')) return 'ch';
+    if (is('二等 平聲')) return 'ch';//“窀”
     return is('平聲') ? 't' : 'd';//平送氣仄不送氣
   }
   if (is('泥來孃母')) return 'l';
   if (is('知母')){ 
-    if (is('麻韻 三等 或 灰韻')) return 'd';//爹&𩬳    
+    if (is('麻韻 三等 或 灰韻')) return 'd';//“爹”&“𩬳”    
     return is('庚耕韻') ? 'z' : 'zh';//知組平翹律
   }
   if (is('徹母')) return  is('庚耕韻') ? 'c' : 'ch';//知組平翹律
@@ -149,7 +149,7 @@ function 韻母規則() {
       if (is('合口'))  return 'uei'; 
       //剩下開口
       if (is('常母')) return 'uei';
-      if (is('徹母')) return 'ä';//𥱻
+      if (is('徹母')) return 'ä';//“𥱻”
       return 'i';    
     }
     if (is('三等')){
@@ -384,7 +384,8 @@ function 韻母規則() {
     if (is('二等')){     
         if (is('影疑母')) return 'iän';
         if (is('見溪羣曉匣母')) return 'än';
-        return 'ang';//只剩知莊幫組
+        //只剩下知莊幫組
+        return 'ang';
     }
     if (is('三等')){     
       if (is('合口')) return is('滂幫並母') ? 'ang' : 'uang';
