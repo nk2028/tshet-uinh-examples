@@ -63,11 +63,11 @@ function 聲母規則() {
     if(is('四等')) return 'l'; 
     return is('支之脂韻 或 眞侵韻 入聲') ?  '' : 'r';
   }   
-  var buohua = '一等 或 二等 合口 或 二等 庚耕韻 或 三等 合口 祭微陽支脂凡廢韻 舒聲 或 三等 開口 通攝 舒聲 或 四等 齊韻';//見溪羣曉匣母不顎化條件
-  if (is('見母')) return is(buohua) ? 'g' : 'j';
+  let 不顎化 = '一等 或 二等 合口 或 二等 庚耕韻 或 三等 合口 祭微陽支脂凡廢韻 舒聲 或 三等 開口 通攝 舒聲 或 四等 齊韻';//見溪羣曉匣母不顎化條件
+  if (is('見母')) return is(不顎化) ? 'g' : 'j';
   if (is('溪母')){
     if (is('二等 皆韻 或 二等 開口 江韻 入聲')) return 'k';
-    return is(buohua) ? 'k' : 'q';
+    return is(不顎化) ? 'k' : 'q';
   }
   if (is('羣母')) {    
     if(is('宵韻 重紐A類')) return 'q';
@@ -75,7 +75,7 @@ function 聲母規則() {
       return is('三等 合口 山陽脂韻') ? 'k' : 'q';
     };
     //剩下仄聲不送氣
-    return is(buohua) ? 'g' : 'j';
+    return is(不顎化) ? 'g' : 'j';
   }
   if (is('疑母'))
   {
@@ -84,7 +84,7 @@ function 聲母規則() {
     //剩下三四等
     return is('尤蒸齊韻 平聲 或 先仙陽庚韻 入聲') ? 'l' : '';
   }
-  if (is('匣曉母')) return is(buohua) ? 'h' : 'x';
+  if (is('匣曉母')) return is(不顎化) ? 'h' : 'x';
   if (is('以母')) return is('合口 祭韻') ? 'r' : '';
   if (is('影云母')) return '';
   throw new Error('無聲母規則');
