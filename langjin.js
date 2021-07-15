@@ -345,7 +345,7 @@ function 韻母規則() {
     if (is('滂幫並母')) return 'u';
     return is('精組 或 疑以影云孃來母') ? 'iou' : 'ou';
   }
-  if (is('侯韻')) 'ou';
+  if (is('侯韻')) return 'ou';
   // 深攝
   if (is('深攝')) {
     if (is('入聲')) {    
