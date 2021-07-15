@@ -340,7 +340,7 @@ function 韻母規則() {
      return is('三等 幫見組 或 三等 來曉以影母') ? 'in' : 'en';
   }
   // 流攝
-  if (is('幽韻')) is('見溪羣曉生母') ? 'ou' : 'iou';
+  if (is('幽韻')) return is('見溪羣曉生母') ? 'ou' : 'iou';
   if (is('尤韻')) {
     if (is('滂幫並母')) return 'u';
     return is('精組 或 疑以影云孃來母') ? 'iou' : 'ou';
