@@ -115,7 +115,7 @@ function 韻母規則() {
     if (is('重紐B類')){
       if (is('並滂母 脂韻 或 幫母 支韻 或 並母 上去聲 支韻 或 幫母 平聲 脂韻')) return 'ei'; 
     }
-    if (is('明母 脂韻 或 幫並滂母 微韻')) return 'ei'//微韻等價於合口
+    if (is('明母 脂韻 或 幫並滂母 微韻')) return 'ei';//微韻等價於合口
     return is('幫並滂母 或 明母 支韻 或 開口') ? 'i' : 'uei';
   }
   // 遇攝
@@ -191,7 +191,7 @@ function 韻母規則() {
         return is('疑影母') ? 'ia' : 'a';
       }
       //剩下三四等   
-      if (is('幫組 元韻')) return is('明母') ? 'ua' : 'a'//等價於合口幫組
+      if (is('幫組 元韻')) return is('明母') ? 'ua' : 'a';//等價於合口幫組
       if (is('合口')) return is('日母 或 知莊章組') ? 'o' : 'üe'; 
       if (is('以母')) return 'io';
       if (is('日母 或 知莊章組')) return 'ä';
