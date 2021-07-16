@@ -127,11 +127,8 @@ function 韻母規則() {
   // 蟹攝
   if (is('齊佳皆灰咍祭泰夬廢韻')) {
     if (is('四等')){
-      if (is('合口')) return 'uei'; 
-      //剩下開口
-      if (is('常母')) return 'uei';
-      if (is('徹母')) return 'ä';//“𥱻”
-      return 'i';  
+      if (is('合口 或 常母')) return 'uei'; 
+      return is('徹母') ? 'ä' : 'i';//徹母僅有“𥱻”         
     }
     if (is('三等')){
       if (is('幫組 廢韻')) return 'ei';//廢韻等價於合口
