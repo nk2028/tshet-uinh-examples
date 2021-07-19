@@ -160,7 +160,7 @@ function 韻母規則() {
         if (is('莊組')) return 'ä';
         return is('章組 或 知徹澄日母') ? 'r' : 'i';  
       }   
-    return is('幫組 或 開口') ? 'o' : 'u';
+      return is('幫組 或 開口') ? 'o' : 'u';
     }
     //剩下舒聲
     if (is('幫組')) { 
