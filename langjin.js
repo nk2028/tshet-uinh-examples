@@ -108,7 +108,7 @@ function 韻母規則() {
   }
   // 止攝
   if (is('支脂之微韻')){
-     if (is('日母 開口')) return 'er'; 
+    if (is('日母 開口')) return 'er'; 
     if (is('崇初從精清生俟邪心莊母 開口')) return 'y'; //平舌音
     if (is('昌常徹澄船書章知母 開口')) return 'r'; //翹舌音
     if (is('莊組 合口')) return 'uä'; 
@@ -179,7 +179,7 @@ function 韻母規則() {
     }
     return is('幫組') ? 'en' : 'uen';
   } 
- // 山攝
+  // 山攝
   if (is('元寒桓刪山先仙韻')) {
     if (is('入聲')) {  
       if (is('一等')){
