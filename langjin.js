@@ -357,10 +357,10 @@ function 韻母規則() {
 }
 
 function 聲調規則() {
-  if (is('平聲')) return is('全清 或 次清') ? '1' : '2';
-  if (is('上聲')) return is('全濁') ? '4' : '3';   
-  if (is('去聲')) return '4';   
-  if (is('入聲')) return '5';
+  if (is('平聲')) return is('全清 或 次清') ? '¹' : '²';
+  if (is('上聲')) return is('全濁') ? '⁴' : '³';   
+  if (is('去聲')) return '⁴';   
+  if (is('入聲')) return '⁵';
   throw new Error('無聲調規則');
 }
 
