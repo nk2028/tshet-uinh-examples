@@ -385,7 +385,7 @@ function 聲調規則(音節) {
   else if (is('去聲')) 聲調 = '去聲';   
   else if (is('入聲')) 聲調 = '入聲';
   else throw new Error('無聲調規則');
-  if (選項.標調方式 === '附標') {
+  if (選項.標調方式 === '韻母附標') {
     let 標調位置;
     if (音節.match(元音Re)) {
       let 第一個元音 = 音節.match(元音Re)[0];
