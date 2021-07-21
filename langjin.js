@@ -9,6 +9,24 @@
 
 const is = (x) => 音韻地位.屬於(x);
 
+const 次序標調 = {
+  '陰平': '¹',
+  '陽平': '²',
+  '上聲': '³',
+  '去聲': '⁴',
+  '入聲': '⁵',
+};
+const 附標標調 = {
+  '陰平': '̄',
+  '陽平': '́',
+  '上聲': '̌',
+  '去聲': '̀',
+  '入聲': '̂',
+};
+
+const 元音 = 'iuüaeoyär';
+const 元音Re = new RegExp("[" + 元音 + "]");
+const 元音附標 = '̃̈';
 function 聲母規則() {
   if (is('幫母')) return is('東韻 三等 或 鍾微虞廢文元陽尤凡韻') ? 'f' : 'b';
   if (is('滂母')) return is('東韻 三等 或 鍾微虞廢文元陽尤凡韻') ? 'f' : 'p';
@@ -356,15 +374,34 @@ function 韻母規則() {
   throw new Error('無韻母規則');
 }
 
-function 聲調規則() {
-  if (is('平聲')) return is('全清 或 次清') ? '¹' : '²';
-  if (is('上聲')) return is('全濁') ? '⁴' : '³';   
-  if (is('去聲')) return '⁴';   
-  if (is('入聲')) return '⁵';
-  throw new Error('無聲調規則');
+function 聲調規則(音節) {
+  let 聲調;
+  if (is('平聲')) 聲調 = is('全清 或 次清') ? '陰平' : '陽平';
+  else if (is('上聲')) 聲調 = is('全濁') ? '去聲' : '上聲';   
+  else if (is('去聲')) 聲調 = '去聲';   
+  else if (is('入聲')) 聲調 = '入聲';
+  else throw new Error('無聲調規則');
+  if (選項.標調方式 === '附標') {
+    let 標調位置;
+    if (音節.match(元音Re)) {
+      let 第一個元音 = 音節.match(元音Re)[0];
+      標調位置 = 音節.indexOf(第一個元音);
+      if (元音.includes(音節[標調位置 + 1])) 標調位置 += 1; // 不要標在介音高頭
+      if (元音附標.includes(音節[標調位置 + 1])) 標調位置 += 1; // 不要標在附標下頭
+      if (音節.includes('a')) 標調位置 = 音節.indexOf('a');
+      else if (音節.includes('o')) 標調位置 = 音節.indexOf('o');
+      else if (音節.includes('e')) 標調位置 = 音節.indexOf('e');
+    } else {
+      標調位置 = 音節.indexOf('̩');
+    }
+    標調位置 += 1;
+    return 音節.slice(0, 標調位置) + 附標標調[聲調] + 音節.slice(標調位置);
+  } 
+  else {
+    return 音節 + 次序標調[聲調];
+  }
 }
 
 let 聲母 = 聲母規則();
 let 韻母 = 韻母規則();
-let 聲調 = 聲調規則();
-return 聲母 + 韻母 + 聲調;
+return 聲調規則(聲母 + 韻母);
