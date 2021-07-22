@@ -1,6 +1,7 @@
 /* 推導大埔話(百侯聲)
  *
- * 音系及IPA標法依照：https://zhuanlan.zhihu.com/p/349914674
+ * 音系及IPA標法見：https://zhuanlan.zhihu.com/p/349914674
+ * 拼音方案見：https://zhuanlan.zhihu.com/p/350459791
  * 
  * @author 以成
  */
@@ -377,7 +378,7 @@ function 聲母處理(聲母, 韻母) {
 function 韻母處理(韻母) {
   // m 韻尾在聲母爲脣音時爲 n
   if (is('幫組') && 韻母.endsWith('m')) 韻母 = 韻母.slice(0, -1) + 'n';
-
+  // 替換入聲韻尾
   if (is('入聲')) {
     if (韻母.endsWith('m')) 韻母 = 韻母.slice(0, -1) + 'b';
     else if (韻母.endsWith('n')) 韻母 = 韻母.slice(0, -1) + 'd';
@@ -396,7 +397,7 @@ function 根據規則推導讀音(白讀) {
     聲調: ''
   };
   讀音.韻母 = 韻母處理(韻母規則(白讀));
-  讀音.聲母 =  聲母處理(聲母規則(白讀), 讀音.韻母);
+  讀音.聲母 = 聲母處理(聲母規則(白讀), 讀音.韻母);
   讀音.聲調 = 聲調規則(白讀);
   return 讀音;
 }
