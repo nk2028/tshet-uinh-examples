@@ -372,6 +372,8 @@ function 聲調規則(白讀) {
 function 聲母處理(聲母, 韻母) {
   // 無聲母時自動補全 v
   if (聲母 === '' && 韻母.startsWith('u')) 聲母 = 'v';
+  // 日母後接洪音爲 rh
+  if (is('日母') && !韻母.startsWith('i')) 聲母 = 'rh';
   return 聲母;
 }
 
