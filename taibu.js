@@ -164,13 +164,14 @@ function 韻母規則(白讀) {
   } else if (is('佳韻 合口')) {
     if (is('見組')) return 'ua';
     if (is('影組')) return 'a';
+    return 'ai';
   }
   if (is('皆夬韻 幫組')) return 'ai';
   if (is('皆夬韻 開口')) {
     return 'ai';
   } else if (is('皆夬韻 合口')) {
-    if (is('見組')) return 'uai';
     if (is('影組')) return 白讀 ? 'oi' : 'ai';
+    return 'uai';
   }
   if (is('咍韻')) return 白讀 ? 'oi' : 'ai';
   if (is('灰廢韻')) return 白讀 ? 'oi' : 'ui';
@@ -192,8 +193,8 @@ function 韻母規則(白讀) {
     return 'un';
   }
   if (is('欣韻')) {
-    if (is('見組')) return 'iun';
     if (is('影組')) return 'in';
+    return 'iun';
   }
   if (is('魂韻')) return 'un';
   if (is('痕韻')) {
@@ -378,8 +379,6 @@ function 聲母處理(聲母, 韻母) {
 }
 
 function 韻母處理(韻母) {
-  // m 韻尾在聲母爲脣音時爲 n
-  if (is('幫組') && 韻母.endsWith('m')) 韻母 = 韻母.slice(0, -1) + 'n';
   // 替換入聲韻尾
   if (is('入聲')) {
     if (韻母.endsWith('m')) 韻母 = 韻母.slice(0, -1) + 'b';
