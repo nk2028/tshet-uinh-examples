@@ -104,7 +104,7 @@ function 聲母規則() {
     return is('尤蒸齊韻 平聲 或 先仙陽庚韻 入聲') ? 'l' : '';
   }
   if (is('匣母')) {
-    if (is('開口 耕韻')) return 'x';//“幸”等字
+    if (is('開口 耕韻 舒聲')) return 'x';//“幸”等字
     return is(不顎化) ? 'h' : 'x';
   }
   if (is('曉母')) return is(不顎化) ? 'h' : 'x';
@@ -328,7 +328,7 @@ function 韻母規則() {
     return is('三等 幫見組 或 三等 來曉以影母') ? 'in' : 'en';
   }
   // 流攝
-  if (is('幽韻')) return is('見溪羣曉生母') ? 'ou' : 'iou';
+  if (is('幽韻')) return is('幫組') ? 'iao' : is('見溪羣曉生母') ? 'ou' : 'iou';
   if (is('尤韻')) {
     if (is('滂幫並母')) return 'u';
     return is('精組 或 疑以影云孃來母') ? 'iou' : 'ou';
