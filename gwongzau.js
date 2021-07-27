@@ -55,14 +55,17 @@ function 聲母規則() {
 
   if (is('見母')) return 'g';
   if (is('溪母')) {
-    if (is('尤韻')) return 'j';
+    if (is('尤侵韻')) return 'j';
     if (is('合口 或 支齊模韻') && !is('元陽先夬韻')) return 'k';
     return 'h';
   }
   if (is('羣母')) return is('平聲') ? 'k' : 'g';
   if (is('疑母')) return 'ng'; // ng 拼細音時為 j，詳後
 
-  if (is('曉母')) return 'h';
+  if (is('曉母')) {
+    if (is('尤欣韻 平聲')) return 'j';
+    return 'h';
+  }
   if (is('匣母')) {
     if (is('合口 或 四等 或 模韻') && !is('齊韻')) return 'j'; // 非 yu 前為 w，詳後
     return 'h';
