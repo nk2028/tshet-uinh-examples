@@ -102,165 +102,119 @@ function 聲母規則(白讀) {
 
 function 韻母規則(白讀) {
   // 通攝
-  if (is('東冬鍾韻')) {
-    if (is('三等 精莊見影組')) return 'iung';
-    if (is('孃來日母')) return 'iung';
-    return 'ung';
-  }
+  if (is('東冬鍾韻 幫組')) return 'ung';
+  if (is('東冬鍾韻 一等')) return 'ung';
+  if (is('東冬鍾韻 三等')) return 'iung'; // (>ung/翹舌_)
 
   // 江攝
-  if (is('江韻')) {
-    if (is('莊組')) return 'ung';
-    return 'ong';
-  }
+  if (is('江韻')) return 'ong'; // 例外: 窗雙 ung
+
+  // 宕攝
+  if (is('唐韻 幫組')) return 'ong';
+  if (is('唐韻 開口')) return 'ong';
+  if (is('唐韻 合口 見影組')) return 'uong'; // (>ong/輕脣_)
+  if (is('陽韻 幫組')) return 白讀 ? 'iong' : 'ong';
+  if (is('陽韻 莊組')) return 'ong';
+  if (is('陽韻 開口')) return 'iong'; // (>ong/翹舌_)
+  if (is('陽韻 合口 見影組')) return 'uong'; // (>ong/輕脣_)
 
   // 止攝
-  if (is('支脂韻 幫組')) return 'i'; // 例外：美費，ui
+  if (is('支脂韻 幫組')) return 'i'; // 例外: 美費 ui
   if (is('微韻 幫組')) return 'ui';
-  if (is('支脂之微韻 開口')) {
-    if (is('孃母')) return 'i';
-    if (is('知精莊章組')) return 'ii'; // 除孃母，例外：知姊死四，i
-    if (is('影云以母')) return 'ii';
-    return 'i';
-  }
-  if (is('支脂之微韻 合口')) return 'ui'; // 例外：炊吹衰睡，oi
+  if (is('支脂之微韻 開口')) return 'i' // (>ii/平翘舌_) 例外: 知姊死四 i
+  if (is('支脂之微韻 合口')) return 'ui'; // 例外: 炊吹衰睡 oi
 
   // 遇攝
   if (is('虞韻 幫組')) return 'u';
-  if (is('魚虞韻 孃來日曉母')) return 'i';
-  if (is('魚虞韻 知章組')) return 'u'; // 除孃母
-  if (is('魚虞韻 精見組')) return 'i';
   if (is('魚虞韻 莊組')) return 'ii';
-  if (is('魚虞韻 影云以母')) return 'ii';
-  if (is('模韻')) return 'u'; // 例外：蜈梧吾吳午五伍，零韻母
+  if (is('魚虞韻')) {
+    if (is('知章組')) return 'u';
+    return 'i'; // (>ii/翘舌_)
+  }
+  if (is('模韻')) return 'u'; // 例外: 蜈梧吾吳午五伍 零韻母
 
   // 蟹攝
-  if (is('齊祭韻 幫組')) return 'i';
-  if (is('齊韻 開口')) {
-    if (is('影組')) return 'i';
-    return 白讀 ? 'ei' : 'i'; // 例外：梯，oi
-  } else if (is('齊韻 合口')) {
-    return 'ui';
-  }
-  if (is('祭韻 開口')) {
-    if (is('知章組')) return 'ii';
-    return 'i';
-  } else if (is('祭韻 合口')) {
-    if (is('精莊組')) return 白讀 ? 'ioi' : 'ei';
-    return 白讀 ? 'oi' : 'ui';
-  }
+  if (is('咍韻')) return 白讀 ? 'oi' : 'ai';
   if (is('泰韻 幫組')) return 'ui';
-  if (is('泰韻 開口')) {
-    if (is('見影組')) return 'oi';
-    return 'ai';
-  } else if (is('泰韻 合口')) {
+  if (is('泰韻 開口')) return 'ai'; // 例外: 蓋害 oi
+  if (is('泰韻 合口')) {
     if (is('見組')) return 'uai';
     return 'ui';
   }
+  if (is('灰廢韻')) return 白讀 ? 'oi' : 'ui';
   if (is('佳韻 幫組')) return 'ai';
   if (is('佳韻 開口')) {
     if (is('影組')) return 'ei';
     return 'ai';
-  } else if (is('佳韻 合口')) {
-    if (is('見組')) return 'ua';
-    if (is('影組')) return 'a';
-    return 'ai';
   }
+  if (is('佳韻 合口')) return 'ua'; // (>a/輕脣_)
   if (is('皆夬韻 幫組')) return 'ai';
-  if (is('皆夬韻 開口')) {
-    return 'ai';
-  } else if (is('皆夬韻 合口')) {
-    if (is('影組')) return 白讀 ? 'oi' : 'ai';
-    return 'uai';
+  if (is('皆夬韻 開口')) return 'ai';
+  if (is('皆夬韻 合口')) return 'uai'; // (>ai/輕脣_)
+  if (is('齊祭韻 幫組')) return 'i';
+  if (is('祭韻 開口')) return 'i'; // (>ii/翹舌_)
+  if (is('祭韻 合口')) return 白讀 ? 'oi' : 'ui'; // 例外: 脆 cioi5 歲 sei5
+  if (is('齊韻 開口')) {
+    if (is('影組')) return 'i';
+    return 白讀 ? 'ei' : 'i'; // 例外: 梯 toi1
   }
-  if (is('咍韻')) return 白讀 ? 'oi' : 'ai';
-  if (is('灰廢韻')) return 白讀 ? 'oi' : 'ui';
+  if (is('齊韻 合口')) return 'ui';
 
   // 臻攝
-  if (is('眞韻 見組')) return 白讀 ? 'iun' : 'in';
-  if (is('眞韻 幫組')) return 白讀 ? 'en' : 'in';
-  if (is('眞韻 開口')) {
-    if (is('日母')) return 白讀 ? 'iun' : 'in';
-    return 'in';
-  } else if (is('眞韻 合口')) {
-    if (is('來母')) return 白讀 ? 'iun' : 'in';
-    return 'un';
-  }
-  if (is('臻韻')) return 'en';
-  if (is('文韻')) {
-    if (is('見組')) return 'iun';
-    if (is('曉母')) return 'iun';
-    return 'un';
-  }
-  if (is('欣韻')) {
-    if (is('影組')) return 'in';
-    return 'iun';
-  }
+  if (is('痕韻')) return 'en'; // 例外: 吞 tun1; 痕 fin2
   if (is('魂韻')) return 'un';
-  if (is('痕韻')) {
-    if (is('端組')) return 'un';
-    return 'en';
+  if (is('眞韻 幫組')) return 'in'; // 例外: 閩敏憫 en; 密蜜 ed
+  if (is('文韻 幫組')) return 'un';
+  if (is('眞臻文欣韻 見組')) return 白讀 ? 'iun' : 'in';
+  if (is('眞臻文欣韻 開口')) return 'in'; // 例外: 韌 ngiun5 瑟 sed7
+  if (is('眞臻文欣韻 合口')) {
+    if (is('精組')) return 'un';
+    return 'iun'; // (>un/翹舌_)
   }
 
   // 山攝
   if (is('寒韻 幫組')) return 'an';
   if (is('寒韻 開口')) {
     if (is('見影組')) return 'on';
-    return 'an'; // 例外：餐，on
+    return 'an'; // 例外: 餐 on
   } else if (is('寒韻 合口')) {
-    if (is('見組')) return 'uan';
-    if (is('影組')) return 'an';
+    if (is('見影組')) return 'uan'; // (>an/輕脣_)
     return 'on';
   }
-  if (is('刪山韻 幫組')) return 'an'; // 例外：慢，een；八捌，eed
+  if (is('刪山韻 幫組')) return 'an'; // 例外: 慢 een; 八捌 eed
   if (is('刪山韻 開口')) {
-    if (is('見組')) return 'ien';
-    if (is('影組')) return 'een';
+    if (is('見影組')) return 'ien'; // 例外: 限 een; 瞎 eed
     return 'an';
   } else if (is('刪山韻 合口')) {
-    if (is('見組')) return 'uan';
-    if (is('影組')) return 'an';
+    if (is('見影組')) return 'uan'; // (>an/輕脣_)
     return 'on';
   }
   if (is('仙韻 幫組')) return 'ien';
-  if (is('仙韻 開口')) {
-    if (is('知章組')) return 'een';
-    if (is('影云以母')) return 'een';
-    return 'ien';
-  } else if (is('仙韻 合口')) {
-    if (is('知章組')) return 'on';
-    if (is('見組')) return 'ien';
-    if (is('影云以母')) return 'een';
+  if (is('仙韻 開口')) return 'ien'; // (>een/翹舌_)
+  if (is('仙韻 合口')) {
+    if (is('見影組')) return 'ien'; // (>een/翹舌_) 例外: 圓 vien2
     if (is('精莊組 入聲')) return 'ied';
-    return 'ion';
+    return 'ion'; // (>on/翹舌_)
   }
-  if (is('先韻 幫組')) return 白讀 ? 'een' : 'ien';
-  if (is('先韻 開口')) {
+  if (is('先韻')) {
+    if (is('幫組')) return 白讀 ? 'een' : 'ien';
     if (is('端組')) return 'een';
-    if (is('來影母')) return 'een';
-    return 'ien';
-  } else if (is('先韻 合口')) {
-    if (is('影母')) return 'een';
-    return 'ien';
+    if (is('來母')) return 'een';
+    return 'ien'; // (>een/翹舌_)
   }
   if (is('元韻')) {
-    if (is('幫組')) return 'an'; // 例外：飯，on
-    if (is('影云母')) return 'een'; // 例外：冤園遠，ien
-    return 'ien';
+    if (is('幫組')) return 'an'; // 例外: 飯 on
+    if (is('見影組')) return 'ien'; // (>een/翹舌_) 例外: 冤園遠 ien
   }
 
   // 效攝
-  if (is('豪韻')) return 'ou'; // 例外：熬靠考袍，au
-  if (is('肴韻')) return 'au';
-  if (is('宵韻')) {
-    if (is('知章影組')) return 'au';
-    if (is('以母')) return 'au';
-    return 'iau';
-  }
+  if (is('豪韻')) return 'ou'; // 例外: 熬靠考袍 au
+  if (is('肴韻')) return 'au'; // (>au/翹舌_)
+  if (is('宵韻')) return 'iau'; // (>au/翹舌_)
   if (is('蕭韻')) {
     if (is('端組')) return 'eeu';
-    if (is('來影母')) return 'eeu';
-    return 'iau';
+    if (is('來母')) return 'eeu';
+    return 'iau'; // (>au/翹舌_)
   }
 
   // 果攝
@@ -270,68 +224,32 @@ function 韻母規則(白讀) {
   // 假攝
   if (is('麻韻 幫組')) return 'a';
   if (is('麻韻 二等 開口')) return 'a';
-  if (is('麻韻 二等 合口')) {
-    if (is('影組')) return 'a';
-    return 'ua';
-  }
-  if (is('麻韻 三等')) {
-    if (is('知章組')) return 'a';
-    if (is('以母')) return 'a';
-    return 'ia';
-  }
-
-  // 宕攝
-  if (is('唐韻 幫組')) return 'ong';
-  if (is('唐韻 開口')) return 'ong';
-  if (is('唐韻 合口 見組')) return 'uong';
-  if (is('唐韻 合口 影組')) return 'ong';
-  if (is('陽韻 幫組')) return 白讀 ? 'iong' : 'ong';
-  if (is('陽韻 開口')) {
-    if (is('知莊章組')) return 'ong';
-    if (is('影以母')) return 'ong';
-    return 'iong';
-  } else if (is('陽韻 合口')) {
-    if (is('見組')) return 'uong';
-    if (is('影組')) return 'ong';
-  }
+  if (is('麻韻 二等 合口')) return 'ua'; // (>a/輕脣_)
+  if (is('麻韻 三等')) return 'ia'; // (>a/翹舌_)
 
   // 梗攝
   if (is('庚韻 二等 幫組')) return 白讀 ? 'ang' : 'en';
   if (is('庚韻 二等 開口')) return 白讀 ? 'ang' : 'en';
-  if (is('庚韻 二等 合口')) {
-    if (is('影組')) return 白讀 ? 'ang' : 'en';
-    return 白讀 ? 'uang' : 'uen';
+  if (is('庚韻 二等 合口')) return 白讀 ? 'uang' : 'uen'; // (>白ang|文en/輕脣_)
+  if (is('庚韻 三等 幫組')) return 白讀 ? 'iang' : 'in'; // 例外: 盟 en
+  if (is('庚韻 三等 開口')) return 白讀 ? 'iang' : 'in'; // (>白ang|文in/翹舌_) 例外: 省 en
+  if (is('庚韻 三等 合口')) return 白讀 ? 'iung' : 'in'; // (>白ung|文un/翹舌_) 例外: 憬 in
+  if (is('耕韻')) return 白讀 ? 'ang' : 'en'; // 例外: 拼莖 in
+  if (is('清韻')) return 白讀 ? 'iang' : 'in'; // (>白ang|文in/翹舌_) 例外: 碧 ed
+  if (is('青韻')) {
+    if (is('端見組 舒聲')) return 'en';
+    if (is('端見組 入聲')) return 'id';
+    if (is('來母 舒聲')) return 'en';
+    if (is('來母 入聲')) return 'id';
+    return 白讀 ? 'iang' : 'in'; // 例外: 星 en
   }
-  if (is('庚韻 三等 幫組')) return 白讀 ? 'iang' : 'in'; // 例外：盟，en
-  if (is('庚韻 三等 開口')) {
-    if (is('影母')) return 白讀 ? 'ang' : 'in';
-    return 白讀 ? 'iang' : 'in'; // 例外：省，en
-  }
-  if (is('庚韻 三等 合口')) {
-    if (is('曉母')) return 'iung';
-    if (is('云母')) return 白讀 ? 'ung' : 'un';
-    return 白讀 ? 'iung' : 'in';
-  }
-  if (is('耕韻')) return 白讀 ? 'ang' : 'en'; // 例外：拼莖，in
-  if (is('清韻')) {
-    if (is('知章組')) return 白讀 ? 'ang' : 'in';
-    if (is('影以母')) return 白讀 ? 'ang' : 'in';
-    return 白讀 ? 'iang' : 'in'; // 例外：碧，ed
-  }
-  if (is('青韻 幫組')) return 'in';
-  if (is('青韻 精組')) return 白讀 ? 'iang' : 'in';
-  if (is('青韻 端見組 舒聲')) return 'en';
-  if (is('青韻 端見組 入聲')) return 'id';
-  if (is('青韻 來母 舒聲')) return 'en';
-  if (is('青韻 來母 入聲')) return 'id';
-  if (is('青韻 影組')) return 'in';
 
   // 曾攝
   if (is('蒸韻')) {
     if (is('莊組')) return 'en';
     return 'in';
   }
-  if (is('登韻')) return 'en'; // 例外：國，ued
+  if (is('登韻')) return 'en'; // 例外: 國 ued
 
   // 流攝
   if (is('侯韻')) return 'eu';
@@ -344,17 +262,12 @@ function 韻母規則(白讀) {
   }
 
   // 咸攝
-  if (is('覃談咸銜凡韻')) return 'am'; // 例外：鹹，eem；減，iam；夾插，iab
-  if (is('鹽嚴韻')) {
-    if (is('孃母')) return 'eem';
-    if (is('知章組')) return 'am'; // 除孃母
-    if (is('影云以母')) return 'am';
-    return 'iam'; // 例外：驗，eem
-  }
+  if (is('覃談咸銜凡韻')) return 'am'; // 例外: 鹹 eem; 減 iam; 夾插 iab
+  if (is('鹽嚴韻')) return 'iam'; // (>am/翹舌_) 例外: 黏驗 eem; 躡 eeb
   if (is('添韻')) {
     if (is('端組')) return 'eem';
-    if (is('來影母')) return 'eem';
-    return 'iam';
+    if (is('來母')) return 'eem';
+    return 'iam'; // (>am/翹舌_)
   }
 
   throw new Error('無韻母規則');
@@ -378,12 +291,39 @@ function 聲母處理(聲母, 韻母) {
   return 聲母;
 }
 
-function 韻母處理(韻母) {
+function 韻母預先處理(韻母) {
   // 替換入聲韻尾
   if (is('入聲')) {
     if (韻母.endsWith('m')) 韻母 = 韻母.slice(0, -1) + 'b';
     else if (韻母.endsWith('n')) 韻母 = 韻母.slice(0, -1) + 'd';
     else if (韻母.endsWith('ng')) 韻母 = 韻母.slice(0, -2) + 'g';
+  }
+  return 韻母;
+}
+
+function 韻母善後處理(聲母, 韻母) {
+  const 平舌 = ['z', 'c', 's'];
+  const 翹舌 = ['zh', 'ch', 'sh', 'rh'];
+  const 平舌或翹舌 = 平舌.concat(翹舌);
+  const 輕脣 = ['f', 'v'];
+  const 翹舌或輕脣 = 翹舌.concat(輕脣);
+  // 先處理 i 相關韻母
+  if (is('支脂之微韻 開口') && 韻母 === 'i' && 平舌或翹舌.includes(聲母)) {
+    韻母 = 'ii';
+  }
+  if (is('魚虞韻') && 韻母 === 'i' && 翹舌.includes(聲母)) 韻母 = 'ii';
+  if (is('祭韻 開口') && 韻母 === 'i' && 翹舌.includes(聲母)) 韻母 = 'ii';
+  // 處理一般情況
+  if (韻母.startsWith('ie') && 翹舌.includes(聲母)) {
+    韻母 = 'ee' + 韻母.slice(2);
+  }
+  if (
+    (
+      韻母.startsWith('ia') || 韻母.startsWith('io') || 韻母.startsWith('iu') ||
+      韻母.startsWith('ua') || 韻母.startsWith('ue') || 韻母.startsWith('uo')
+    ) && 翹舌或輕脣.includes(聲母)
+  ) {
+    韻母 = 韻母.slice(1);
   }
   return 韻母;
 }
@@ -397,8 +337,10 @@ function 根據規則推導讀音(白讀) {
     聲母: '',
     聲調: ''
   };
-  讀音.韻母 = 韻母處理(韻母規則(白讀));
-  讀音.聲母 = 聲母處理(聲母規則(白讀), 讀音.韻母);
+  const 聲母推導結果 = 聲母規則(白讀);
+  const 韻母推導結果 = 韻母規則(白讀);
+  讀音.韻母 = 韻母善後處理(聲母推導結果, 韻母預先處理(韻母推導結果));
+  讀音.聲母 = 聲母處理(聲母推導結果, 讀音.韻母);
   讀音.聲調 = 聲調規則(白讀);
   return 讀音;
 }
