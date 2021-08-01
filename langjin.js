@@ -173,7 +173,6 @@ function 韻母規則() {
       // 剩下三四等   
       if (is('幫組 元韻')) return is('明母') ? 'ua' : 'a'; // 等價於合口幫組
       if (is('合口')) return is('日母 或 知莊章組') ? 'o' : 'üe'; 
-      if (is('以母')) return 'io';
       return is('日母 或 知莊章組') ? 'ä' : is('見溪羣曉匣母') ? 'e' : 'ie';
    }  
    // 剩下舒聲
