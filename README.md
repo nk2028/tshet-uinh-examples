@@ -29,9 +29,9 @@ https://cdn.jsdelivr.net/gh/nk2028/qieyun-examples@<commit-sha>/<filename>
 - 推導《聲音唱和圖》擬音 (Extrapolated Reconstruction of _Shing-im Chiang-xhua Dhu_): `chiangxhua.js`
 - 推導《分韻撮要》擬音 (Extrapolated Reconstruction of _Fan-Wan Ts'üt-Iú_): `fanwan.js`
 - 推導普通話 (Extrapolated Putonghua): `putonghua.js`
-- 推導廣州音 (Extrapolated Cantonese): `gwongzau.js`
+- 推導廣州話 (Extrapolated Cantonese): `gwongzau.js`
 - 推導上海話 (Extrapolated Shanghainese): `zaonhe.js`
-- 推導南京音 (Extrapolated Nankinese): `langjin.js`
+- 推導南京話 (Extrapolated Nankinese): `langjin.js`
 
 **人造音系 artificial phonological system**
 
