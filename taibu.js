@@ -242,7 +242,7 @@ function 韻母規則(白讀) {
   if (is('庚韻 二等 合口')) return 白讀 ? 'uang' : 'uen'; // (>白ang|文en/輕脣_)
   if (is('庚韻 三等 幫組')) return 白讀 ? 'iang' : 'in'; // 例外: 盟 en
   if (is('庚韻 三等 開口')) return 白讀 ? 'iang' : 'in'; // (>白ang|文in/翹舌_) 例外: 省 en
-  if (is('庚韻 三等 合口')) return 白讀 ? 'iung' : 'in'; // (>白ung|文un/翹舌_) 例外: 憬 in
+  if (is('庚韻 三等 合口')) return 白讀 ? 'iung' : 'un'; // (>白ung|文un/翹舌_) 例外: 憬 in
   if (is('耕韻')) return 白讀 ? 'ang' : 'en'; // 例外: 拼莖 in
   if (is('清韻')) return 白讀 ? 'iang' : 'in'; // (>白ang|文in/翹舌_) 例外: 碧 ed
   if (is('青韻')) {
