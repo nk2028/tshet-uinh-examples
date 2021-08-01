@@ -2,6 +2,7 @@
  *
  * 音系及IPA標法見：https://zhuanlan.zhihu.com/p/349914674
  * 拼音方案見：https://zhuanlan.zhihu.com/p/350459791
+ * 推導規則描述：https://zhuanlan.zhihu.com/p/392372782
  * 
  * @author 以成
  */
