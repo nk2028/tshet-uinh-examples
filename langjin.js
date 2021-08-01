@@ -3,7 +3,7 @@
  * https://zhuanlan.zhihu.com/p/391166351
  *
  * 中古音與南京音的對應表：https://github.com/uliloewi/lang2jin1/blob/master/Guangyun_Langjin_pulish_Alphabetic.2.0.csv
- * 南京音本是清末以前標準官話的基礎音系，和中古音有嚴格的對應關系。故有上表。本程序展示此對應關系。
+ * 南京音本是清末以前標準官話的基礎音系，和中古音有嚴格的對應關係，故有上表。本程序展示此對應關係。
  * 南京話拼音方案：https://zh.wikipedia.org/wiki/%E5%8D%97%E4%BA%AC%E8%A9%B1%E6%8B%89%E4%B8%81%E5%8C%96%E6%96%B9%E6%A1%88#%E8%BC%B8%E5%85%A5%E6%B3%95%E6%96%B9%E6%A1%88
  *
  * @author uliloewi
@@ -43,7 +43,7 @@ function 聲母規則() {
   if (is('透母')) return 't';
   if (is('定母')) return is('平聲') ? 't' : 'd';
   if (is('泥來孃母')) return 'l';
-  if (is('知母')) return is('麻韻 三等') ? 'd' : is('庚耕韻') ? 'z' : 'zh'; // 知組平翹律；
+  if (is('知母')) return is('麻韻 三等') ? 'd' : is('庚耕韻') ? 'z' : 'zh'; // 知組平翹律
   if (is('徹母')) return is('庚耕韻') ? 'c' : 'ch'; // 知組平翹律
   if (is('澄母')) { 
     if (is('庚耕韻')) return is('平聲') ? 'c' : 'z'; // 平送氣仄不送氣
