@@ -73,7 +73,7 @@ function 聲母規則() {
   if (is('見母')) return is(不顎化) ? 'g' : 'j';
   if (is('溪母')) return is('二等 皆韻 或 二等 開口 江韻 入聲') ? 'k' : is(不顎化) ? 'k' : 'q';
   if (is('羣母')) {  
-    if(is('宵韻 重紐A類')) return 'q';
+    if (is('宵韻 重紐A類')) return 'q';
     if (is('平聲')) return is('三等 合口 山陽脂韻') ? 'k' : 'q'; // 平送氣
     // 剩下仄聲不送氣
     return is(不顎化) ? 'g' : 'j';
@@ -277,7 +277,7 @@ function 韻母規則() {
     if (is('入聲')) {  
       if (is('一等')) return is('見組 或 匣曉影母') ? 'o' : 'a';
       if (is('二等')) return is('疑影母') ? 'io' : 'a';
-      if (is('三等')){
+      if (is('三等')) {
         if (is('幫組')) return 'a';
         if (is('合口')) return is('徹孃母') ? 'ua' : 'a';
         if (is('章組 或 日知徹澄母')) return 'ä';
@@ -288,7 +288,7 @@ function 韻母規則() {
     // 剩下舒聲
     if (is('一等')) return is('開口 或 幫組') ? 'ang' : 'uang';
     if (is('二等')) return is('影疑母') ? 'iän' : is('見溪羣曉匣母') ? 'än' : 'ang';
-    if (is('三等')){   
+    if (is('三等')) {   
       if (is('幫組')) return is('鹽韻') ? 'iän' : is('明母') ? 'uang' : 'ang';
       if (is('合口')) return 'uang';
       // 剩下開口  
