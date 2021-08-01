@@ -1,4 +1,4 @@
-/* 推導大埔話(百侯聲)
+/* 推導大埔話（百侯聲）
  *
  * 音系及IPA標法見：https://zhuanlan.zhihu.com/p/349914674
  * 拼音方案見：https://zhuanlan.zhihu.com/p/350459791
