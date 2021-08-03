@@ -86,7 +86,7 @@ function 聲母規則() {
   if (is('曉母')) return is('三等 開口 或 三等 通攝') ? 'x' : is(不顎化) ? 'h' : 'x';
   if (is('以母')) return is('合口 祭韻') ? 'r' : '';
   if (is('影母')) return '';
-  if (is('云母')) return is('通攝') ? 'x' : '';
+  if (is('云母')) return is('舒聲 通攝') ? 'x' : '';
   throw new Error('無聲母規則');
 }
 
