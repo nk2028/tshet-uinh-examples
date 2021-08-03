@@ -14,6 +14,7 @@ import {
   gwongzau,
   zaonhe,
   langjin,
+  taibu,
   ayaka_v8,
 } from "../index.js";
 
@@ -40,4 +41,5 @@ assert_equal(putonghua(音韻地位), "shao3");
 assert_equal(gwongzau(音韻地位), "siu2");
 assert_equal(zaonhe(音韻地位), "sɔ̄");
 assert_equal(langjin(音韻地位), "shao³");
+assert_equal(taibu(音韻地位), "shau3");
 assert_equal(ayaka_v8(音韻地位), "seu");
