@@ -128,7 +128,8 @@ function 韻母規則() {
   if (is('廢韻 幫組')) return 'ei';
   if (is('祭韻 幫組')) return 'i';
   if (is('廢祭韻 開口')) return is('章知組') ? 'r' : is('莊組') ? 'y' : 'i';  
-  if (is('佳皆夬韻 合口')) return is('佳韻 見溪匣曉影母') ? 'ua' : 'uä'; 
+  if (is('佳韻 合口')) return is('見溪匣曉影母') ? 'ua' : 'uä';
+  if (is('皆夬韻 合口')) return 'uä';
   if (is('佳皆夬韻 幫組'))  return 'ä';
   if (is('佳皆夬韻 開口'))  return is('疑母') ? 'iä' : 'ä';
   if (is('灰廢韻 幫組')) return 'ei';
@@ -246,7 +247,8 @@ function 韻母規則() {
   if (is('鹽嚴凡韻 入聲 幫組')) return 'a';
   if (is('鹽嚴凡韻 入聲 合口')) return is('徹孃母') ? 'ua' : 'a';
   if (is('鹽嚴凡韻 入聲 開口')) return is('莊章組 或 日知徹澄母') ? 'ä' : is('見溪羣曉匣母') ? 'e' : 'ie';
-  if (is('鹽嚴凡韻 舒聲 幫組')) return is('鹽韻') ? 'iän' : is('明母') ? 'uang' : 'ang';
+  if (is('鹽韻 舒聲 幫組')) return 'iän';
+  if (is('嚴凡韻 舒聲 幫組')) return is('明母') ? 'uang' : 'ang';
   if (is('鹽嚴凡韻 舒聲 合口')) return 'uang';
   if (is('鹽嚴凡韻 舒聲 開口')) return is('日知徹澄母 或 莊章組') ? 'ang' : is('見溪羣曉匣母') ? 'än' : 'iän';
   if (is('咸銜韻 入聲')) return is('疑影母') ? 'ia' : 'a';
