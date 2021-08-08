@@ -1,8 +1,6 @@
 /* 推導普通話
  *
- * https://github.com/BYVoid/ytenx/blob/master/ytenx/sync/kyonh/Dauh.txt
- *
- * @author N/A
+ * @author graphemecluster
  */
 
 const is = (x) => 音韻地位.屬於(x);
@@ -48,162 +46,136 @@ function 聲母規則() {
   if (is('溪母')) return 'k';
   if (is('羣母')) return is('平聲') ? 'k' : 'g';
   if (is('曉匣母')) return 'h';
-  if (is('疑影云以母')) return is(`\
-東韻 一等 或 \
-止蟹假攝 合口 或 \
-模魂韻 或 \
-寒刪唐韻 合口 或 \
-歌韻 一等 合口 或 \
-庚韻 二等 合口 或 \
-耕陽韻 合口 舒聲 或 \
-冬韻 入聲 或 \
-山韻 合口 入聲`) ? 'w' : '';
+  if (is('疑影云以母')) return '';
 
   throw new Error('無聲母規則');
 }
 
 function 舒聲韻母規則() {
   // 通攝
-  if (is('東韻 一等 或 冬韻')) return is('幫組 或 疑影云以母') ? 'eng' : 'ong';
-  if (is('東韻 三等 或 鍾韻')) return is('幫組') ? 'eng' : is('牙喉音') ? 'iong' : 'ong';
+  if (is('通攝 三等 牙喉音')) return 'iong';
+  if (is('通攝')) return is('幫組') ? 'eng' : 'ong';
 
   // 江攝
-  if (is('江韻')) return is('牙喉音') ? 'iang' : is('知徹澄日母 或 莊章組') ? 'uang' : 'ang';
+  if (is('江韻')) return is('牙喉音') ? 'iang' : 'uang';
 
   // 止攝
-  if (is('止攝 合口')) return is('莊組') ? 'uai' : is('疑影云以孃來母') ? 'ei' : 'ui';
-  if (is('止攝')) return is('微韻 幫組') ? 'ei' : 'i';
+  if (is('止攝 合口')) return is('莊組') ? 'uai' : 'uei';
+  if (is('止攝')) return is('牙喉音') ? 'i' : 'er';
 
   // 遇攝
-  if (is('魚虞韻 孃來母')) return 'ü';
-  if (is('遇攝')) return 'u';
+  if (is('魚虞韻')) return 'ü';
+  if (is('模韻')) return 'u';
 
   // 蟹攝
-  if (is('泰咍韻 開口')) return 'ai';
   if (is('祭韻 合口 莊組')) return 'uai';
-  if (is('泰廢祭齊灰韻 合口')) return is('泥孃來母') ? 'ei' : 'ui';
-  if (is('祭齊韻')) return 'i';
-  if (is('泰廢灰韻')) return is('幫組') ? 'ei' : 'i';
-  if (is('佳韻 疑影云以母')) return 'a';
-  if (is('佳韻 牙喉音')) return is('開口') ? 'ia' : 'ua';
-  if (is('皆夬韻 牙喉音 開口')) return 'ie';
-  if (is('佳皆夬韻')) return is('開口 或 幫組 或 孃來母') ? 'ai' : 'uai';
+  if (is('齊祭廢韻')) return is('合口') ? 'uei' : 'i';
+  if (is('灰韻')) return is('開口') ? 'i' : 'uei';
+  if (is('泰韻')) return is('開口') ? 'ai' : 'uei';
+  if (is('佳韻 牙喉音')) return is('合口') ? 'ua' : 'ia';
+  if (is('皆夬韻 牙喉音')) return is('合口') ? 'uai' : 'ie';
+  if (is('佳皆夬韻')) return is('合口') ? 'uai' : 'ai';
+  if (is('咍韻')) return 'ai';
 
   // 臻攝
-  if (is('眞韻 合口')) return 'un';
-  if (is('眞韻')) return is('知徹澄日母 或 莊章組') ? 'en' : 'in';
-  if (is('眞韻')) return 'un';
+  if (is('眞韻')) return is('合口') ? 'ün' : 'in';
   if (is('臻韻')) return 'en';
   if (is('痕韻 牙喉音')) return 'en';
-  if (is('魂韻 疑影云以母')) return 'en';
-  if (is('痕魂文韻')) return is('幫組') ? 'en' : 'un';
+  if (is('文韻 牙喉音')) return 'ün';
+  if (is('痕魂文韻')) return 'uen';
   if (is('欣韻')) return 'in';
-  if (is('元韻 開口 牙喉音')) return 'ian';
-  if (is('元韻 合口')) return 'uan';
-  if (is('元韻')) return 'an';
+  if (is('元韻')) return is('合口') ? 'üan' : 'ian';
 
   // 山攝
-  if (is('山攝 合口')) return 'uan';
+  if (is('寒刪山韻 合口')) return 'uan';
   if (is('寒韻')) return 'an';
   if (is('刪山韻')) return is('牙喉音') ? 'ian' : 'an';
-  if (is('仙先韻')) return is('知徹澄日母 或 莊章組') ? 'an' : 'ian';
+  if (is('仙先韻')) return is('合口') ? 'üan' : 'ian';
 
   // 效攝
   if (is('豪韻')) return 'ao';
   if (is('肴韻')) return is('牙喉音') ? 'iao' : 'ao';
-  if (is('蕭宵韻')) return is('知徹澄日母 或 莊章組') ? 'ao' : 'iao';
+  if (is('蕭宵韻')) return 'iao';
 
   // 果攝
   if (is('歌韻 一等 開口')) return is('牙喉音') ? 'e' : 'uo';
-  if (is('歌韻 一等')) return is('幫組') ? 'o' : 'uo';
+  if (is('歌韻 一等')) return 'uo';
   if (is('歌韻 三等 開口')) return 'ie';
-  if (is('歌韻 三等')) return is('孃來母') ? 'üe' : 'ue';
+  if (is('歌韻 三等')) return 'üe';
 
   // 假攝
   if (is('麻韻 二等 合口')) return 'ua';
   if (is('麻韻 二等')) return is('牙喉音') ? 'ia' : 'a';
-  if (is('麻韻 三等')) return is('知徹澄日母 或 莊章組') ? 'e' : 'ie';
+  if (is('麻韻 三等')) return 'ie';
 
   // 宕攝
   if (is('唐韻 開口')) return 'ang';
-  if (is('陽韻 開口 莊組')) return 'uang';
-  if (is('陽韻 開口')) return is('端精組 或 牙喉音 或 孃來母') ? 'iang' : 'ang';
-  if (is('宕攝')) return is('牙喉音') ? 'uang' : 'ang';
+  if (is('陽韻 開口')) return is('莊組') ? 'uang' : 'iang';
+  if (is('唐陽韻')) return 'uang';
 
   // 梗攝
-  if (is('庚韻 二等 或 耕韻') && is('合口 見溪羣曉匣母')) return 'ong';
-  if (is('庚韻 三等 或 清青韻') && is('合口 牙喉音')) return 'iong';
-  if (is('庚韻 二等 或 耕韻') && is('開口 或 幫組')) return 'eng';
-  if (is('梗攝 合口 疑影云以母')) return 'eng';
-  if (is('梗攝')) return is('知徹澄日母 或 莊章組') ? 'eng' : 'ing';
+  if (is('梗攝 二等')) return is('合口') ? 'ong' : 'eng';
+  if (is('梗攝')) return is('合口') ? 'iong' : 'ing';
 
   // 曾攝
-  if (is('登韻 合口')) return 'ong';
-  if (is('登韻')) return 'eng';
-  if (is('蒸韻')) return is('知徹澄日母 或 莊章組') ? 'eng' : 'ing';
+  if (is('登韻')) return is('合口') ? 'ong' : 'eng';
+  if (is('蒸韻')) return 'ing';
 
   // 流攝
   if (is('侯韻')) return 'ou';
-  if (is('尤韻 幫組')) return 'ou';
-  if (is('幽韻 幫組')) return 'iao';
-  if (is('尤幽韻')) return is('知徹澄日母 或 莊章組') ? 'ou' : 'iu';
+  if (is('尤韻')) return is('幫組') ? 'ou' : 'iou';
+  if (is('幽韻')) return is('幫組') ? 'iao' : 'iou';
 
   // 深攝
-  if (is('侵韻')) return is('知徹澄日母 或 莊章組') ? 'en' : 'in';
+  if (is('侵韻')) return 'in';
 
   // 咸攝
   if (is('覃談韻')) return 'an';
-  if (is('鹽添韻')) return is('知徹澄日母 或 莊章組') ? 'an' : 'ian';
+  if (is('鹽添韻')) return 'ian';
   if (is('嚴咸銜韻')) return is('牙喉音') ? 'ian' : 'an';
-  if (is('凡韻')) return is('幫組') ? 'an' : 'uan';
+  if (is('凡韻')) return 'uan';
 
   throw new Error('無韻母規則');
 }
 
 function 入聲韻母規則() {
   // 通攝
-  if (is('東韻 三等 或 鍾韻') && is('孃來母')) return 'ü';
-  if (is('通攝')) return 'u';
+  if (is('通攝 一等')) return 'u';
+  if (is('通攝 三等')) return is('精組') ? 'u' : 'ü';
 
   // 江攝
-  if (is('江韻')) return is('幫組') ? 'o' : is('牙喉音') ? 'ue' : 'uo';
+  if (is('江韻')) return is('牙喉音') ? 'üe' : 'uo';
 
   // 臻攝
-  if (is('眞韻 合口 孃來母')) return 'ü';
-  if (is('眞韻 合口 莊組')) return 'uai';
-  if (is('眞韻 合口')) return 'u';
+  if (is('眞韻 合口')) return is('莊組') ? 'uai' : 'ü';
   if (is('眞欣韻')) return 'i';
   if (is('臻痕韻')) return 'e';
-  if (is('魂韻 幫組')) return 'o';
-  if (is('魂文韻')) return 'u';
+  if (is('魂韻')) return is('幫組') ? 'o' : 'u';
+  if (is('文韻')) return 'ü';
   if (is('元韻 開口')) return 'ie';
-  if (is('元韻')) return is('牙喉音') ? 'ue' : 'a';
+  if (is('元韻')) return is('牙喉音') ? 'üe' : 'a';
 
   // 山攝
   if (is('寒韻 開口')) return is('牙喉音') ? 'e' : 'a';
-  if (is('寒韻')) return is('幫組') ? 'o' : 'uo';
-  if (is('刪山韻 合口')) return is('孃來母') ? 'a' : 'ua';
+  if (is('寒韻')) return 'uo';
+  if (is('刪山韻 合口')) return 'ua';
   if (is('刪山韻')) return is('牙喉音') ? 'ia' : 'a';
-  if (is('仙先韻 合口')) return is('孃來母') ? 'üe' : is('知徹澄日母 或 莊章組') ? 'uo' : 'ue';
-  if (is('仙先韻')) return is('知徹澄日母 或 莊章組') ? 'e' : 'ie';
+  if (is('仙先韻 合口')) return 'üe';
+  if (is('仙先韻')) return 'ie';
 
   // 宕攝
-  if (is('宕攝 幫組')) return 'o';
   if (is('唐韻 開口 牙喉音')) return 'e';
   if (is('唐韻')) return 'uo';
-  if (is('陽韻')) return is('孃來母') ? 'üe' : is('知徹澄日母 或 莊章組') ? 'uo' : 'ue';
+  if (is('陽韻')) return is('幫組') ? 'o' : 'üe';
 
   // 梗攝
-  if (is('庚韻 二等 開口 莊組')) return 'a';
-  if (is('庚韻 二等 合口')) return is('疑影云以母') ? 'o' : 'uo';
-  if (is('耕韻 合口')) return 'uo';
-  if (is('庚韻 二等 或 耕韻')) return is('幫組') ? 'o' : 'e';
-  if (is('庚韻 三等 或 清青韻')) return is('合口') ? 'u' : 'i';
+  if (is('梗攝 二等')) return is('開口') ? 'e' : 'uo';
+  if (is('梗攝')) return is('合口') ? 'ü' : 'i';
 
   // 曾攝
-  if (is('登韻 合口')) return 'uo';
-  if (is('登韻')) return is('幫組') ? 'o' : 'e';
-  if (is('蒸韻 合口')) return 'u';
+  if (is('登韻 開口')) return 'e';
+  if (is('登韻')) return 'uo';
+  if (is('蒸韻 合口')) return 'ü';
   if (is('蒸韻')) return is('莊組') ? 'e' : 'i';
 
   // 深攝
@@ -211,7 +183,7 @@ function 入聲韻母規則() {
 
   // 咸攝
   if (is('覃談韻')) return is('牙喉音') ? 'e' : 'a';
-  if (is('鹽添嚴韻')) return is('知徹澄日母 或 莊章組') ? 'e' : 'ie';
+  if (is('鹽添嚴韻')) return 'ie';
   if (is('咸銜凡韻')) return is('牙喉音') ? 'ia' : 'a';
 
   throw new Error('無韻母規則');
@@ -234,24 +206,48 @@ function 聲調規則() {
   throw new Error('無聲調規則');
 }
 
-if (is('日母 止攝 開口')) return 'er' + 聲調規則();
-
 let 聲母 = 聲母規則();
 let 韻母 = is('舒聲') ? 舒聲韻母規則() : 入聲韻母規則();
 let 聲調 = 聲調規則();
 
-if (is('牙喉音') && is('東韻 三等 或 鍾江韻 或 止攝 開口') || is('精組 或 牙喉音') && is(`\
-魚虞眞文欣元仙先肴宵蕭清青蒸尤幽侵凡嚴銜咸鹽添韻 或 \
-佳夬皆廢祭齊刪山麻陽韻 開口 或 \
-歌庚韻 三等 或 \
-陽韻 合口 入聲`)) 聲母 = {
+if (['i', 'ü'].includes(韻母[0])) 聲母 = {
   g: 'j', k: 'q', h: 'x',
   z: 'j', c: 'q', s: 'x',
-  '': 'y',
-}[聲母];
+}[聲母] || 聲母;
 
-if (聲母 === 'w' && 韻母 === 'ui') 韻母 = 'ei';
-if (聲母 === 'y' && 韻母 === 'iu') 韻母 = 'ou';
-if ((聲母 === 'y' && 韻母.startsWith('i') || 聲母 === 'w' && 韻母.startsWith('u')) && 'aeiou'.includes(韻母[1])) 韻母 = 韻母.slice(1);
+if (韻母 === 'er') {
+  if (聲母 === 'r') 聲母 = '';
+  else if (!['z', 'c', 's'].includes(聲母[0])) 韻母 = 'i';
+}
+
+if (['n', 'l'].includes(聲母) && ['ua', 'uai', 'uang', 'uei'].includes(韻母)) 韻母 = 韻母.slice(1);
+if (韻母[0] === 'ü' && !(['n', 'l'].includes(聲母) && ['ü', 'üe'].includes(韻母))) {
+  if (!聲母) 聲母 = 'y';
+  韻母 = 'u' + 韻母.slice(1);
+}
+
+if (['zh', 'sh', 'ch', 'r'].includes(聲母)) {
+  if (韻母.startsWith('i')) {
+    if (韻母[1] === 'n') 韻母 = 'e' + 韻母.slice(1);
+    if ('aeiou'.includes(韻母[1])) 韻母 = 韻母.slice(1);
+  }
+  if (韻母 === 'ue') 韻母 = 'uo';
+}
+
+if (['b', 'p', 'm', 'f', 'w'].includes(聲母) && 韻母[0] === 'u' && 'aeiou'.includes(韻母[1])) 韻母 = 韻母.slice(1);
+if (['f', 'w'].includes(聲母) && 韻母[0] === 'i') 韻母 = 韻母.slice(1) || 'ei';
+
+if (聲母) {
+  if (韻母 === 'er') 韻母 = 'i';
+} else {
+  if (韻母 === 'ong') 韻母 = 'ueng';
+  if (韻母[0] === 'i') 聲母 = 'y';
+  if (韻母[0] === 'u') 聲母 = 'w';
+  if (聲母 && 'aeiou'.includes(韻母[1])) 韻母 = 韻母.slice(1);
+}
+
+if (韻母 === 'iou') 韻母 = 聲母 === 'y' ? 'ou' : 'iu';
+if (韻母 === 'uei') 韻母 = 聲母 === 'w' ? 'ei' : 'ui';
+if (韻母 === 'uen') 韻母 = 聲母 === 'w' ? 'en' : 'un';
 
 return 聲母 + 韻母 + 聲調;
