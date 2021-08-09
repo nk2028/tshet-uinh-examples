@@ -221,7 +221,7 @@ if (['i', 'ü'].includes(韻母[0])) 聲母 = {
 
 if (韻母 === 'er') {
   if (聲母 === 'r') 聲母 = '';
-  else if (!['z', 'c', 's'].includes(聲母[0])) 韻母 = 'i';
+  else 韻母 = 'i';
 }
 
 if (['n', 'l'].includes(聲母) && ['ua', 'uai', 'uang', 'uei'].includes(韻母)) 韻母 = 韻母.slice(1);
@@ -233,26 +233,24 @@ if (韻母[0] === 'ü' && !(['n', 'l'].includes(聲母) && ['ü', 'üe'].include
 if (['zh', 'sh', 'ch', 'r'].includes(聲母)) {
   if (韻母.startsWith('i')) {
     if (韻母[1] === 'n') 韻母 = 'e' + 韻母.slice(1);
-    if ('aeiou'.includes(韻母[1])) 韻母 = 韻母.slice(1);
+    else if (韻母[1]) 韻母 = 韻母.slice(1);
   }
   if (韻母 === 'ue') 韻母 = 'uo';
 }
 
-if (['b', 'p', 'm', 'f', 'w'].includes(聲母) && 韻母[0] === 'u' && 'aeiou'.includes(韻母[1])) 韻母 = 韻母.slice(1);
+if (['b', 'p', 'm', 'f', 'w'].includes(聲母) && 韻母[0] === 'u' && 韻母[1]) 韻母 = 韻母.slice(1);
 if (['f', 'w'].includes(聲母) && 韻母[0] === 'i') 韻母 = 韻母.slice(1) || 'ei';
 
-if (聲母) {
-  if (韻母 === 'er') 韻母 = 'i';
-} else {
+if (!聲母) {
   if (韻母 === 'ong') 韻母 = 'ueng';
   if (韻母[0] === 'i') 聲母 = 'y';
   if (韻母[0] === 'u') 聲母 = 'w';
-  if (聲母 && 'aeiou'.includes(韻母[1])) 韻母 = 韻母.slice(1);
+  if (聲母 && 韻母[1] && 韻母[1] !== 'n') 韻母 = 韻母.slice(1);
 }
 
-if (韻母 === 'iou') 韻母 = 聲母 === 'y' ? 'ou' : 'iu';
-if (韻母 === 'uei') 韻母 = 聲母 === 'w' ? 'ei' : 'ui';
-if (韻母 === 'uen') 韻母 = 聲母 === 'w' ? 'en' : 'un';
+if (韻母 === 'iou') 韻母 = 'iu';
+if (韻母 === 'uei') 韻母 = 'ui';
+if (韻母 === 'uen') 韻母 = 'un';
 
 if (選項.標調方式 === '數字') return 聲母 + 韻母 + 聲調;
 return 聲母 + (聲調 ? 韻母.replace(/(.*)a|(.*)[eo]|(.*)[iu]/, "$&" + " ̄́̌̀"[聲調]) : 韻母);
