@@ -326,6 +326,7 @@ function 韻母善後處理(聲母, 韻母) {
       韻母.startsWith('ia') || 韻母.startsWith('io') || 韻母.startsWith('iu') ||
       韻母.startsWith('ua') || 韻母.startsWith('ue') || 韻母.startsWith('uo')
     ) && 翹舌或輕脣.includes(聲母)
+    && 韻母 !== 'iu' // iu 韻本身除外, 如: 手 shiu3
   ) {
     韻母 = 韻母.slice(1);
   }
