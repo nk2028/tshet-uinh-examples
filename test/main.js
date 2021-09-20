@@ -8,6 +8,7 @@ import {
   unt,
   unt_j,
   msoeg_v8,
+  mid_tang,
   chiangxhua,
   fanwan,
   putonghua,
@@ -35,6 +36,7 @@ assert_equal(panwuyun(音韻地位), "ɕiɛu˧˥");
 assert_equal(unt(音韻地位), "ɕjɛw˦˦˥");
 assert_equal(unt_j(音韻地位), "ɕe̋w");
 assert_equal(msoeg_v8(音韻地位), "çiɛuˀ");
+assert_equal(mid_tang(音韻地位), "ɕjɛw˦˥");
 assert_equal(chiangxhua(音韻地位), "ɕɉɐ́w \n[ɕj̈ɐ́w]");
 assert_equal(fanwan(音韻地位), "shiu2");
 assert_equal(putonghua(音韻地位), "shǎo");
