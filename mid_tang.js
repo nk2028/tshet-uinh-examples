@@ -231,7 +231,7 @@ function 韻母預處理() {
   throw new Error('無介音規則');
 }
 
-function 韻母开合處理() {
+function 韻母開合處理() {
   let 韻母列表 = 韻母預處理().split('|');
   if (韻母列表.length === 1) return 韻母列表[0];
   // 一等唇音取合口，二三四等唇音取開口
@@ -240,7 +240,7 @@ function 韻母开合處理() {
 }
 
 function get韻母() {
-  let 韻母 = 韻母开合處理();
+  let 韻母 = 韻母開合處理();
   韻母 = 韻母.replace('ʕ', 選項.二等介音);
   韻母 = 韻母.replace('ɤ', 選項.魚虞模[2]);
   韻母 = 韻母.replace('o', 選項.魚虞模[6]);
