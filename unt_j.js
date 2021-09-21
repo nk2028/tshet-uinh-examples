@@ -155,10 +155,11 @@ const is锐 = is锐前 || is锐后 || is('來母');  // [COR]
 // 函数：将声母的音韵地位转换为音位，包含开合信息
 function getInitial() {
   let result = getInitialWithoutRounding();
+  if ('打爹'.includes(字頭) && is('知母')) result = 't';
+
   // 音韵学术语开合对应 [±rnd]。如果主要调音部位就是 [LAB]〈帮组〉，那么本文一律视为 [−rnd]
   // 没有开合对立的韵母一般视为开口，但虞韵本文视为鱼韵对应的合口；平行地，钟韵也视为合口
-  // 𠑆𦑣䎎小韵算合口
-  if (is('合口 或 虞鍾韻 或 知組 嚴凡韻') && !is('幫組')) { // [+rnd]
+  if (is('合口 或 虞鍾韻') && !is('幫組')) { // [+rnd]
     result += 'ʷ';
     result = result.replace('ʰʷ', 'ʷʰ');
   } // else [−rnd]
@@ -198,7 +199,9 @@ function getGlide() {
 
   // 钝音声母分三 A、B、C
   if (is('重紐B類 或 庚臻韻')) return 'ɹ';
+  if (is('溪母 幽韻 平聲')) return 'ɹ'; // “𠁫”小韵归三 B
   if ('抑𡊁烋'.includes(字頭)) return 'ɹ'; // 蒸韵“抑𡊁”二字、幽韵“烋”字归三 B
+  if (字頭 == '揭' && is('見母 仙韻')) return 'ɹ'; // “孑”小韵的“揭”字归三 B
   if (is('云母 支脂祭眞臻仙宵麻庚清蒸幽侵鹽韻')) return 'ɹ'; // 云母前元音韵归三 B
   if (is('重紐A類 或 麻蒸清幽韻')) return 'j'; // 三 A
   return 'j̈'; // 三 C
@@ -342,6 +345,7 @@ let tone = getTone();
      G -> ∅ / [COR, −ant]__
 */
 if (is('知莊章組 或 日以母')) glide = '';
+if (字頭 == '爹' && is('知母')) glide = 'j'; // 特例
 
 /**
 (2)  舌面介音被唇音或唇化声母同化〈帮组或合口三 A、C〉
@@ -445,10 +449,6 @@ if (選項.豪覃韵韵核推导为ʌ && !glide && [...'mpw'].includes(coda)) {
      e͇      -> œ͇ / __w
      {e, ə} -> œ / [LAB]G__m
 */
-// 先转换𠑆𦑣䎎小韵，它们属于凡韵
-if (is锐 && initial.includes('ʷ') && [...'mp'].includes(coda)) {
-  if (nucleus == 'e') nucleus = 'ə';
-}
 if (選項.肴凡韵韵核推导为œ) {
   if (nucleus == 'e͇' && coda == 'w') nucleus = 'œ͇';
   if (nucleus == 'ə' && (initial.includes('ʷ') || is('幫組')) && [...'mp'].includes(coda)) nucleus = 'œ';
@@ -537,6 +537,8 @@ if ('iɨʉuɪ'.includes(nucleus)) {
 */
 if ('iɨʉ'.includes(nucleus[0])) {
   if (['j', 'ɥ', 'j̈', 'ɥ̈'].includes(glide)) glide = '';
+  // 特别地，“矣”小韵算零声母
+  if (initial == 'ɹ' && !coda) initial = '';
 }
 
 /**
@@ -576,6 +578,9 @@ if (選項.半元音韵尾写成元音) {
 }
 
 if (is('二等')) {
+  if ('打冷'.includes(字頭)) { // “打冷”两小韵不是二等元音
+    nucleus = nucleus.replace('͇', '');
+  }
   if (選項.二等元音写成r音钩) {
     nucleus = nucleus.replace('͇', '˞');
   } else if (選項.二等元音写成双下横线) {
