@@ -56,7 +56,7 @@ function 聲母規則() {
   if (is('見母')) return 'g';
   if (is('溪母')) {
     if (is('尤侵韻')) return 'j';
-    if (is('合口 或 支齊模韻') && !is('元陽先夬韻')) return 'k';
+    if (is('合口 二三四等')) return 'k';
     return 'h';
   }
   if (is('羣母')) return is('平聲') ? 'k' : 'g';
@@ -67,7 +67,7 @@ function 聲母規則() {
     return 'h';
   }
   if (is('匣母')) {
-    if (is('合口 或 四等 或 模韻') && !is('齊韻')) return 'j'; // 非 yu 前為 w，詳後
+    if (is('合口 或 模韻 或 四等') && !is('齊韻 開口')) return 'j'; // 非 yu 前為 w，詳後
     return 'h';
   }
   if (is('影云以母')) {
@@ -253,7 +253,7 @@ if (is('入聲') && 聲調 === '1' && is長元音(韻母)) 聲調 = '3';
 
 if (is('合口 或 模韻') && !['eo', 'oe', 'yu'].some((x) => 韻母.startsWith(x))) { // 合口字
   if (聲母 === 'g' && !韻母.startsWith('u')) 聲母 = 'gw';
-  else if (聲母 === 'k' && !韻母.startsWith('i')) 聲母 = is('一等') && !is('魂唐韻') ? 'f' : 'kw';
+  else if (聲母 === 'k' && !韻母.startsWith('i')) 聲母 = 'kw';
   else if (聲母 === 'h' && !韻母.startsWith('i')) 聲母 = 'f';
   else if (聲母 === 'j') 聲母 = 'w';
   else if (聲母 === '') 聲母 = 'w';
