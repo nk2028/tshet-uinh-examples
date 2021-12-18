@@ -73,7 +73,7 @@ function 韻母規則() {
   if (is('脂韻 合口')) return is('重紐A類') ? 'yi' : 'ʉi';//皆三合
   if (is('脂韻 開口')) return is('重紐A類') ? 'i' : 'ɨi';//皆三開
   if (is('之韻')) return 'ɨ';//皆三開
-  if (is('微韻')) return  is('開口') ? 'ɨui' : 'ʉui';//皆三等
+  if (is('微韻')) return  is('開口') ? 'ɨəi' : 'ʉəi';//皆三等
   // 遇攝 
   if (is('魚韻')) return 'ɨo';//皆三開
   if (is('虞韻')) return 'ʉo';//皆三合
@@ -82,14 +82,13 @@ function 韻母規則() {
   if (is('齊韻')) return is('開口') ? 'iɛ' :'yɛ';//皆四等
   if (is('祭韻 合口')) return is('重紐A類') ? 'yɛɿ' : 'ʉɛɿ';//皆三合
   if (is('祭韻 開口')) return is('重紐A類') ? 'iɛɿ' : 'ɨɛɿ';//皆三開
-  if (is('泰韻 合口')) return is('重紐A類') ? 'yæɿ' : 'ʉæɿ';//皆三合
-  if (is('泰韻 開口')) return is('重紐A類') ? 'iæɿ' : 'ɨæɿ';//皆三開
+  if (is('泰韻')) return is('開口') ? 'æɿ' : 'uæɿ';//皆一等
   if (is('佳韻')) return is('開口') ? 'ɻɛ' :'ɻuɛ';//皆二等
   if (is('皆韻')) return is('開口') ? 'ɻai' :'ɻuai';//皆二等
   if (is('夬韻')) return is('開口') ? 'ɻæɿ' :'ɻuæɿ';//皆二等
   if (is('咍韻')) return 'ai';//皆一開
   if (is('灰韻')) return 'uai';//皆一合
-  if (is('廢韻')) return is('開口') ? 'ɨəɿ' :'ʉəɿ';//皆三等
+  if (is('廢韻')) return is('開口') ? 'ɨæɿ' :'ʉæɿ';//皆三等
   // 臻攝 
   if (is('眞韻 合口')) return is('重紐A類') ? 'yən' : 'ʉən';//皆三合
   if (is('眞韻 開口')) return is('重紐A類') ? 'iən' : 'ɨən';//皆三開
@@ -100,20 +99,19 @@ function 韻母規則() {
   // if (is('元韻')) return 'yan';
   if (is('痕韻')) return 'on';//皆一開
   if (is('魂韻')) return 'uon';//皆一合
-  if (is('諄韻')) return 'ʉn';//皆三合
+  if (is('諄韻')) return 'ʉən';//皆三合 即眞B合
   // 山攝 
   if (is('寒桓韻')) return is('三等') ? 'ɨan' : is('開口') ? 'an' : 'uan';//皆一開，除了䔾三開
   if (is('刪韻')) return is('開口') ? 'ɻan' : 'ɻuan';//皆二等
   if (is('山韻')) return is('開口') ? 'ɻæn' : 'ɻuæn';//皆二等
-  if (is('元韻 合口')) return is('重紐A類') ? 'yɒn' : 'ʉɒn';//皆三等
-  if (is('元韻 開口')) return is('重紐A類') ? 'iɒn' : 'ɨɒn';//皆三等
+  if (is('元韻')) return is('開口') ? 'ɨan' : 'ʉan';//皆三等
   if (is('仙韻 合口')) return is('重紐A類') ? 'yæn' : 'ʉæn';//皆三等
   if (is('仙韻 開口')) return is('重紐A類') ? 'iæn' : 'ɨæn';//皆三等
   if (is('先韻')) return is('開口') ? 'ian' : 'yan';//皆四等
   // 效攝 
-  if (is('蕭韻')) return 'iæu';//皆四開 有問題？
+  if (is('蕭韻')) return 'iæu';//皆四開
   if (is('宵韻')) return is('重紐A類') ? 'iau' : 'ɨau';//皆三開
-  if (is('肴韻')) return 'ɻau';//皆二開 is('莊組') ? 'au' : 'ɻau';//皆二開
+  if (is('肴韻')) return 'ɻau';//皆二開
   if (is('豪韻')) return 'au';//皆一開
   // 果攝 
   if (is('歌戈韻 一等')) return is('開口') ? 'ɒ' : 'uɒ';
