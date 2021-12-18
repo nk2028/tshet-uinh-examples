@@ -134,7 +134,7 @@ function 韻母規則() {
   // 流攝 
   if (is('尤韻')) return 'ɨu';//皆三開
   if (is('侯韻')) return 'u';//皆一開
-  if (is('幽韻')) return 'ɨʉ';//皆三開
+  if (is('幽韻')) return 'ɨou';//皆三開
   // 深攝 
   if (is('侵韻')) return is('重紐A類') ? 'im' : 'ɨm';//皆三開
   // 咸攝 
