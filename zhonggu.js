@@ -81,7 +81,7 @@ function 韻母規則() {
   if (is('虞韻')) return 'ʉo';//皆三合
   if (is('模韻')) return 'o';//皆一開
   // 蟹攝 
-  if (is('齊韻')) return is('合口') ? 'yɛ' : 'iɛ';//皆四等
+  if (is('齊韻')) return is('合口') ? 'yɛi' : 'iɛi';//皆四等
   if (is('祭韻 合口')) return is('重紐A類') ? 'yɛɿ' : 'ʉɛɿ';//皆三合
   if (is('祭韻') && is('幫組 或 開口')) return is('重紐A類') ? 'iɛɿ' : 'ɨɛɿ';//皆三開
   if (is('泰韻')) return is('合口') ? 'uæɿ' : 'æɿ';//皆一等
