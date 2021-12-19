@@ -75,22 +75,22 @@ function 韻母規則() {
   if (is('脂韻 合口')) return is('重紐A類') ? 'yi' : 'ʉi';//皆三合
   if (is('脂韻') && is('幫組 或 開口')) return is('重紐A類') ? 'i' : 'ɨi';//皆三開
   if (is('之韻')) return 'ɨ';//皆三開
-  if (is('微韻')) return  is('開口') ? 'ɨəi' : 'ʉəi';//皆三等
+  if (is('微韻')) return  is('合口') ? 'ʉəi' : 'ɨəi';//皆三等
   // 遇攝 
   if (is('魚韻')) return 'ɨo';//皆三開
   if (is('虞韻')) return 'ʉo';//皆三合
   if (is('模韻')) return 'o';//皆一開
   // 蟹攝 
-  if (is('齊韻')) return is('開口') ? 'iɛ' :'yɛ';//皆四等
+  if (is('齊韻')) return is('合口') ? 'yɛ' : 'iɛ';//皆四等
   if (is('祭韻 合口')) return is('重紐A類') ? 'yɛɿ' : 'ʉɛɿ';//皆三合
   if (is('祭韻') && is('幫組 或 開口')) return is('重紐A類') ? 'iɛɿ' : 'ɨɛɿ';//皆三開
-  if (is('泰韻')) return is('開口') ? 'æɿ' : 'uæɿ';//皆一等
-  if (is('佳韻')) return is('開口') ? 'ʅɛ' :'ʯɛ';//皆二等
-  if (is('皆韻')) return is('開口') ? 'ʅai' :'ʯai';//皆二等
-  if (is('夬韻')) return is('開口') ? 'ʅæɿ' :'ʯæɿ';//皆二等
+  if (is('泰韻')) return is('合口') ? 'uæɿ' : 'æɿ';//皆一等
+  if (is('佳韻')) return is('合口') ? 'ʯɛ' : 'ʅɛ';//皆二等
+  if (is('皆韻')) return is('合口') ? 'ʯai' : 'ʅai';//皆二等
+  if (is('夬韻')) return is('合口') ? 'ʯæɿ' : 'ʅæɿ';//皆二等
   if (is('咍韻')) return 'ai';//皆一開
   if (is('灰韻')) return 'uai';//皆一合
-  if (is('廢韻')) return is('開口') ? 'ɨæɿ' :'ʉæɿ';//皆三等
+  if (is('廢韻')) return is('合口') ? 'ʉæɿ' : 'ɨæɿ';//皆三等
   // 臻攝 
   if (is('眞韻 合口')) return is('重紐A類') ? 'yən' : 'ʉən';//皆三合
   if (is('眞韻') && is('幫組 或 開口')) return is('重紐A類') ? 'iən' : 'ɨən';//皆三開
@@ -103,36 +103,36 @@ function 韻母規則() {
   if (is('魂韻')) return 'uon';//皆一合
   if (is('諄韻')) return 'ʉən';//皆三合 即眞B合
   // 山攝 
-  if (is('寒桓韻')) return is('三等') ? 'ɨan' : is('開口') ? 'an' : 'uan';//皆一開，除了䔾三開
-  if (is('刪韻')) return is('開口') ? 'ʅan' : 'ʯan';//皆二等
-  if (is('山韻')) return is('開口') ? 'ʅæn' : 'ʯæn';//皆二等
-  if (is('元韻')) return is('開口') ? 'ɨan' : 'ʉan';//皆三等
+  if (is('寒桓韻')) return is('三等') ? 'ɨan' : is('合口') ? 'uan' : 'an';//皆一開，除了䔾三開
+  if (is('刪韻')) return is('合口') ? 'ʯan' : 'ʅan';//皆二等
+  if (is('山韻')) return is('合口') ? 'ʯæn' : 'ʅæn';//皆二等
+  if (is('元韻')) return is('合口') ? 'ʉan' : 'ɨan';//皆三等
   if (is('仙韻 合口')) return is('重紐A類') ? 'yæn' : 'ʉæn';//皆三等
   if (is('仙韻') && is('幫組 或 開口')) return is('重紐A類') ? 'iæn' : 'ɨæn';//皆三等
-  if (is('先韻')) return is('開口') ? 'ian' : 'yan';//皆四等
+  if (is('先韻')) return is('合口') ? 'yan' : 'ian';//皆四等
   // 效攝 
   if (is('蕭韻')) return 'iæu';//皆四開
   if (is('宵韻')) return is('重紐A類') ? 'iau' : 'ɨau';//皆三開
   if (is('肴韻')) return 'ʅau';//皆二開
   if (is('豪韻')) return 'au';//皆一開
   // 果攝 
-  if (is('歌戈韻 一等')) return is('開口') ? 'ɒ' : 'uɒ';
-  if (is('歌戈韻 三等')) return is('開口') ? 'ɨɒ' : 'ʉɒ';
+  if (is('歌戈韻 一等')) return is('合口') ? 'uɒ' : 'ɒ';
+  if (is('歌戈韻 三等')) return is('合口') ? 'ʉɒ' : 'ɨɒ';
   // 假攝 
-  if (is('麻韻 二等')) return is('開口') ? 'ʅa' : 'ʯa';
+  if (is('麻韻 二等')) return is('合口') ? 'ʯa' : 'ʅa';
   if (is('麻韻 三等')) return 'ɨa';
   // 宕攝 
-  if (is('陽韻')) return is('開口') ? 'ɨaŋ' : 'ʉaŋ';//皆三等
-  if (is('唐韻')) return is('開口') ? 'aŋ' : 'uaŋ';//皆一等
+  if (is('陽韻')) return is('合口') ? 'ʉaŋ' : 'ɨaŋ';//皆三等
+  if (is('唐韻')) return is('合口') ? 'uaŋ' : 'aŋ';//皆一等
   // 梗攝 
-  if (is('庚韻 二等')) return is('開口') ? 'ʅæŋ' : 'ʯæŋ';
-  if (is('庚韻 三等')) return is('開口') ? 'ɨæŋ' : 'ʉæŋ';
-  if (is('耕韻')) return is('開口') ? 'ʅɛŋ' : 'ʯɛŋ';//皆二等
-  if (is('清韻')) return is('開口') ? 'iæŋ' : 'yæŋ';//皆三等A類
-  if (is('青韻')) return is('開口') ? 'iɛŋ' : 'yɛŋ';//皆四等
+  if (is('庚韻 二等')) return is('合口') ? 'ʯæŋ' : 'ʅæŋ';
+  if (is('庚韻 三等')) return is('合口') ? 'ʉæŋ' : 'ɨæŋ';
+  if (is('耕韻')) return is('合口') ?  'ʯɛŋ' : 'ʅɛŋ';//皆二等
+  if (is('清韻')) return is('合口') ?  'yæŋ' : 'iæŋ';//皆三等A類
+  if (is('青韻')) return is('合口') ? 'yɛŋ' : 'iɛŋ';//皆四等
   // 曾攝 
-  if (is('蒸韻')) return is('開口') ? 'ɨəŋ' : 'ʉəŋ';//皆三等
-  if (is('登韻')) return is('開口') ? 'əŋ' : 'uəŋ';//皆一等
+  if (is('蒸韻')) return is('合口') ? 'ʉəŋ' : 'ɨəŋ';//皆三等
+  if (is('登韻')) return is('合口') ? 'uəŋ' : 'əŋ';//皆一等
   // 流攝 
   if (is('尤韻')) return 'ɨu';//皆三開
   if (is('侯韻')) return 'u';//皆一開
@@ -167,7 +167,7 @@ let 聲調 = 聲調規則();
 if (is('入聲')) {
   if (韻母.endsWith('m')) 韻母 = `${韻母.slice(0, -1)}p`;
   else if (韻母.endsWith('n')) 韻母 = `${韻母.slice(0, -1)}t`;
-  else if (韻母.endsWith('ŋ')) 韻母 = `${韻母.slice(0, -2)}k`;
+  else if (韻母.endsWith('ŋ')) 韻母 = `${韻母.slice(0, -1)}k`;
 }
 
 if (韻母.endsWith('ɿ')) {
