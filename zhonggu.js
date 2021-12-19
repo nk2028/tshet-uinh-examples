@@ -53,7 +53,7 @@ function 聲母規則() {
     case '常': return 'ɟʝ';
     case '書': return 'ç';
     case '船': return 'ʝ';
-    
+
     case '以': return 'ʎ';
     case '日': return 'ɲ';
 
@@ -71,9 +71,9 @@ function 韻母規則() {
   if (is('江韻')) return 'ʅɒŋ';//皆二開
   // 止攝 
   if (is('支韻 合口')) return is('重紐A類') ? 'yɪ' : 'ʉɪ';//皆三合
-  if (is('支韻 開口')) return is('重紐A類') ? 'iɪ' : 'ɨɪ';//皆三開
+  if (is('支韻') && is('幫組 或 開口')) return is('重紐A類') ? 'iɪ' : 'ɨɪ';//皆三開
   if (is('脂韻 合口')) return is('重紐A類') ? 'yi' : 'ʉi';//皆三合
-  if (is('脂韻 開口')) return is('重紐A類') ? 'i' : 'ɨi';//皆三開
+  if (is('脂韻') && is('幫組 或 開口')) return is('重紐A類') ? 'i' : 'ɨi';//皆三開
   if (is('之韻')) return 'ɨ';//皆三開
   if (is('微韻')) return  is('開口') ? 'ɨəi' : 'ʉəi';//皆三等
   // 遇攝 
@@ -83,7 +83,7 @@ function 韻母規則() {
   // 蟹攝 
   if (is('齊韻')) return is('開口') ? 'iɛ' :'yɛ';//皆四等
   if (is('祭韻 合口')) return is('重紐A類') ? 'yɛɿ' : 'ʉɛɿ';//皆三合
-  if (is('祭韻 開口')) return is('重紐A類') ? 'iɛɿ' : 'ɨɛɿ';//皆三開
+  if (is('祭韻') && is('幫組 或 開口')) return is('重紐A類') ? 'iɛɿ' : 'ɨɛɿ';//皆三開
   if (is('泰韻')) return is('開口') ? 'æɿ' : 'uæɿ';//皆一等
   if (is('佳韻')) return is('開口') ? 'ʅɛ' :'ʯɛ';//皆二等
   if (is('皆韻')) return is('開口') ? 'ʅai' :'ʯai';//皆二等
@@ -93,7 +93,7 @@ function 韻母規則() {
   if (is('廢韻')) return is('開口') ? 'ɨæɿ' :'ʉæɿ';//皆三等
   // 臻攝 
   if (is('眞韻 合口')) return is('重紐A類') ? 'yən' : 'ʉən';//皆三合
-  if (is('眞韻 開口')) return is('重紐A類') ? 'iən' : 'ɨən';//皆三開
+  if (is('眞韻') && is('幫組 或 開口')) return is('重紐A類') ? 'iən' : 'ɨən';//皆三開
   if (is('臻韻')) return 'ɨən';//皆莊組三開
   if (is('欣韻')) return 'ɨon';//皆牙喉音三開
   if (is('文韻')) return 'ʉon';//皆三合
@@ -108,7 +108,7 @@ function 韻母規則() {
   if (is('山韻')) return is('開口') ? 'ʅæn' : 'ʯæn';//皆二等
   if (is('元韻')) return is('開口') ? 'ɨan' : 'ʉan';//皆三等
   if (is('仙韻 合口')) return is('重紐A類') ? 'yæn' : 'ʉæn';//皆三等
-  if (is('仙韻 開口')) return is('重紐A類') ? 'iæn' : 'ɨæn';//皆三等
+  if (is('仙韻') && is('幫組 或 開口')) return is('重紐A類') ? 'iæn' : 'ɨæn';//皆三等
   if (is('先韻')) return is('開口') ? 'ian' : 'yan';//皆四等
   // 效攝 
   if (is('蕭韻')) return 'iæu';//皆四開
@@ -119,7 +119,7 @@ function 韻母規則() {
   if (is('歌戈韻 一等')) return is('開口') ? 'ɒ' : 'uɒ';
   if (is('歌戈韻 三等')) return is('開口') ? 'ɨɒ' : 'ʉɒ';
   // 假攝 
-  if (is('麻韻 二等')) is('開口') ? 'ʅa' : 'ʯa';
+  if (is('麻韻 二等')) return is('開口') ? 'ʅa' : 'ʯa';
   if (is('麻韻 三等')) return 'ɨa';
   // 宕攝 
   if (is('陽韻')) return is('開口') ? 'ɨaŋ' : 'ʉaŋ';//皆三等
@@ -136,9 +136,9 @@ function 韻母規則() {
   // 流攝 
   if (is('尤韻')) return 'ɨu';//皆三開
   if (is('侯韻')) return 'u';//皆一開
-  if (is('幽韻')) return 'iou';//皆三A開口
+  if (is('幽韻')) return 'iu';//皆三A開口
   // 深攝 
-  if (is('侵韻')) return is('重紐A類') ? 'im' : 'ɨm';//皆三開
+  if (is('侵韻')) return is('重紐A類') ? 'iəm' : 'ɨəm';//皆三開
   // 咸攝 
   if (is('覃韻')) return 'ɒm';//皆一開
   if (is('談韻')) return 'am';//皆一開
