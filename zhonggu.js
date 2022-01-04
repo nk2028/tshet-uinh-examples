@@ -5,6 +5,55 @@
  * @author uliloewi
  */
 
+if (!音韻地位) return [
+  ['書寫系統', [2, '拼音方案', '國際音標']],
+];
+
+const 標號表 = {
+  // p:  'p', pʰ:  'ph', b:  'b', m:  'm',
+  // t: 't', tʰ: 'th', d: 'd', n: 'n',
+  // ts: 'ts', tsʰ: 'tsh', dz: 'dz', s: 's', z: 'z',
+  // k: 'k', kʰ: 'kh', g: 'g', ŋ: 'ng',
+  // ʔ: 'q', x: 'h', ɣ: 'x', l: 'l',
+  // ʈ: 'tc', ʈʰ: 'tch', ɖ: 'dc', ɳ: 'n',
+  // tʂ: 'tsc', tʂʰ: 'tsch', dʐ: 'dzc', ʂ: 'sc', ʐ: 'zc',
+  // cç: 'tsj', cçʰ: 'tsjh', ɟʝ: 'dzj', ç: 'sj', ʝ: 'zj',
+  // ʎ: 'j', ɲ: 'nj', 以上輔音等於：
+  ʰ:  'h', p:  'p', b:  'b', m:  'm',
+  t: 't', d: 'd', n: 'n', s: 's', z: 'z', l: 'l',
+  k: 'k', g: 'g', ŋ: 'ng', ʔ: 'q', x: 'h', ɣ: 'x',
+  ʈ: 'tc', ɖ: 'dc', ɳ: 'n', ʂ: 'sc', ʐ: 'zc',
+  c: 't', ɟ: 'd', ç: 'sj', ʝ: 'zj', ʎ: 'j', ɲ: 'nj',
+
+  // 元音表 
+  u: 'u', ʅ: 'r', ʯ: 'w', ɨ: 'y', ʉ: 'v', i: 'i', y: 'ü', //等呼
+  o: 'o', ɪ: 'ï', ə: 'ë', ɛ: 'e', a: 'a', æ: 'ä', ɒ: 'ö',
+};
+
+const 調值標調 = {
+  '平聲':'˧˧',
+  '上聲':'˨˦',
+  '去聲':'˧˩',
+  '入聲':'˥',
+};
+
+const 附標標調 = {
+  '上聲': '́',
+  '去聲': '̀',
+};
+
+const 元音 = 'aeiouyäöëï';
+const 元音Re = new RegExp("[" + 元音 + "]");
+const 元音附標 = '̃̈';
+
+function 音標轉字母(s) {
+  var res = "";
+  for (var i = 0; i < s.length; i++) {
+      res += 標號表[s.charAt(i)];
+  }
+  return res;
+};
+
 const is = (x) => 音韻地位.屬於(x);
 
 function 聲母規則() {
@@ -150,12 +199,38 @@ function 韻母規則() {
   throw new Error('無韻母規則');
 }
 
-function 聲調規則() {
-  if (is('平聲')) return '˧˧';
-  if (is('上聲')) return '˨˦';
-  if (is('去聲')) return '˧˩';
-  if (is('入聲')) return '˥';
-  throw new Error('無聲調規則');
+function 聲調規則(inzie) {
+  let 聲調;
+  let 音節 = String(inzie);
+  if (is('平聲')) 聲調 = '平聲';
+  else if (is('上聲')) 聲調 = '上聲';   
+  else if (is('去聲')) 聲調 = '去聲';   
+  else if (is('入聲')) 聲調 = '入聲';
+  else throw new Error('無聲調規則');
+  if (選項.書寫系統 !== '國際音標') {
+    if (is('上聲 或 去聲'))
+    {
+      let 標調位置;
+      if (音節.match(元音Re)) {
+        let 第一個元音 = 音節.match(元音Re)[0];
+        標調位置 = 音節.indexOf(第一個元音);
+        if (元音.includes(音節[標調位置 + 1])) 標調位置 += 1; // 不要標在介音高頭
+        if (元音附標.includes(音節[標調位置 + 1])) 標調位置 += 1; // 不要標在附標下頭
+        if (音節.includes('a')) 標調位置 = 音節.indexOf('a');
+        else if (音節.includes('ä')) 標調位置 = 音節.indexOf('ä');
+        else if (音節.includes('ö')) 標調位置 = 音節.indexOf('ö');
+        else if (音節.includes('e')) 標調位置 = 音節.indexOf('e');
+        else if (音節.includes('ë')) 標調位置 = 音節.indexOf('ë');
+        else if (音節.includes('u')) 標調位置 = 音節.indexOf('u');
+      } else {
+        標調位置 = 音節.indexOf('̩');
+      }
+      標調位置 += 1;
+      return 音節.slice(0, 標調位置) + 附標標調[聲調] + 音節.slice(標調位置);
+    }
+    else return 音節;
+  } 
+  else return 音節 + 調值標調[聲調];
 }
 
 let 聲母 = 聲母規則();
@@ -172,5 +247,11 @@ if (is('入聲')) {
 if (韻母.endsWith('ʎ')) {
   聲調 = '˧˩';
 }
-
-return 聲母 + 韻母 + 聲調;
+if (選項.書寫系統 === '國際音標') {
+  return  聲調規則(聲母 + 韻母);
+}
+else
+{
+  let 音節 = 音標轉字母(聲母 + 韻母);
+  return  聲調規則(音節);
+}
