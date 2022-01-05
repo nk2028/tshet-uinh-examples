@@ -26,7 +26,7 @@ const 標號表 = {
   c: 't', ɟ: 'd', ç: 'sj', ʝ: 'zj', ʎ: 'j', ɲ: 'nj',
 
   // 元音表 
-  u: 'u', ʅ: 'r', ʯ: 'w', ɨ: 'y', ʉ: 'v', i: 'i', y: 'ü', //等呼
+  u: 'u', ʅ: 'r', ʯ: 'w', ɨ: 'y', ʉ: 'ü', i: 'i', y: 'v', //等呼
   o: 'o', ɪ: 'ï', ə: 'ë', ɛ: 'e', a: 'a', æ: 'ä', ɒ: 'ö',
 };
 
@@ -142,11 +142,11 @@ function 韻母規則() {
   if (is('灰韻')) return 'uɒi';//皆一合
   if (is('廢韻')) return is('合口') ? 'ʉɒʎ' : 'ɨɒʎ';//皆三等
   // 臻攝 
-  if (is('眞韻 合口')) return is('重紐A類') ? 'yin' : 'ʉɨn';//皆三合
-  if (is('眞韻') && is('幫組 或 開口')) return is('重紐A類') ? 'in' : 'ɨn';//皆三開
-  if (is('臻韻')) return 'ɨən';//皆莊組三開
-  if (is('欣韻')) return 'ɨon';//皆牙喉音三開
-  if (is('文韻')) return 'ʉən';//皆三合
+  if (is('眞韻 合口')) return is('重紐A類') ? 'yən' : 'ʉən';//皆三合
+  if (is('眞韻') && is('幫組 或 開口')) return is('重紐A類') ? 'iən' : 'ɨən';//皆三開
+  if (is('臻韻')) return 'ɨn';//皆莊組三開
+  if (is('欣韻')) return 'ɨn';//皆牙喉音三開
+  if (is('文韻')) return 'ʉn';//皆三合
   if (is('痕韻')) return 'on';//皆一開
   if (is('魂韻')) return 'uon';//皆一合
   if (is('諄韻')) return 'ʉɨn';//皆三合 即眞B合
@@ -154,7 +154,7 @@ function 韻母規則() {
   if (is('寒桓韻')) return is('三等') ? 'ɨan' : is('合口') ? 'uan' : 'an';//皆一等，除了䔾三開
   if (is('刪韻')) return is('合口') ? 'ʯan' : 'ʅan';//皆二等
   if (is('山韻')) return is('合口') ? 'ʯæn' : 'ʅæn';//皆二等
-  if (is('元韻')) return is('合口') ? 'ʉɒn' : 'ɨɒn';//皆三等
+  if (is('元韻')) return is('合口') ? 'ʉon' : 'ɨon';//皆三等
   if (is('仙韻 合口')) return is('重紐A類') ? 'yæn' : 'ʉæn';//皆三等
   if (is('仙韻') && is('幫組 或 開口')) return is('重紐A類') ? 'iæn' : 'ɨæn';//皆三等
   if (is('先韻')) return is('合口') ? 'yɛn' : 'iɛn';//皆四等
