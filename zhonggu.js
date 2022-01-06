@@ -1,7 +1,4 @@
-/* 柳漫中古擬音
- *
- * 
- *
+/* 柳漫廣通中古擬音
  * @author uliloewi
  */
 
@@ -42,7 +39,7 @@ const 附標標調 = {
   '去聲': '̀',
 };
 
-const 元音 = 'aeiouyäöëï';
+const 元音 = 'aeiouyäüöëï';
 const 元音Re = new RegExp("[" + 元音 + "]");
 const 元音附標 = '̃̈';
 
