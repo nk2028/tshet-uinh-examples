@@ -149,7 +149,7 @@ function 韻母規則() {
   if (is('文韻')) return 'ʉn';//皆三合
   if (is('痕韻')) return 'on';//皆一開
   if (is('魂韻')) return 'uon';//皆一合
-  if (is('諄韻')) return 'ʉɨn';//皆三合 即眞B合
+  if (is('諄韻')) return 'ʉən';//皆三合 即眞B合
   // 山攝 
   if (is('寒桓韻')) return is('三等') ? 'ɨan' : is('合口') ? 'uan' : 'an';//皆一等，除了䔾三開
   if (is('刪韻')) return is('合口') ? 'ʯan' : 'ʅan';//皆二等
