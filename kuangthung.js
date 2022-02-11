@@ -152,7 +152,7 @@ function 韻母規則() {
   if (is('寒桓韻')) return is('三等') ? 'ɨan' : is('合口') ? 'uan' : 'an';//皆一等，除了䔾三開
   if (is('刪韻')) return is('合口') ? 'ʯan' : 'ʅan';//皆二等
   if (is('山韻')) return is('合口') ? 'ʯæn' : 'ʅæn';//皆二等
-  if (is('元韻')) return is('合口') ? 'ʉon' : 'ɨon';//皆三等
+  if (is('元韻')) return is('幫組 或 合口') ? 'ʉon' : 'ɨon';//皆三等
   if (is('仙韻 合口')) return is(SangA) ? 'yæn' : 'ʉæn';//皆三等
   if (is('仙韻') && is('幫組 或 開口')) return is(SangA) ? 'iæn' : 'ɨæn';//皆三等
   if (is('先韻')) return is('合口') ? 'yɛn' : 'iɛn';//皆四等
