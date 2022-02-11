@@ -168,7 +168,7 @@ function 韻母規則() {
   if (is('麻韻 二等')) return is('合口') ? 'ʯa' : 'ʅa';
   if (is('麻韻 三等')) return 'ɨa';
   // 宕攝 
-  if (is('陽韻')) return is('合口') ? 'ʉaŋ' : 'ɨaŋ';//皆三等
+  if (is('陽韻')) return is('幫組 或 合口') ? 'ʉaŋ' : 'ɨaŋ';//皆三等
   if (is('唐韻')) return is('合口') ? 'uaŋ' : 'aŋ';//皆一等
   // 梗攝 
   if (is('庚韻 二等')) return is('合口') ? 'ʯæŋ' : 'ʅæŋ';
