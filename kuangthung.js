@@ -123,7 +123,7 @@ function 韻母規則() {
   if (is('脂韻 合口')) return is(SangA) ? 'yi' : 'ʉi';//皆三合
   if (is('脂韻') && is('幫組 或 開口')) return is(SangA) ? 'i' : 'ɨi';//皆三開
   if (is('之韻')) return 'ɨ';//皆三開
-  if (is('微韻')) return  is('合口') ? 'ʉəi' : 'ɨəi';//皆三等
+  if (is('微韻')) return  is('幫組 或 合口') ? 'ʉəi' : 'ɨəi';//皆三等
   // 遇攝 
   if (is('魚韻')) return 'ɨo';//皆三開
   if (is('虞韻')) return 'ʉo';//皆三合
@@ -138,7 +138,7 @@ function 韻母規則() {
   if (is('夬韻')) return is('合口') ? 'ʯaʎ' : 'ʅaʎ';//皆二等
   if (is('咍韻')) return 'ɒi';//皆一開
   if (is('灰韻')) return 'uɒi';//皆一合
-  if (is('廢韻')) return is('合口') ? 'ʉɒʎ' : 'ɨɒʎ';//皆三等
+  if (is('廢韻')) return is('幫組 或 合口') ? 'ʉɒʎ' : 'ɨɒʎ';//皆三等
   // 臻攝 
   if (is('眞韻 合口')) return is(SangA) ? 'yin' : 'ʉɨn';//皆三合
   if (is('眞韻') && is('幫組 或 開口')) return is(SangA) ? 'in' : 'ɨn';//皆三開
