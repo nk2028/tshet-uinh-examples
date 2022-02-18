@@ -27,14 +27,15 @@ const is = (x) => 音韻地位.屬於(x.replace(/　/g, ''));
 */
 
 if (!音韻地位) return [
-  ['知组:', [1, 'tɹ', 'ʈ']],
+  ['知組:', [1, 'tɹ', 'ʈ']],
   ['云母:', [1, 'w', 'ɹ']],
-  ['祭泰夬废韵尾:', [2, 'j', 'ɹ', 'ð']],
+  ['祭泰夬廢韻尾:', [2, 'j', 'ɹ', 'ð']],
   ['精三A合介音:', [1, 'ɹ', 'ɥ']],
-  ['后低元音:', [2, 'ɑ', 'a']],
-  ['二等元音记号:', [1, '咽化 ◌ˤ', 'r音钩 ◌˞', '下等号 ◌͇', '双下横线 ◌̳']],
-  ['侯韵:', [2, 'u', 'ɘu']],
-  ['声调记号:', [1, '上◌́ 去◌̀', '上ˀ 去ʱ']],
+  ['後低元音:', [2, 'ɑ', 'a']],
+  // 对于多数字体，r 音钩后需插入 U+2006（六分之一的 Em 间隔）以确保显示效果
+  ['二等元音記號:', [1, '咽化 ◌ˤ', 'r音鉤（帶空隙）◌˞ ', 'r音鉤（無空隙）◌˞', '下等號 ◌͇', '雙下橫線 ◌̳']],
+  ['侯韻:', [2, 'u', 'ɘu']],
+  ['聲調記號:', [1, '上◌́ 去◌̀', '上ˀ 去ʱ', '上ˀ 去ʰ']],
 ];
 
 for (var key in 選項) {
@@ -274,8 +275,8 @@ function semivowelToVowel(consonant) {
 // 函数：将声调的音韵地位转换为语音
 function getTone() {
   if (is('平入聲')) return '';
-  if (is('上聲')) return 選項.声调记号 == '上◌́ 去◌̀' ? '́' : 選項.声调记号[1];
-  if (is('去聲')) return 選項.声调记号 == '上◌́ 去◌̀' ? '̀' : 選項.声调记号[4];
+  if (is('上聲')) return 選項.聲調記號 == '上◌́ 去◌̀' ? '́' : 選項.聲調記號[1];
+  if (is('去聲')) return 選項.聲調記號 == '上◌́ 去◌̀' ? '̀' : 選項.聲調記號[4];
   throw new Error('无声调规则');
 }
 
@@ -320,7 +321,7 @@ if (initial == 'jʷ') initial = 'ɥ';
 */
 if (is('去聲')) {
   if (nucleus.includes('a') || nucleus == 'ɜ') {
-    if (coda == 'j') coda = 選項.祭泰夬废韵尾;
+    if (coda == 'j') coda = 選項.祭泰夬廢韻尾;
   }
 }
 
@@ -475,7 +476,7 @@ if ('ʉuoœɑ'.includes(nucleus[0]) || (nucleus.includes('ɐ'))) {
           ɘu / 其他__#
 */
 if (nucleus == 'u' && !coda) {
-  nucleus = 選項.侯韵;
+  nucleus = 選項.侯韻;
   if (is锐后 || is('明云母') || glide) nucleus = 'u';
 }
 
@@ -520,13 +521,13 @@ if (initial == 'm' && nucleus == 'u' && !coda) {
 /** 五、后处理的代码实现
 */
 
-if (選項.知组 == 'ʈ' && is('知組 或 來母')) {
+if (選項.知組 == 'ʈ' && is('知組 或 來母')) {
   initial = retroflexToStop(initial);
   if (is('知組 三等')) glide = 'ɹ'; // 还原出三等介音
   if ('iɨʉ'.includes(nucleus[0])) glide = ''; // 再次应用音系规则 (21)。平行地，也要应用给来母
 }
 
-if (選項.后低元音 == 'a') {
+if (選項.後低元音 == 'a') {
   nucleus = nucleus.replace('ɑ', 'a');
 }
 
@@ -534,10 +535,10 @@ if (is('二等')) {
   if ('打冷'.includes(字頭)) { // “打冷”两小韵不是二等元音
     nucleus = nucleus.replace('ˤ', '');
   }
-  nucleus = nucleus.replace('ˤ', 選項.二等元音记号.slice(-1));
+  nucleus = nucleus.replace('ˤ', 選項.二等元音記號.split('◌')[1]);
 }
 
-if (選項.声调记号 != '上◌́ 去◌̀') return initial + glide + nucleus + coda + tone;
+if (選項.聲調記號 != '上◌́ 去◌̀') return initial + glide + nucleus + coda + tone;
 
 // 声调附加符号写在韵核主体上
 if (nucleus.includes('͇') || nucleus.includes('̳') || nucleus == 'ɘu' || nucleus == 'ɹ̩') return initial + glide + nucleus + tone + coda;
