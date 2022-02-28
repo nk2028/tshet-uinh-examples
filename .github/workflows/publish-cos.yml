@@ -31,4 +31,4 @@ jobs:
           SECRET_KEY: ${{ secrets.SecretKey }}
         run: coscmd config -a $SECRET_ID -s $SECRET_KEY -b nk2028-1305783649 -r ap-guangzhou
       - name: Publish static files to COS
-        run: coscmd upload -rs --delete -f . /qieyun-examples --ignore '**/.*,**/node_modules,test,build.py'
+        run: coscmd upload -rs --delete -f . /qieyun-examples --ignore '*/.*,*/node_modules/*,./test/*,./build.py,./package.json,./package-lock.json'
