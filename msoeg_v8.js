@@ -159,7 +159,7 @@ function get韻母() {
 }
 
 function get聲調() {
-  return { 上: 'ˀ', 去: 'ʰ', }[音韻地位.聲] || '';
+  return { 上: 'ˀ', 去: 'ʰ' }[音韻地位.聲] || '';
 }
 
 return get聲母() + get韻母() + get聲調();
