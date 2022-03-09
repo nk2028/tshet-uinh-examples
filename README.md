@@ -5,7 +5,7 @@ JavaScript code examples to generate the derivatives of the Qieyun phonological 
 ## Usage
 
 ```
-https://cdn.jsdelivr.net/gh/nk2028/qieyun-examples@<commit-sha>/<filename>
+https://nk2028-1305783649.file.myqcloud.com/qieyun-examples/<filename>
 ```
 
 ## List of included examples

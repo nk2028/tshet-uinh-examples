@@ -1,4 +1,4 @@
-name: Publish
+name: Publish to NPM
 
 on:
   release:
@@ -9,6 +9,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+
+      # Build
       - name: Setup Node.js
         uses: actions/setup-node@v1
         with:
@@ -18,6 +20,8 @@ jobs:
         run: npm ci
       - name: Build
         run: python build.py > index.js
+
+      # Publish
       - name: Publish
         run: npm publish
         env:
