@@ -66,7 +66,7 @@ function 聲母規則() {
   if (is('俟母')) return is('平聲') ? 'c' : 's'; // 平送氣仄不送氣
   if (is('章母')) return 'zh';
   if (is('昌母')) return 'ch';
-  if (is('常母')) return is('曾攝 入聲') ? 'zh' : is('平聲 齊侵清仙鹽陽尤魚虞眞蒸支鍾諄韻 或 一等') ? 'ch' : 'sh';
+  if (is('常母')) return is('曾攝 入聲') ? 'zh' : is('平聲 齊侵清仙鹽陽尤魚虞眞蒸支鍾韻 或 一等') ? 'ch' : 'sh';
   if (is('船書母')) return is('平聲 通攝 或 平聲 合口 山臻攝') ? 'ch' : 'sh'; // 章組擦音分化律
   if (is('日母')) return is('四等') ? 'l' : is('支之脂韻 開口 或 眞侵韻 入聲') ? '' : 'r';  
   let 不顎化 = '一等 或 二等 合口 或 二等 庚耕韻 或 三等 合口 祭微陽支脂凡廢韻 舒聲 或 三等 通攝 舒聲 或 四等 合口 齊韻'; // 見溪羣曉匣母不顎化條件
@@ -141,14 +141,14 @@ function 韻母規則() {
 
   // 臻攝
   if (is('文韻 入聲 幫組')) return 'u';
-  if (is('諄臻欣文眞韻 入聲 合口')) return is('知莊章組') ? 'u' : 'ü'; 
-  if (is('諄臻欣文眞韻 入聲 幫組')) return 'i';
-  if (is('諄臻欣文眞韻 入聲 開口')) return is('莊組') ? 'ä' : is('章組 或 知徹澄日母') ? 'r' : 'i';
-  if (is('諄臻欣文眞韻 舒聲 開口')) return is('莊章組 或 日知徹澄母') ? 'en' : 'in';
+  if (is('臻欣文眞韻 入聲 合口')) return is('知莊章組') ? 'u' : 'ü'; 
+  if (is('臻欣文眞韻 入聲 幫組')) return 'i';
+  if (is('臻欣文眞韻 入聲 開口')) return is('莊組') ? 'ä' : is('章組 或 知徹澄日母') ? 'r' : 'i';
+  if (is('臻欣文眞韻 舒聲 開口')) return is('莊章組 或 日知徹澄母') ? 'en' : 'in';
   if (is('眞韻 舒聲 幫組')) return 'in'; 
   if (is('文眞韻 舒聲 合口')) return is('來明日書章知昌常徹澄船母') ? 'uen' : 'üin';            
-  if (is('諄臻欣文韻 舒聲 幫組')) return is ('明母') ? 'uen' : 'en'; 
-  if (is('諄臻欣韻 舒聲 合口')) return is('滂幫並母') ? 'en' : is('來明日書章知昌常徹澄船母') ? 'uen' : 'üin';
+  if (is('眞臻欣文韻 舒聲 幫組')) return is ('明母') ? 'uen' : 'en'; 
+  if (is('眞臻欣韻 舒聲 合口')) return is('滂幫並母') ? 'en' : is('來明日書章知昌常徹澄船母') ? 'uen' : 'üin';
   if (is('魂痕韻 入聲')) return is('幫組 或 開口') ? 'o' : 'u';
   if (is('魂痕韻 舒聲 幫組')) return 'en';
   if (is('魂痕韻 舒聲 開口')) return is('端組') ? 'uen' : 'en';
@@ -169,10 +169,10 @@ function 韻母規則() {
   if (is('刪山韻 舒聲 幫組')) return 'ang'; 
   if (is('刪山韻 舒聲 開口')) return is('影疑母') ? 'iän' : is('見溪羣曉匣母') ? 'än' : 'ang';
   if (is('刪山韻 舒聲 合口')) return 'uang';
-  if (is('桓寒韻 入聲 開口')) return is('見溪羣曉匣疑影母') ? 'o' : 'a';
-  if (is('桓寒韻 入聲 幫組')) return 'o';
-  if (is('桓寒韻 入聲 合口')) return is('見組') ? 'uä' : 'o';
-  if (is('桓寒韻 舒聲')) return is('開口 或 幫組') ? 'ang' : 'uang';
+  if (is('寒韻 入聲 開口')) return is('見溪羣曉匣疑影母') ? 'o' : 'a';
+  if (is('寒韻 入聲 幫組')) return 'o';
+  if (is('寒韻 入聲 合口')) return is('見組') ? 'uä' : 'o';
+  if (is('寒韻 舒聲')) return is('開口 或 幫組') ? 'ang' : 'uang';
   
   // 效攝
   if (is('蕭宵韻')) return is('見溪羣曉匣日母 或 知章組') ? 'ao' : 'iao';
@@ -180,7 +180,7 @@ function 韻母規則() {
   if (is('豪韻')) return 'ao';
   
   // 果攝
-  if (is('歌戈韻')) return is('一等') ? 'o' : is('開口') ? 'e' : 'üe';
+  if (is('歌韻')) return is('一等') ? 'o' : is('開口') ? 'e' : 'üe';
   
   // 假攝
   if (is('麻韻 二等')) return is('合口') ? 'ua' : is('疑影母') ? 'ia' : 'a';

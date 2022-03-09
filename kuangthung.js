@@ -147,9 +147,8 @@ function 韻母規則() {
   if (is('文韻')) return 'ʉn';//皆三合
   if (is('痕韻')) return 'on';//皆一開
   if (is('魂韻')) return 'uon';//皆一合
-  if (is('諄韻')) return is('見組 或 曉匣母') ? 'yin' : 'ʉɨn';//皆三合 牙音和曉匣母即眞A合 其餘即眞B合
   // 山攝 
-  if (is('寒桓韻')) return is('三等') ? 'ɨan' : is('合口') ? 'uan' : 'an';//皆一等，除了䔾三開
+  if (is('寒韻')) return is('三等') ? 'ɨan' : is('合口') ? 'uan' : 'an';//皆一等，除了䔾三開
   if (is('刪韻')) return is('合口') ? 'ʯan' : 'ʅan';//皆二等
   if (is('山韻')) return is('合口') ? 'ʯæn' : 'ʅæn';//皆二等
   if (is('元韻')) return is('幫組 或 合口') ? 'ʉon' : 'ɨon';//皆三等
@@ -162,8 +161,8 @@ function 韻母規則() {
   if (is('肴韻')) return 'ʅau';//皆二開
   if (is('豪韻')) return 'au';//皆一開
   // 果攝 
-  if (is('歌戈韻 一等')) return is('合口') ? 'uɒ' : 'ɒ';
-  if (is('歌戈韻 三等')) return is('合口') ? 'ʉɒ' : 'ɨɒ';
+  if (is('歌韻 一等')) return is('合口') ? 'uɒ' : 'ɒ';
+  if (is('歌韻 三等')) return is('合口') ? 'ʉɒ' : 'ɨɒ';
   // 假攝 
   if (is('麻韻 二等')) return is('合口') ? 'ʯa' : 'ʅa';
   if (is('麻韻 三等')) return 'ɨa';
