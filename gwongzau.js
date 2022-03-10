@@ -5,6 +5,10 @@
  * @author Ayaka
  */
 
+if (!音韻地位) return [
+  ['版本', [2, '白讀', '文讀']],
+];
+
 const is = (x) => 音韻地位.屬於(x);
 
 function 聲母規則() {
@@ -19,32 +23,56 @@ function 聲母規則() {
   if (is('並母')) {
     if (is('東韻 三等 或 鍾微虞廢文元陽尤凡韻')) return 'f';
     if (is('平聲')) return 'p';
+    if (選項.版本 === '白讀' && is('上聲')) return 'p';
     return 'b';
   }
   if (is('明母')) return 'm';
 
   if (is('端母')) return 'd';
   if (is('透母')) return 't';
-  if (is('定母')) return is('平聲') ? 't' : 'd';
+  if (is('定母')) {
+    if (is('平聲')) return 't';
+    if (選項.版本 === '白讀' && is('上聲')) return 't';
+    return 'd';
+  }
   if (is('泥母')) return 'n';
   if (is('來母')) return 'l';
 
   if (is('知母')) return 'z';
   if (is('徹母')) return 'c';
-  if (is('澄母')) return is('平聲') ? 'c' : 'z';
+  if (is('澄母')) {
+    if (is('平聲')) return 'c';
+    if (選項.版本 === '白讀' && is('上聲')) return 'c';
+    return 'z';
+  }
   if (is('孃母')) return 'n';
 
   if (is('精母')) return 'z';
   if (is('清母')) return 'c';
-  if (is('從母')) return is('平聲') ? 'c' : 'z';
+  if (is('從母')) {
+    if (is('平聲')) return 'c';
+    if (選項.版本 === '白讀' && is('上聲')) return 'c';
+    return 'z';
+  }
   if (is('心母')) return 's';
-  if (is('邪母')) return is('平聲') ? 'c' : 'z'; // 塞擦音多於擦音
-
+  if (is('邪母')) {
+    if (is('平聲')) return 'c';
+    if (選項.版本 === '白讀' && is('上聲')) return 'c';
+    return 'z';
+  } // 塞擦音多於擦音
   if (is('莊母')) return 'z';
   if (is('初母')) return 'c';
-  if (is('崇母')) return is('平聲') ? 'c' : 'z';
+  if (is('崇母')) {
+    if (is('平聲')) return 'c';
+    if (選項.版本 === '白讀' && is('上聲')) return 'c';
+    return 'z';
+  }
   if (is('生母')) return 's';
-  if (is('俟母')) return is('平聲') ? 'c' : 'z';
+  if (is('俟母')) {
+    if (is('平聲')) return 'c';
+    if (選項.版本 === '白讀' && is('上聲')) return 'c';
+    return 'z';
+  }
 
   if (is('章母')) return 'z';
   if (is('昌母')) return 'c';
@@ -55,7 +83,11 @@ function 聲母規則() {
 
   if (is('見母')) return 'g';
   if (is('溪母')) return 'h'; // 多數擦化
-  if (is('羣母')) return is('平聲') ? 'k' : 'g';
+  if (is('羣母')) {
+    if (is('平聲')) return 'k';
+    if (選項.版本 === '白讀' && is('上聲')) return 'k';
+    return 'g';
+  }
   if (is('疑母')) return 'ng'; // ng 拼細音時為 j，詳後
 
   if (is('曉母')) return 'h';
@@ -219,7 +251,7 @@ function 聲調規則() {
     if (is('入聲')) return '1'; // 陰入。長元音為 3，詳後
   } else {
     if (is('平聲')) return '4'; // 陽平
-    if (is('全濁 上聲')) return '6'; // 陽去，全濁上變去
+    if (選項.版本 === '文讀' && is('全濁 上聲')) return '6'; // 陽去，全濁上變去
     if (is('上聲')) return '5'; // 陽上
     if (is('去聲')) return '6'; // 陽去
     if (is('入聲')) return '6'; // 陽入
@@ -228,7 +260,7 @@ function 聲調規則() {
 }
 
 function is長元音(韻母) {
-  if (['aam', 'aan', 'im', 'in', 'om', 'on', 'ong', 'oeng', 'un', 'yun'].includes(韻母)) return true;
+  if (['aam', 'aan', 'im', 'in', 'om', 'on', 'ong', 'oeng', 'un', 'yun', 'aang', 'eng'].includes(韻母)) return true;
   if (['am', 'an', 'ang', 'eon', 'ing', 'ung'].includes(韻母)) return false;
   throw new Error('無法判斷元音長短：' + 韻母);
 }
@@ -240,6 +272,12 @@ let 聲調 = 聲調規則();
 // ng 拼細音時為 j
 const is細音 = ['eo', 'i', 'oe', 'u', 'yu'].some((x) => 韻母.startsWith(x));
 if (聲母 === 'ng' && is細音) 聲母 = 'j';
+
+if (選項.版本 === '白讀') {
+  if (韻母 === 'ing') 韻母 = 'eng'; 
+  else if (韻母 === 'ang') 韻母 = 'aang';
+  else if (韻母 === 'ang') 韻母 = 'aang';
+}
 
 // 陰入分化
 if (is('入聲') && 聲調 === '1' && is長元音(韻母)) 聲調 = '3';
