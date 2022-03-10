@@ -1,5 +1,6 @@
 import { query字頭 } from "qieyun";
 import {
+  tshet,
   baxter,
   blankego,
   kyonh,
@@ -28,6 +29,7 @@ function assert_equal(a, b) {
 
 const 音韻地位 = query字頭("䒚")[0].音韻地位;
 
+assert_equal(tshet(音韻地位), "sjiewq");
 assert_equal(baxter(音韻地位), "syewX");
 assert_equal(blankego(音韻地位), "sjev");
 assert_equal(kyonh(音韻地位), "sjeux");
