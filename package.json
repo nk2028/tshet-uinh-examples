@@ -23,6 +23,6 @@
   },
   "homepage": "https://github.com/nk2028/qieyun-examples#readme",
   "dependencies": {
-    "qieyun": "^0.12.2"
+    "qieyun": "^0.12.3"
   }
 }
