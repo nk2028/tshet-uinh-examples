@@ -17,6 +17,7 @@ https://nk2028-1305783649.file.myqcloud.com/qieyun-examples/<filename>
 - 有女羅馬字 (Blankego’s Romanization): `blankego.js`
 - 古韻羅馬字 (Koxyonh’s Romanization): `kyonh.js`
 - 隋拼 (Zyepheng): `zyepheng.js`
+- 廣通羅馬字 (Kuangthung Romanization): `kuangthung.js`
 
 **切韻音系擬音 reconstruction of the Qieyun phonological system**
 
