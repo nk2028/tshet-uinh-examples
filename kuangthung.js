@@ -146,7 +146,7 @@ if (!音韻地位) return [
     if (is('眞韻') && is('幫組 或 開口')) return is(SangA) ? 'in' : 'ɨn';//皆三開
     if (is('臻韻')) return 'ɨn';//皆莊組三開
     if (is('欣韻')) return 'ɨən';//皆牙喉音三開
-    if (is('文韻')) return 'ʉn';//皆三合
+    if (is('文韻')) return 'ʉən';//皆三合
     if (is('痕韻')) return 'on';//皆一開
     if (is('魂韻')) return 'uon';//皆一合
     // 山攝 
