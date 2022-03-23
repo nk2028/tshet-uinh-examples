@@ -1,6 +1,6 @@
 /* 柳漫廣通中古拼音
  * https://zhuanlan.zhihu.com/p/453393955
- * 南京話拼音方案：https://zh.wikipedia.org/wiki/User:%E6%9F%B3%E6%BC%AB/%E4%B8%AD%E5%8F%A4%E6%BC%A2%E8%AA%9E%E6%8B%BC%E9%9F%B3%EF%BC%88%E5%BB%A3%E9%80%9A%E7%BE%85%E9%A6%AC%E5%AD%97%EF%BC%89
+ * 廣通中古拼音方案：https://zh.wikipedia.org/wiki/User:%E6%9F%B3%E6%BC%AB/%E4%B8%AD%E5%8F%A4%E6%BC%A2%E8%AA%9E%E6%8B%BC%E9%9F%B3%EF%BC%88%E5%BB%A3%E9%80%9A%E7%BE%85%E9%A6%AC%E5%AD%97%EF%BC%89
  * @author uliloewi
  */
 
