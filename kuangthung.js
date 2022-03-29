@@ -16,13 +16,13 @@ if (!音韻地位) return [
     // ʔ: 'q', x: 'h', ɣ: 'x', l: 'l',
     // ʈ: 'tc', ʈʰ: 'tch', ɖ: 'dc', ɳ: 'n',
     // tʂ: 'tsc', tʂʰ: 'tsch', dʐ: 'dzc', ʂ: 'sc', ʐ: 'zc',
-    // cç: 'tsj', cçʰ: 'tsjh', ɟʝ: 'dzj', ç: 'sj', ʝ: 'zj',
-    // ʎ: 'j', ɲ: 'nj', 以上輔音等於：
+    // tɕ: 'tsj', tɕʰ: 'tsjh', dʑ: 'dzj', ɕ: 'sj', ʑ: 'zj',
+    // j: 'j', ɲ: 'nj', 以上輔音等於：
     ʰ:  'h', p:  'p', b:  'b', m:  'm',
     t: 't', d: 'd', n: 'n', s: 's', z: 'z', l: 'l',
     k: 'k', g: 'g', ŋ: 'ng', ʔ: 'q', x: 'h', ɣ: 'x',
     ʈ: 'tc', ɖ: 'dc', ɳ: 'n', ʂ: 'sc', ʐ: 'zc',
-    c: 't', ɟ: 'd', ç: 'sj', ʝ: 'zj', ʎ: 'j', ɲ: 'nj',
+    ɕ: 'sj', ʑ: 'zj', j: 'j', ɲ: 'nj',
   
     // 元音表 
     u: 'u', ʅ: 'r', ʯ: 'w', ɨ: 'y', ʉ: 'ü', i: 'i', y: 'v', //等呼
@@ -97,13 +97,13 @@ if (!音韻地位) return [
       case '俟': return 'ʐ';
   
       //硬腭
-      case '章': return 'cç';
-      case '昌': return 'cçʰ';
-      case '常': return 'ɟʝ';
-      case '書': return 'ç';
-      case '船': return 'ʝ';
+      case '章': return 'tɕ';
+      case '昌': return 'tɕʰ';
+      case '常': return 'dʑ';
+      case '書': return 'ɕ';
+      case '船': return 'ʑ';
   
-      case '以': return 'ʎ';
+      case '以': return 'j';
       case '日': return 'ɲ';
   
       default: throw new Error('無聲母規則');
@@ -132,15 +132,15 @@ if (!音韻地位) return [
     if (is('模韻')) return 'o';//皆一開
     // 蟹攝 
     if (is('齊韻')) return is('合口') ? 'yɛi' : 'iɛi';//皆四等
-    if (is('祭韻 合口')) return is(SangA) ? 'yɛʎ' : 'ʉɛʎ';//皆三合
-    if (is('祭韻') && is('幫組 或 開口')) return is(SangA) ? 'iɛʎ' : 'ɨɛʎ';//皆三開
-    if (is('泰韻')) return is('合口') ? 'uaʎ' : 'aʎ';//皆一等
+    if (is('祭韻 合口')) return is(SangA) ? 'yɛj' : 'ʉɛj';//皆三合
+    if (is('祭韻') && is('幫組 或 開口')) return is(SangA) ? 'iɛj' : 'ɨɛj';//皆三開
+    if (is('泰韻')) return is('合口') ? 'uaj' : 'aj';//皆一等
     if (is('佳韻')) return is('合口') ? 'ʯɛ' : 'ʅɛ';//皆二等
     if (is('皆韻')) return is('合口') ? 'ʯæi' : 'ʅæi';//皆二等
-    if (is('夬韻')) return is('合口') ? 'ʯaʎ' : 'ʅaʎ';//皆二等
+    if (is('夬韻')) return is('合口') ? 'ʯaj' : 'ʅaj';//皆二等
     if (is('咍韻')) return 'ɒi';//皆一開
     if (is('灰韻')) return 'uɒi';//皆一合
-    if (is('廢韻')) return is('幫組 或 合口') ? 'ʉɒʎ' : 'ɨɒʎ';//皆三等
+    if (is('廢韻')) return is('幫組 或 合口') ? 'ʉɒj' : 'ɨɒj';//皆三等
     // 臻攝 
     if (is('眞韻 合口')) return is(SangA) ? 'yin' : 'ʉɨn';//皆三合
     if (is('眞韻') && is('幫組 或 開口')) return is(SangA) ? 'in' : 'ɨn';//皆三開
@@ -243,7 +243,7 @@ if (!音韻地位) return [
     else if (韻母.endsWith('ŋ')) 韻母 = `${韻母.slice(0, -1)}k`;
   }
   
-  if (韻母.endsWith('ʎ')) {
+  if (韻母.endsWith('j')) {
     聲調 = '˧˩';
   }
   if (選項.書寫系統 === '國際音標') {
