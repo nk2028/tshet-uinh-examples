@@ -35,7 +35,7 @@ assert_equal(baxter(音韻地位), "syewX");
 assert_equal(blankego(音韻地位), "sjev");
 assert_equal(kyonh(音韻地位), "sjeux");
 assert_equal(zyepheng(音韻地位), "shiéu");
-assert_equal(kuangthung(音韻地位), "çiæu˨˦");
+assert_equal(kuangthung(音韻地位), "ɕiæu˨˦");
 assert_equal(panwuyun(音韻地位), "ɕiɛu˧˥");
 assert_equal(unt(音韻地位), "ɕjɛw˦˦˥");
 assert_equal(unt_j(音韻地位), "ɕéw");
