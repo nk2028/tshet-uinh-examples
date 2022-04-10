@@ -67,9 +67,6 @@ def handle_file(filename):
         print('/**')
         print(' * ' + name)
         print(comment)
-        # TODO 等 autoderiver 亦改用 tupa 名後，移除 tshet 名稱，僅保留 tupa
-        if filename == 'tshet':
-            print(' * @deprecated tshet 已改名 tupa')
         print(' * @param {Qieyun.音韻地位} 音韻地位 切韻音系音韻地位')
         print(' * @param {string=} 字頭 字頭（可選）')
         print(' * @param {Object=} 選項 選項（可選）')
