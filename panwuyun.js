@@ -3,6 +3,8 @@
  * @author N/A
  */
 
+if (!音韻地位) return [['$legacy', true]];
+
 return {
   EAA: 'tuŋ˧',
   GAA: 'duŋ˧',
