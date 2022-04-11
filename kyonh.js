@@ -7,7 +7,7 @@
 
 if (!音韻地位) return [];
 
-const is = (x) => 音韻地位.屬於(x);
+const is = (...x) => 音韻地位.屬於(...x);
 
 const { 重紐母 } = Qieyun.表達式;
 
