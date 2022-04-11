@@ -141,8 +141,8 @@ function 韻母規則() {
   if (is('庚韻 三等')) return 'ieng';
   if (is('耕韻 合口')) return 'rueng';
   if (is('耕韻')) return 'reng';
-  if (is('清韻 合口')) return is('重紐A類') ? 'jyeng' : 'yeng';
-  if (is('清韻')) return is('重紐A類') ? 'jeng' : 'ieng';
+  if (is('清韻 合口')) return is`${重紐母} 非 重紐B類` ? 'jyeng' : 'yeng';
+  if (is('清韻')) return is`${重紐母} 非 重紐B類` ? 'jeng' : 'ieng';
   if (is('青韻 合口')) return 'ueng';
   if (is('青韻')) return 'eng';
   // 曾攝
