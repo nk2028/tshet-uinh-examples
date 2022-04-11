@@ -18,8 +18,7 @@ export function from字頭(schema, 字頭, 選項) {
       ? schema.map(schema => schemas[schema](result.音韻地位, result.字頭, 選項))
       : schemas[schema](result.音韻地位, result.字頭, 選項),
   }));
-}
-''')
+}''')
 
 
 def handle_file(filename):
@@ -32,6 +31,7 @@ def handle_file(filename):
         comment = comment.rstrip()
         code = code.strip()
 
+        print()
         print(
             f'schemas.{filename} = Qieyun.推導方案.建立(function (音韻地位, 字頭, 選項) {{')
         print(code)
@@ -48,7 +48,6 @@ def handle_file(filename):
         print(f'export function {filename}(音韻地位, 字頭, 選項) {{')
         print(f'  return schemas.{filename}(音韻地位, 字頭, 選項);')
         print(f'}}')
-        print()
 
 
 def main():
