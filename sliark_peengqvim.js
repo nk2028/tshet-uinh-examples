@@ -173,7 +173,7 @@ function get聲調() {
   return { 上: 'x', 去: 'h' }[音韻地位.聲] || '';
 }
 
-拼音 = get聲母() + get韻母() + get聲調();
+let 拼音 = get聲母() + get韻母() + get聲調();
 
 if (選項.二等使用下加点) {
   拼音 = 拼音.replace('ee', 'ẹ');
