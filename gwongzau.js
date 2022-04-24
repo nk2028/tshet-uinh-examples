@@ -5,6 +5,8 @@
  * @author Ayaka
  */
 
+if (!音韻地位) return [['$legacy', true]];
+
 const is = (x) => 音韻地位.屬於(x);
 
 function 聲母規則() {
