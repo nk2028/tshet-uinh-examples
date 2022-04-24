@@ -7,6 +7,7 @@
 
 if (!音韻地位)
   return [
+    ["$legacy", true],
     ['字母ŋ', true],
     ['字母ü', true],
     ['字母ö', false],
