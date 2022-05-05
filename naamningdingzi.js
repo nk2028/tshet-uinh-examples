@@ -193,7 +193,7 @@ function 韻母規則() {
   if (is('肴豪韻')) return 'aau';
 
   // 果攝
-  if (is('歌韻 一等 幫組') && is('幫組')) return 'u';
+  if (is('歌韻 一等 幫組')) return 'u';
   if (is('歌韻 開口 一等') && !is('幫組')) return 'o';
   if (is('歌韻 合口 一等')) return 'u';
   if (is('歌韻 三等')) return is('合口') ? 'oe' : 'e';
