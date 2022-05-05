@@ -103,7 +103,7 @@ function 聲母規則() {
 		  if (is('梗攝 二等 庚耕韻 舒聲 或 曾攝 一等 登韻 舒聲 或 蒸青清韻 入聲')) return 'gw';
 		  if (is('止攝 或 寒韻 去聲 或 文魂祭齊廢韻 舒聲 或 蟹攝 二等')) return 'w';
 		  if (is('宕攝 三等 去聲 或 宕攝 三等 入聲 或 宕攝 一等 入聲')) return 'k';
-		  return 'f';
+		  return 'h';
 	  }
 	  return 'h';
   }
