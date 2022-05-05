@@ -241,7 +241,7 @@ function 聲調規則() {
     if (is('平聲')) return '1'; // 陰平
     if (is('上聲')) return '2'; // 陰上
     if (is('去聲')) return '3'; // 陰去
-    if (is('入聲')) return '2'
+    if (is('入聲')) return '2';
   } else {
     if (is('平聲')) return '4'; // 陽平
     if (is('全濁 上聲')) return '6'; // 陽去，全濁上變去
