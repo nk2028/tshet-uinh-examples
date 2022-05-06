@@ -146,7 +146,7 @@ function 韻母規則() {
   if (is('東冬鍾韻')) return 'ung';
 
   // 江攝
-  if (is('江韻')) return 'ong';
+  if (is('江韻')) return is('初生母 舒聲') ? 'oeng' : 'ong'; // 雙囪
 
   // 止攝
   if (is('支脂之微韻 幫組')) return 'i';
