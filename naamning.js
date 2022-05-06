@@ -18,15 +18,15 @@ const is = (x) => 音韻地位.屬於(x);
 
 function 聲母規則() {
   if (is('幫母')) {
-    if (is('東韻 三等 或 鍾微虞廢文元陽尤凡韻')) return 'f';
+    if (is('輕脣韻')) return 'f';
     return 'b';
   }
   if (is('滂母')) {
-    if (is('東韻 三等 或 鍾微虞廢文元陽尤凡韻')) return 'f';
+    if (is('輕脣韻')) return 'f';
     return 'p';
   }
   if (is('並母')) {
-    if (is('東韻 三等 或 鍾微虞廢文元陽尤凡韻')) return 'f';
+    if (is('輕脣韻')) return 'f';
     if (is('平聲')) return 'p';
     return 'b';
   }
@@ -197,9 +197,9 @@ function 韻母規則() {
   if (is('寒韻 開口 牙喉音')) return 'on';
   if (is('寒韻 合口 舌齒音')) return 'yun';
   if (is('寒韻 合口 牙喉音')) return 'un';
-  if (is('元韻 幫組')) return 'aan';
-  if (is('元韻 開口')) return 'in';
-  if (is('元韻 合口')) return 'yun';
+  if (is('元韻 幫組')) return 'aan';  // 放山攝是個人習慣
+  if (is('元韻 開口')) return 'in';  // 放山攝是個人習慣
+  if (is('元韻 合口')) return 'yun';  // 放山攝是個人習慣
   if (is('刪山韻')) return 'aan';
   if (is('仙先韻 幫組')) return 'in';
   if (is('仙先韻 開口')) return 'in';
@@ -226,10 +226,10 @@ function 韻母規則() {
   if (is('唐韻')) return 'ong';
 
   // 梗攝
-  if (is('庚韻 二等')) return is('影見曉母') || is('溪匣母 上聲 或 溪匣母 去聲') ? 'ang' : 'aang';
+  if (is('庚韻 二等')) return is('影見曉母 或 溪匣母 上聲 或 溪匣母 去聲') ? 'ang' : 'aang';
   if (is('庚韻 三等 莊組')) return 'aang';
   if (is('庚韻 三等')) return 'ing';
-  if (is('耕韻')) return is('影見曉母') || is('溪匣母 上聲 或 溪匣母 去聲') ? 'ang' : 'aang';
+  if (is('耕韻')) return is('影見曉母 或 溪匣母 上聲 或 溪匣母 去聲') ? 'ang' : 'aang';
   if (is('清青韻')) return 'ing';
 
   // 曾攝
@@ -247,7 +247,7 @@ function 韻母規則() {
   if (is('覃談韻 舌齒音')) return 'aam';
   if (is('覃談韻 牙喉音')) return 'am';
   if (is('鹽添嚴韻')) return 'im';
-  if (is('咸銜凡韻')) return 'aam'; // return is('莊初崇見溪曉匣母') 'em' : 'aam'; 白讀。狎洽韻則是見莊初崇生知徹澄孃母。
+  if (is('咸銜凡韻')) return 'aam'; // return is('莊初崇見溪曉匣母') ? 'em' : 'aam'; 白讀。狎洽韻則是見莊初崇生知徹澄孃母。
 
   throw new Error('無韻母規則');
 }

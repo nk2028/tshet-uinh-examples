@@ -18,15 +18,15 @@ const is = (x) => 音韻地位.屬於(x);
 
 function 聲母規則() {
   if (is('幫母')) {
-    if (is('東韻 三等 或 鍾微虞廢文元陽尤凡韻')) return 'f';
+    if (is('輕脣韻')) return 'f';
     return 'b';
   }
   if (is('滂母')) {
-    if (is('東韻 三等 或 鍾微虞廢文元陽尤凡韻')) return 'f';
+    if (is('輕脣韻')) return 'f';
     return 'p';
   }
   if (is('並母')) {
-    if (is('東韻 三等 或 鍾微虞廢文元陽尤凡韻')) return 'f';
+    if (is('輕脣韻')) return 'f';
     return 'b';
   }
   if (is('明母')) return is('遇臻攝 三等') ? 'f' : 'm';
@@ -180,9 +180,9 @@ function 韻母規則() {
   if (is('寒韻 幫組')) return 'un';
   if (is('寒韻 開口')) return 'aan';
   if (is('寒韻 合口')) return 'un';
-  if (is('元韻 幫組')) return 'aan';
-  if (is('元韻 開口')) return 'in';
-  if (is('元韻 合口')) return 'yun';
+  if (is('元韻 幫組')) return 'aan';  // 放山攝是個人習慣
+  if (is('元韻 開口')) return 'in';  // 放山攝是個人習慣
+  if (is('元韻 合口')) return 'yun';  // 放山攝是個人習慣
   if (is('刪山韻')) return 'aan';
   if (is('仙先韻 幫組')) return 'in';
   if (is('仙先韻 開口')) return 'in';
