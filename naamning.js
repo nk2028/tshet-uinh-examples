@@ -82,13 +82,13 @@ function 聲母規則() {
       if (is('尤韻 或 侵韻 入聲')) return 'j';
       return 'h';
     }
-      if (is('合口') && !is('模韻')) {
+    if (is('合口') && !is('模韻')) {
       if (is('文韻 舒聲')) return 'kw';
       if (is('果遇止假梗宕攝 或 先仙元韻 入聲 或 皆佳祭齊魂眞韻 舒聲')) return 'k';
       if (is('登韻 舒聲')) return 'w';
       return 'h';
     }
-      return 'h';
+    return 'h';
   }
   
   if (is('羣母')) return is('平聲') ? 'k' : 'g';
@@ -105,7 +105,7 @@ function 聲母規則() {
       if (is('庚耕韻 二等 舒聲 或 登韻 舒聲 或 蒸青清韻 入聲')) return 'gw';
       if (is('止攝 或 寒韻 去聲 或 文魂祭齊廢佳皆夬韻 舒聲')) return 'w';
       if (is('陽韻 去聲 或 陽韻 入聲 或 唐韻 入聲')) return 'k'; // 宕攝 三等 去聲 或 宕攝 三等 入聲 或 宕攝 一等 入聲
-      if (is('通遇梗曾攝 或 山元先仙韻 四等') || (is('三等') && !is('陽韻 上聲')) ) return 'h';
+      if (is('通遇梗曾攝 或 山元先仙韻 四等 或 三等') return is('陽韻 上聲') ? 'f' : 'h';
       return 'f';
     }
     return 'h';
@@ -262,8 +262,8 @@ function 聲調規則() {
         if (is('咸攝 一等 影母')) return '1';
         return '3';
       }
-        if (is('梗攝 三等 莊組')) return '3';
-        return '1'; // 清紐內轉字
+      if (is('梗攝 三等 莊組')) return '3';
+      return '1'; // 清紐內轉字
     }
   } else {
     if (is('平聲')) return '4'; // 陽平
