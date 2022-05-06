@@ -48,7 +48,7 @@ function 聲母規則() {
   if (is('從母')) return is('平聲') ? 'c' : 'z';
   
   if (is('心母')) {
-	if (is('支脂之微韻 開口')) return is('支韻 上聲') ? 'sl' : 's';  // 徙璽 絲斯
+    if (is('支脂之微韻 開口')) return is('支韻 上聲') ? 'sl' : 's';  // 徙璽 絲斯
     if (is('支脂之微韻 合口 上聲 或 泰咍韻 開口 去聲 或 寒韻 開口 平聲')) return 's';  // 髓賽珊
     return 'sl';
   }
@@ -82,13 +82,13 @@ function 聲母規則() {
       if (is('尤韻 或 侵韻 入聲')) return 'j';
       return 'h';
     }
-	  if (is('合口') && !is('模韻')) {
+      if (is('合口') && !is('模韻')) {
       if (is('文韻 舒聲')) return 'kw';
       if (is('果遇止假梗宕攝 或 先仙元韻 入聲 或 皆佳祭齊魂眞韻 舒聲')) return 'k';
       if (is('登韻 舒聲')) return 'w';
       return 'h';
     }
-	  return 'h';
+      return 'h';
   }
   
   if (is('羣母')) return is('平聲') ? 'k' : 'g';
@@ -100,7 +100,7 @@ function 聲母規則() {
       if (is('侯韻 去聲')) return 'k';
       if (is('尤韻 或 鍾韻 入聲')) return 'j';
       return 'h';
-	}
+    }
     if (is('合口') && !is('模韻')) {
       if (is('庚耕韻 二等 舒聲 或 登韻 舒聲 或 蒸青清韻 入聲')) return 'gw';
       if (is('止攝 或 寒韻 去聲 或 文魂祭齊廢佳皆夬韻 舒聲')) return 'w';
