@@ -83,8 +83,8 @@ function 聲母規則() {
 		  return 'h';
 	  }
 	  if (is('合口') && !is('模韻')) {
-		  if (is('臻攝 三等 文韻 舒聲')) return 'kw';
-		  if (is('果遇止假梗宕攝 或 先仙元韻 入聲  或 皆佳祭齊魂眞韻 舒聲')) return 'k';
+		  if (is('文韻 舒聲')) return 'kw';
+		  if (is('果遇止假梗宕攝 或 先仙元韻 入聲 或 皆佳祭齊魂眞韻 舒聲')) return 'k';
 		  if (is('曾攝 一等 登韻 舒聲')) return 'w';
 		  return 'h';
 	  }
