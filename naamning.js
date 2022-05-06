@@ -105,7 +105,7 @@ function 聲母規則() {
       if (is('庚耕韻 二等 舒聲 或 登韻 舒聲 或 蒸青清韻 入聲')) return 'gw';
       if (is('止攝 或 寒韻 去聲 或 文魂祭齊廢佳皆夬韻 舒聲')) return 'w';
       if (is('陽韻 去聲 或 陽韻 入聲 或 唐韻 入聲')) return 'k'; // 宕攝 三等 去聲 或 宕攝 三等 入聲 或 宕攝 一等 入聲
-      if (is('通遇梗曾攝 或 山元先仙韻 四等 或 三等') return is('陽韻 上聲') ? 'f' : 'h';
+      if (is('通遇梗曾攝 或 山元先仙韻 四等 或 三等')) return is('陽韻 上聲') ? 'f' : 'h';
       return 'f';
     }
     return 'h';
@@ -146,7 +146,7 @@ function 韻母規則() {
   if (is('東冬鍾韻')) return 'ung';
 
   // 江攝
-  if (is('江韻')) return is('初生母 舒聲') ? 'oeng' : 'ong'; // 雙囪
+  if (is('江韻')) return is('初生母 舒聲') ? 'oeng' : is('影母 入聲') ? 'ang' : 'ong'; // 雙囪握
 
   // 止攝
   if (is('支脂之微韻 幫組')) return 'i';
@@ -258,8 +258,8 @@ function 聲調規則() {
     if (is('上聲')) return '2'; // 陰上
     if (is('去聲')) return '3'; // 陰去
     if (is('入聲')) {
-      if (is('咸山江宕攝') || (is('梗攝 二等') && !is('影母'))){ // 清紐外轉字，影母特例
-        if (is('咸攝 一等 影母')) return '1';
+      if (is('咸山江宕攝 或 梗攝 二等')){ // 清紐外轉字，影母特例
+        if (is('咸攝 一等 影母 或 江攝 影母 或 梗攝 影母')) return '1';
         return '3';
       }
       if (is('梗攝 三等 莊組')) return '3';
