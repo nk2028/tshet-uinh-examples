@@ -29,7 +29,7 @@ function 聲母規則() {
     if (is('輕脣韻')) return 'f';
     return 'b';
   }
-  if (is('明母')) return is('遇臻攝 三等') ? 'f' : 'm';
+  if (is('明母')) return is('魚虞眞臻文欣韻 三等') ? 'f' : 'm'; // 遇臻攝 三等
 
   if (is('端母')) return 'd';
   if (is('透母')) return 't';
