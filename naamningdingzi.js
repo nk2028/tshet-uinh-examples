@@ -47,12 +47,12 @@ function 聲母規則() {
   if (is('從母')) return 'z';
   
   if (is('心母')) {
-    if (is('止攝 合口 三等 上聲 或 蟹攝 開口 一等 去聲 或 山攝 開口 一等 平聲')) return 's';  // 髓賽珊
+    if (is('支脂之微韻 合口 上聲 或 支脂之微韻 開口 去聲 或 寒韻 開口 平聲')) return 's';  // 髓賽珊
     return 'sl';
   }
   
   if (is('邪母 平聲')) {
-    if (is('山臻攝 三等')) return 'sl';
+    if (is('山仙元文臻眞欣韻 三等')) return 'sl';  // 山臻攝 三等
     return 'z';
   }
   if (is('邪母 仄聲')) return 'z';
@@ -73,66 +73,66 @@ function 聲母規則() {
   if (is('見母')) return 'g';
   
   if (is('溪母')) {
-	  if (is('模韻')) return 'h';
-	  if (is('開口') && !is('模韻')) {
-		  if (is('侯韻')) return is('上聲') ? 'h' : 'k';
-		  if (is('果假攝 或 鍾先仙陽江韻 入聲 或 佳皆齊宵支陽韻 舒聲 或 庚韻 三等 入聲 或 唐咍韻 去聲')) return 'k';
-		  if (is('尤韻 或 侵韻 入聲')) return 'j';
-		  return 'h';
-	  }
-	  if (is('合口') && !is('模韻')) {
-		  if (is('文韻 舒聲')) return 'kw';
-		  if (is('果遇止假梗宕攝 或 先仙元韻 入聲 或 皆佳祭齊魂眞韻 舒聲')) return 'k';
-		  if (is('曾攝 一等 登韻 舒聲')) return 'w';
-		  return 'h';
-	  }
-	  return 'h';
+    if (is('模韻')) return 'h';
+    if (is('開口') && !is('模韻')) {
+      if (is('侯韻')) return is('上聲') ? 'h' : 'k';
+      if (is('果假攝 或 鍾先仙陽江韻 入聲 或 佳皆齊宵支陽韻 舒聲 或 庚韻 三等 入聲 或 唐咍韻 去聲')) return 'k';
+      if (is('尤韻 或 侵韻 入聲')) return 'j';
+      return 'h';
+    }
+    if (is('合口') && !is('模韻')) {
+      if (is('文韻 舒聲')) return 'kw';
+      if (is('果遇止假梗宕攝 或 先仙元韻 入聲 或 皆佳祭齊魂眞韻 舒聲')) return 'k';
+      if (is('登韻 舒聲')) return 'w';
+      return 'h';
+    }
+    return 'h';
   }
   
   if (is('羣母')) return is('平聲') ? 'k' : 'g';
   if (is('疑母')) return 'ng';
 
   if (is('曉母')) {
-	  if (is('模韻')) return 'h';
-	  if (is('開口') && !is('模韻')) {
-		  if (is('侯韻 去聲')) return 'k';
-		  if (is('尤韻 或 鍾韻 入聲')) return 'j';
-		  return 'h';
-	  }
-	  if (is('合口') && !is('模韻')) {
-		  if (is('梗攝 二等 庚耕韻 舒聲 或 曾攝 一等 登韻 舒聲 或 蒸青清韻 入聲')) return 'gw';
-		  if (is('止攝 或 寒韻 去聲 或 文魂祭齊廢韻 舒聲 或 蟹攝 二等')) return 'w';
-		  if (is('宕攝 三等 去聲 或 宕攝 三等 入聲 或 宕攝 一等 入聲')) return 'k';
-		  return 'h';
-	  }
-	  return 'h';
+    if (is('模韻')) return 'h';
+    if (is('開口') && !is('模韻')) {
+      if (is('侯韻 去聲')) return 'k';
+      if (is('尤韻 或 鍾韻 入聲')) return 'j';
+      return 'h';
+    }
+    if (is('合口') && !is('模韻')) {
+      if (is('庚耕韻 二等 舒聲 或 登韻 舒聲 或 蒸青清韻 入聲')) return 'gw';
+      if (is('止攝 或 寒韻 去聲 或 文魂祭齊廢佳皆夬韻 舒聲')) return 'w';
+      if (is('陽韻 去聲 或 陽韻 入聲 或 唐韻 入聲')) return 'k'; // 宕攝 三等 去聲 或 宕攝 三等 入聲 或 宕攝 一等 入聲
+      return 'h';
+    }
+    return 'h';
   }
   
   if (is('匣母')) {
-	  if (is('模韻')) return 'h';
-	  if (is('開口') && !is('模韻')) return 'h';
-	  if (is('合口') && !is('模韻')) {
-		  if (is('一等 或 二等')) return is('通果宕攝') ? 'h' : 'w';
-		  if (is('三等 或 四等')) return is('通攝') ? 'j' : is('咸攝') ? 'h' : 'w';
-	  }
-	  return 'h';
+    if (is('模韻')) return 'h';
+    if (is('開口') && !is('模韻')) return 'h';
+    if (is('合口') && !is('模韻')) {
+      if (is('一等 或 二等')) return is('通果宕攝') ? 'h' : 'w';
+      if (is('三等 或 四等')) return is('通攝') ? 'j' : is('咸攝') ? 'h' : 'w';
+    }
+    return 'h';
   }
   if (is('影云以母')) {
-	  if (is('模韻')) return 'w';
-	  if (is('開口') && !is('模韻')) {
-		  if (is('三等 或 四等') && !is('影母 蟹曾梗臻通攝')) return 'j';  
-		  if (is('云母 二等')) return 'w';
-		  if (is('一等 或 二等') && is('以母')) return 'j';
-		  return '';
-	  }
-	  if (is('合口') && !is('模韻')) {
-		  if (is('一等 或 二等')) return is('通果宕攝') ? '' : 'w';
-		  if (is('三等 或 四等')) {
-			  if (is('通果攝 或 以母 蟹攝 或 影云母 咸攝 或 梗攝 四等')) return is('影母 通果攝') ? '' : 'j';
-			  return 'w';
-		  }
-	  }
-	  return is('三四等') ? 'j' : '';
+    if (is('模韻')) return 'w';
+    if (is('開口') && !is('模韻')) {
+      if (is('三等 或 四等') && !is('影母 蟹曾梗臻通攝')) return 'j';  
+      if (is('云母 二等')) return 'w';
+      if (is('一等 或 二等') && is('以母')) return 'j';
+      return '';
+    }
+    if (is('合口') && !is('模韻')) {
+      if (is('一等 或 二等')) return is('通果宕攝') ? '' : 'w';
+      if (is('三等 或 四等')) {
+        if (is('通果攝 或 以母 蟹攝 或 影云母 咸攝 或 青韻')) return is('影母 通果攝') ? '' : 'j';
+        return 'w';
+      }
+    }
+    return is('三四等') ? 'j' : '';
   }
 
   throw new Error('無聲母規則');
@@ -148,8 +148,8 @@ function 韻母規則() {
   // 止攝
   if (is('支脂之微韻 幫組')) return 'i';
   if (is('支脂之微韻 開口') && !is('幫組')) {
-	  if (is('精組 三等 或 莊組 三等')) return is('心生母 支韻 上聲') ? 'ai' : 'i';
-	  return 'i';
+      if (is('精組 三等 或 莊組 三等')) return is('心生母 支韻 上聲') ? 'ai' : 'i';
+      return 'i';
   }
   if (is('支脂之微韻 合口 舌齒音')) return 'ui';
   if (is('支脂之微韻 合口 牙喉音')) return 'ai';
@@ -161,9 +161,9 @@ function 韻母規則() {
   // 蟹攝
   if (is('齊韻')) return 'ai';
   if (is('祭韻')) {
-	  if (is('合口 以母')) return 'ui';
-	  if (is('合口') && !is('牙喉音')) return 'ui';
-	  return 'ai';
+      if (is('合口 以母')) return 'ui';
+      if (is('合口') && !is('牙喉音')) return 'ui';
+      return 'ai';
   }
   if (is('泰韻 幫組')) return 'ui';
   if (is('泰韻 開口') && !is('幫組')) return 'aai';
@@ -288,7 +288,7 @@ if (聲母 === 'nj' && 韻母.startsWith('i') && is('入聲')) 聲母 = 'n';
 
 
 // 南寧的 詠泳咏 濁去作上
-if (is('云匣母 合口 庚韻 去聲')) 聲調='5';
+if (is('云匣母 庚韻 合口 去聲')) 聲調='5';
 
 
 // m 韻尾在聲母為脣音時為 n
