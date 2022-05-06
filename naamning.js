@@ -54,7 +54,7 @@ function 聲母規則() {
   }
   
   if (is('邪母 平聲')) {
-    if (is('山仙元文臻眞欣韻 三等')) return 'sl';  // 山臻攝 三等
+    if (is('山臻攝 三等')) return 'sl';
     return 'c';
   }
   if (is('邪母 仄聲')) return 'z';
@@ -190,6 +190,9 @@ function 韻母規則() {
     if (is('合口 三等') && !is('幫組') && !is('牙喉音')) return 'yun';
     return 'an';
   }
+  if (is('元韻 幫組')) return 'aan';
+  if (is('元韻 開口')) return 'in';
+  if (is('元韻 合口')) return 'yun';
 
   // 山攝
   if (is('寒韻 幫組')) return 'un';
@@ -197,17 +200,14 @@ function 韻母規則() {
   if (is('寒韻 開口 牙喉音')) return 'on';
   if (is('寒韻 合口 舌齒音')) return 'yun';
   if (is('寒韻 合口 牙喉音')) return 'un';
-  if (is('元韻 幫組')) return 'aan';  // 放山攝是個人習慣
-  if (is('元韻 開口')) return 'in';  // 放山攝是個人習慣
-  if (is('元韻 合口')) return 'yun';  // 放山攝是個人習慣
-  if (is('刪山韻')) return 'aan';
+  if (is('刪山韻')) return 'aan'; // is('見溪疑曉匣母') ? 'en' : 'aan'; 白讀
   if (is('仙先韻 幫組')) return 'in';
   if (is('仙先韻 開口')) return 'in';
   if (is('仙先韻 合口')) return 'yun';
 
   // 效攝
   if (is('蕭宵韻')) return 'iu';
-  if (is('肴韻')) return 'aau';
+  if (is('肴韻')) return 'aau'; // !is('曉母') ? 'eu' : 'aau'; 白讀
   if (is('豪韻')) return is('溪母') ? 'aau' : 'u';
 
   // 果攝
@@ -247,7 +247,7 @@ function 韻母規則() {
   if (is('覃談韻 舌齒音')) return 'aam';
   if (is('覃談韻 牙喉音')) return 'am';
   if (is('鹽添嚴韻')) return 'im';
-  if (is('咸銜凡韻')) return 'aam'; // return is('莊初崇見溪曉匣母') ? 'em' : 'aam'; 白讀。狎洽韻則是見莊初崇生知徹澄孃母。
+  if (is('咸銜凡韻')) return 'aam'; // return is('莊初崇見溪曉匣母') ? 'em' : 'aam'; 白讀；狎洽韻則是見莊初崇生知徹澄孃母
 
   throw new Error('無韻母規則');
 }
@@ -258,11 +258,11 @@ function 聲調規則() {
     if (is('上聲')) return '2'; // 陰上
     if (is('去聲')) return '3'; // 陰去
     if (is('入聲')) {
-      if (is('咸山江宕攝') || (is('庚耕韻 二等') && !is('影母'))){ // 清紐外轉字，梗攝二等影母特例
-        if (is('覃談韻 一等 影母')) return '1';  // 咸攝 一等 影母
+      if (is('咸山江宕攝') || (is('梗攝 二等') && !is('影母'))){ // 清紐外轉字，影母特例
+        if (is('咸攝 一等 影母')) return '1';
         return '3';
       }
-        if (is('庚清韻 三等 莊組')) return '3';  // 梗攝 三等 莊組
+        if (is('梗攝 三等 莊組')) return '3';
         return '1'; // 清紐內轉字
     }
   } else {

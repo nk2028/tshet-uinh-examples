@@ -29,7 +29,7 @@ function 聲母規則() {
     if (is('輕脣韻')) return 'f';
     return 'b';
   }
-  if (is('明母')) return is('魚虞眞臻文欣韻 三等') ? 'f' : 'm'; // 遇臻攝 三等
+  if (is('明母')) return is('虞文韻') ? 'f' : 'm';
 
   if (is('端母')) return 'd';
   if (is('透母')) return 't';
@@ -52,7 +52,7 @@ function 聲母規則() {
   }
   
   if (is('邪母 平聲')) {
-    if (is('山仙元文臻眞欣韻 三等')) return 'sl';  // 山臻攝 三等
+    if (is('山臻攝 三等')) return 'sl';
     return 'z';
   }
   if (is('邪母 仄聲')) return 'z';
@@ -175,14 +175,14 @@ function 韻母規則() {
 
   // 臻攝
   if (is('眞臻文欣魂痕韻')) return is('魂韻 精組 或 魂韻 幫組') ? 'un' : 'an';
+  if (is('元韻 幫組')) return 'aan';
+  if (is('元韻 開口')) return 'in';
+  if (is('元韻 合口')) return 'yun';
 
   // 山攝
   if (is('寒韻 幫組')) return 'un';
   if (is('寒韻 開口')) return 'aan';
   if (is('寒韻 合口')) return 'un';
-  if (is('元韻 幫組')) return 'aan';  // 放山攝是個人習慣
-  if (is('元韻 開口')) return 'in';  // 放山攝是個人習慣
-  if (is('元韻 合口')) return 'yun';  // 放山攝是個人習慣
   if (is('刪山韻')) return 'aan';
   if (is('仙先韻 幫組')) return 'in';
   if (is('仙先韻 開口')) return 'in';
@@ -241,7 +241,7 @@ function 聲調規則() {
     if (is('平聲')) return '1'; // 陰平
     if (is('上聲')) return '2'; // 陰上
     if (is('去聲')) return '3'; // 陰去
-    if (is('入聲')) return '2';
+    if (is('入聲')) return '2'; // 下陰入，上陰入屬外來層，不參與推導
   } else {
     if (is('平聲')) return '4'; // 陽平
     if (is('全濁 上聲')) return '6'; // 陽去，全濁上變去
