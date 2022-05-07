@@ -54,7 +54,7 @@ function 聲母規則() {
   }
   
   if (is('邪母 平聲')) {
-    if (is('山臻攝 三等')) return 'sl';
+    if (is('山臻攝 三等')) return 'sl'; // 新派 return is('臻攝 合口 三等') ? 'c' : 'sl';
     return 'c';
   }
   if (is('邪母 仄聲')) return 'z';
@@ -187,7 +187,7 @@ function 韻母規則() {
   if (is('眞臻文欣魂痕韻')) {
     if (is('魂韻 精組')) return 'yun';
     if (is('魂韻 幫組')) return 'un';
-    if (is('合口 三等') && !is('幫組') && !is('牙喉音')) return 'yun';
+    if (is('合口 三等') && !is('幫組') && !is('牙喉音')) return 'yun'; // 新派 return 'an';
     return 'an';
   }
   if (is('元韻 幫組')) return 'aan';
@@ -200,14 +200,14 @@ function 韻母規則() {
   if (is('寒韻 開口 牙喉音')) return 'on';
   if (is('寒韻 合口 舌齒音')) return 'yun';
   if (is('寒韻 合口 牙喉音')) return 'un';
-  if (is('刪山韻')) return 'aan'; // is('見溪疑曉匣母') ? 'en' : 'aan'; 白讀
+  if (is('刪山韻')) return 'aan'; // 白讀 return is('見溪疑曉匣母') ? 'en' : 'aan';
   if (is('仙先韻 幫組')) return 'in';
   if (is('仙先韻 開口')) return 'in';
   if (is('仙先韻 合口')) return 'yun';
 
   // 效攝
   if (is('蕭宵韻')) return 'iu';
-  if (is('肴韻')) return 'aau'; // !is('曉母') ? 'eu' : 'aau'; 白讀
+  if (is('肴韻')) return 'aau'; // 白讀 return !is('曉母') ? 'eu' : 'aau';
   if (is('豪韻')) return is('溪母') ? 'aau' : 'u';
 
   // 果攝
@@ -247,7 +247,7 @@ function 韻母規則() {
   if (is('覃談韻 舌齒音')) return 'aam';
   if (is('覃談韻 牙喉音')) return 'am';
   if (is('鹽添嚴韻')) return 'im';
-  if (is('咸銜凡韻')) return 'aam'; // return is('莊初崇見溪曉匣母') ? 'em' : 'aam'; 白讀；狎洽韻則是見莊初崇生知徹澄孃母
+  if (is('咸銜凡韻')) return 'aam'; // 白讀 { return is('銜咸韻 舒聲 莊初崇見溪曉匣母') ? 'em' : 'aam'; return is('銜咸韻 入聲 見莊初崇生知徹澄孃母') ? 'em' : 'aam'; }
 
   throw new Error('無韻母規則');
 }

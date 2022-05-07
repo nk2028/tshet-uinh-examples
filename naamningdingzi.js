@@ -156,7 +156,7 @@ function 韻母規則() {
 
   // 遇攝
   if (is('魚虞韻')) return is('幫組 或 莊組') ? 'u' : 'yu';  // 莊組部分字o
-  if (is('模韻')) return 'u';  // 新派疑母字讀零聲母
+  if (is('模韻')) return 'u';  // 新派 return is('疑母') ? '' : 'u';
 
   // 蟹攝
   if (is('齊韻')) return 'ai';
