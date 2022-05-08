@@ -2,7 +2,7 @@
  *
  * https://github.com/leimaau/naamning_jyutping
  *
- * version: 2022-05-04
+ * version: 2022-05-09
  *
  * 【符號說明】
  * 心母字讀 sl[ɬ]（清齒齦邊擦音），效咸山攝二等字讀 -eu[-ɛu]、-em[-ɛm]/-ep[-ɛp]、-en[-ɛn]/-et[-ɛt]，但演變不平衡，以下只推導文讀音，同理，梗三四的演變不平衡，以下也只推導文讀音
@@ -63,7 +63,7 @@ function 聲母規則() {
       } else {
         return is('臻攝 合口 三等') ? 'c' : 'sl';
       }
-	}
+    }
     return 'c';
   }
   if (is('邪母 仄聲')) return 'z';

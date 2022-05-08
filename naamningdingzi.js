@@ -2,7 +2,7 @@
  *
  * https://github.com/leimaau/naamning_jyutping
  *
- * version: 2022-05-04
+ * version: 2022-05-09
  *
  * 【符號說明】
  * 心母字讀 sl[ɬ]（清齒齦邊擦音），日母和疑母細音字讀 nj[ȵ]（齦齶音）
