@@ -140,8 +140,8 @@ function 聲母規則() {
     if (is('合口')) {
       if (is('一二等')) return is('通攝') ? '' : 'w';
       if (is('三四等')) {
-      if (is('通果攝 或 以母 蟹攝 或 影云母 咸攝')) return 'j';
-      return 'w';
+        if (is('通果攝 或 以母 蟹攝 或 影云母 咸攝')) return 'j';
+        return 'w';
       }
     }
     return is('三四等') ? 'j' : '';

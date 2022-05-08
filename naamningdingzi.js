@@ -154,14 +154,14 @@ function 韻母規則() {
   // 止攝
   if (is('支脂之微韻 幫組')) return 'i';
   if (is('支脂之微韻 開口') && !is('幫組')) {
-      if (is('精莊組 三等')) return is('心生母 支韻 上聲') ? 'ai' : 'i';
-      return 'i';
+    if (is('精莊組 三等')) return is('心生母 支韻 上聲') ? 'ai' : 'i';
+    return 'i';
   }
   if (is('支脂之微韻 合口 舌齒音')) return 'ui';
   if (is('支脂之微韻 合口 牙喉音')) return 'ai';
 
   // 遇攝
-  if (is('魚虞韻')) return is('幫組 或 莊組') ? 'u' : 'yu';  // 莊組部分字o
+  if (is('魚虞韻')) return is('幫莊組') ? 'u' : 'yu';  // 莊組部分字o
   if (is('模韻')) {
     if (選項.新老派 === '老派') {
       return 'u';
@@ -186,7 +186,7 @@ function 韻母規則() {
   if (is('廢韻')) return is('幫組') ? 'i' : 'ai';
 
   // 臻攝
-  if (is('眞臻文欣魂痕韻')) return is('魂韻 精組 或 魂韻 幫組') ? 'un' : 'an';
+  if (is('眞臻文欣魂痕韻')) return is('魂韻 精幫組') ? 'un' : 'an';
   if (is('元韻 幫組')) return 'aan';
   if (is('元韻 開口')) return 'in';
   if (is('元韻 合口')) return 'yun';
