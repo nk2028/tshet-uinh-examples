@@ -12,7 +12,10 @@
  * @author LeiMaau
  */
 
-if (!音韻地位) return [['$legacy', true]];
+if (!音韻地位) return [
+  ['文白讀', [1, '白讀', '文讀']],
+  ['新老派', [2, '新派', '老派']]
+];
 
 const is = (x) => 音韻地位.屬於(x);
 
@@ -54,7 +57,11 @@ function 聲母規則() {
   }
   
   if (is('邪母 平聲')) {
-    if (is('山臻攝 三等')) return 'sl'; // 新派 return is('臻攝 合口 三等') ? 'c' : 'sl';
+    if (選項.新老派 === '老派') {
+      if (is('山臻攝 三等')) return 'sl';
+    } else {
+      if (is('山臻攝 三等')) return is('臻攝 合口 三等') ? 'c' : 'sl';
+    }
     return 'c';
   }
   if (is('邪母 仄聲')) return 'z';
@@ -151,7 +158,13 @@ function 韻母規則() {
   // 止攝
   if (is('支脂之微韻 幫組')) return 'i';
   if (is('支脂之微韻 開口') && !is('幫組')) {
-    if (is('精莊組')) return is('心生母 支韻 上聲') ? 'ai' : 'y';
+    if (is('精莊組')) {
+      if (選項.新老派 === '老派') {
+        return is('心生母 支韻 上聲') ? 'ai' : 'y';
+      } else {
+        return is('心生母 支韻 上聲') ? 'ai' : 'i';
+      }
+    }
     return 'i';
   }
   if (is('支脂之微韻 合口 舌齒音')) return 'ui';
@@ -187,7 +200,13 @@ function 韻母規則() {
   if (is('眞臻文欣魂痕韻')) {
     if (is('魂韻 精組')) return 'yun';
     if (is('魂韻 幫組')) return 'un';
-    if (is('合口 三等') && !is('幫組') && !is('牙喉音')) return 'yun'; // 新派 return 'an';
+    if (is('合口 三等') && !is('幫組') && !is('牙喉音')) {
+      if (選項.新老派 === '老派') {
+        return 'yun';
+      } else {
+        return 'an';
+      }
+    }
     return 'an';
   }
   if (is('元韻 幫組')) return 'aan';
@@ -200,14 +219,26 @@ function 韻母規則() {
   if (is('寒韻 開口 牙喉音')) return 'on';
   if (is('寒韻 合口 舌齒音')) return 'yun';
   if (is('寒韻 合口 牙喉音')) return 'un';
-  if (is('刪山韻')) return 'aan'; // 白讀 return is('見溪疑曉匣母') ? 'en' : 'aan';
+  if (is('刪山韻')) {
+    if (選項.文白讀 === '文讀') {
+      return 'aan'; 
+    } else {
+      return is('見溪疑曉匣母 或 山韻 幫母') ? 'en' : 'aan';
+    }
+  }
   if (is('仙先韻 幫組')) return 'in';
   if (is('仙先韻 開口')) return 'in';
   if (is('仙先韻 合口')) return 'yun';
 
   // 效攝
   if (is('蕭宵韻')) return 'iu';
-  if (is('肴韻')) return 'aau'; // 白讀 return !is('曉母') ? 'eu' : 'aau';
+  if (is('肴韻')) {
+    if (選項.文白讀 === '文讀') {
+      return 'aau';
+    } else {
+      return !is('曉母') ? 'eu' : 'aau';
+    }
+  }
   if (is('豪韻')) return is('溪母') ? 'aau' : 'u';
 
   // 果攝
@@ -247,7 +278,13 @@ function 韻母規則() {
   if (is('覃談韻 舌齒音')) return 'aam';
   if (is('覃談韻 牙喉音')) return 'am';
   if (is('鹽添嚴韻')) return 'im';
-  if (is('咸銜凡韻')) return 'aam'; // 白讀 { return is('銜咸韻 舒聲 莊初崇見溪曉匣母') ? 'em' : 'aam'; return is('銜咸韻 入聲 見莊初崇生知徹澄孃母') ? 'em' : 'aam'; }
+  if (is('咸銜凡韻')) {
+    if (選項.文白讀 === '文讀') {
+      return 'aam';
+    } else {
+      return is('銜咸韻 舒聲 莊初崇見溪曉匣母') ? 'em' : is('銜咸韻 入聲 見莊初崇生知徹澄孃母') ? 'em' : 'aam';
+    }
+  }
 
   throw new Error('無韻母規則');
 }

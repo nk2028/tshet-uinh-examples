@@ -12,7 +12,7 @@
  * @author LeiMaau
  */
 
-if (!音韻地位) return [['$legacy', true]];
+if (!音韻地位) return [['新老派', [2, '新派', '老派']]];
 
 const is = (x) => 音韻地位.屬於(x);
 
@@ -29,7 +29,13 @@ function 聲母規則() {
     if (is('輕脣韻')) return 'f';
     return 'b';
   }
-  if (is('明母')) return is('虞文韻') ? 'f' : 'm';
+  if (is('明母')) {
+      if (選項.新老派 === '老派') {
+        return is('虞文韻') ? 'f' : 'm';
+      } else {
+        return 'm';
+      }
+  }
 
   if (is('端母')) return 'd';
   if (is('透母')) return 't';
@@ -156,7 +162,13 @@ function 韻母規則() {
 
   // 遇攝
   if (is('魚虞韻')) return is('幫組 或 莊組') ? 'u' : 'yu';  // 莊組部分字o
-  if (is('模韻')) return 'u';  // 新派 return is('疑母') ? '' : 'u';
+  if (is('模韻')) {
+    if (選項.新老派 === '老派') {
+      return 'u';
+    } else {
+      return is('疑母') ? '' : 'u';
+    }
+  }
 
   // 蟹攝
   if (is('齊韻')) return 'ai';
