@@ -85,13 +85,13 @@ function 聲母規則() {
   
   if (is('溪母')) {
     if (is('模韻')) return 'f';
-    if (is('開口 非 模韻')) {
+    if (is('開口')) {
       if (is('侯韻')) return is('上聲') ? 'h' : 'k';
       if (is('果假攝 或 鍾先仙陽江韻 入聲 或 佳皆齊宵支陽韻 舒聲 或 庚韻 三等 入聲 或 唐咍韻 去聲')) return 'k';
       if (is('尤韻 或 侵韻 入聲')) return 'j';
       return 'h';
     }
-    if (is('合口 非 模韻')) {
+    if (is('合口')) {
       if (is('文韻 舒聲')) return 'kw';
       if (is('果遇止假梗宕攝 或 先仙元韻 入聲 或 皆佳祭齊魂眞韻 舒聲')) return 'k';
       if (is('登韻 舒聲')) return 'w';
@@ -105,12 +105,12 @@ function 聲母規則() {
 
   if (is('曉母')) {
     if (is('模韻')) return 'f';
-    if (is('開口 非 模韻')) {
+    if (is('開口')) {
       if (is('侯韻 去聲')) return 'k';
       if (is('尤韻 或 鍾韻 入聲')) return 'j';
       return 'h';
     }
-    if (is('合口 非 模韻')) {
+    if (is('合口')) {
       if (is('庚耕韻 二等 舒聲 或 登韻 舒聲 或 蒸青清韻 入聲')) return 'gw';
       if (is('止攝 或 寒韻 去聲 或 文魂祭齊廢佳皆夬韻 舒聲')) return 'w';
       if (is('陽韻 去聲 或 陽韻 入聲 或 唐韻 入聲')) return 'k'; // 宕攝 三等 去聲 或 宕攝 三等 入聲 或 宕攝 一等 入聲
@@ -122,24 +122,24 @@ function 聲母規則() {
   
   if (is('匣母')) {
     if (is('模韻')) return 'w';
-    if (is('開口 非 模韻')) return 'h';
-    if (is('合口 非 模韻')) {
-      if (is('一等 或 二等')) return is('通攝') ? 'h' : 'w';
-      if (is('三等 或 四等')) return is('通攝') ? 'j' : is('咸攝') ? 'h' : 'w';
+    if (is('開口')) return 'h';
+    if (is('合口')) {
+      if (is('一二等')) return is('通攝') ? 'h' : 'w';
+      if (is('三四等')) return is('通攝') ? 'j' : is('咸攝') ? 'h' : 'w';
     }
     return 'h';
   }
   if (is('影云以母')) {
     if (is('模韻')) return 'w';
-    if (is('開口 非 模韻')) {
-      if (is('三等 或 四等') && !is('影母 蟹攝')) return 'j';  
+    if (is('開口')) {
+      if (is('三四等 非 (影母 蟹攝)')) return 'j';  
       if (is('云母 二等')) return 'w';
-      if (is('一等 或 二等') && is('以母')) return 'j';
+      if (is('一二等 以母')) return 'j';
       return '';
     }
-    if (is('合口 非 模韻')) {
-      if (is('一等 或 二等')) return is('通攝') ? '' : 'w';
-      if (is('三等 或 四等')) {
+    if (is('合口')) {
+      if (is('一二等')) return is('通攝') ? '' : 'w';
+      if (is('三四等')) {
       if (is('通果攝 或 以母 蟹攝 或 影云母 咸攝')) return 'j';
       return 'w';
       }
@@ -202,7 +202,7 @@ function 韻母規則() {
   if (is('眞臻文欣魂痕韻')) {
     if (is('魂韻 精組')) return 'yun';
     if (is('魂韻 幫組')) return 'un';
-    if (is('合口 三等') && !is('幫組') && !is('牙喉音')) {
+    if (is('合口 三等 舌齒音')) {
       if (選項.新老派 === '老派') {
         return 'yun';
       } else {
@@ -259,10 +259,10 @@ function 韻母規則() {
   if (is('唐韻')) return 'ong';
 
   // 梗攝
-  if (is('庚韻 二等')) return is('影見曉母 或 溪匣母 上聲 或 溪匣母 去聲') ? 'ang' : 'aang';
+  if (is('庚韻 二等')) return is('影見曉母 或 溪匣母 上去聲') ? 'ang' : 'aang';
   if (is('庚韻 三等 莊組')) return 'aang';
   if (is('庚韻 三等')) return 'ing';
-  if (is('耕韻')) return is('影見曉母 或 溪匣母 上聲 或 溪匣母 去聲') ? 'ang' : 'aang';
+  if (is('耕韻')) return is('影見曉母 或 溪匣母 上去聲') ? 'ang' : 'aang';
   if (is('清青韻')) return 'ing';
 
   // 曾攝
@@ -298,7 +298,7 @@ function 聲調規則() {
     if (is('去聲')) return '3'; // 陰去
     if (is('入聲')) {
       if (is('咸山江宕攝 或 梗攝 二等')){ // 清紐外轉字，影母特例
-        if (is('咸攝 一等 影母 或 江攝 影母 或 梗攝 影母')) return '1';
+        if (is('(咸攝 一等 或 江梗攝) 影母')) return '1';
         return '3';
       }
       if (is('梗攝 三等 莊組')) return '3';
@@ -329,14 +329,16 @@ if (is('合口') && !['u', 'o', 'yu'].some((x) => 韻母.startsWith(x))) { // �
 
 
 // 疑母拼細音時: i-類和oe-類 入聲n- 舒聲j-；yu類 舒入聲j-；u-類 ngung/k->jung/k，ngun/t->wun/t，ngu不變
-const is細音i和oe類 = ['i', 'oe'].some((x) => 韻母.startsWith(x));
-const is細音yu類 = ['yu'].some((x) => 韻母.startsWith(x));
-const is細音u類 = ['u'].some((x) => 韻母.startsWith(x));
-if (聲母 === 'ng' && is細音i和oe類 && is('入聲')) 聲母 = 'n';
-if (聲母 === 'ng' && is細音i和oe類 && is('舒聲')) 聲母 = 'j';
-if (聲母 === 'ng' && is細音yu類) 聲母 = 'j';
-if (聲母 === 'ng' && is細音u類 && 韻母 === 'ung') 聲母 = 'j';
-if (聲母 === 'ng' && is細音u類 && 韻母 === 'un') 聲母 = 'w';
+if (聲母 === 'ng') {
+  const is細音i和oe類 = ['i', 'oe'].some((x) => 韻母.startsWith(x));
+  const is細音yu類 = ['yu'].some((x) => 韻母.startsWith(x));
+  const is細音u類 = ['u'].some((x) => 韻母.startsWith(x));
+  if (is細音i和oe類 && is('入聲')) 聲母 = 'n';
+  if (is細音i和oe類 && is('舒聲')) 聲母 = 'j';
+  if (is細音yu類) 聲母 = 'j';
+  if (is細音u類 && 韻母 === 'ung') 聲母 = 'j';
+  if (is細音u類 && 韻母 === 'un') 聲母 = 'w';
+}
 
 // 其他變換
 if (聲母 === 'w' && 韻母 === 'yu') 聲母 = 'j'; // 保險起見再寫一遍
