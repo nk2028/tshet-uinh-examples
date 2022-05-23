@@ -12,11 +12,12 @@ https://nk2028-1305783649.file.myqcloud.com/qieyun-examples/<filename>
 
 **切韻音系拼音或轉寫 romanization/transcription of the Qieyun phonological system**
 
-- 切韻拼音 (Tshet-uinh Phonetic Alphabet): `tshet.js`
+- 切韻拼音 (Tshet-uinh Phonetic Alphabet): `tupa.js`
 - 白一平轉寫 (Baxter’s Transcription): `baxter.js`
 - 有女羅馬字 (Blankego’s Romanization): `blankego.js`
 - 古韻羅馬字 (Koxyonh’s Romanization): `kyonh.js`
 - 隋拼 (Zyepheng): `zyepheng.js`
+- Sliark 拼音 (Sliark’s Romanization): `sliark_peengqvim.js`
 
 **切韻音系擬音 reconstruction of the Qieyun phonological system**
 

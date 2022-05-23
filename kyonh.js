@@ -5,7 +5,11 @@
  * @author Ayaka
  */
 
-const is = (x) => 音韻地位.屬於(x);
+if (!音韻地位) return [];
+
+const is = (...x) => 音韻地位.屬於(...x);
+
+音韻地位 = Qieyun.適配分析體系('ytenx')(音韻地位);
 
 function 聲母規則() {
   switch (音韻地位.母) {
@@ -185,11 +189,11 @@ if (韻母.endsWith('d')) {
 }
 
 if (聲母.endsWith('r') && 韻母.startsWith('r')) {
-  韻母 = 韻母.substr(1);
+  韻母 = 韻母.slice(1);
 }
 
 if (聲母.endsWith('j') && 韻母.startsWith('i') && [...'aeou'].some((x) => 韻母.includes(x))) {
-  韻母 = 韻母.substr(1);
+  韻母 = 韻母.slice(1);
 }
 
 if (is(`幫組 一二三四等 \
@@ -208,8 +212,10 @@ if (is(`幫組 一二三四等 \
   隔音符號 = '';
 }
 
-if (is('云母 一等')) 聲母 = 'i'; // 1444 倄小韻 i'uaix
+if (is('云母 一二四等')) 聲母 = 'i'; // 如 1444 倄小韻 i'uaix
 
-if (is('定母 三等')) 隔音符號 = ''; // 2237 地小韻 diih
+if (is('端組 三等') && !韻母.startsWith('j')) {
+  隔音符號 = ''; // 如 2237 地小韻 diih
+}
 
 return 聲母 + 隔音符號 + 韻母 + 聲調;
