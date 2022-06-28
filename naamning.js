@@ -225,7 +225,7 @@ function 韻母規則() {
     if (選項.文白讀 === '文讀') {
       return 'aan'; 
     } else {
-      return is('見溪疑曉匣母 或 山韻 幫母') ? 'en' : 'aan';
+      return is('見溪疑曉匣母 或 山韻 幫母 入聲') ? 'en' : 'aan';
     }
   }
   if (is('仙先韻 幫組')) return 'in';
