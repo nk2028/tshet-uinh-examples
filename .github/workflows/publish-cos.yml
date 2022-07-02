@@ -1,0 +1,35 @@
+name: Publish to Tencent Cloud COS
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      # Build
+      - name: Setup Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14
+          registry-url: https://registry.npmjs.org/
+      - name: Install Node.js packages
+        run: npm ci
+      - name: Build
+        run: python build.py > index.js
+
+      # Publish
+      - name: Install coscmd
+        run: sudo pip install coscmd
+      - name: Configure coscmd
+        env:
+          SECRET_ID: ${{ secrets.SecretId }}
+          SECRET_KEY: ${{ secrets.SecretKey }}
+        run: coscmd config -a $SECRET_ID -s $SECRET_KEY -b nk2028-1305783649 -r ap-guangzhou
+      - name: Publish static files to COS
+        run: coscmd upload -rs --delete -f . /qieyun-examples --ignore '*/.*,*/node_modules/*,./test/*,./build.py,./package.json,./package-lock.json'

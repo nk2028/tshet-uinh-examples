@@ -5,6 +5,8 @@
  * @author Ayaka
  */
 
+if (!音韻地位) return [['$legacy', true]];
+
 const is = (x) => 音韻地位.屬於(x);
 
 function 聲母規則() {
@@ -212,7 +214,7 @@ if (韻母.startsWith('wɻ') && is('知莊組')) {
 
 // 以母簡化拼式
 // 總結：以母三A/三B，以 j 或 ɥ 起始時，省略聲母
-if (is('以母 三等 支脂祭眞仙宵諄臻麻清庚蒸侵鹽韻') && (韻母.startsWith('j') || 韻母.startsWith('ɥ'))) {
+if (is('以母 三等 支脂祭眞仙宵臻麻清庚蒸侵鹽韻') && (韻母.startsWith('j') || 韻母.startsWith('ɥ'))) {
   聲母 = '';
 }
 

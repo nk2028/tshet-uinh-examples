@@ -5,17 +5,19 @@ JavaScript code examples to generate the derivatives of the Qieyun phonological 
 ## Usage
 
 ```
-https://cdn.jsdelivr.net/gh/nk2028/qieyun-examples@<commit-sha>/<filename>
+https://nk2028-1305783649.file.myqcloud.com/qieyun-examples/<filename>
 ```
 
 ## List of included examples
 
 **切韻音系拼音或轉寫 romanization/transcription of the Qieyun phonological system**
 
+- 切韻拼音 (Tshet-uinh Phonetic Alphabet): `tupa.js`
 - 白一平轉寫 (Baxter’s Transcription): `baxter.js`
 - 有女羅馬字 (Blankego’s Romanization): `blankego.js`
 - 古韻羅馬字 (Koxyonh’s Romanization): `kyonh.js`
 - 隋拼 (Zyepheng): `zyepheng.js`
+- Sliark 拼音 (Sliark’s Romanization): `sliark_peengqvim.js`
 
 **切韻音系擬音 reconstruction of the Qieyun phonological system**
 
@@ -26,11 +28,14 @@ https://cdn.jsdelivr.net/gh/nk2028/qieyun-examples@<commit-sha>/<filename>
 
 **推導後世音系 extrapolated later phonological system**
 
+- 推導盛中唐擬音 (Extrapolated Reconstruction of High and Middle Tang Chinese): `mid_tang.js`
 - 推導《聲音唱和圖》擬音 (Extrapolated Reconstruction of _Shing-im Chiang-xhua Dhu_): `chiangxhua.js`
 - 推導《分韻撮要》擬音 (Extrapolated Reconstruction of _Fan-Wan Ts'üt-Iú_): `fanwan.js`
 - 推導普通話 (Extrapolated Putonghua): `putonghua.js`
 - 推導廣州音 (Extrapolated Cantonese): `gwongzau.js`
 - 推導上海話 (Extrapolated Shanghainese): `zaonhe.js`
+- 推導南京話 (Extrapolated Nankinese): `langjin.js`
+- 推導大埔話 (Extrapolated Taibu Hakka): `taibu.js`
 
 **人造音系 artificial phonological system**
 
