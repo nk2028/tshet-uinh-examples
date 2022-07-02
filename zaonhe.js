@@ -325,6 +325,7 @@ function 韻母規則(文讀) {
   if (is('歌韻 一等')) return 'u';
   if (is('歌韻 三等 開口')) return 文讀 ? 'ia▽' : 'a'; // 「茄」等
   if (is('歌韻 三等 合口')) return 文讀 ? 'ia▽' : 分于園 ? 'io' : 'y'; // 「瘸」等
+  if (is('歌韻 三等 脣音')) return 'u'; // 「縛」
 
   // 假攝
   if (is('麻韻 二等 脣音')) return 文讀 ? 'a▽' : 'o'; // 「馬」等
