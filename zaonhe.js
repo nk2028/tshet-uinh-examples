@@ -42,7 +42,7 @@ const 分羣窮 = 選項['區分⟨羣､窮⟩'];
 
 const 元音 = 'iyɨʉɯuɪʏʊeøɘɵɤoəɛœɜɞʌɔæɐaɶäɑɒ';
 const 元音Re = new RegExp("[" + 元音 + "]");
-const 閉前元音 = 'iy';
+const 閉前元音 = 'iyɪʏ';
 const 元音附標 = '̃̈';
 const 顎化分尖團 = {
   'n': 'ɲ',
