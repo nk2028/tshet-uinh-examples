@@ -8,7 +8,6 @@ import {
   sliark_peengqvim,
   panwuyun,
   unt,
-  unt_j,
   msoeg_v8,
   mid_tang,
   chiangxhua,
@@ -37,8 +36,7 @@ assert_equal(kyonh(音韻地位), "sjeux");
 assert_equal(zyepheng(音韻地位), "shiéu");
 assert_equal(sliark_peengqvim(音韻地位), "sjewx");
 assert_equal(panwuyun(音韻地位), "ɕiɛu˧˥");
-assert_equal(unt(音韻地位), "ɕjɛw˦˦˥");
-assert_equal(unt_j(音韻地位), "ɕéw");
+assert_equal(unt(音韻地位), "ɕéw");
 assert_equal(msoeg_v8(音韻地位), "çiɛuˀ");
 assert_equal(mid_tang(音韻地位), "ɕiɛw˦˥");
 assert_equal(chiangxhua(音韻地位), "ɕiɛ́w");
