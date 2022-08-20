@@ -1,3 +1,4 @@
+import * as Qieyun from "qieyun";
 import { 資料 } from "qieyun";
 import {
   tupa,
@@ -47,3 +48,27 @@ assert_equal(zaonhe(音韻地位), "sɔ̄");
 assert_equal(langjin(音韻地位), "shao³");
 assert_equal(taibu(音韻地位), "shau3");
 assert_equal(ayaka_v8(音韻地位), "seu");
+
+assert_equal(
+  tupa.schema({ 模式: "標準", 脣音咍韻歸灰韻: false })(
+    Qieyun.音韻地位.from描述("並咍上")
+  ),
+  "beojq"
+);
+
+(() => {
+  let value;
+  try {
+    value = tupa(音韻地位, null, { 模式: "標準" });
+  } catch (e) {
+    if (!/no longer supported/i.test(e.message)) {
+      throw new Error(
+        `Expected error containing "no longer supported", but got: ${JSON.stringify(
+          e.message
+        )}`
+      );
+    }
+    return;
+  }
+  throw new Error(`Expected error, but got ${JSON.stringify(value)}`);
+})();
