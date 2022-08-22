@@ -1,6 +1,6 @@
 {
   "name": "qieyun-examples",
-  "version": "20220424.0.0",
+  "version": "20220801.0.0",
   "description": "JavaScript code examples to generate the derivatives of the Qieyun phonological system using qieyun-js",
   "type": "module",
   "main": "index.js",
@@ -22,7 +22,13 @@
     "url": "https://github.com/nk2028/qieyun-examples/issues"
   },
   "homepage": "https://github.com/nk2028/qieyun-examples#readme",
+  "peerDependencies": {
+    "qieyun": "^0.13.x"
+  },
   "dependencies": {
-    "qieyun": "^0.13.0"
+    "tshet-uinh-deriver-tools": "^0.1.1"
+  },
+  "devDependencies": {
+    "qieyun": "^0.13.4"
   }
 }
