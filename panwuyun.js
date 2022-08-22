@@ -64,15 +64,8 @@ function get韻母() {
     æ: '麻庚銜刪夬肴', ɑ: '歌唐談寒泰豪',
   };
   const 韻尾列表 = [''].concat(is`舒聲` ? [...'ŋmniu'] : [...'kpt']);
-  let 韻核;
-  let 韻尾;
-  Object.keys(元音表).some(e => {
-    if (元音表[e].includes(音韻地位.韻)) {
-      韻核 = e;
-      韻尾 = 韻尾列表[元音表[e].indexOf(音韻地位.韻)];
-      return true;
-    }
-  });
+  let 韻核 = Object.keys(元音表).find(e => 元音表[e].includes(音韻地位.韻));
+  let 韻尾 = 韻尾列表[元音表[韻核].indexOf(音韻地位.韻)];
 
   let 介音 = '';
   if (is`合口` && ![...'mpu'].includes(韻尾) && ![...'uoʊɔ'].includes(韻核))
@@ -86,13 +79,11 @@ function get韻母() {
   if ([...'oʊ'].includes(韻核))
     介音 += is2000 ? 介音 ? '' : 'u' : 'u̯';
 
-  if (is2000) { // 調整韻核
-    [...'ᴇɛæaɐ'].some((e, i, a) => {
-      if (韻核 === e) {
-        韻核 = a[i + 1];
-        return true;
-      }
-    });
+  // 調整韻核
+  if (is2000) {
+    const 韻核鏈移列表 = [...'ᴇɛæaɐ']; // “鏈移”只是比喻
+    if (韻核鏈移列表.includes(韻核)) 韻核 = 韻核鏈移列表[韻核鏈移列表.indexOf(韻核) + 1];
+
     韻核 = {
       尤: 'i', 幽: 'ɨ', 侯: 'əu',
       支: 選項.支韻[1], 魚: 'ɔ', 虞: 選項.虞韻[1],

@@ -251,12 +251,7 @@ function get韻母() {
 
   let 韻母 = 韻母列表[開合index];
   if (is`入聲`) {
-    ['m', 'n', 'ŋ'].some((e, i) => {
-      if (韻母.slice(-1) === e) {
-        韻母 = 韻母.slice(0, -1) + 選項.入聲韻尾.split(' ')[i];
-        return true;
-      }
-    });
+    選項.入聲韻尾.split(' ').forEach((e, i) => { 韻母 = 韻母.replace('mnŋ'[i], e); });
   }
 
   韻母 = 韻母.replace('ʕ', 選項.二等介音.replace('省略', ''));
@@ -284,7 +279,7 @@ function get音節() {
     韻母: get韻母(),
     聲調: get聲調(),
   };
-  const 韻尾列表 = ['ŋ', 'j', 'n', 'w', 'm'] + 選項.入聲韻尾.split(' ');
+  const 韻尾列表 = [...'ŋjnwm', ...選項.入聲韻尾.split(' ')];
   音節.帶調韻母 = 選項.聲調 === '附加符號' && 韻尾列表.includes(音節.韻母.slice(-1)) ?
     音節.韻母.slice(0, -1) + 音節.聲調 + 音節.韻母.slice(-1) :
     音節.韻母 + 音節.聲調;

@@ -15,6 +15,7 @@
 if (!音韻地位) return [];
 
 const is = (...x) => 音韻地位.屬於(...x);
+const when = (...x) => 音韻地位.判斷(...x);
 
 // 正則化之前需保留該信息
 const is脣音咍韻 = is`脣音 咍韻`;
@@ -45,7 +46,7 @@ function get聲母() {
 
 function get韻母() {
   // 爲了方便推導，對韻類稍作調整
-  const 韻 = 音韻地位.判斷([
+  const 韻 = when([
     ['蒸韻 (重紐B類 或 幫組 或 合口)', '冰'],
     ['東韻 三等', '終'],
     ['清韻', '庚'],
@@ -69,15 +70,9 @@ function get韻母() {
          'ae', 'a',
   ];
 
-  let 元音;
-  let 韻尾;
-  韻到韻尾.some((item) => {
-    if (item[0].includes(韻)) {
-      元音 = 元音列表[item[0].replace(/ /g, '')[is`開口` ? 'indexOf' : 'lastIndexOf'](韻)];
-      韻尾 = item[1 + is`入聲`];
-      return true;
-    }
-  });
+  let 匹配行 = 韻到韻尾.find(行 => 行[0].includes(韻));
+  let 元音 = 元音列表[匹配行[0].replace(/ /g, '')[is`開口` ? 'indexOf' : 'lastIndexOf'](韻)];
+  let 韻尾 = 匹配行[1 + is`入聲`];
 
   // 添加三等 C 介音（僅歌陽韻需要處理）
   if (is`三等` && 元音 === 'a') {
