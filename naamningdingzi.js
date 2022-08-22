@@ -215,7 +215,7 @@ function 韻母規則() {
   if (is('麻韻 三等')) return 'e';
 
   // 宕攝
-  if (is('陽韻 幫組')) return 'aang';
+  if (is('陽韻 幫組')) return 'ung';
   if (is('陽韻 開口 莊組')) return 'aang';
   if (is('陽韻 開口')) return 'iang';
   if (is('陽韻 合口')) return 'ung';
@@ -224,10 +224,10 @@ function 韻母規則() {
   if (is('唐韻 合口')) return 'ung';
 
   // 梗攝
-  if (is('庚韻 二等')) return is('影見曉幫滂並母') ? 'ang' : 'iang';
+  if (is('庚韻 二等')) return is('影見曉幫滂並母') ? 'ang' : (選項.新老派 === '老派') ? 'iang' : 'aang';
   if (is('庚韻 三等 莊組')) return 'iang';
   if (is('庚韻 三等')) return 'ing';
-  if (is('耕韻')) return is('影見曉幫滂並母') ? 'ang' : 'iang';
+  if (is('耕韻')) return is('影見曉幫滂並母') ? 'ang' : (選項.新老派 === '老派') ? 'iang' : 'ang';
   if (is('清青韻')) return 'ing';
 
   // 曾攝
@@ -301,7 +301,7 @@ if (聲母 === 'nj' && (韻母 === 'ing' || 韻母 === 'iang')) 聲母 = 'ng';
 if (聲母 === 'nj' && 韻母.startsWith('i') && is('入聲')) 聲母 = 'n';
 
 
-// 南寧的 詠泳咏 濁去作上
+// 南寧的 詠泳咏 讀陽上
 if (is('云匣母 庚韻 合口 去聲')) 聲調 = '5';
 
 
