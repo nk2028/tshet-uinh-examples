@@ -46,6 +46,7 @@ _defaultDerivers.{id} = _schemata.{id}();
 {comment}
  * @param {{Qieyun.音韻地位}} 音韻地位 切韻音系音韻地位
  * @param {{string=}} 字頭 字頭（可選）
+ * @param {{undefined=}} 舊選項參數 已棄用，請用 `<方案名>.方案(選項)(音韻地位, 字頭?)` 代替
  * @return {{string}} 音韻地位對應的{title}
  * @property {{推導方案<string>}} schema 推導方案，可用於指定推導選項、獲取方案詳細資訊等
  */
