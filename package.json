@@ -1,6 +1,6 @@
 {
   "name": "qieyun-examples",
-  "version": "20220826.0.1",
+  "version": "20220826.0.2",
   "description": "JavaScript code examples to generate the derivatives of the Qieyun phonological system using qieyun-js",
   "type": "module",
   "main": "index.js",
