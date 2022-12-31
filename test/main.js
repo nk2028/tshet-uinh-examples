@@ -13,6 +13,7 @@ import {
   msoeg_v8,
   mid_tang,
   chiangxhua,
+  zhongyuan,
   fanwan,
   putonghua,
   gwongzau,
@@ -43,6 +44,7 @@ assert_equal(unt(音韻地位), "ɕéw");
 assert_equal(msoeg_v8(音韻地位), "çiɛuˀ");
 assert_equal(mid_tang(音韻地位), "ɕiɛw˦˥");
 assert_equal(chiangxhua(音韻地位), "ɕiɛ́w");
+assert_equal(zhongyuan(音韻地位), "ʂjɛw³");
 assert_equal(fanwan(音韻地位), "shiu2");
 assert_equal(putonghua(音韻地位), "shǎo");
 assert_equal(gwongzau(音韻地位), "siu2");

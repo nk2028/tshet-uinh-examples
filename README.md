@@ -30,6 +30,7 @@ https://nk2028-1305783649.file.myqcloud.com/qieyun-examples/<filename>
 
 - 推導盛中唐擬音 (Extrapolated Reconstruction of High and Middle Tang Chinese): `mid_tang.js`
 - 推導《聲音唱和圖》擬音 (Extrapolated Reconstruction of _Shing-im Chiang-xhua Dhu_): `chiangxhua.js`
+- 推導《中原音韻》擬音 (Extrapolated Reconstruction of _Zhongyuan Yinyun_): `zhongyuan.js`
 - 推導《分韻撮要》擬音 (Extrapolated Reconstruction of _Fan-Wan Tsʽüt-Iú_): `fanwan.js`
 - 推導普通話 (Extrapolated Putonghua): `putonghua.js`
 - 推導廣州音 (Extrapolated Cantonese): `gwongzau.js`
