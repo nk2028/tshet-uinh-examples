@@ -22,6 +22,7 @@ https://nk2028-1305783649.file.myqcloud.com/qieyun-examples/<filename>
 **切韻音系擬音 reconstruction of the Qieyun phonological system**
 
 - 高本漢擬音 (Bernhard Karlgren’s Reconstruction): `karlgren.js`
+- 王力擬音 (Wang Li’s Reconstruction): `wangli.js`
 - 潘悟雲擬音 (Pan Wuyun’s Reconstruction): `panwuyun.js`
 - unt 切韻擬音 (unt’s Qieyun Reconstruction): `unt.js`
 - msoeg 中古擬音 V8 (msoeg’s Middle Chinese Reconstruction V8): `msoeg_v8.js`
