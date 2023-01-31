@@ -8,6 +8,7 @@ import {
   zyepheng,
   sliark_peengqvim,
   karlgren,
+  wangli,
   panwuyun,
   unt,
   msoeg_v8,
@@ -39,6 +40,7 @@ assert_equal(kyonh(音韻地位), "sjeux");
 assert_equal(zyepheng(音韻地位), "shiéu");
 assert_equal(sliark_peengqvim(音韻地位), "sjewx");
 assert_equal(karlgren(音韻地位), "ɕi̯ɛu꞉");
+assert_equal(wangli(音韻地位), "꜂ɕĭɛu");
 assert_equal(panwuyun(音韻地位), "ɕiᴇu˧˥");
 assert_equal(unt(音韻地位), "ɕéw");
 assert_equal(msoeg_v8(音韻地位), "çiɛuˀ");
