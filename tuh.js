@@ -1,6 +1,6 @@
 /* 切韻諺文
  *
- * https://www.zhihu.com/question/554789198/answer/2689346458
+ * https://zhuanlan.zhihu.com/p/570151415
  *
  * 基於：切韻拼音 (https://zhuanlan.zhihu.com/p/478751152)
  *
