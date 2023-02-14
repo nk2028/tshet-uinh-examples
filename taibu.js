@@ -122,11 +122,11 @@ function 韻母規則(白讀) {
   // 宕攝
   if (is('唐韻 幫組')) return 'ong';
   if (is('唐韻 開口')) return 'ong';
-  if (is('唐韻 合口 見影組')) return 'uong'; // (>ong/輕脣_)
+  if (is('唐韻 合口')) return 'uong'; // (>ong/輕脣_)
   if (is('陽韻 幫組')) return 白讀 ? 'iong' : 'ong';
   if (is('陽韻 莊組')) return 'ong';
   if (is('陽韻 開口')) return 'iong'; // (>ong/翹舌_)
-  if (is('陽韻 合口 見影組')) return 'uong'; // (>ong/輕脣_)
+  if (is('陽韻 合口')) return 'uong'; // (>ong/輕脣_)
 
   // 止攝
   if (is('支脂韻 幫組')) return 'i'; // 例外: 美費 ui
@@ -214,7 +214,7 @@ function 韻母規則(白讀) {
   }
   if (is('元韻')) {
     if (is('幫組')) return 'an'; // 例外: 飯 on
-    if (is('見影組')) return 'ien'; // (>een/翹舌_) 例外: 冤園遠 ien
+    return 'ien'; // (>een/翹舌_) 例外: 冤園遠 ien
   }
 
   // 效攝

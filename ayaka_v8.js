@@ -236,6 +236,7 @@ function 韻母規則() {
   if (is('歌韻 一等 脣音')) return 'a';
   if (is('歌韻 一等 開口')) return 'a';
   if (is('歌韻 一等 合口')) return 'wa';
+  if (is('歌韻 三等 脣音')) return 'a';
   if (is('歌韻 三等 開口')) return 'ya';
   if (is('歌韻 三等 合口')) return 'wa';
 
