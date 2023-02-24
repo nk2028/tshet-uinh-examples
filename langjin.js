@@ -55,7 +55,7 @@ function 聲母規則() {
   if (is('清母')) return 'c';
   if (is('從母')) return is('二等') ? 'ch' : is('平聲') ? 'c' : 'z'; // 平送氣仄不送氣
   if (is('心母')) return 's';
-  if (is('邪母')) return is('平聲 尤之韻') ? 'c' : 's';
+  if (is('邪母')) return is('平聲 尤之陽鹽侵魚韻') ? 'c' : 's';
   if (is('莊母')) return is('宕假效江攝 或 止攝 合口 或 蟹咸山攝 二等') ? 'zh' : 'z'; // 莊組平翹律
   if (is('初母')) return is('宕假效江攝 或 止攝 合口 或 蟹咸山攝 二等') ? 'ch' : 'c'; // 莊組平翹律
   if (is('崇母')) {
