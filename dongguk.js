@@ -2,7 +2,7 @@
  *
  * https://zhuanlan.zhihu.com/p/616644846
  *
- * 申叔舟, 崔恆, 成三問, et al, 1448(朝鮮正統十三年). 東國正韻[M/OL]. 漢城: [s.n.]. https://commons.wikimedia.org/wiki/Category:Dictionary_of_Korean_Pronunciation_of_Chinese_Letters.
+ * 申叔舟, 崔恆, 成三問, et al., 1448(朝鮮正統十三年). 東國正韻[M/OL]. 漢城: [s.n.]. https://commons.wikimedia.org/wiki/Category:Dictionary_of_Korean_Pronunciation_of_Chinese_Letters.
  * 申祐先, 2014. 韓國語漢字音歷史層次研究[D/OL]. 臺北: 國立臺灣大學. https://archive.org/details/woosun_shin_2014.
  * 福井玲, 2015. 中世韓国語の「傍点」をめぐるいくつかの基本的な課題[J/OL]. 言語研究(148): 61-80. http://www.ls-japan.org/modules/documents/LSJpapers/journals/148_fukui.pdf.
  *
@@ -24,8 +24,8 @@ if (!音韻地位) return [
   ['標調方式', 選項.注音方案 === '福井玲轉寫' ? [2, '上標', '後綴'] : null],
 ]);
 
-const 例外 = 選項.推導原書部分例外讀音;
-const 現代 = 選項.推導現代讀音;
+const is推導例外 = 選項.推導原書部分例外讀音;
+const is推導現代 = 選項.推導現代讀音;
 
 const 轉寫 = {
   // 基於福井玲（2015），有增補
@@ -35,7 +35,7 @@ const 轉寫 = {
     ᄇ: 'p', ᄑ: 'pʰ', ᄈ: 'pp', ᄆ: 'm',
     ᄌ: 'c', ᄎ: 'cʰ', ᄍ: 'cc',
     ᄉ: 's', 　        ᄊ: 'ss', ᅀ: 'z',
-    ᅙ: 'q', ᄒ: 'h',  ᅘ: 'hh', ᄋ: '’',
+    ᅙ: 'q', ᄒ: 'h',  ᅘ: 'hh', ᄋ: 'ʼ',
 
     ᆞ: 'ʌ', ᆡ: 'ʌi',
     ᅳ: 'ɨ', ᅴ: 'ɨi',
@@ -45,7 +45,7 @@ const 轉寫 = {
     ᅮ: 'u', ᅱ: 'ui', ᅲ: 'ju', ᆔ: 'jui',
     ᅥ: 'e', 　        ᅧ: 'je', ᅨ: 'jei', ᅯ: 'we', 　         ᆑ: 'jwe', ᆒ: 'jwei',
 
-    ᇰ: 'ŋ', ᆨ: 'k', ᆫ: 'n', ᇙ: 'rq', ᆷ: 'm', ᆸ: 'p', ᇢ: 'w', ᆼ: '’',
+    ᇰ: 'ŋ', ᆨ: 'k', ᆫ: 'n', ᇙ: 'rq', ᆷ: 'm', ᆸ: 'p', ᇢ: 'w', ᆼ: 'ʼ',
   },
 
   '文觀部轉寫': {
@@ -87,7 +87,7 @@ function 音變(音節) {
 
 function 聲母() {
   return when([
-    [例外, [
+    [is推導例外, [
       ['疑母', [
         ['齊韻 上聲 或 先韻 平上聲 或 蕭韻 去聲 或 青韻 入聲', 'ᅌ'],
         ['耕韻 去聲', 'ᄋ'],
@@ -179,7 +179,7 @@ function 韻母(輸出) {
 
   let 韻母 = 韻母字典[(is`江韻` ? '宕' : is`元韻` ? '山' : is`麻韻` ? '果' : 音韻地位.攝) + 開合];
   let 中聲 = when([
-    [例外, [
+    [is推導例外, [
       ['東韻 云曉母 三等 入聲', 'ᅲ'],
       ['鍾韻', [
         ['孃母 平聲 或 書來母 入聲', 'ᅩ'],
@@ -250,10 +250,10 @@ let 音節 = {
   初聲: 聲母(),
   ...韻母()
 };
-if (現代) 音變(音節);
+if (is推導現代) 音變(音節);
 
 function 聲調() {
-  if (現代) return 選項.標記長音 && is`上去聲` ? 'ː' : '';
+  if (is推導現代) return 選項.標記長音 && is`上去聲` ? 'ː' : '';
   return {
     諺文: { 平: '', 上: '〯', 去: '〮', 入: '〮' },
     福井玲轉寫: 選項.標調方式 === '上標' ?
