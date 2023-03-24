@@ -1,5 +1,7 @@
 /* 推導《東國正韻》式漢字音
  *
+ * https://zhuanlan.zhihu.com/p/616644846
+ *
  * 申叔舟, 崔恆, 成三問, et al, 1448(朝鮮正統十三年). 東國正韻[M/OL]. 漢城: [s.n.]. https://commons.wikimedia.org/wiki/Category:Dictionary_of_Korean_Pronunciation_of_Chinese_Letters.
  * 申祐先, 2014. 韓國語漢字音歷史層次研究[D/OL]. 臺北: 國立臺灣大學. https://archive.org/details/woosun_shin_2014.
  * 福井玲, 2015. 中世韓国語の「傍点」をめぐるいくつかの基本的な課題[J/OL]. 言語研究(148): 61-80. http://www.ls-japan.org/modules/documents/LSJpapers/journals/148_fukui.pdf.
