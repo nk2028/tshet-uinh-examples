@@ -22,6 +22,7 @@ import {
   langjin,
   taibu,
   ayaka_v8,
+  yec_en_hua,
 } from "../index.js";
 
 function assert_equal(a, b) {
@@ -45,7 +46,7 @@ assert_equal(panwuyun(音韻地位), "ɕiᴇu˧˥");
 assert_equal(unt(音韻地位), "ɕéw");
 assert_equal(msoeg_v8(音韻地位), "çiɛuˀ");
 assert_equal(mid_tang(音韻地位), "ɕiɛw˦˥");
-assert_equal(chiangxhua(音韻地位), "ɕiɛ́w");
+assert_equal(chiangxhua(音韻地位), "ʃiɛ́w");
 assert_equal(zhongyuan(音韻地位), "ʂjɛw³");
 assert_equal(fanwan(音韻地位), "shiu2");
 assert_equal(putonghua(音韻地位), "shǎo");
@@ -54,6 +55,7 @@ assert_equal(zaonhe(音韻地位), "sɔ̄");
 assert_equal(langjin(音韻地位), "shao³");
 assert_equal(taibu(音韻地位), "shau3");
 assert_equal(ayaka_v8(音韻地位), "seu");
+assert_equal(yec_en_hua(音韻地位), "A");
 
 assert_equal(
   tupa.schema({ 模式: "標準", 脣音咍韻歸灰韻: false })(
