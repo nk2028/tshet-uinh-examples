@@ -136,7 +136,7 @@ function 韻母規則() {
   if (is('灰廢韻 幫組')) return 'ei';
   if (is('灰韻 開口')) return is('以母') ? 'iä' : 'ä'; 
   if (is('咍韻')) return is('合口') ? 'uei' : is('以母') ? 'iä' : 'ä';
-  if (is('泰韻 合口')) return is('見溪疑母') ? 'uä' : 'uei'; 
+  if (is('泰韻 合口')) return 'uei'; 
   if (is('泰韻 幫組')) return 'ei';
   if (is('泰韻 開口')) return is('以母') ? 'iä' : 'ä';  
 
