@@ -199,7 +199,7 @@ function 韻母規則() {
 
   // 梗攝
   if (is('庚韻 入聲 二等')) return is('合口') ? 'uä' : 'ä';
-  if (is('庚韻 入聲 三等')) return is('莊組') ? 'y' : is('合口') ? 'ü' : 'i';
+  if (is('庚韻 入聲 三等')) return is('莊組') ? 'ä' : is('合口') ? 'ü' : 'i';
   if (is('庚韻 舒聲 二等')) return is('合口') ? 'uen' : 'en';
   if (is('庚韻 舒聲 三等 合口')) return is('心以影母') ?  'in' : is('云影母') ? 'iong' : 'ong';
   if (is('庚韻 舒聲 三等 開口')) return is('知莊章組') ? 'en' : 'in';
