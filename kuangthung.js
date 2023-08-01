@@ -218,6 +218,7 @@ function 聲調規則(inzie) {
         if (音節.includes('a')) 標調位置 = 音節.indexOf('a');
         else if (音節.includes('ä')) 標調位置 = 音節.indexOf('ä');
         else if (音節.includes('ö')) 標調位置 = 音節.indexOf('ö');
+        else if (音節.includes('o')) 標調位置 = 音節.indexOf('o');
         else if (音節.includes('e')) 標調位置 = 音節.indexOf('e');
         else if (音節.includes('ë')) 標調位置 = 音節.indexOf('ë');
         else if (音節.includes('u')) 標調位置 = 音節.indexOf('u');
