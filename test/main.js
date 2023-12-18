@@ -46,7 +46,7 @@ assert_equal(wangli(音韻地位), "꜂ɕĭɛu");
 assert_equal(panwuyun(音韻地位), "ɕiᴇu˧˥");
 assert_equal(unt(音韻地位), "ɕéw");
 assert_equal(msoeg_v8(音韻地位), "çiɛuˀ");
-assert_equal(mid_tang(音韻地位), "ɕiɛw˦˥");
+assert_equal(mid_tang(音韻地位), "ɕɛ́w");
 assert_equal(chiangxhua(音韻地位), "ɕjɛ́w");
 assert_equal(mongol(音韻地位), "ꡮꡠꡓ");
 assert_equal(zhongyuan(音韻地位), "ʂjɛw³");
