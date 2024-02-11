@@ -234,7 +234,7 @@ function 韻母規則() {
   if (is('登韻 舒聲 開口')) return 'en';
 
   // 流攝
-  if (is('幽韻')) return is('滂幫並母') ? 'iao' : is('見溪羣曉生母') ? 'ou' : 'iou';
+  if (is('幽韻')) return is('幫滂並母') ? 'iao' : is('見溪羣曉生母') ? 'ou' : 'iou';
   if (is('尤韻')) return is('滂幫並母') ? 'u' : is('精組 或 疑以影云孃來母') ? 'iou' : 'ou';
   if (is('侯韻')) return 'ou';
   
