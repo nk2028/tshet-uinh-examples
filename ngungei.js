@@ -205,7 +205,6 @@ function 韻母規則() {
   if (is("耕韻 開口")) return "ang";
   if (is("耕韻 合口")) return "uang";
 
-  if (is("清青韻 入聲 章組")) return "iak";
   if (is("清青韻 合口 牙喉音")) return "iung";
   if (is("清青韻")) return "ing";
 
