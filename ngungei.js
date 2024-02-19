@@ -128,22 +128,22 @@ function 韻母規則() {
 
   // 臻攝
   if (is("眞韻 脣音")) return "in";
-  if (is("眞韻 開口 莊組")) return "en";
+  if (is("眞韻 開口 莊組")) return "eng";
   if (is("眞韻 開口")) return "in";
   if (is("眞韻 合口")) return "iun";
 
-  if (is("臻文欣韻 脣音")) return "en";
+  if (is("臻文欣韻 脣音")) return "eng";
   if (is("臻文欣韻 開口")) return "in";
   if (is("臻文欣韻 合口")) return "iun";
 
   if (is("元韻 脣音")) return "ae";
-  if (is("元韻 開口")) return "ie";
+  if (is("元韻 開口")) return "iee";
   if (is("元韻 合口")) return "ioe";
 
-  if (is("魂韻 牙喉音 疑母")) return "en";
-  if (is("魂韻 牙喉音")) return "uen";
-  if (is("魂韻")) return "en";
-  if (is("痕韻")) return "en";
+  if (is("魂韻 牙喉音 疑母")) return "eng";
+  if (is("魂韻 牙喉音")) return "ueng";
+  if (is("魂韻")) return "eng";
+  if (is("痕韻")) return "eng";
 
   // 山攝
   if (is("寒韻 脣音")) return "oe";
@@ -157,9 +157,9 @@ function 韻母規則() {
   if (is("刪山韻 合口 舌齒音")) return "oe";
   if (is("刪山韻 合口 牙喉音")) return "uae";
 
-  if (is("仙韻 脣音")) return "ie";
-  if (is("仙韻 開口")) return "ie";
-  if (is("仙韻 合口 來母")) return "ie";
+  if (is("仙韻 脣音")) return "iee";
+  if (is("仙韻 開口")) return "iee";
+  if (is("仙韻 合口 來母")) return "iee";
 
   //四等
   if (is("先韻 脣音")) return "iae";
@@ -231,16 +231,15 @@ function 韻母規則() {
   if (is("幽韻")) return "ieu";
 
   // 深攝
-  if (is("侵韻 莊組")) return "en";
+  if (is("侵韻 莊組")) return "eng";
   if (is("侵韻")) return "in";
 
   // 咸攝
-  if (is("覃韻 入聲 舌齒音")) return "ah";
   if (is("覃韻")) return "ee";
   if (is("談韻 牙喉音")) return "ee";
   if (is("談韻")) return "ae";
 
-  if (is("鹽嚴韻")) return "ie";
+  if (is("鹽嚴韻")) return "iee";
   if (is("添韻")) return "iae"; //四等
 
   if (is("咸銜凡韻")) return "ae";
@@ -268,6 +267,8 @@ if (is("入聲")) {
 
 if (韻母 === "ee") {
   韻母 = "e";
+} else if (韻母 === "iee") {
+  韻母 = "ie";
 }
 
 //y w 簡拼
