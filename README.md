@@ -39,6 +39,7 @@ https://nk2028-1305783649.file.myqcloud.com/qieyun-examples/<filename>
 - 推導上海話 (Extrapolated Shanghainese): `zaonhe.js`
 - 推導南京話 (Extrapolated Nankinese): `langjin.js`
 - 推導大埔話 (Extrapolated Taibu Hakka): `taibu.js`
+- 推導《東國正韻》式漢字音 (Extrapolated Sino-Korean Pronunciation from _Dongguk Jeongun_): `dongguk.js`
 
 **人造音系 artificial phonological system**
 
