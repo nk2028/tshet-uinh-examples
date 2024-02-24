@@ -220,12 +220,7 @@ let 聲調 = 聲調規則();
 
 if (選項.更多選項) {
   // 參考 https://www.zhihu.com/question/526195183/answer/2425807330
-  if (選項.常母平聲陰聲韻聲母和船母平聲聲母 === 'ch') {
-    if (is`(常母 陰聲韻 或 船母) 平聲`) 聲母 = 'ch';
-  }
-  if (選項.常母平聲陰聲韻聲母和船母平聲聲母 === 'sh') {
-    if (is`(常母 陰聲韻 或 船母) 平聲`) 聲母 = 'sh';
-  }
+  if (is`(常母 陰聲韻 或 船母) 平聲`) 聲母 = 選項.常母平聲陰聲韻聲母和船母平聲聲母;
 
   /* 參考
    * http://ccj.pku.edu.cn/Article/DownLoad?id=271015083&&type=ArticleFile (https://web.archive.org/web/20240223084634/http://ccj.pku.edu.cn/Article/DownLoad?id=271015083&&type=ArticleFile)
