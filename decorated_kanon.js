@@ -130,7 +130,7 @@ let get韻母 = {
     return is`以母 或 (重紐A類 (幫組 或 見組 或 影組))` ? 'yen' : 'ėn';
   },
   陽: () => {
-    if (is`合口`) return (is`影云以母`) ? 'wâng': 'ŷang';
+    if (is`合口`) return is`影云以母` ? 'wâng': 'ŷang';
     return is`幫組 或 莊組` ? 'âng' : 'yang';
   },
   清: () => {
