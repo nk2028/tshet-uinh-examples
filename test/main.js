@@ -22,6 +22,7 @@ import {
   zaonhe,
   langjin,
   taibu,
+  ngungei,
   ayaka_v8,
   yec_en_hua,
 } from "../index.js";
@@ -45,7 +46,7 @@ assert_equal(karlgren(音韻地位), "ɕi̯ɛu꞉");
 assert_equal(wangli(音韻地位), "꜂ɕĭɛu");
 assert_equal(panwuyun(音韻地位), "ɕiᴇu˧˥");
 assert_equal(unt(音韻地位), "ɕéw");
-assert_equal(msoeg_v8(音韻地位), "çiɛuˀ");
+assert_equal(msoeg_v8(音韻地位), "ɕiɛuˀ");
 assert_equal(mid_tang(音韻地位), "ɕɛ́w");
 assert_equal(chiangxhua(音韻地位), "ɕjɛ́w");
 assert_equal(mongol(音韻地位), "ꡮꡠꡓ");
@@ -56,6 +57,7 @@ assert_equal(gwongzau(音韻地位), "siu2");
 assert_equal(zaonhe(音韻地位), "sɔ̄");
 assert_equal(langjin(音韻地位), "shao³");
 assert_equal(taibu(音韻地位), "shau3");
+assert_equal(ngungei(音韻地位), "shiau2");
 assert_equal(ayaka_v8(音韻地位), "seu");
 assert_equal(yec_en_hua(音韻地位), "A");
 
