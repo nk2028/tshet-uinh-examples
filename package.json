@@ -22,13 +22,8 @@
     "url": "https://github.com/nk2028/qieyun-examples/issues"
   },
   "homepage": "https://github.com/nk2028/qieyun-examples#readme",
-  "peerDependencies": {
-    "qieyun": "^0.13.x"
-  },
   "dependencies": {
-    "tshet-uinh-deriver-tools": "^0.1.4"
-  },
-  "devDependencies": {
-    "qieyun": "^0.13.4"
+    "qieyun": "^0.15.0-beta.1",
+    "tshet-uinh-deriver-tools": "^0.2.0-beta.3"
   }
 }
