@@ -1,10 +1,5 @@
 {
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.formatOnSave": true,
   "[javascript]": {
     "editor.formatOnSave": false
-  },
-  "[python]": {
-    "editor.defaultFormatter": "ms-python.python"
   }
 }

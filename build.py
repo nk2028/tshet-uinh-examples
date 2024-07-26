@@ -3,7 +3,7 @@ import re
 # TODO `from字頭` should not use a single 選項 for all schemata.
 # Instead it should allow options set for each schema.
 
-HEADER = '''\
+HEADER = """\
 import Qieyun from 'qieyun';
 import { 推導方案 } from 'tshet-uinh-deriver-tools';
 
@@ -31,10 +31,10 @@ function _perform(name, derive, 地位, 字頭, 選項) {
     throw new Error(`Specifying 選項 directly is no longer supported, use ${name}.schema(選項)(地位, 字頭?) instead`);
   }
   return derive(地位, 字頭);
-}'''
+}"""
 
 
-FILE_TEMPLATE = '''\
+FILE_TEMPLATE = """\
 _schemata.{id} = new 推導方案(function (選項, 音韻地位, 字頭) {{
 {code}
 }});
@@ -54,13 +54,12 @@ export function {id}(音韻地位, 字頭, 舊選項參數) {{
   return _perform("{id}", _defaultDerivers.{id}, 音韻地位, 字頭, 舊選項參數);
 }}
 /** @type {{推導方案<string>}} */
-{id}.schema = _schemata.{id}'''
+{id}.schema = _schemata.{id}"""
 
 
 def handle_file(filename):
     with open(f'{filename}.js') as f:
-        match = re.fullmatch(r'^\s*/\* (.+?)\*/(.+)',
-                             f.read(), flags=re.DOTALL)
+        match = re.fullmatch(r'^\s*/\* (.+?)\*/(.+)', f.read(), flags=re.DOTALL)
 
         name, comment = match[1].split('\n', 1)
         code = match[2]
@@ -69,8 +68,7 @@ def handle_file(filename):
         code = code.strip()
 
         print()
-        print(FILE_TEMPLATE.format(id=filename,
-              title=name, code=code, comment=comment))
+        print(FILE_TEMPLATE.format(id=filename, title=name, code=code, comment=comment))
 
 
 def main():
