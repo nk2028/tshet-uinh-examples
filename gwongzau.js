@@ -1,4 +1,4 @@
-/* 推導廣州音
+/* 推導廣州話
  *
  * https://ayaka.shn.hk/teoi/
  *
