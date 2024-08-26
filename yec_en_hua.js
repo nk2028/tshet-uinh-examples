@@ -69,4 +69,3 @@ function get聲調() {
 return [
   get聲母(), get介音(), get韻核(), get韻尾(), get聲調(),
 ].map(e => e.split('|')[+(選項.顯示 === '國際音標')]).join('');
-
