@@ -14,7 +14,6 @@ https://nk2028-1305783649.file.myqcloud.com/qieyun-examples/<filename>
 
 - 切韻拼音 (Tshet-uinh Phonetic Alphabet): `tupa.js`
 - 白一平轉寫 (Baxter’s Transcription): `baxter.js`
-- 有女羅馬字 (Blankego’s Romanization): `blankego.js`
 
 **切韻音系擬音 reconstruction of the Qieyun phonological system**
 
