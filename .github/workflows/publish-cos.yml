@@ -10,13 +10,13 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       # Build
       - name: Setup Node.js
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v4
         with:
-          node-version: 14
+          node-version: '22'
           registry-url: https://registry.npmjs.org/
       - name: Install Node.js packages
         run: npm ci
@@ -32,4 +32,4 @@ jobs:
           SECRET_KEY: ${{ secrets.SecretKey }}
         run: coscmd config -a $SECRET_ID -s $SECRET_KEY -b nk2028-1305783649 -r ap-guangzhou
       - name: Publish static files to COS
-        run: coscmd upload -rs --delete -f . /qieyun-examples --ignore '*/.*,*/node_modules/*,./test/*,./build.py,./package.json,./package-lock.json'
+        run: coscmd upload -rs --delete -f . /tshet-uinh-examples --ignore '*/.*,*/node_modules/*,./test/*,./build.py,./package.json,./package-lock.json'

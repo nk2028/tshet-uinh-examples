@@ -1,5 +1,5 @@
 {
-  "name": "qieyun-examples",
+  "name": "tshet-uinh-examples",
   "version": "20230224.0.0",
   "description": "JavaScript code examples to generate the derivatives of the Qieyun phonological system using qieyun-js",
   "type": "module",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nk2028/qieyun-examples.git"
+    "url": "git+https://github.com/nk2028/tshet-uinh-examples.git"
   },
   "keywords": [
     "historical-linguistics",
@@ -19,11 +19,11 @@
   "author": "nk2028",
   "license": "CC0-1.0",
   "bugs": {
-    "url": "https://github.com/nk2028/qieyun-examples/issues"
+    "url": "https://github.com/nk2028/tshet-uinh-examples/issues"
   },
-  "homepage": "https://github.com/nk2028/qieyun-examples#readme",
+  "homepage": "https://github.com/nk2028/tshet-uinh-examples#readme",
   "dependencies": {
-    "qieyun": "^0.15.0-beta.1",
-    "tshet-uinh-deriver-tools": "^0.2.0-beta.3"
+    "tshet-uinh": "^0.15.0-beta.7",
+    "tshet-uinh-deriver-tools": "^0.2.0-beta.7"
   }
 }

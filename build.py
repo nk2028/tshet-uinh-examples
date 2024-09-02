@@ -4,7 +4,7 @@ import re
 # Instead it should allow options set for each schema.
 
 HEADER = """\
-import Qieyun from 'qieyun';
+import TshetUinh from 'tshet-uinh';
 import { 推導方案 } from 'tshet-uinh-deriver-tools';
 
 const _schemata = {};
@@ -15,10 +15,10 @@ const _defaultDerivers = {};
  * @param {string | string[]} schema 推導方案或推導方案陣列
  * @param {string} 字頭 要查詢的字頭
  * @param {Object=} 選項 選項（可選）
- * @return {(Qieyun.資料.字頭檢索結果 & {擬音: string | string[]})[]} 音韻地位、解釋、音韻地位對應的擬音或擬音陣列
+ * @return {(TshetUinh.資料.字頭檢索結果 & {擬音: string | string[]})[]} 音韻地位、解釋、音韻地位對應的擬音或擬音陣列
  */
 export function from字頭(schema, 字頭, 選項) {
-  return Qieyun.資料.query字頭(字頭).map(result => ({
+  return TshetUinh.資料.query字頭(字頭).map(result => ({
     ...result,
     擬音: schema.map
       ? schema.map(schema => _schemata[schema](選項)(result.音韻地位, result.字頭))
@@ -44,7 +44,7 @@ _defaultDerivers.{id} = _schemata.{id}();
 /**
  * {title}
 {comment}
- * @param {{Qieyun.音韻地位}} 音韻地位 切韻音系音韻地位
+ * @param {{TshetUinh.音韻地位}} 音韻地位 切韻音系音韻地位
  * @param {{string=}} 字頭 字頭（可選）
  * @param {{undefined=}} 舊選項參數 已棄用，請用 `<方案名>.schema(選項)(音韻地位, 字頭?)` 代替
  * @return {{string}} 音韻地位對應的{title}

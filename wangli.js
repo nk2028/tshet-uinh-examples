@@ -16,7 +16,7 @@
  * - 國際音標（原貌）：王力著作採用的音標符號
  * - 國際音標（通用）：現在的中國通用音標符號
  *
- * 參考：高本漢擬音 (https://github.com/nk2028/qieyun-examples/blob/main/karlgren.js)
+ * 參考：高本漢擬音 (https://github.com/nk2028/tshet-uinh-examples/blob/qieyun-0.13/karlgren.js)
  *
  * @author Mishiro
  */
@@ -115,12 +115,12 @@ function get韻母() {
   let 韻尾 = 韻尾列表[元音表[韻核].indexOf(韻)];
   let 介音 = '';
   if (is史稿) {
-    if (is`${Qieyun.表達式.四等韻} 或 幽韻`) 介音 += 'i';
+    if (is`${TshetUinh.表達式.四等韻} 或 幽韻`) 介音 += 'i';
     else if (is`三四等 非 脂幽韻`) 介音 += 'ĭ';
     if (is`冬灰文魂韻 或 泰寒歌韻 非 開口 或 唐登韻 合口 或 真韻 合口 (A類 或 銳音 非 莊組)`) 介音 += 'u';
     else if (is`合口 非 虞韻 或 鍾凡韻 或 幫組 微廢元陽韻`) 介音 += 'w';
   } else {
-    if (is`${Qieyun.表達式.四等韻} 或 幽韻`) 介音 += !is`合口` && 韻核 === 'i' ? '' : 'i';
+    if (is`${TshetUinh.表達式.四等韻} 或 幽韻`) 介音 += !is`合口` && 韻核 === 'i' ? '' : 'i';
     else if (is`三四等 非 臻幽韻`) 介音 += !is`合口` && 韻核 === 'i' ? '' : 'i̯';
     if (is`二等 或 臻韻` && !is隋唐) 介音 += is`合口` ? 'o' : 韻核 === 'e' ? '' : 'e';
     else if (is`合口 非 虞韻 或 幫組 微泰灰廢文元魂寒歌陽凡韻`) 介音 += 'u';
