@@ -1,6 +1,6 @@
 import re
 
-# TODO `from字頭` should not use a single 選項 for all schemata.
+# FIXME `from字頭` should not use a single 選項 for all schemata.
 # Instead it should allow options set for each schema.
 
 HEADER = """\
