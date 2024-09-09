@@ -2,7 +2,10 @@ name: Test
 
 on:
   push:
-    branches: [main]
+    branches:
+    - main
+    - dev
+    - dev-*
   pull_request:
     branches: [main]
 
@@ -10,19 +13,23 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       # Build
-      - name: Setup Node.js
-        uses: actions/setup-node@v1
+      - name: Setup Python
+        uses: actions/setup-python@v5
         with:
-          node-version: 14
-          registry-url: https://registry.npmjs.org/
-      - name: Install Node.js packages
-        run: npm ci
+          python-version: '3.12'
       - name: Build
         run: python build.py > index.js
 
       # Test
-      - name: Test
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          registry-url: https://registry.npmjs.org/
+      - name: Install Node.js dependencies
+        run: npm ci
+      - name: Run tests
         run: npm test

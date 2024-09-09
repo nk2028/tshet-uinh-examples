@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/nk2028/tshet-uinh-examples#readme",
   "dependencies": {
-    "tshet-uinh": "^0.15.0-beta.7",
-    "tshet-uinh-deriver-tools": "^0.2.0-beta.7"
+    "tshet-uinh": "^0.15.0",
+    "tshet-uinh-deriver-tools": "^0.2.0"
   }
 }
