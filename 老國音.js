@@ -1,11 +1,12 @@
 /* 推導老國音
- *
- * @author graphemecluster、JwietPuj-Drin
- * 
- * https://zh.wikiversity.org/zh/%E8%80%81%E5%9C%8B%E9%9F%B3%E8%88%87%E5%BB%A3%E9%9F%BB%E5%B0%8D%E6%AF%94
- * https://syimyuzya.github.io/qieyun-autoderiver/
- * 
- * 音：
+
+@author 307587
+
+攷：
+https://zh.wikiversity.org/zh/%E8%80%81%E5%9C%8B%E9%9F%B3%E8%88%87%E5%BB%A3%E9%9F%BB%E5%B0%8D%E6%AF%94
+https://syimyuzya.github.io/qieyun-autoderiver/
+
+音：
 https://github.com/lyczwy/Old-National-Pronunciation/blob/master/Zhauping-ONP
 https://github.com/baopaau/rime-bepemefeve/blob/main/bepemefeve.dict.yaml
 https://github.com/jacob-us/lau_guoq_in/blob/master/lau_guoq_in.dict.yaml
@@ -18,7 +19,7 @@ const when = (...x) => 音韻地位.判斷(...x);
 
 if (!音韻地位) return [
   ['標調方式', [1, '調號', '調值']],
-  ['常母平聲陰聲韻聲母和船母平聲聲母', [2, 'tʂʰ', 'ʂ']],
+  //['常母平聲陰聲韻聲母和船母平聲聲母', [2, 'tʂʰ', 'ʂ']],　//待考
 ];
 
 const 聲母規則 = () => when([
@@ -41,7 +42,8 @@ const 聲母規則 = () => when([
   ['知莊章母', 'tʂ'],
   ['徹初昌母', 'tʂʰ'],
   ['澄崇母', [['平聲', 'tʂʰ'], ['', 'tʂ']]],
-  ['常母', [['平聲 陽聲韻', 'tʂʰ'], ['', 'ʂ']]],
+  ['常母', 'ʂ'],
+  //['常母', [['平聲 陽聲韻', 'tʂʰ'], ['', 'ʂ']]], //待考
   ['生俟書船母', 'ʂ'],
   ['日母', [['止攝 開口', ''], ['', 'ɻ']]],
 
@@ -59,3 +61,13 @@ const 聲調規則 = () => when([
   ['去聲', '4'],
   ['入聲', '5'],
 ], '無聲調規則');
+
+if (選項.標調方式 === '調號') return 聲母 + 韻母 + 聲調;
+if (選項.標調方式 === '調值') {
+  if (聲調 === '1') 聲調 = '⁵⁵';
+  if (聲調 === '2') 聲調 = '³⁵';
+  if (聲調 === '3') 聲調 = '²¹⁴';
+  if (聲調 === '4') 聲調 = '⁵¹';
+  if (聲調 === '5') 聲調 = '⁵';
+}
+return 聲母 + 韻母 + 聲調;
