@@ -1,6 +1,6 @@
 {
   "name": "tshet-uinh-examples",
-  "version": "20230224.0.0",
+  "version": "20241008.0.0",
   "description": "JavaScript code examples to generate the derivatives of the Qieyun phonological system using qieyun-js",
   "type": "module",
   "main": "index.js",
