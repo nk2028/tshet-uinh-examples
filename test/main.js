@@ -31,7 +31,7 @@ for (const [schema, expected] of testCases) {
   console.log(`Testing: ${schema}`);
   total++;
   try {
-    const result = TshetUinhExamples[schema](地位);
+    const result = TshetUinhExamples[schema]()(地位);
     if (result === expected) {
       passed += 1;
     } else {
