@@ -7,9 +7,7 @@ https://zh.wikiversity.org/zh/%E8%80%81%E5%9C%8B%E9%9F%B3%E8%88%87%E5%BB%A3%E9%9
 https://syimyuzya.github.io/qieyun-autoderiver/
 
 音：
-https://github.com/lyczwy/Old-National-Pronunciation/blob/master/Zhauping-ONP
 https://github.com/baopaau/rime-bepemefeve/blob/main/bepemefeve.dict.yaml
-https://github.com/jacob-us/lau_guoq_in/blob/master/lau_guoq_in.dict.yaml
  */
 
 /** @type { 音韻地位['屬於'] } */
@@ -54,6 +52,10 @@ const 聲母規則 = () => when([
   ['影云以母', ''],
   ['曉匣母', 'x'],
 ], '無聲母規則');
+
+const 韻母規則 = () => when([
+
+], '無韻母規則');
 
 const 聲調規則 = () => when([
   ['平聲', [['清音', '1'], ['濁音', '2']]],
