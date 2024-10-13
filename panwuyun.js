@@ -14,7 +14,7 @@ const when = (...x) => 音韻地位.判斷(...x);
 const is2000 = Boolean(選項.版本?.includes('2000'));
 const is2013 = Boolean(選項.版本?.includes('2013'));
 const is2023 = 選項.版本?.includes('2023') ?? true;
-const 三C介音 = 選項.非前三等介音 ? 選項.非前三等介音.split('（')[0] : 'ɨ';
+const 三C介音 = 選項.非前三等介音 ? 選項.非前三等介音.split('（')[0] : 'i';
 
 if (!音韻地位) return [
   ['版本', [3,
