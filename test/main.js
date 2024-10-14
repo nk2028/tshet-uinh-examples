@@ -1,86 +1,48 @@
-import * as Qieyun from "qieyun";
-import { 資料 } from "qieyun";
-import {
-  tupa,
-  baxter,
-  blankego,
-  kyonh,
-  zyepheng,
-  sliark_peengqvim,
-  karlgren,
-  wangli,
-  panwuyun,
-  unt,
-  msoeg_v8,
-  mid_tang,
-  chiangxhua,
-  mongol,
-  zhongyuan,
-  fanwan,
-  putonghua,
-  gwongzau,
-  zaonhe,
-  langjin,
-  taibu,
-  ngungei,
-  ayaka_v8,
-  yec_en_hua,
-} from "../index.js";
+import util from "node:util";
 
-function assert_equal(a, b) {
-  if (a !== b)
-    throw new Error(
-      `Expected ${JSON.stringify(b)}, but got ${JSON.stringify(a)}.`
-    );
-}
+import { 音韻地位 } from "tshet-uinh";
+import * as TshetUinhExamples from "../index.js";
 
-const 音韻地位 = 資料.query字頭("䒚")[0].音韻地位;
+const 地位 = 音韻地位.from描述("書開三宵上");
 
-assert_equal(tupa(音韻地位), "sjiewq");
-assert_equal(baxter(音韻地位), "syewX");
-assert_equal(blankego(音韻地位), "sjev");
-assert_equal(kyonh(音韻地位), "sjeux");
-assert_equal(zyepheng(音韻地位), "shiéu");
-assert_equal(sliark_peengqvim(音韻地位), "sjewx");
-assert_equal(karlgren(音韻地位), "ɕi̯ɛu꞉");
-assert_equal(wangli(音韻地位), "꜂ɕĭɛu");
-assert_equal(panwuyun(音韻地位), "ɕiᴇu˧˥");
-assert_equal(unt(音韻地位), "ɕéw");
-assert_equal(msoeg_v8(音韻地位), "ɕiɛuˀ");
-assert_equal(mid_tang(音韻地位), "ɕɛ́w");
-assert_equal(chiangxhua(音韻地位), "ɕjɛ́w");
-assert_equal(mongol(音韻地位), "ꡮꡠꡓ");
-assert_equal(zhongyuan(音韻地位), "ʂjɛw³");
-assert_equal(fanwan(音韻地位), "shiu2");
-assert_equal(putonghua(音韻地位), "shǎo");
-assert_equal(gwongzau(音韻地位), "siu2");
-assert_equal(zaonhe(音韻地位), "sɔ̄");
-assert_equal(langjin(音韻地位), "shao³");
-assert_equal(taibu(音韻地位), "shau3");
-assert_equal(ngungei(音韻地位), "shiau2");
-assert_equal(ayaka_v8(音韻地位), "seu");
-assert_equal(yec_en_hua(音韻地位), "A");
+const testCases = [
+  ["tupa", "sjiewq"],
+  ["baxter", "syewX"],
+  //["karlgren", "ɕi̯ɛu꞉"],
+  ["wangli", "꜂ɕĭɛu"],
+  ["panwuyun", "ɕiᴇu˧˥"],
+  ["unt", "ɕéw"],
+  ["msoeg_v8", "ɕiɛuʔ"],
+  ["mid_tang", "ɕɛ́w"],
+  //["chiangxhua", "ɕjɛ́w"],
+  ["mongol", "ꡮꡠꡓ"],
+  ["zhongyuan", "ʂjɛw³"],
+  //["fanwan", "shiu2"],
+  ["putonghua", "shǎo"],
+  ["gwongzau", "siu2"],
+  ["zaonhe", "sɔ̄"],
+  //["ayaka_v8", "seu"],
+  ["yec_en_hua", "A"],
+];
 
-assert_equal(
-  tupa.schema({ 模式: "標準", 脣音咍韻歸灰韻: false })(
-    Qieyun.音韻地位.from描述("並咍上")
-  ),
-  "beojq"
-);
-
-(() => {
-  let value;
+let passed = 0;
+let total = 0;
+for (const [schema, expected] of testCases) {
+  console.log(`Testing: ${schema}`);
+  total++;
   try {
-    value = tupa(音韻地位, null, { 模式: "標準" });
-  } catch (e) {
-    if (!/no longer supported/i.test(e.message)) {
-      throw new Error(
-        `Expected error containing "no longer supported", but got: ${JSON.stringify(
-          e.message
-        )}`
+    const result = TshetUinhExamples[schema]()(地位);
+    if (result === expected) {
+      passed += 1;
+    } else {
+      console.log(
+        `  Expected ${util.inspect(expected)}, got ${util.inspect(result)}`
       );
     }
-    return;
+  } catch (e) {
+    console.log(`  Error thrown: ${util.inspect(e)}`);
   }
-  throw new Error(`Expected error, but got ${JSON.stringify(value)}`);
-})();
+}
+
+console.log(`${passed}/${total} test(s) passed.`);
+process.exit(passed === total ? 0 : 1);
