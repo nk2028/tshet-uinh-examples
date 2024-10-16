@@ -12,6 +12,7 @@
 const is = (x) => 音韻地位.屬於(x);
 
 if (!音韻地位) return [
+  //['$legacy', true],  
   ['標調方式', [1, '數字', '附標']],  
 ];
 
@@ -33,6 +34,9 @@ const 附標標調 = {
 const 元音 = 'iuüaeoyär';
 const 元音Re = new RegExp("[" + 元音 + "]");
 const 元音附標 = '̃̈';
+var 真韻='真';
+var 殷韻='殷';
+var 重紐='';
 
 function 聲母規則() {
   if (is('幫母')) return is('東韻 三等 或 鍾微虞廢文元陽尤凡韻') ? 'f' : 'b';
@@ -66,14 +70,14 @@ function 聲母規則() {
   if (is('俟母')) return is('平聲') ? 'c' : 's'; // 平送氣仄不送氣
   if (is('章母')) return 'zh';
   if (is('昌母')) return 'ch';
-  if (is('常母')) return is('曾攝 入聲') ? 'zh' : is('平聲 齊侵清仙鹽陽尤魚虞真蒸支鍾韻 或 一等') ? 'ch' : 'sh';
+  if (is('常母')) return is('曾攝 入聲') ? 'zh' : is(真韻 + '齊侵清仙鹽陽尤魚虞蒸支鍾韻 平聲 或 一等') ? 'ch' : 'sh';
   if (is('船書母')) return is('平聲 通攝 或 平聲 合口 山攝') ? 'ch' : 'sh'; // 章組擦音分化律
-  if (is('日母')) return is('四等') ? 'l' : is('支之脂韻 開口 或 真侵韻 入聲') ? '' : 'r';  
+  if (is('日母')) return is('四等') ? 'l' : is(真韻 + '侵韻 入聲 或 支之脂韻 開口') ? '' : 'r';  
   let 不顎化 = '一等 或 二等 合口 或 二等 庚耕韻 或 三等 合口 祭微陽支脂凡廢韻 舒聲 或 三等 通攝 舒聲 或 四等 合口 齊韻'; // 見溪羣曉匣母不顎化條件
   if (is('見母')) return is(不顎化) ? 'g' : 'j';
   if (is('溪母')) return is('二等 皆韻 或 二等 江韻 入聲') ? 'k' : is(不顎化) ? 'k' : 'q';
   if (is('羣母')) {  
-    if (is('宵韻 A類')) return 'q';
+    if (is('宵韻 '+ 重紐 + 'A類')) return 'q';
     if (is('平聲')) return is('三等 合口 山陽脂韻') ? 'k' : 'q'; // 平送氣
     // 剩下仄聲不送氣
     return is(不顎化) ? 'g' : 'j';
@@ -107,8 +111,8 @@ function 韻母規則() {
   if (is('支脂之韻 崇初從精清生俟邪心莊母 開口')) return 'y'; // 平舌音
   if (is('支脂之韻 昌常徹澄船書章知母 開口')) return 'r'; // 翹舌音
   if (is('支脂韻 莊組 合口')) return 'uä';
-  if (is('支韻 B類') && is('幫母 或 並母 上去聲')) return 'ei';
-  if (is('脂韻 B類') && is('並滂母 或 幫母 平聲')) return 'ei';
+  if (is('支韻 '+ 重紐 + 'B類') && is('幫母 或 並母 上去聲')) return 'ei';
+  if (is('脂韻 '+ 重紐 + 'B類') && is('並滂母 或 幫母 平聲')) return 'ei';
   if (is('脂韻 明母')) return 'ei';
   if (is('微韻 幫並滂母')) return 'ei';
   if (is('支脂之微韻 幫滂並母')) return 'i';
@@ -141,14 +145,14 @@ function 韻母規則() {
 
   // 臻攝
   if (is('文韻 入聲 幫組')) return 'u';
-  if (is('臻殷文真韻 入聲 合口')) return is('莊組') ? 'o' : is('知章組') ? 'u' : 'ü'; 
-  if (is('臻殷文真韻 入聲 幫組')) return 'i';
-  if (is('臻殷文真韻 入聲 開口')) return is('莊組') ? 'ä' : is('章組 或 知徹澄日母') ? 'r' : 'i';
-  if (is('臻殷文真韻 舒聲 開口')) return is('莊章組 或 日知徹澄母') ? 'en' : 'in';
-  if (is('真韻 舒聲 幫組')) return 'in'; 
-  if (is('文真韻 舒聲 合口')) return is('來明日書章知昌常徹澄船母') ? 'uen' : 'üin';            
-  if (is('真臻殷文韻 舒聲 幫組')) return is ('明母') ? 'uen' : 'en'; 
-  if (is('真臻殷韻 舒聲 合口')) return is('幫滂並母') ? 'en' : is('來明日書章知昌常徹澄船母') ? 'uen' : 'üin';
+  if (is(殷韻 + 真韻 + '臻文韻 入聲 合口')) return is('莊組') ? 'o' : is('知章組') ? 'u' : 'ü'; 
+  if (is(殷韻 + 真韻 + '臻文韻 入聲 幫組')) return 'i';
+  if (is(殷韻 + 真韻 + '臻文韻 入聲 開口')) return is('莊組') ? 'ä' : is('章組 或 知徹澄日母') ? 'r' : 'i';
+  if (is(殷韻 + 真韻 + '臻文韻 舒聲 開口')) return is('莊章組 或 日知徹澄母') ? 'en' : 'in';
+  if (is(真韻 + '韻 舒聲 幫組')) return 'in'; 
+  if (is(真韻 + '文韻 舒聲 合口')) return is('來明日書章知昌常徹澄船母') ? 'uen' : 'üin';            
+  if (is(殷韻 + 真韻 + '臻文韻 舒聲 幫組')) return is ('明母') ? 'uen' : 'en'; 
+  if (is(殷韻 + 真韻 + '臻韻 舒聲 合口')) return is('幫滂並母') ? 'en' : is('來明日書章知昌常徹澄船母') ? 'uen' : 'üin';
   if (is('魂痕韻 入聲')) return is('幫組 或 開口') ? 'o' : 'u';
   if (is('魂痕韻 舒聲 幫組')) return 'en';
   if (is('魂痕韻 舒聲 開口')) return is('端組') ? 'uen' : 'en';
@@ -288,6 +292,21 @@ function 聲調規則(音節) {
   }
 }
 
+try { 
+  is('真韻');
+} catch {  //“真”變“眞”
+  真韻 = '眞';
+}
+try { 
+  is('殷韻');
+} catch {  //“殷”變“欣”
+  殷韻 = '欣';  
+}
+try { 
+  is('A類');
+} catch {  //無標記詞“重紐”
+  重紐 = '重紐';  
+}
 let 聲母 = 聲母規則();
 let 韻母 = 韻母規則();
 return 聲調規則(聲母 + 韻母);
