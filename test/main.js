@@ -14,7 +14,7 @@ const testCases = [
   ["unt", "ɕéw"],
   ["msoeg_v8", "ɕiɛuʔ"],
   ["mid_tang", "ɕɛ́w"],
-  //["chiangxhua", "ɕjɛ́w"],
+  ["n_song", "ɕjɛ́w"],
   ["mongol", "ꡮꡠꡓ"],
   ["zhongyuan", "ʂjɛw³"],
   //["fanwan", "shiu2"],
