@@ -38,4 +38,5 @@ https://nk2028-1305783649.file.myqcloud.com/tshet-uinh-examples/<filename>
 
 **人造音系 artificial phonological system**
 
+- 綾香思考音系 (Ayaka’s Phonological System for Thinking): `ayaka_v8.js`
 - 不通話 (Yec-en-ʻua): `yec_en_hua.js`
