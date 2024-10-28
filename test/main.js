@@ -8,7 +8,7 @@ const 地位 = 音韻地位.from描述("書開三宵上");
 const testCases = [
   ["tupa", "sjiewq"],
   ["baxter", "syewX"],
-  //["karlgren", "ɕi̯ɛu꞉"],
+  ["karlgren", "ɕi̯ɛu꞉"],
   ["wangli", "꜂ɕĭɛu"],
   ["panwuyun", "ɕiᴇu˧˥"],
   ["unt", "ɕéw"],

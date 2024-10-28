@@ -1,6 +1,6 @@
 # tshet-uinh-examples
 
-JavaScript code examples to generate the derivatives of the Qieyun phonological system using TshetUinh.js
+JavaScript code examples to generate the derivatives of the Qieyun system using TshetUinh.js
 
 ## Usage
 
@@ -10,17 +10,18 @@ https://nk2028-1305783649.file.myqcloud.com/tshet-uinh-examples/<filename>
 
 ## List of included examples
 
-**切韻音系拼音或轉寫 romanization/transcription of the Qieyun phonological system**
+**切韻音系拼音或轉寫 romanization/transcription of the Qieyun system**
 
 - 切韻拼音 (Tshet-uinh Phonetic Alphabet): `tupa.js`
 - 白一平轉寫 (Baxter’s Transcription): `baxter.js`
 
-**切韻音系擬音 reconstruction of the Qieyun phonological system**
+**切韻音系擬音 reconstruction of the Qieyun system**
 
+- 高本漢擬音 (Bernhard Karlgren’s Reconstruction): `karlgren.js`
 - 王力擬音 (Wang Li’s Reconstruction): `wangli.js`
 - 潘悟雲擬音 (Pan Wuyun’s Reconstruction): `panwuyun.js`
 - unt 擬音 (unt’s Qieyun Reconstruction): `unt.js`
-- msoeg 擬音 V8 (msoeg’s Middle Chinese Reconstruction V8): `msoeg_v8.js`
+- msoeg 擬音 V8 (msoeg’s Reconstruction V8): `msoeg_v8.js`
 
 **推導後世音系 extrapolated phonological system of later periods**
 
