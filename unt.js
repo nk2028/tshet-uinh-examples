@@ -59,11 +59,13 @@ function get選項列表() {
     ['聲調記號', [1,
       { text: '上ˊ 去ˋ', value: '\u0301\u0300' },
       { text: '上ʔ 去h', value: 'ʔh' },
-      { text: '上ˀ 去ʰ', value: 'ˀʰ', description: '上標的 ʔ Unicode 未收，以 ˀ 代替' },
+      { text: '上ˀ 去ʰ', value: 'ˀʰ' },
       '五度符號',
       '五度符號（帶拖腔）',
       '無',
-    ].filter((_, i) => (is專業模式 || [0, 1, 2, 4, 6].includes(i)) && !(is朗讀音 && i === 4))],
+    ].filter((_, i) => (is專業模式 || [0, 1, 2, 4, 6].includes(i)) && !(is朗讀音 && i === 4)),
+      { description: is專業模式 && !is朗讀音 && 'ʔ 對應的上標字母 Unicode 未收，以 ˀ 代替' },
+    ],
     ['鈍C介音|鈍 C 介音',
       isL && [1, '開∅ 合w'] ||
       // ɣ 代表軟腭近音（即 ɣ̞）
