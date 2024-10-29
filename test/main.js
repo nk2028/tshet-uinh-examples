@@ -9,7 +9,7 @@ const testCases = [
   ["tupa", "sjiewq"],
   ["baxter", "syewX"],
   ["karlgren", "ɕi̯ɛu꞉"],
-  ["wangli", "꜂ɕĭɛu"],
+  ["wangli", "꜂ɕĭɛu"],
   ["panwuyun", "ɕiᴇu˧˥"],
   ["unt", "ɕéw"],
   ["msoeg_v8", "ɕiɛuʔ"],
