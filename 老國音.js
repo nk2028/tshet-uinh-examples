@@ -6,8 +6,8 @@
 https://zh.wikiversity.org/zh-hant/%E8%80%81%E5%9C%8B%E9%9F%B3%E8%88%87%E5%BB%A3%E9%9F%BB%E5%B0%8D%E6%AF%94
 https://syimyuzya.github.io/qieyun-autoderiver/
 
-音：
-https://github.com/baopaau/rime-bepemefeve/blob/main/bepemefeve.dict.yaml
+字音來源：https://github.com/baopaau/rime-bepemefeve/blob/main/bepemefeve.dict.yaml
+注意「僞老國音」：https://www.bilibili.com/read/cv17377530/
  */
 
 /** @type { 音韻地位['屬於'] } */
@@ -16,7 +16,7 @@ const is = (...x) => 音韻地位.屬於(...x);
 const when = (...x) => 音韻地位.判斷(...x);
 
 if (!音韻地位) return [
-  ['標調方式', [5, '調值', '調線', '調符', '調號上標', '調號', '附標']],
+  ['標調方式', [6, '調值', '調線', '附標', '調符', '調號上標', '調號']],
   ['聲調在前\n標調方式爲「附標」時無效', false],
   ['隔聲韻調\n標調方式爲「附標」時只隔聲和韻', [3, '空格', '定位', '無']],
   ['常母平聲陰聲韻聲母和船母平聲聲母', [2, 'tʂʰ', 'ʂ']],
