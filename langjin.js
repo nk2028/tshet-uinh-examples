@@ -15,7 +15,7 @@ const is = (x) => 音韻地位.屬於(x);
 const when = (...x) => 音韻地位.判斷(...x);
 
 if (!音韻地位) return [
-  //['$legacy', true],  
+  ['$legacy', true],  
   ['標調方式', [1, '數字', '附標']],  
 ];
 
