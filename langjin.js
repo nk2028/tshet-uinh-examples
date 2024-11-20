@@ -37,9 +37,9 @@ const 附標標調 = {
 const 元音 = 'iuüaeoyär';
 const 元音Re = new RegExp("[" + 元音 + "]");
 const 元音附標 = '̃̈';
-var 真韻='真';
-var 殷韻='殷';
-var 重紐='';
+let 真韻 = '真';
+let 殷韻 = '殷';
+let 重紐 = '';
 
 try { 
   is('真韻');
@@ -53,7 +53,7 @@ try {
 }
 try { 
   is('A類');
-} catch {  //無標記詞“重紐”
+} catch {  //老版有標記詞“重紐”
   重紐 = '重紐';  
 }
 
