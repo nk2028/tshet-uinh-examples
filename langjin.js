@@ -34,9 +34,6 @@ const 附標標調 = {
   '入聲': '̂',
 };
 
-const 元音 = 'iuüaeoyär';
-const 元音Re = new RegExp("[" + 元音 + "]");
-const 元音附標 = '̃̈';
 let 真韻 = '真';
 let 殷韻 = '殷';
 let 重紐 = '';
