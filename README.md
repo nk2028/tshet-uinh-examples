@@ -32,6 +32,7 @@ https://nk2028-1305783649.file.myqcloud.com/tshet-uinh-examples/<filename>
 
 **現代方言推導音 extrapolated pronunciations of modern dialects**
 
+- 推導老國音 (Extrapolated Old National Pronunciation): `老國音.js`
 - 推導普通話 (Extrapolated Putonghua): `putonghua.js`
 - 推導廣州話 (Extrapolated Cantonese): `gwongzau.js`
 - 推導上海話 (Extrapolated Shanghainese): `zaonhe.js`
