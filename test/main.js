@@ -17,7 +17,7 @@ const testCases = [
   ["n_song", "ɕjɛ́w"],
   ["mongol", "ꡮꡠꡓ"],
   ["zhongyuan", "ʂjɛw³"],
-  ["老國音", "ㄕㄠˇ"],
+  ["onp", "ㄕㄠˇ"],
   //["fanwan", "shiu2"],
   ["putonghua", "shǎo"],
   ["gwongzau", "siu2"],
