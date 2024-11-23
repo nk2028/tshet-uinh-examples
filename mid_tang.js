@@ -10,11 +10,12 @@
  * @author unt
  */
 
-const is = (x) => 音韻地位.屬於(x);
+/** @type { 音韻地位['屬於'] } */
+const is = (...x) => 音韻地位.屬於(...x);
+/** @type { 音韻地位['判斷'] } */
 const when = (...x) => 音韻地位.判斷(...x);
 
 const is盛唐 = 選項.預置風格?.includes('盛唐') ?? false;
-const is韻圖 = 選項.預置風格?.includes('韻圖') ?? true;
 const is慧琳 = 選項.預置風格?.includes('慧琳') ?? false;
 const 預置風格changed = 選項._last預置風格 && 選項._last預置風格 !== 選項.預置風格;
 

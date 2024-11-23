@@ -5,14 +5,17 @@
  * @author unt
  */
 
+/** @type { 音韻地位['屬於'] } */
 const is = (...x) => 音韻地位.屬於(...x);
+/** @type { 音韻地位['判斷'] } */
 const when = (...x) => 音韻地位.判斷(...x);
+
 let isIPA = 選項.音標體系 !== 'MPA';
 let 音標體系changed = 選項._last音標體系 && 選項._last音標體系 !== 選項.音標體系;
 let mpaRevoked = false; // 用於在用戶選擇放棄使用 MPA 時刷新選項列表的內容
 if (音標體系changed && 選項.音標體系 === 'MPA') {
   const message = '請注意 MPA 不是國際音標，其中諸多符號不可按國際音標理解，容易引起誤會。在公共場合使用 MPA 後果自負！\n\n確認使用 MPA？';
-  if (!confirm(message)) {
+  if (!confirm(message)) { // eslint-disable-line no-undef
     isIPA = true;
     音標體系changed = false;
     mpaRevoked = true;
@@ -54,7 +57,7 @@ if (!音韻地位) return [
   ['莊三韻母起始|\n知乎文章用 r 化元音\n韻鑒用 ɻ\n這裏默認用普通的三等起始（B 類或 C 類）',
     [1, '普通', 'r 化元音', 'ɻ'], { hidden: !選項.顯示高級選項 }],
   ['覺韻|\n知乎文章和韻鑒用低元音\n這裏默認用中元音，與江韻一致',
-    [1, '中元音', '低元音'], { hidden: !選項.顯示高級選項 }], // 
+    [1, '中元音', '低元音'], { hidden: !選項.顯示高級選項 }],
   ['庚三清|\n知乎文章和韻鑒用低元音',
     [2, '中元音', '低元音'], { hidden: !選項.顯示高級選項 }],
   ['宕攝入聲附加|\n知乎文章和韻鑒用 ⁽ʷ⁾\n這裏默認省略',

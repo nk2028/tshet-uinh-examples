@@ -14,7 +14,7 @@
  *
  * - 2022：切韻擬音 L
  *   https://zhuanlan.zhihu.com/p/545490174
- * 
+ *
  * - 2023：切韻通俗擬音
  *   https://zhuanlan.zhihu.com/p/545490174
  *
@@ -23,7 +23,9 @@
  * @author unt
  */
 
+/** @type { 音韻地位['屬於'] } */
 const is = (...x) => 音韻地位.屬於(...x);
+/** @type { 音韻地位['判斷'] } */
 const when = (...x) => 音韻地位.判斷(...x);
 
 const is專業模式 = 選項.專業模式 ?? false;

@@ -21,7 +21,9 @@
  * @author Mishiro
  */
 
+/** @type { 音韻地位['屬於'] } */
 const is = (...x) => 音韻地位.屬於(...x);
+/** @type { 音韻地位['判斷'] } */
 const when = (...x) => 音韻地位.判斷(...x);
 
 const is史稿 = 選項.擬音版本?.includes('稿') ?? true;

@@ -5,6 +5,11 @@
  * @author Ayaka
  */
 
+/** @type { 音韻地位['屬於'] } */
+const is = (...x) => 音韻地位.屬於(...x);
+/** @type { 音韻地位['判斷'] } */
+const when = (...x) => 音韻地位.判斷(...x);
+
 // 1. 選項
 
 if (!音韻地位) return [
@@ -21,7 +26,7 @@ if (!音韻地位) return [
     description: ['true: 迥 ク𛅥ィ', 'false: 迥 クヱィ', '僅當開啓假名時生效'].join('\n'),
   }],
 
-  ['音變', [1, {value: null, text: '無'}, '現代日語'], {
+  ['音變', [1, { value: null, text: '無' }, '現代日語'], {
     description: [
       "'無': 宙 チウ tiu；南 ダム dam；愁 スウ suu",
       "'現代日語': 宙 チュウ tyuu；南 ダン dan；愁 スウ suu",
@@ -29,13 +34,13 @@ if (!音韻地位) return [
   }],
 
   // 參考：尉遲治平. 日本悉曇家所傳古漢語調值.
-  ['聲調', [1, {value: null, text: '無'}, '四聲', '四聲（數字）', '四聲（調值）', '六聲（調值）', '六聲（符號）', '八聲', '八聲（數字）', '八聲（調值）']],
+  ['聲調', [1, { value: null, text: '無' }, '四聲', '四聲（數字）', '四聲（調值）', '六聲（調值）', '六聲（符號）', '八聲', '八聲（數字）', '八聲（調值）']],
 ];
 
 // 2. 輔助函數
 
 const 假名表 = {
-  a:  'ア', i:  'イ', u:  'ウ', e:  'エ', o:  'オ',
+   a: 'ア',  i: 'イ',  u: 'ウ',  e: 'エ',  o: 'オ',
   ka: 'カ', ki: 'キ', ku: 'ク', ke: 'ケ', ko: 'コ',
   ga: 'ガ', gi: 'ギ', gu: 'グ', ge: 'ゲ', go: 'ゴ',
   sa: 'サ', si: 'シ', su: 'ス', se: 'セ', so: 'ソ',
@@ -58,15 +63,15 @@ const 拗音表 = {
 };
 
 const 韻尾表 = {
-  '': '', i: 'イ', u: 'ウ',
-  m: 'ム', n: 'ン', ng: 'ゥ', // ng: 'ィ',
-  p: 'フ', t: 'ツ', k: 'ク', // k: 'キ',
+   '': '',   'i': 'イ',  'u': 'ウ',
+  'm': 'ム', 'n': 'ン', 'ng': 'ゥ', // ng: 'ィ',
+  'p': 'フ', 't': 'ツ',  'k': 'ク', // k: 'キ',
 };
 
 function roma2kata(s) {
   const r = /^([kgsztdnpbmyrw]?w??[yw]?)([aiueo])([ptkmngiu]*)$/g; // 將音節分為韻頭、主要元音及韻尾
   const match = r.exec(s);
-  if (match == null) {
+  if (match === null) {
     throw new Error('無法轉換為假名：' + s);
   }
   const { 1: 韻頭, 2: 主要元音, 3: 韻尾 } = match;
@@ -84,7 +89,7 @@ function roma2kata(s) {
 
 function kata2hira(s) {
   const diff = 'ぁ'.charCodeAt(0) - 'ァ'.charCodeAt(0);
-  return [...s].map((c) => ({
+  return [...s].map(c => ({
     '𛅤': '𛅐',
     '𛅥': '𛅑',
     '𛅦': '𛅒',
@@ -92,7 +97,7 @@ function kata2hira(s) {
 }
 
 function small2large(s) {
-  return [...s].map((c) => ({
+  return [...s].map(c => ({
     '𛅤': 'ヰ',
     '𛅥': 'ヱ',
     '𛅦': 'ヲ',
@@ -100,11 +105,6 @@ function small2large(s) {
 }
 
 // 3. 推導規則
-
-/** @type { 音韻地位["屬於"] } */
-const is = (...x) => 音韻地位.屬於(...x);
-/** @type { 音韻地位["判斷"] } */
-const when = (...x) => 音韻地位.判斷(...x);
 
 function 聲母規則() {
   return when([
@@ -429,9 +429,9 @@ if (['平假名', '片假名'].includes(選項.書寫系統)) {
   if (選項.音變 === '現代日語') {
     if (聲母 === 'p') 聲母 = 'h'; // 甫 pu -> hu
 
-    if (韻母.endsWith('t')) 韻母 = 韻母 + 'u'; // 遏 at -> atu
-    else if (韻母.endsWith('ek')) 韻母 = 韻母 + 'i'; // 席 sek -> seki
-    else if (韻母.endsWith('k')) 韻母 = 韻母 + 'u'; // 澤 tak -> taku
+    if (韻母.endsWith('t')) 韻母 += 'u'; // 遏 at -> atu
+    else if (韻母.endsWith('ek')) 韻母 += 'i'; // 席 sek -> seki
+    else if (韻母.endsWith('k')) 韻母 += 'u'; // 澤 tak -> taku
   }
 
   if (選項.書寫系統 === '平文式羅馬字') {
