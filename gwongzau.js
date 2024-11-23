@@ -200,10 +200,10 @@ if (聲母 === 'h' && ['au', 'an', 'am'].includes(韻母) && is`清音 三四等
 }
 
 // 陰入分化
-if (is('入聲') && 聲調 === '3' && is短元音(韻母)) 聲調 = '1';
+if (is`入聲` && 聲調 === '3' && is短元音(韻母)) 聲調 = '1';
 
 // 合口
-if (is('合口 或 模韻') && !['eo', 'oe', 'yu'].some(x => 韻母.startsWith(x))) {
+if (is`合口 或 模韻` && !['eo', 'oe', 'yu'].some(x => 韻母.startsWith(x))) {
   if ((聲母 === 'g' || 聲母 === 'k') && !韻母.startsWith('u')) 聲母 += 'w';
   else if (聲母 === 'h' && !韻母.startsWith('i')) 聲母 = 'f';
   else if (聲母 === 'j' || 聲母 === '') 聲母 = 'w';
@@ -213,9 +213,9 @@ if (is('合口 或 模韻') && !['eo', 'oe', 'yu'].some(x => 韻母.startsWith(x
 if (韻母 === 'om') 韻母 = 'am';
 
 // m 韻尾在聲母為脣音時為 n
-if (is('脣音') && 韻母.endsWith('m')) 韻母 = 韻母.slice(0, -1) + 'n';
+if (is`脣音` && 韻母.endsWith('m')) 韻母 = 韻母.slice(0, -1) + 'n';
 
-if (is('入聲')) {
+if (is`入聲`) {
   if (韻母.endsWith('m')) 韻母 = 韻母.slice(0, -1) + 'p';
   else if (韻母.endsWith('n')) 韻母 = 韻母.slice(0, -1) + 't';
   else if (韻母.endsWith('ng')) 韻母 = 韻母.slice(0, -2) + 'k';

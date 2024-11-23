@@ -1,4 +1,5 @@
 import stylisticJs from '@stylistic/eslint-plugin-js';
+import taggedIs from './rules/tagged-is.js';
 
 export default [
   {
@@ -20,6 +21,11 @@ export default [
     },
     plugins: {
       '@stylistic/js': stylisticJs,
+      'tagged-is': {
+        rules: {
+          'tagged-is': taggedIs,
+        },
+      },
     },
     rules: {
       'no-constant-binary-expression': 'error',
@@ -126,6 +132,8 @@ export default [
       '@stylistic/js/template-curly-spacing': 'error',
       '@stylistic/js/template-tag-spacing': 'error',
       '@stylistic/js/yield-star-spacing': 'error',
+
+      'tagged-is/tagged-is': 'error',
     },
   },
   {

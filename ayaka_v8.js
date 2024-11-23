@@ -336,7 +336,7 @@ function 韻母規則() {
 let 聲母 = 聲母規則();
 let 韻母 = 韻母規則();
 
-if (is('入聲')) {
+if (is`入聲`) {
   if (韻母.endsWith('m')) 韻母 = 韻母.slice(0, -1) + 'p';
   else if (韻母.endsWith('n')) 韻母 = 韻母.slice(0, -1) + 't';
   else if (韻母.endsWith('ng')) 韻母 = 韻母.slice(0, -2) + 'k';
@@ -364,7 +364,7 @@ function 聲調規則() {
   }
 
   if (選項.聲調 === '六聲（符號）') {
-    if (is('入聲 全濁')) {
+    if (is`入聲 全濁`) {
       if (韻母.endsWith('p')) 韻母 = 韻母.slice(0, -1) + 'b';
       else if (韻母.endsWith('t')) 韻母 = 韻母.slice(0, -1) + 'd';
       else if (韻母.endsWith('k')) 韻母 = 韻母.slice(0, -1) + 'g';
@@ -401,7 +401,7 @@ function 聲調規則() {
 
 let 聲調 = 聲調規則();
 
-if (韻母.startsWith('w') && (!is('牙喉音') || is('A類 或 以母'))) 韻母 = 韻母.slice(1);
+if (韻母.startsWith('w') && is`非 牙喉音 或 A類 或 以母`) 韻母 = 韻母.slice(1);
 
 // 4. 音變規則
 
