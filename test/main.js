@@ -1,6 +1,6 @@
 import util from 'node:util';
 
-import { 音韻地位 } from 'tshet-uinh';
+import { 資料, 音韻地位 } from 'tshet-uinh';
 import * as TshetUinhExamples from '../index.js';
 
 const 地位 = 音韻地位.from描述('書開三宵上');
@@ -31,7 +31,9 @@ for (const [schema, expected] of testCases) {
   console.log(`Testing: ${schema}`);
   total++;
   try {
-    const result = TshetUinhExamples[schema]()(地位);
+    const deriver = TshetUinhExamples[schema]();
+    Array.from(資料.iter音韻地位(), deriver); // Ensure no error is thrown from all 音韻地位
+    const result = deriver(地位);
     if (result === expected) {
       passed += 1;
     } else {
