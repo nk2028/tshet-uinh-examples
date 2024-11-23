@@ -1,16 +1,20 @@
-name: Publish to Tencent Cloud COS
+name: Build
 
 on:
   workflow_dispatch:
   push:
-    branches:
-      - main
+    branches: [main, dev, dev-*]
+  pull_request:
+    branches: [main]
+  release:
+    types: [created]
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout latest code
+        uses: actions/checkout@v4
 
       # Build
       - name: Setup Python
@@ -33,13 +37,23 @@ jobs:
       - name: Run tests
         run: npm test
 
-      # Publish
-      - name: Install coscmd
+      # Publish to NPM
+      - if: github.event_name == 'release'
+        name: Publish to NPM
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.npm_token }}
+
+      # Publish to Tencent Cloud COS
+      - if: github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.ref == 'refs/heads/main')
+        name: Install coscmd
         run: sudo pip install coscmd
-      - name: Configure coscmd
+      - if: github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.ref == 'refs/heads/main')
+        name: Configure coscmd
         env:
           SECRET_ID: ${{ secrets.SecretId }}
           SECRET_KEY: ${{ secrets.SecretKey }}
         run: coscmd config -a $SECRET_ID -s $SECRET_KEY -b nk2028-1305783649 -r ap-guangzhou
-      - name: Publish static files to COS
+      - if: github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.ref == 'refs/heads/main')
+        name: Publish static files to COS
         run: coscmd upload -rs --delete -f . /tshet-uinh-examples --ignore '*/.*,*/node_modules/*,./test/*,./build.py,./package.json,./package-lock.json'
