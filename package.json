@@ -5,6 +5,8 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
     "test": "node test/main.js"
   },
   "repository": {
@@ -25,5 +27,9 @@
   "dependencies": {
     "tshet-uinh": "^0.15.1",
     "tshet-uinh-deriver-tools": "^0.2.0"
+  },
+  "devDependencies": {
+    "@stylistic/eslint-plugin-js": "^2.11.0",
+    "eslint": "^9.15.0"
   }
 }

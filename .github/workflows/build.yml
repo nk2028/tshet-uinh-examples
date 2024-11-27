@@ -1,0 +1,60 @@
+name: Build
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main, dev, dev-*]
+  pull_request:
+    branches: [main]
+  release:
+    types: [created]
+
+jobs:
+  build:
+    name: ${{ github.event_name == 'release' && 'Publish to NPM' || (github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.repository == 'nk2028/tshet-uinh-examples' && github.ref == 'refs/heads/main')) && 'Publish to Tencent Cloud COS' || 'Test' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout latest code
+        uses: actions/checkout@v4
+
+      # Build
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Build
+        run: python build.py > index.js
+
+      # Test
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          registry-url: https://registry.npmjs.org/
+      - name: Install Node.js dependencies
+        run: npm ci
+      - name: Lint
+        run: npm run lint
+      - name: Run tests
+        run: npm test
+
+      # Publish to NPM
+      - if: github.event_name == 'release'
+        name: Publish to NPM
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.npm_token }}
+
+      # Publish to Tencent Cloud COS
+      - if: github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.repository == 'nk2028/tshet-uinh-examples' && github.ref == 'refs/heads/main')
+        name: Install coscmd
+        run: sudo pip install coscmd
+      - if: github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.repository == 'nk2028/tshet-uinh-examples' && github.ref == 'refs/heads/main')
+        name: Configure coscmd
+        env:
+          SECRET_ID: ${{ secrets.SecretId }}
+          SECRET_KEY: ${{ secrets.SecretKey }}
+        run: coscmd config -a $SECRET_ID -s $SECRET_KEY -b nk2028-1305783649 -r ap-guangzhou
+      - if: github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.repository == 'nk2028/tshet-uinh-examples' && github.ref == 'refs/heads/main')
+        name: Publish static files to COS
+        run: coscmd upload -rs --delete -f . /tshet-uinh-examples --ignore '*/.*,*/node_modules/*,./test/*,./build.py,./package.json,./package-lock.json'

@@ -5,10 +5,12 @@
  * @author unt
  */
 
-if (!音韻地位) return [];
-
+/** @type { 音韻地位['屬於'] } */
 const is = (...x) => 音韻地位.屬於(...x);
+/** @type { 音韻地位['判斷'] } */
 const when = (...x) => 音韻地位.判斷(...x);
+
+if (!音韻地位) return [];
 
 function get聲母() {
   return {
