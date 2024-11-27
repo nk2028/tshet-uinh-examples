@@ -11,7 +11,7 @@ on:
 
 jobs:
   build:
-    name: ${{ github.event_name == 'release' && 'Publish to NPM' || (github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.ref == 'refs/heads/main')) && 'Publish to Tencent Cloud COS' || 'Test' }}    
+    name: ${{ github.event_name == 'release' && 'Publish to NPM' || (github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.repository == 'nk2028/tshet-uinh-examples' && github.ref == 'refs/heads/main')) && 'Publish to Tencent Cloud COS' || 'Test' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout latest code
@@ -46,15 +46,15 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.npm_token }}
 
       # Publish to Tencent Cloud COS
-      - if: github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.ref == 'refs/heads/main')
+      - if: github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.repository == 'nk2028/tshet-uinh-examples' && github.ref == 'refs/heads/main')
         name: Install coscmd
         run: sudo pip install coscmd
-      - if: github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.ref == 'refs/heads/main')
+      - if: github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.repository == 'nk2028/tshet-uinh-examples' && github.ref == 'refs/heads/main')
         name: Configure coscmd
         env:
           SECRET_ID: ${{ secrets.SecretId }}
           SECRET_KEY: ${{ secrets.SecretKey }}
         run: coscmd config -a $SECRET_ID -s $SECRET_KEY -b nk2028-1305783649 -r ap-guangzhou
-      - if: github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.ref == 'refs/heads/main')
+      - if: github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.repository == 'nk2028/tshet-uinh-examples' && github.ref == 'refs/heads/main')
         name: Publish static files to COS
         run: coscmd upload -rs --delete -f . /tshet-uinh-examples --ignore '*/.*,*/node_modules/*,./test/*,./build.py,./package.json,./package-lock.json'
