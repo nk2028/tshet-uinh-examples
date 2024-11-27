@@ -9,8 +9,11 @@
  * @author unt
  */
 
+/** @type { 音韻地位['屬於'] } */
 const is = (...x) => 音韻地位.屬於(...x);
+/** @type { 音韻地位['判斷'] } */
 const when = (...x) => 音韻地位.判斷(...x);
+
 const is2000 = Boolean(選項.版本?.includes('2000'));
 const is2013 = Boolean(選項.版本?.includes('2013'));
 const is2023 = 選項.版本?.includes('2023') ?? true;

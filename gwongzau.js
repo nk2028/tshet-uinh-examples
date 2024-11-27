@@ -5,12 +5,12 @@
  * @author Ayaka
  */
 
-if (!音韻地位) return [];
-
-/** @type { 音韻地位["屬於"] } */
+/** @type { 音韻地位['屬於'] } */
 const is = (...x) => 音韻地位.屬於(...x);
-/** @type { 音韻地位["判斷"] } */
+/** @type { 音韻地位['判斷'] } */
 const when = (...x) => 音韻地位.判斷(...x);
+
+if (!音韻地位) return [];
 
 function 聲母規則() {
   return when([
@@ -191,7 +191,7 @@ let 韻母 = 韻母規則();
 let 聲調 = 聲調規則();
 
 // ng 拼細音時為 j
-const is細音 = ['eo', 'i', 'oe', 'u', 'yu'].some((x) => 韻母.startsWith(x));
+const is細音 = ['eo', 'i', 'oe', 'u', 'yu'].some(x => 韻母.startsWith(x));
 if (聲母 === 'ng' && is細音) 聲母 = 'j';
 
 // 三四等清調 h 拼 a 元音部分韻母時為 j/w
@@ -200,10 +200,10 @@ if (聲母 === 'h' && ['au', 'an', 'am'].includes(韻母) && is`清音 三四等
 }
 
 // 陰入分化
-if (is('入聲') && 聲調 === '3' && is短元音(韻母)) 聲調 = '1';
+if (is`入聲` && 聲調 === '3' && is短元音(韻母)) 聲調 = '1';
 
 // 合口
-if (is('合口 或 模韻') && !['eo', 'oe', 'yu'].some((x) => 韻母.startsWith(x))) {
+if (is`合口 或 模韻` && !['eo', 'oe', 'yu'].some(x => 韻母.startsWith(x))) {
   if ((聲母 === 'g' || 聲母 === 'k') && !韻母.startsWith('u')) 聲母 += 'w';
   else if (聲母 === 'h' && !韻母.startsWith('i')) 聲母 = 'f';
   else if (聲母 === 'j' || 聲母 === '') 聲母 = 'w';
@@ -213,9 +213,9 @@ if (is('合口 或 模韻') && !['eo', 'oe', 'yu'].some((x) => 韻母.startsWith
 if (韻母 === 'om') 韻母 = 'am';
 
 // m 韻尾在聲母為脣音時為 n
-if (is('脣音') && 韻母.endsWith('m')) 韻母 = 韻母.slice(0, -1) + 'n';
+if (is`脣音` && 韻母.endsWith('m')) 韻母 = 韻母.slice(0, -1) + 'n';
 
-if (is('入聲')) {
+if (is`入聲`) {
   if (韻母.endsWith('m')) 韻母 = 韻母.slice(0, -1) + 'p';
   else if (韻母.endsWith('n')) 韻母 = 韻母.slice(0, -1) + 't';
   else if (韻母.endsWith('ng')) 韻母 = 韻母.slice(0, -2) + 'k';
