@@ -17,12 +17,9 @@ writeFileSync('./dist/index.d.ts', /* ts */`\
 import TshetUinh from 'tshet-uinh';
 import { 推導方案 } from 'tshet-uinh-deriver-tools';
 
-type ReplaceElement<T, U> = T extends readonly Schema[] ? { [K in keyof T]: U } : U;
-type ElementRecord<T, U> = T extends readonly Schema[] ? { [K in T[number]]: U } : U;
-
 type 推導選項 = Readonly<Record<string, unknown>> | undefined;
-interface 字頭檢索及推導結果<T extends Schema | readonly Schema[]> extends TshetUinh.資料.字頭檢索結果 {
-  推導結果: ReplaceElement<T, string> & ElementRecord<T, string>;
+interface 字頭檢索及推導結果<T extends Schema | readonly Schema[]> extends TshetUinh.資料.檢索結果 {
+  推導結果: T extends readonly Schema[] ? { -readonly [K in keyof T]: string } & { -readonly [K in T[number]]: string } : string;
 }
 
 /**
@@ -36,10 +33,10 @@ interface 字頭檢索及推導結果<T extends Schema | readonly Schema[]> exte
  * - 若 \`schema\` 為字串，傳回結果中的 \`推導結果\` 屬性為字串
  * - 若 \`schema\` 為字串列表，傳回結果中的 \`推導結果\` 屬性亦為字串列表
  */
-export function from字頭<T extends Schema | readonly Schema[]>(
+export function from字頭<const T extends Schema | readonly Schema[]>(
   schema: T,
   字頭: string,
-  選項?: Readonly<Partial<ReplaceElement<T, 推導選項> | ElementRecord<T, 推導選項>>>,
+  選項?: T extends readonly Schema[] ? { readonly [K in keyof T]?: 推導選項 } | { readonly [K in T[number]]?: 推導選項 } : 推導選項,
 ): 字頭檢索及推導結果<T>[];
 `);
 
