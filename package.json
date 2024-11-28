@@ -11,6 +11,7 @@
 			"types": "./dist/index.d.ts"
 		}
 	},
+  "files": ["dist"],
   "scripts": {
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
