@@ -1,4 +1,6 @@
-import { appendFileSync, existsSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { appendFileSync, existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
+
+mkdirSync('./dist', { recursive: true });
 
 writeFileSync('./dist/index.js', /* js */ `\
 import TshetUinh from 'tshet-uinh';
