@@ -2,7 +2,7 @@ import { readdirSync } from 'node:fs';
 import util from 'node:util';
 
 import { 資料, 音韻地位 } from 'tshet-uinh';
-import * as TshetUinhExamples from '../index.js';
+import * as TshetUinhExamples from '../dist/index.js';
 
 const 地位 = 音韻地位.from描述('書開三宵上');
 
@@ -26,7 +26,7 @@ const testCases = [
   ['yec_en_hua', 'A'],
 ];
 
-const directorySchemata = new Set(readdirSync('.').flatMap(file => file !== (file = file.replace(/\.js$/, '')) && file !== 'index' && !file.endsWith('.config') ? [file] : []));
+const directorySchemata = new Set(readdirSync('.').flatMap(file => file !== (file = file.replace(/\.js$/, '')) && !file.endsWith('.config') ? [file] : []));
 const nonExistentSchemata = new Set();
 
 let passed = 0;

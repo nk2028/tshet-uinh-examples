@@ -1,6 +1,6 @@
 import { appendFileSync, existsSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 
-writeFileSync('index.js', /* js */ `\
+writeFileSync('./dist/index.js', /* js */ `\
 import TshetUinh from 'tshet-uinh';
 import { 推導方案 } from 'tshet-uinh-deriver-tools';
 
@@ -13,7 +13,7 @@ export function from字頭(schema, 字頭, 選項) {
 }
 `);
 
-writeFileSync('index.d.ts', /* ts */`\
+writeFileSync('./dist/index.d.ts', /* ts */`\
 import TshetUinh from 'tshet-uinh';
 import { 推導方案 } from 'tshet-uinh-deriver-tools';
 
@@ -43,7 +43,7 @@ export function from字頭<T extends Schema | readonly Schema[]>(
 ): 字頭檢索及推導結果<T>[];
 `);
 
-const directoryFiles = new Set(readdirSync('.').filter(file => file.endsWith('.js') && file !== 'index.js' && !file.endsWith('.config.js')));
+const directoryFiles = new Set(readdirSync('.').filter(file => file.endsWith('.js') && !file.endsWith('.config.js')));
 const nonExistentFiles = new Set();
 
 const readmeContent = readFileSync('README.md', 'utf-8');
@@ -59,13 +59,13 @@ for (const [, file, schema] of files) {
   const content = readFileSync(file, 'utf-8');
   const [, description, code] = content.match(/^\/\*(.+?)\*\/(.+)$/s);
 
-  appendFileSync('index.js', /* js */ `
+  appendFileSync('./dist/index.js', /* js */ `
 export const ${schema} = new 推導方案(function (選項, 音韻地位, 字頭) {
 ${code.trim()}
 });
 `);
 
-  appendFileSync('index.d.ts', /* ts */ `
+  appendFileSync('./dist/index.d.ts', /* ts */ `
 /**
  * ${description.trim()}
  */
@@ -76,11 +76,11 @@ export const ${schema}: 推導方案<string>;
   directoryFiles.delete(file);
 }
 
-appendFileSync('index.js', /* js */ `
+appendFileSync('./dist/index.js', /* js */ `
 const _schemata = { ${schemata.join(', ')} };
 `);
 
-appendFileSync('index.d.ts', /* ts */ `
+appendFileSync('./dist/index.d.ts', /* ts */ `
 type Schema = '${schemata.join("' | '")}';
 `);
 
