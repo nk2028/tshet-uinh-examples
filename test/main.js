@@ -1,3 +1,4 @@
+import { readdirSync } from 'node:fs';
 import util from 'node:util';
 
 import { 資料, 音韻地位 } from 'tshet-uinh';
@@ -25,9 +26,17 @@ const testCases = [
   ['yec_en_hua', 'A'],
 ];
 
+const directorySchemata = new Set(readdirSync('.').flatMap(file => file !== (file = file.replace(/\.js$/, '')) && file !== 'index' && !file.endsWith('.config') ? [file] : []));
+const nonExistentSchemata = new Set();
+
 let passed = 0;
 let total = 0;
 for (const [schema, expected] of testCases) {
+  if (!(schema in TshetUinhExamples)) {
+    nonExistentSchemata.add(schema);
+    continue;
+  }
+
   console.log(`Testing: ${schema}`);
   total++;
   try {
@@ -35,7 +44,7 @@ for (const [schema, expected] of testCases) {
     Array.from(資料.iter音韻地位(), deriver); // Ensure no error is thrown from all 音韻地位
     const result = deriver(地位);
     if (result === expected) {
-      passed += 1;
+      passed++;
     } else {
       console.log(
         `  Expected ${util.inspect(expected)}, got ${util.inspect(result)}`
@@ -44,7 +53,13 @@ for (const [schema, expected] of testCases) {
   } catch (e) {
     console.log(`  Error thrown: ${util.inspect(e)}`);
   }
+
+  directorySchemata.delete(schema);
 }
 
-console.log(`${passed}/${total} test(s) passed.`);
-process.exit(passed === total ? 0 : 1);
+console.log(`${passed}/${total} tests passed.`);
+if (directorySchemata.size || nonExistentSchemata.size || passed < total) {
+  if (directorySchemata.size) console.log('The following schemata are untested:', directorySchemata);
+  if (nonExistentSchemata.size) console.log('There are test cases for the following schemata but they are missing:', nonExistentSchemata);
+  process.exit(1);
+}

@@ -3,10 +3,18 @@
   "version": "20241008.0.0",
   "description": "JavaScript code examples to generate the derivatives of the Qieyun phonological system using qieyun-js",
   "type": "module",
-  "main": "index.js",
+	"main": "./index.js",
+	"types": "./index.d.ts",
+	"exports": {
+		".": {
+			"default": "./index.js",
+			"types": "./index.d.ts"
+		}
+	},
   "scripts": {
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
+    "build": "node build/main.js",
     "test": "node test/main.js"
   },
   "repository": {
