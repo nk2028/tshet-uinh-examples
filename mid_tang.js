@@ -1,10 +1,13 @@
 /* 推導盛中唐擬音
  *
  * 《“平水韻”擬音》
+ * https://phesoca.com/aws/351/ 或
+ * https://www.bilibili.com/read/cv37390491/ 或
  * https://zhuanlan.zhihu.com/p/681190661
- * https://www.bilibili.com/read/cv37390491/
  *
  * 《中唐音系韻基和聲類》
+ * https://phesoca.com/linguistics/mid-tang.png 或
+ * https://t.bilibili.com/1005592182086696967 或
  * https://www.zhihu.com/pin/1725177872707268608
  *
  * @author unt
@@ -37,7 +40,7 @@ if (!音韻地位) return [
   ['A4合併|三 A 與四等合併', !is盛唐, { reset: 預置風格changed }],
   ['常船合併崇俟合併|常船合併、崇俟合併\n常 dʑ 船 ʑ 合併作擦音 ʑ\n崇 dʐ 俟 ʐ 合併作塞擦音 dʐ', is慧琳, { reset: 預置風格changed }],
   ['等類記法|\n特別地，非組和莊章組後總是不寫等類標記', [1, ...get選單(
-    選項.A4合併 ?? true ?
+    (預置風格changed ?? true ? !is盛唐 : 選項.A4合併) ?
       ['四', '三', '一二'] :
       ['三A', '三BC', '一二四'],
     [['j', 'ɣ', ''], ['ʲ', 'ˠ', ''], ['ʲ', 'ˠ', 'ˤ'], ['ʲ', '', 'ˤ']],
@@ -47,7 +50,10 @@ if (!音韻地位) return [
 
   '韻',
   ['低元音', [2, ...get選單(['前', '後'], [['æ', 'a'], ['æ', 'ɑ'], ['a', 'ɑ']])]],
-  ['後高元音' + (選項.BC合併 === false ? '|\n微韻除外' : ''), [1, ...get選單(['閉音節', '魚韻'], [['ɨ', 'ɨ'], ['ə', 'ɨ'], ['ə', 'ɯ']])]],
+  ['後高元音',
+    [1, ...get選單(['閉音節', '魚韻'], [['ɨ', 'ɨ'], ['ə', 'ɨ'], ['ə', 'ɯ']])],
+    { description: (預置風格changed ?? true ? is盛唐 : !選項.BC合併) ? '微韻除外' : null },
+  ],
   ['東一冬合併', !is盛唐, { reset: 預置風格changed }],
   ['支脂合併', !is盛唐, { reset: 預置風格changed }],
   ['咍泰合併', !is盛唐, { reset: 預置風格changed }],
