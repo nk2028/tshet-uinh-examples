@@ -152,7 +152,7 @@ function get等類記法() {
 }
 
 function get合口介音() {
-  return is`合口 或 幫組 咍泰魂韻` ? 'w' : '';
+  return is`合口` ? 'w' : '';
 }
 
 function get韻基() {
