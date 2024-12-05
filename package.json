@@ -13,8 +13,8 @@
   },
   "files": ["dist"],
   "scripts": {
-    "lint": "eslint . --ignore-pattern dist/**",
-    "lint:fix": "eslint --fix . --ignore-pattern dist/**",
+    "lint": "eslint . --ignore-pattern dist/**/*",
+    "lint:fix": "eslint --fix . --ignore-pattern dist/**/*",
     "build": "node build/main.js",
     "test": "node test/main.js"
   },
