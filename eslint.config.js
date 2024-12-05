@@ -3,7 +3,6 @@ import taggedIs from './rules/tagged-is.js';
 
 export default [
   {
-    ignores: ['index.js'],
     languageOptions: {
       sourceType: 'script',
       globals: {
