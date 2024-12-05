@@ -54,4 +54,4 @@ jobs:
         run: coscmd config -a $SECRET_ID -s $SECRET_KEY -b nk2028-1305783649 -r ap-guangzhou
       - if: github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.repository == 'nk2028/tshet-uinh-examples' && github.ref == 'refs/heads/main')
         name: Publish static files to COS
-        run: coscmd upload -rs --delete -f . /tshet-uinh-examples --ignore '*/.*,*/node_modules/*,./test/*,./build.py,./package.json,./package-lock.json'
+        run: coscmd upload -rs --delete -f . /tshet-uinh-examples --ignore '*/.*,*/node_modules/*,./test/*,./build/*,./dist/*,./package.json,./package-lock.json,./eslint.config.js'
