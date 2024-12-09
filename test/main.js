@@ -14,6 +14,7 @@ const testCases = [
   ['panwuyun', 'ɕiᴇu˧˥'],
   ['unt', 'ɕéw'],
   ['msoeg_v8', 'ɕiɛuʔ'],
+  ['high_tang', 'ɕéw'],
   ['mid_tang', 'ɕɛ́w'],
   ['n_song', 'ɕjɛ́w'],
   ['mongol', 'ꡮꡠꡓ'],
