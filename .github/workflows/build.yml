@@ -44,8 +44,13 @@ jobs:
 
       # Publish to Tencent Cloud COS
       - if: github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.repository == 'nk2028/tshet-uinh-examples' && github.ref == 'refs/heads/main')
+        name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - if: github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.repository == 'nk2028/tshet-uinh-examples' && github.ref == 'refs/heads/main')
         name: Install coscmd
-        run: sudo pip install coscmd
+        run: pip install coscmd
       - if: github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.repository == 'nk2028/tshet-uinh-examples' && github.ref == 'refs/heads/main')
         name: Configure coscmd
         env:
