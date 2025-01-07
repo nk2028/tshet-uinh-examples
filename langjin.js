@@ -376,7 +376,7 @@ const 替換列表字典 = [
 ];
 
 function 字母轉音標(s) {
-  let res = Array.from(s, c => 音標表[c]);
+  let res = Array.from(s, c => 音標表[c]).join('');
   替換列表字典.forEach(pair => res = res.replace(...pair));
   return res;
 }
