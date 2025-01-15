@@ -371,7 +371,7 @@ function 韻母規則(文讀) {
     ]],
   ], '無韻母規則');
 
-  let is主流層 = !韻母.match('▽');
+  let is主流層 = !韻母.includes('▽');
   韻母 = 韻母.replace('▽', '');
   韻母 = {
     'iɪ': !選項.分衣煙 && 'i',
@@ -394,9 +394,9 @@ function 韻母規則(文讀) {
 }
 
 function 顎化規則(音節) {
-  if (音節.match(元音Re)) {
-    let 第一個元音 = 音節.match(元音Re)[0];
-    if (閉前元音.includes(第一個元音)) {
+  const match = 元音Re.exec(音節);
+  if (match !== null) {
+    if (閉前元音.includes(match[0])) {
       for (let 聲母 in 顎化分尖團) 音節 = 音節.replace(聲母, 顎化分尖團[聲母]);
       if (選項.分尖團 !== '分尖團') {
         for (let 聲母 in 顎化分情琴)
@@ -434,9 +434,9 @@ function 聲調規則(音節) {
 
   if (選項.標調方式 === '附標') {
     let 標調位置;
-    if (音節.match(元音Re)) {
-      let 第一個元音 = 音節.match(元音Re)[0];
-      標調位置 = 音節.indexOf(第一個元音);
+    const match = 元音Re.exec(音節);
+    if (match !== null) {
+      標調位置 = match.index;
       if (元音.includes(音節[標調位置 + 1])) 標調位置 += 1; // 弗要標在介音上
       if (元音附標.includes(音節[標調位置 + 1])) 標調位置 += 1; // 弗要標在附標下頭
     } else {
