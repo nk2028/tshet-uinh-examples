@@ -367,51 +367,44 @@ if (韻母.startsWith('w') && is`非 牙喉音 或 A類 或 以母`) 韻母 = �
 // 4. 音變規則
 
 if (選項.音變 === '現代日語') {
-  if (韻母.startsWith('w')) 韻母 = 韻母.slice(1); // 園 wen -> en
-
-  if (韻母.endsWith('p')) 韻母 = 韻母.slice(0, -1) + 'u'; // 鄴 gep -> geu
-  else if (韻母.endsWith('m')) 韻母 = 韻母.slice(0, -1) + 'n'; // 南 dam -> dan
-  else if (韻母.endsWith('eng')) 韻母 = 韻母.slice(0, -2) + 'i'; // 生 seng -> sei
-  else if (韻母.endsWith('ng')) 韻母 = 韻母.slice(0, -2) + 'u'; // 相 syang -> syau
-
-  if (韻母.endsWith('au')) 韻母 = 韻母.slice(0, -2) + 'ou'; // 高 kau -> kou
-  else if (韻母.endsWith('iu')) 韻母 = 韻母.slice(0, -2) + 'yuu'; // 宙 tiu -> tyuu
-  else if (韻母.endsWith('eu')) 韻母 = 韻母.slice(0, -2) + 'you'; // 遙 eu -> you
+  const 韻母轉換規則字典 = [
+    ['w', ''], // 園 wen -> en
+    ['p', 'u'], // 鄴 gep -> geu
+    ['m', 'n'], // 南 dam -> dan
+    ['eng', 'ei'], // 生 seng -> sei
+    ['ng', 'u'], // 相 syang -> syau
+    ['au', 'ou'], // 高 kau -> kou
+    ['iu', 'yuu'], // 宙 tiu -> tyuu
+    ['eu', 'you'], // 遙 eu -> you
+  ];
+  韻母轉換規則字典.forEach(pair => 韻母 = 韻母.replace(...pair));
 
   if (聲母 === 'd' && /^[iy]/.test(韻母)) 聲母 = 'z'; // 膩 di -> zi, 紐 dyuu -> zyuu
 }
 
-let 聲韻;
+let 聲韻 = 聲母 + 韻母;
 
 if (['平假名', '片假名'].includes(選項.書寫系統)) {
-  聲韻 = roma2kata(聲母 + 韻母);
+  聲韻 = roma2kata(聲韻);
   if (!選項.ヰヱヲ小假名) 聲韻 = small2large(聲韻);
   if (選項.書寫系統 === '平假名') 聲韻 = kata2hira(聲韻);
-} else {
-  if (選項.音變 === '現代日語') {
-    if (聲母 === 'p') 聲母 = 'h'; // 甫 pu -> hu
+} else if (選項.音變 === '現代日語') {
+  聲韻 = 聲韻.replace('p', 'h'); // 甫 pu -> hu
 
-    if (韻母.endsWith('t')) 韻母 += 'u'; // 遏 at -> atu
-    else if (韻母.endsWith('ek')) 韻母 += 'i'; // 席 sek -> seki
-    else if (韻母.endsWith('k')) 韻母 += 'u'; // 澤 tak -> taku
-  }
+  if (聲韻.endsWith('t')) 聲韻 += 'u'; // 遏 at -> atu
+  else if (聲韻.endsWith('ek')) 聲韻 += 'i'; // 席 sek -> seki
+  else if (聲韻.endsWith('k')) 聲韻 += 'u'; // 澤 tak -> taku
 
   if (選項.書寫系統 === '平文式羅馬字') {
-    if (選項.音變 === '現代日語') {
-      if (聲母 === 's' && 韻母.startsWith('i')) 聲母 = 'sh'; // 四 si -> shi
-      else if (聲母 === 'z' && 韻母.startsWith('i')) 聲母 = 'j'; // 人 zin -> jin
-      else if (聲母 === 't' && 韻母.startsWith('i')) 聲母 = 'ch'; // 地 ti -> chi
-      else if (聲母 === 't' && 韻母.startsWith('u')) 聲母 = 'ts'; // 追 tui -> tsui
-      else if (聲母 === 'h' && 韻母.startsWith('u')) 聲母 = 'f'; // 甫 hu -> fu
-      else if (聲母 === 's' && 韻母.startsWith('y')) { 聲母 = 'sh'; 韻母 = 韻母.slice(1); } // 小 syou -> shou
-      else if (聲母 === 'z' && 韻母.startsWith('y')) { 聲母 = 'j'; 韻母 = 韻母.slice(1); } // 繞 zyou -> jou
-      else if (聲母 === 't' && 韻母.startsWith('y')) { 聲母 = 'ch'; 韻母 = 韻母.slice(1); } // 兆 tyou -> chou
-
-      if (韻母.endsWith('tu')) 韻母 = 韻母.slice(0, -1) + 'su'; // 遏 atu -> atsu
-    }
+    const 聲韻轉換規則字典 = [
+      [/s(y|(?=i))/, 'sh'], // 四 si -> shi, 小 syou -> shou
+      [/z(y|(?=i))/, 'j'], // 人 zin -> jin, 繞 zyou -> jou
+      [/t(y|(?=i))/, 'ch'], // 地 ti -> chi, 兆 tyou -> chou
+      [/t(?=u)/, 'ts'], // 追 tui -> tsui, 遏 atu -> atsu
+      [/^h(?=u)/, 'f'], // 甫 hu -> fu
+    ];
+    聲韻轉換規則字典.forEach(pair => 聲韻 = 聲韻.replace(...pair));
   }
-
-  聲韻 = 聲母 + 韻母;
 }
 
 return [...'꜀꜁꜂꜃'].includes(聲調) ? 聲調 + 聲韻 : 聲韻 + 聲調;
