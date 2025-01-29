@@ -25,8 +25,9 @@ https://nk2028-1305783649.file.myqcloud.com/tshet-uinh-examples/<filename>
 
 **推導後世音系 extrapolated phonological system of later periods**
 
-- 推導盛中唐擬音 (Extrapolated Reconstruction of High and Middle Tang Chinese): `mid_tang.js`
-- 推導北宋擬音（聲音唱和圖） (Extrapolated Reconstruction of Northern Song Chinese (*Shing-im Chiang-xhua Dhu*)): `n_song.js`
+- 推導盛唐（平水韻）擬音 (Extrapolated Reconstruction of High Tang Chinese (*Pingshui Yun*)): `high_tang.js`
+- 推導中唐（韻圖）擬音 (Extrapolated Reconstruction of Middle Tang Chinese (*Yuntu*)): `mid_tang.js`
+- 推導北宋（聲音唱和圖）擬音 (Extrapolated Reconstruction of Northern Song Chinese (*Shengyin Changhe Tu*)): `n_song.js`
 - 推導《蒙古字韻》 (Extrapolated _Menggu Ziyun_): `mongol.js`
 - 推導《中原音韻》擬音 (Extrapolated Reconstruction of _Zhongyuan Yinyun_): `zhongyuan.js`
 

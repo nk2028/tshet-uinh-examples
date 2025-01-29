@@ -1,0 +1,49 @@
+name: Build
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main, dev, dev-*]
+  pull_request:
+    branches: [main]
+  release:
+    types: [created]
+
+jobs:
+  build:
+    name: ${{ github.event_name == 'release' && 'Publish to NPM' || (github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.repository == 'nk2028/tshet-uinh-examples' && github.ref == 'refs/heads/main')) && 'Publish to Tencent Cloud COS' || 'Test' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout latest code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          registry-url: https://registry.npmjs.org/
+
+      - name: Install Node.js dependencies
+        run: npm ci
+
+      - name: Lint schemata
+        run: npm run lint
+
+      - name: Build project
+        run: npm run build
+
+      - name: Run tests
+        run: npm test
+
+      - if: github.event_name == 'release'
+        name: Publish to NPM
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.npm_token }}
+
+      - if: github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.repository == 'nk2028/tshet-uinh-examples' && github.ref == 'refs/heads/main')
+        name: Publish to Tencent Cloud COS
+        uses: ./.github/actions/publish-to-cos
+        env:
+          SECRET_ID: ${{ secrets.SecretId }}
+          SECRET_KEY: ${{ secrets.SecretKey }}
