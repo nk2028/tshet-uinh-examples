@@ -96,6 +96,7 @@ export default [
       '@stylistic/js/arrow-parens': ['error', 'as-needed'],
       '@stylistic/js/arrow-spacing': 'error',
       '@stylistic/js/block-spacing': 'error',
+      '@stylistic/js/brace-style': ['error', '1tbs', { allowSingleLine: true }],
       '@stylistic/js/comma-spacing': 'error',
       '@stylistic/js/comma-style': 'error',
       '@stylistic/js/computed-property-spacing': 'error',
