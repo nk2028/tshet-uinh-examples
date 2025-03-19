@@ -57,12 +57,12 @@ function get韻母() {
   if (is`開口` && !韻母.endsWith('m')) 韻母 = 韻母.replace(/^u/, 'y').replace(/^o/, 'eo');
   // 等類標記
   if (is`三等` || is`四等` && 韻母.startsWith('ae')) {
-    if (is`A類` || is`銳音 非 莊組` && 韻母.match(/^i|^e(?!o)|^ae/)) {
+    if (is`A類` || is`銳音 非 莊組` && /^i|^e(?!o)|^ae/.test(韻母)) {
       // A 類以 i- 標記
       if (!韻母.startsWith('i')) 韻母 = 'i' + 韻母;
     } else {
       // B、C 類以 y-/u- 標記
-      if (韻母.match(/^[uo]|^a(?!e)/) ? is`開口` : is`非 合口`) {
+      if (/^[uo]|^a(?!e)/.test(韻母) ? is`開口` : is`非 合口`) {
         if (!韻母.startsWith('y')) 韻母 = 'y' + 韻母;
         韻母 = 韻母.replace('yeo', 'yo');
       } else {
@@ -71,9 +71,9 @@ function get韻母() {
     }
   } else {
     // 高元音非三等以 o- 標記
-    if (韻母.match(/^[yu]/)) 韻母 = 'o' + 韻母;
+    if (/^[yu]/.test(韻母)) 韻母 = 'o' + 韻母;
   }
-  if (is`合口` && !韻母.match(/^[uo]/)) 韻母 = 'w' + 韻母;
+  if (is`合口` && !/^[uo]/.test(韻母)) 韻母 = 'w' + 韻母;
   if (is`入聲`) 韻母 = 韻母
     .replace('ng', 'k')
     .replace('n', 't')

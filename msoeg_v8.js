@@ -133,8 +133,8 @@ function get韻母() {
   // 等類記號
   if (is`三等` || is`四等` && 韻母.startsWith('a')) {
     if (韻母.startsWith('ɯ') && is`銳音 或 蒸韻 AB類`) 韻母 = 'i' + 韻母;
-    else if (韻母.match(/^[eɛa]/)) 韻母 = 'i' + 韻母;
-    else if (韻母.match(/^[ɤʌɑ]/)) 韻母 = 'ɯ' + 韻母;
+    else if (/^[eɛa]/.test(韻母)) 韻母 = 'i' + 韻母;
+    else if (/^[ɤʌɑ]/.test(韻母)) 韻母 = 'ɯ' + 韻母;
     else if (韻母.startsWith('o')) 韻母 = 'u' + 韻母;
 
     if (韻母.startsWith('i') && is`B類 非 幽韻`) {
