@@ -7,6 +7,7 @@ import * as TshetUinhExamples from '../dist/index.js';
 const 地位 = 音韻地位.from描述('書開三宵上');
 
 const testCases = [
+  ['position', '書開三宵上'],
   ['tupa', 'sjiewq'],
   ['baxter', 'syewX'],
   ['karlgren', 'ɕi̯ɛu꞉'],
