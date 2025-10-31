@@ -22,8 +22,8 @@ https://nk2028-1305783649.file.myqcloud.com/tshet-uinh-examples/<filename>
 - 高本漢擬音 (Bernhard Karlgren’s Reconstruction): `karlgren.js`
 - 王力擬音 (Wang Li’s Reconstruction): `wangli.js`
 - 潘悟雲擬音 (Pan Wuyun’s Reconstruction): `panwuyun.js`
-- unt 擬音 (unt’s Reconstruction): `unt_new.js`
-- unt 過往擬音 (unt’s Legacy Reconstructions): `unt.js`
+- unt 擬音 (unt’s Reconstruction): `unt.js`
+- unt 過往擬音 (unt’s Legacy Reconstructions): `unt_legacy.js`
 - msoeg 擬音 V8 (msoeg’s Reconstruction V8): `msoeg_v8.js`
 
 **推導後世音系 extrapolated phonological system of later periods**

@@ -1,24 +1,10 @@
 /* unt 切韻擬音
+ * unt’s Qieyun Reconstruction
  *
- * 包含 6 個版本：
+ * [出處待公佈 / Source TBA]
  *
- * - 2019：切韻朗讀音
- *   https://zhuanlan.zhihu.com/p/58227457
- *
- * - 2020：切韻擬音 J（原版）
- *   https://zhuanlan.zhihu.com/p/305516512 & https://zhuanlan.zhihu.com/p/313005024
- *
- * - 2020：切韻擬音 J（2022 新版）
- * - 2020：切韻擬音 J（2024 新版）
- *   都由切韻擬音 L 改寫，與 L 的對比見 https://zhuanlan.zhihu.com/p/545490174 文末
- *
- * - 2022：切韻擬音 L
- *   https://zhuanlan.zhihu.com/p/545490174
- *
- * - 2023：切韻通俗擬音
- *   https://zhuanlan.zhihu.com/p/545490174
- *
- * 前 3 個版本已過時，僅作爲歷史存檔，不建議使用
+ * 過往 unt 擬音（切韻擬音 L、切韻擬音 J、切韻通俗擬音、切韻朗讀音）已移入「unt 過往擬音」推導方案，不建議使用
+ * Previous versions of unt’s reconstruction have been moved to the derivation scheme “unt’s Legacy Reconstructions” and are no longer recommended for use
  *
  * @author unt
  */
@@ -28,486 +14,212 @@ const is = (...x) => 音韻地位.屬於(...x);
 /** @type { 音韻地位['判斷'] } */
 const when = (...x) => 音韻地位.判斷(...x);
 
-const is專業模式 = 選項.專業模式 ?? false;
-const isL = 選項.版本?.includes('L') ?? true;
-const isJ原版 = Boolean(選項.版本?.includes('J') && 選項.版本?.includes('原版')); // 2020
-const isJ新版 = Boolean(選項.版本?.includes('J') && !選項.版本?.includes('原版')); // 2022 或 2024
-const isJ2024 = Boolean(選項.版本?.includes('J') && !選項.版本?.includes('版')); // 2024
-const is朗讀音 = Boolean(選項.版本?.includes('朗讀音'));
-const is通俗 = Boolean(選項.版本?.includes('通俗'));
-
-function get選項列表() {
-  const 後低元音選單 = !is朗讀音 ? (!is通俗 ? [1, 'a', 'ɑ'] : [2, 'ɑ', '歌陽唐ɑ 其他a']) : [1, 'ɑ'];
-
-  const { _last版本, _last後低元音選單 } = 選項;
-  const 版本changed = _last版本 && _last版本 !== 選項.版本;
-  const 後低元音選單changed = _last後低元音選單 !== 後低元音選單.join('\n');
-
+if (!音韻地位) {
+  /* global document */
+  let isZH = typeof document === 'undefined' || (document.documentElement?.lang?.startsWith('zh') ?? true);
+  let prevRTR = 選項._prevRTR ?? true;
+  let prevATR = 選項._prevATR ?? false;
+  let prev小舌 = 選項._prev小舌 ?? true;
+  let currRTR = 選項.RTR ?? true;
+  let currATR = 選項.ATR ?? false;
+  let curr小舌 = 選項.小舌 ?? true;
+  if (curr小舌 !== prev小舌 && !curr小舌) currRTR = false; // RTR => 見組非三等寫小舌音
+  if (!currRTR && !currATR) { // RTR 和 ATR 中至少選一項
+    if (currRTR !== prevRTR) currATR = true;
+    else currRTR = true;
+  }
+  if (currRTR !== prevRTR && currRTR) curr小舌 = true; // RTR => 見組非三等寫小舌音
   return [
-    ['_last版本', [1, 選項.版本 ?? '2022：切韻擬音 L'], { hidden: true }],
-    ['_last後低元音選單', [1, 後低元音選單.join('\n')], { hidden: true }],
-    ['版本|\n切韻擬音 J 和 L 均爲 2024 新版。如需調取過時版本、查看高級選項，請勾選「專業模式」', [is專業模式 ? 5 : 2,
-      '2019：切韻朗讀音',
-      '2020：切韻擬音 J（原版）',
-      '2020：切韻擬音 J（2022 版）',
-      '2020：切韻擬音 J',
-      '2022：切韻擬音 L',
-      '2023：切韻通俗擬音',
-    ].filter((_, i) => is專業模式 || ![1, 2, 3].includes(i))],
-    ['專業模式', is專業模式],
+    ['_prevRTR', currRTR, { reset: true, hidden: true }],
+    ['_prevATR', currATR, { reset: true, hidden: true }],
+    ['_prev小舌', curr小舌, { reset: true, hidden: true }],
 
-    '基本選項',
-    ['後低元音', 後低元音選單, { reset: 後低元音選單changed }],
-    ['聲調記號', [1,
-      { text: '上ˊ 去ˋ', value: '\u0301\u0300' },
-      { text: '上ʔ 去h', value: 'ʔh' },
-      { text: '上ˀ 去ʰ', value: 'ˀʰ' },
-      '五度符號',
-      '五度符號（帶拖腔）',
-      '無',
-    ].filter((_, i) => (is專業模式 || [0, 1, 2, 4, 6].includes(i)) && !(is朗讀音 && i === 4)),
-      { description: is專業模式 && !is朗讀音 && 'ʔ 對應的上標字母 Unicode 未收，以 ˀ 代替' },
-    ],
-    ['鈍C介音|鈍 C 介音',
-      isL && [1, '開∅ 合w'] ||
-      // ɣ 代表軟腭近音（即 ɣ̞）
-      isJ2024 && [1, '開ɣ 唇ʋ 合ɣw'] ||
-      // β、ʋ 都代表雙唇近音（即 β̞ = ʋ̟）
-      isJ新版 && [1, '開j̈ 唇ʋ 合w', '開j̈ 唇ʋ 合ɥ̈', '開j̈ 唇β 合ɥ̈'] ||
-      isJ原版 && [1, '開j̈ 唇β 合ɥ̈'] ||
-      is朗讀音 && [1, '開j̈ 唇ɥ̈ 合ẅ'] ||
-      is通俗 && [1, '開ɨ 唇低ɨ 唇非低ʉ 合ʉ'],
-      { reset: 版本changed },
-    ],
-    ['見組非三等簡寫作軟腭音', isJ2024 ? false : is通俗 ? true : null, { reset: 版本changed }],
-  ].concat(is專業模式 && !is通俗 ? [
-    '高級選項',
-    ['前部聲母非三等', isL ? [1, 'ᵱ ɫ', 'pˤ lˤ', 'p̙ l̙'] : null],
-    ['知組', isJ原版 ? [2, 'ʈ', 'tɹ'] : null],
-    ['二等元音記號|\n雙下橫線僅在下等號顯示不正常時使用', !is朗讀音 ? [1,
-      { text: '咽化 ◌ˤ', value: 'ˤ' },
-      { text: 'r 音鉤（帶空隙）◌˞', value: '˞\u2006' },
-      { text: 'r 音鉤（無空隙）◌˞', value: '˞' },
-      { text: '下等號 ◌͇', value: '͇' },
-      { text: '雙下橫線 ◌̳', value: '̳' },
-    ] : null],
-    ['脂支魚虞', isJ2024 || isL ? [2,
-      'i ie ɨə uo',
-      'i ie ə o',
-      'i e ə o',
-    ] : null],
-    ['灰魂', isJ2024 || isL ? [1, 'wəj wən', 'oj on'] : null],
-    ['豪覃', isJ2024 || isL ? [1, 'əw əm', 'ʌw ʌm'] : null],
-    ['泰祭夬廢韻尾', isJ原版 ? [1, 'j', 'ɹ'] : is朗讀音 ? [1, 'jɕ'] : null],
-    ['j 韻尾去聲作 ɹ', isJ新版 || isL ? false : null], // 脂韻去聲則後加 ɹ
-    ['顯示純音位形式', isL ? false : null],
-  ] : []);
+    isZH ? '非三等' : 'Type A: Divisions I, II & IV',
+    ['RTR', currRTR, {
+      reset: currRTR !== prevRTR,
+      text: isZH ? '寫出 RTR（舌根偏後）符號' : 'Use RTR Diacritic',
+      description: isZH ?
+        `聲母下加├
+         見組除外，因爲見組非三等已經是小舌音，無需再加 RTR 符號
+         （寫出 RTR 符號時，見組非三等必寫小舌音）` :
+        `Add the retracted tongue root (RTR) diacritic [├] to the initial
+         Except for Type-A dorsals (見 Jiàn group), which are already uvulars and do not require additional indication for RTR
+         (When applying the RTR diacritic, Type-A dorsals must be transcribed as uvulars)`,
+    }],
+    ['pRTR', 1, {
+      hidden: !currRTR,
+      text: isZH ? 'RTR 的 p' : 'RTR Diacritic on [p]',
+      options: [
+        { text: isZH ? '符號加在上方 p᫡' : 'Above [p᫡]', value: 'p᫡' },
+        { text: isZH ? '符號加在下方 p̙' : 'Below [p̙]', value: 'p̙' },
+      ],
+    }],
+
+    isZH ? '三　等' : 'Type B: Division III',
+    ['ATR', currATR, {
+      reset: currATR !== prevATR,
+      text: isZH ? '寫出 ATR（舌根偏前）介音' : 'Use ATR Medials',
+      description: isZH ?
+        `鈍音聲母三等 C 類寫 ɣ 介音（代表軟腭近音 ɣ̞ = ɨ̯~ɯ̯）
+         莊組三等寫 ɹ 介音
+         其他銳音聲母三等寫 j 介音
+         （RTR 符號和 ATR 介音至少要寫出一方）` :
+        `Add advanced tongue root (ATR) medials to Division-III syllables:
+         After non-coronal (grave) initials, Subdivision C: [ɣ] (representing the velar approximant [ɣ̞] = [ɨ̯~ɯ̯])
+         After retroflex sibilants (莊 Zhuāng group): [ɹ]
+         After other coronal (acute) initials: [j]
+         (At least one of RTR and ATR must be marked)`,
+    }],
+
+    isZH ? '小舌音' : 'Uvulars',
+    ['小舌', curr小舌, {
+      reset: curr小舌 !== prev小舌,
+      text: isZH ? '見組非三等寫小舌音' : 'Transcribe Type-A Dorsals as Uvulars',
+      description: isZH ? null : 'Dorsals = 見 Jiàn group',
+    }],
+    ['通江宕攝音節尾寫小舌音', true, {
+      hidden: !curr小舌,
+      text: isZH ? null : 'Transcribe Back Dorsal Codas as Uvulars',
+      description: isZH ? null : 'Back dorsal codas = codas of the 通 Tōng, 江 Jiāng, and 宕 Dàng rhyme groups',
+    }],
+    ['後低元音', [1, 'a', 'ɑ'], {
+      hidden: !curr小舌 || 選項.通江宕攝音節尾寫小舌音 === false,
+      text: isZH ? null : 'Low Back Vowel',
+      description: isZH ?
+        '宕攝音節尾寫小舌音時，前後低元音互補，可合併' :
+        'When transcribing the 宕 Dàng rhyme group codas as uvulars, the low front and back vowels are in complementary distribution and can be merged',
+    }],
+
+    isZH ? '其　他' : 'Misc',
+    ['支韻', [2, 'ie̯', 'ie', 'e'], {
+      text: isZH ? null : '支 Zhī Rhyme',
+    }],
+    ['微韻合口', [2, 'wɨj', 'uj'], {
+      text: isZH ? null : '微 Wēi Rhyme, Hékǒu 合口',
+    }],
+    ['聲調記號', 0, {
+      text: isZH ? null : 'Tone Marks',
+      options: [
+        { text: isZH ? '上ˊ 去ˋ' : 'Rising [ˊ], Departing [ˋ]', value: ',\u0301,\u0300,' },
+        { text: isZH ? '上ʔ 去h' : 'Rising [ʔ], Departing [h]', value: ',ʔ,h,' },
+        { text: isZH ? '五度符號' : 'Chao Tone Letters', value: '˦,˦˥,˦˩,˦,˨,˨˥,˨˩,˨' }, // ...陰調, ...陽調
+        { text: isZH ? '省略' : 'None', value: ',,,' },
+      ],
+    }],
+    ['音韻地位正則化', true, {
+      text: isZH ? '音韻地位正則化' : 'Phonological Position Normalization',
+      description: isZH ?
+        `銳音三 C₁ 韻 → 對應的 AB 韻（廢韻除外）
+         銳音幽韻 → 尤韻
+         明母尤韻 → 侯韻` :
+        `Division-III Subdivision-C₁ rhymes following coronal (acute) initials → Corresponding Subdivision-AB rhymes (except for the 廢 Fèi rhyme)
+         幽 Yōu rhyme following coronal (acute) initials → 尤 Yóu rhyme
+         尤 Yóu rhyme following the initial 明 Míng → 侯 Hóu rhyme`,
+    }],
+    ['幫組拼ə時添加w介音', false, {
+      text: isZH ?
+        選項.微韻合口 === 'wɨj' ?
+          '幫組拼 ɨ、ə 時添加 w 介音（蒸登韻除外）' :
+          '幫組拼 ə 時添加 w 介音（登韻除外）' :
+        選項.微韻合口 === 'wɨj' ?
+          'Insert [w] Between Labials and [ɨ]/[ə]' :
+          'Insert [w] Between Labials and [ə]',
+      description: isZH ? null :
+        `${選項.微韻合口 === 'wɨj' ?
+          'Except for the 蒸 Zhēng and 登 Dēng rhymes' :
+          'Except for the 登 Dēng rhyme'}
+         Labials = 幫 Bāng group`,
+    }],
+  ];
 }
 
-const { 四等韻 } = TshetUinh.表達式;
-
-function 調整音韻地位() {
+function 音韻地位正則化() {
   function 調整(表達式, 調整屬性) { if (is(表達式)) 音韻地位 = 音韻地位.調整(調整屬性); }
-  if (!is通俗) 調整('明母 尤韻', '侯韻 一等 不分類'); // 實爲一等
-  if (!is通俗) 調整('銳音 幽韻', `尤韻 開合中立 ${is`端組` ? '四等' : ''}`);
+  [['微', '脂'], ['殷文', '真'], ['元', '仙'], ['嚴凡', '鹽']]
+    .forEach(([C1, AB]) => 調整(`銳音 ${C1}韻`, `${AB}韻`));
+  調整('銳音 幽韻', `尤韻 開合中立 ${is`端組` ? '四等' : ''}`);
+  調整('明母 尤韻', '侯韻 一等 不分類');
 }
 
 function get聲母() {
-  return when([
-    ['云母 開口 非 (侵鹽韻 入聲)', { 云: '' }], // 煜曄兩小韻爲“合口”
-    [選項.顯示純音位形式 === true && '精組 非 三等', {
-      精: 'tᵴ', 清: 'tᵴʰ', 從: 'dᵶ', 心: 'ᵴ', 邪: 'ᵶ', // 精組僅在音位形式中區分三等非三等
-    }],
-    ['(鈍音 非 羣母 非 三等) 或 (來母 非 三等) 或 (匣母)', {
-      // 羣母一律按三等寫，匣母一律按非三等寫
-      幫: 'ᵱ', 滂: 'ᵱʰ', 並: 'ᵬ', 明: 'ᵯ',
-      見: 'q', 溪: 'qʰ', 疑: 'ɴ',
-      影: 'ʡ', 曉: 'χ', 匣: 'ʁ',
-      來: 'ɫ',
-    }],
-    ['', {
-      幫: 'p', 滂: 'pʰ', 並: 'b', 明: 'm',
-      端: 't', 透: 'tʰ', 定: 'd', 泥: 'n', 來: 'l',
-      知: 'ʈ', 徹: 'ʈʰ', 澄: 'ɖ', 孃: 'ɳ',
-      見: 'k', 溪: 'kʰ', 羣: 'ɡ', 疑: 'ŋ', 云: 'w',
-      影: 'ʔ', 曉: 'x',
-      精: 'ts', 清: 'tsʰ', 從: 'dz', 心: 's', 邪: 'z',
-      莊: 'tʂ', 初: 'tʂʰ', 崇: 'dʐ', 生: 'ʂ', 俟: 'ʐ',
-      章: 'tɕ', 昌: 'tɕʰ', 常: 'dʑ', 書: 'ɕ', 船: 'ʑ', 日: 'ɲ', 以: 'j',
-    }]
-  ])[音韻地位.母];
-}
-
-function get韻基() {
-  const 韻 = {
-    臻: '真',
-    侯: '尤',
-    唐: '陽',
-  }[音韻地位.韻] ?? 音韻地位.韻;
-  const 所有韻 = [
-    // 介音（AB 韻只列在第一列，開合兼有的韻不列在最後一列）
-    // 三　等：j|ɹ|∅|w
-    // 非三等：e̯|ʕ|∅|o̯
-    ['ɨ', '　　　脂真幽侵|　　　　　　　|之蒸　微殷　　|尤　東　文　　'],
-    ['ə', '　青　齊先蕭添|佳耕江皆山　咸|　登　咍痕豪覃|模　冬灰魂　　'], // 非三等
-    ['ə', '　　　祭仙宵鹽|　　　　　　　|魚　　廢元　嚴|虞　鍾　　　凡'], // 三等
-    ['a', '　清　　　　　|麻庚　夬刪肴銜|歌　陽泰寒　談'],
-    ['ɨ', '　　　　　　　支'], // 前響二合元音 [ie]
-  ];
-  const 韻尾列表 = is`舒聲` ? ['', ...'ŋɴjnwme'] : [...' kq t p'];
-
-  let 匹配行 = 所有韻.find(e => e[1].includes(韻));
-  let 韻核 = 匹配行[0];
-  let 韻尾 = 韻尾列表[匹配行[1].split('|').find(v => v.includes(韻)).indexOf(韻)];
-  if (is`泰祭夬廢韻 去聲`) 韻尾 = 選項.泰祭夬廢韻尾 || 韻尾;
-  if (選項['j 韻尾去聲作 ɹ'] && 韻尾 === 'j' && is`去聲`) 韻尾 = 'ɹ';
-  return [韻核, 韻尾];
+  if (is`云母 開口 非 (深咸攝 入聲)`) return ''; // 云母開口爲零聲母，但煜、曄小韻（視爲“合口”）除外
+  return {
+    幫: 'p p̙', 滂: 'pʰ p̙ʰ', 並: 'b b̙', 明: 'm m̙',
+    端: '  t̙', 透: '   t̙ʰ', 定: '  d̙', 泥: '  n̙', 來: 'l l̙',
+    知: 'ʈ  ', 徹: 'ʈʰ   ', 澄: 'ɖ  ', 孃: 'ɳ  ',
+    見: 'k q', 溪: 'kʰ qʰ', 羣: 'ɡ  ', 疑: 'ŋ ɴ', 曉: 'x χ', 匣: 'ʁ', 云: 'w',
+    影: 'ʔ ʔ̙',
+    精: 'ts t̙s̙', 清: 'tsʰ t̙s̙ʰ', 從: 'dz d̙z̙', 心: 's s̙', 邪: 'z',
+    莊: 'tʂ   ', 初: 'tʂʰ    ', 崇: 'dʐ   ', 生: 'ʂ  ', 俟: 'ʐ',
+    章: 'tɕ   ', 昌: 'tɕʰ    ', 常: 'dʑ   ', 書: 'ɕ  ', 船: 'ʑ', 日: 'ɲ', 以: 'j',
+  }[音韻地位.母].trim().split(' ').at(is`三等` - 1);
 }
 
 function get介音() {
-  const A = 'j';
-  const B = 'ɹ';
-  const C = '';
-  let 等類介音 = when([
-    ['A類 或 四等', A], // 四等包含「地」「爹」等
-    ['B類 或 二等', B],
-    ['C類 或 一等', C],
-    // 餘下為三等銳音（含以母）
-    ['精組', A],
-    ['', ''],
-  ]);
-  let 合口介音 = is`(合口 或 尤韻) 非 (幫組 或 云母)` ? 'w' : '';
-  return 等類介音 + 合口介音;
+  let 類介音 = { A: 'j', B: 'ɹ' }[音韻地位.類] ?? '';
+  let 呼介音 = is`合口 非 云母` ? 'w' : '';
+  return 類介音 + 呼介音;
+}
+
+function get音節核尾() {
+  let [韻列表, 核] = [
+    ['脂　│　　　│幽　│　　│　　│真臻　│侵　　', 'i'],
+    ['之　│微　　│　　│蒸　│　　│殷　　│　　　', 'ɨ'],
+    ['尤侯│＿＿＿│＿＿│＿＿│東＿│文＿＿│＿＿＿', 'u'],
+    ['支　│齊祭　│蕭宵│青　│　　│先仙　│鹽添　', 'e'],
+    ['佳　│皆　　│　　│耕　│　　│山　　│咸　　', 'eˤ'],
+    ['魚　│灰咍廢│豪　│登　│　　│元魂痕│覃嚴凡', 'ə'],
+    ['虞模│　　　│　　│　　│冬鍾│　　　│　　　', 'o'],
+    ['＿＿│＿＿＿│＿＿│＿＿│江＿│＿＿＿│＿＿＿', 'oˤ'],
+    ['麻　│夬　　│肴　│庚清│　　│刪　　│銜　　', is`二等` ? 'aˤ' : 'a'],
+    ['歌　│泰　　│　　│　　│陽唐│寒　　│談　　', 'ɑ'],
+  ].find(e => e[0].includes(音韻地位.韻));
+  let 尾 = ['', ...'jwŋɴnm'][韻列表.split('│').findIndex(e => e.includes(音韻地位.韻))];
+  if (is`入聲`) 尾 = { ŋ: 'k', ɴ: 'q', n: 't', m: 'p' }[尾];
+  return { 核, 尾 };
 }
 
 function get聲調() {
-  if (選項.聲調記號 === '無') return '';
-
-  if (!選項.聲調記號.includes('五度符號')) {
-    if (is`平入聲`) return '';
-    let 聲調記號 = 選項.聲調記號[+is`去聲`];
-    if (is朗讀音 && is`泰祭夬廢韻 去聲` && ['ʰ', 'h'].includes(聲調記號)) return '';
-    return 聲調記號;
-  }
-
-  const 五度符號列表 = is朗讀音 ? [
-    '˦', '˦˦˥', '˥˩', '˥',
-    '˨˩', '˨˨˧', '˧˩˨', '˨˩',
-  ] : 選項.聲調記號.includes('帶拖腔') ? [
-    '˦˦˨', '˦˥', '˦˩˨', '˦',
-    '˨˨˩', '˨˦', '˨˩˨', '˨',
-  ] : [
-    '˦', '˦˥', '˦˩', '˦',
-    '˨', '˨˦', '˨˩', '˨',
-  ];
-  const is陽調 = is`全濁` || is朗讀音 && is`次濁 平去聲`;
-  return 五度符號列表['平上去入'.indexOf(音韻地位.聲) + is陽調 * 4];
-}
-
-function 音位to音值(音節) {
-  const is雙唇韻尾 = [...'wmp'].includes(音節.韻尾);
-  const is展唇鈍韻尾 = [...'ŋk'].includes(音節.韻尾);
-  const is圓唇鈍韻尾 = [...'ɴq'].includes(音節.韻尾);
-  const is後部韻尾 = is展唇鈍韻尾 || is圓唇鈍韻尾 || !音節.韻尾;
-  const is音節首含銳 = !['', 'w'].includes(音節.介音) || is`銳音 三等`;
-  const is音節首含唇 = 音節.介音.includes('w') || is`幫組` || 音節.聲母 === 'w';
-
-  // (1) 韻核前化
-  //     韻核前的非小舌化銳音使韻核前化，但後部韻尾使韻核不被前化（-K 只使 /ɨ/ 不被前化）。
-  //     通俗擬音不強制前化。茝佁䑂 3 小韻也除外
-  if (is音節首含銳 && !(is通俗 && is`東鍾之微魚虞廢殷元文歌陽尤嚴凡韻`) && !is`廢韻 非 去聲`) {
-    if (!is後部韻尾) 音節.替換('韻核', 'ɨ', 'i');
-    if (!is圓唇鈍韻尾 && (音節.韻尾 || is`二等`)) 音節.替換('韻核', 'ə', 'e');
-  }
-
-  // (2) 韻核圓唇化
-  //     a1. 圓唇鈍韻尾使韻核圓唇化
-  //     a2. 非三等音节相當於 a1
-  //     b1. 含唇音的三　等音節首使 ɨ 圓唇化（三　等 w 實現爲 u̯，同化 ɨ）
-  //     b2. 含唇音的非三等音節首使 ə 圓唇化（非三等 w 實現爲 o̯，同化 ə）
-  //     b3. 但展唇鈍韻尾和雙唇韻尾排斥圓唇，使韻核保持展唇
-  if (is圓唇鈍韻尾 || !is`三等` && !音節.韻尾) {
-    音節.替換('韻核', 'ɨ', 'u');
-    音節.替換('韻核', 'ə', 'o');
-  }
-  if (is音節首含唇 && !is展唇鈍韻尾 && !is雙唇韻尾) {
-    音節.替換('韻核', 'ɨ', 'u');
-    if ((選項.灰魂?.includes('o') || !(isJ2024 || isL)) && !is`三等` || !音節.韻尾) 音節.替換('韻核', 'ə', 'o');
-  } // 豪韻唇音可能也是獨立的，但爲了簡便不處理它
-
-  // (3) 韻核咽化
-  //     非三等 ɹ 實現爲 ʕ，使韻核咽化
-  if (!is`三等` && 音節.介音.includes('ɹ')) {
-    音節.韻核 += 'ˤ';
-  }
-
-  // (4) 省略與韻核同質的介音、韻尾
-  if (音節.韻核 === 'i') 音節.替換('韻尾', 'j', '');
-  if (音節.韻核 === 'i') 音節.替換('介音', 'j', '');
-  if (音節.韻核 === 'u') 音節.替換('介音', 'w', '');
-  if (音節.韻核 === 'e' && !is`三等`) 音節.替換('介音', 'j', '');
-  if (音節.韻核 === 'o') 音節.替換('介音', 'w', '');
-  if (音節.韻核.endsWith('ˤ')) 音節.替換('介音', 'ɹ', '');
-
-  // (5) 豪覃韻韻核寫作 ʌ
-  if ((選項.豪覃?.includes('ʌ') || !(isJ2024 || isL)) && !is`三等` && is雙唇韻尾) 音節.替換('韻核', 'ə', 'ʌ');
-
-  // 後處理：按需顯示 ɑ，包括𦣛小韻（銳音歌三合）
-  if (選項.後低元音.length === 1)
-    if (!is音節首含銳 || is圓唇鈍韻尾 || is`歌韻 三等 合口`) 音節.替換('韻核', 'a', 選項.後低元音);
-  // 後處理：脂支魚虞
-  const i = ['i', 'ie', 'ə', 'o'].indexOf(音節.韻核 + 音節.韻尾);
-  if (i !== -1 && is`三等`) {
-    // 舊版本魚虞按前響二合元音處理
-    const 韻基 = (選項.脂支魚虞 ?? (isJ2024 || isL ? 'i ie ə o' : 'i ie ɨə uo')).split(' ')[i];
-    音節.韻核 = 韻基[0];
-    音節.韻尾 = 韻基.slice(1);
-  }
-}
-
-function 調整聲母(音節) {
-  const 舊版聲母字典 = [
-    [選項.前部聲母非三等?.includes('ˤ'), {
-      'ᵱ': 'pˤ', 'ᵬ': 'bˤ', 'ᵯ': 'mˤ',
-      'ᵴ': 'sˤ', 'ᵶ': 'zˤ', 'ɫ': 'lˤ', 'ʡ': 'ʔˤ',
-    }],
-    [選項.前部聲母非三等?.includes('̙'), {
-      'ᵱ': 'p̙', 'ᵬ': 'b̙', 'ᵯ': 'm̙',
-      'ᵴ': 's̙', 'ᵶ': 'z̙', 'ɫ': 'l̙', 'ʡ': 'ʔ̙',
-    }],
-    [!isL, { 'ᵱ': 'p', 'ᵬ': 'b', 'ᵯ': 'm' }],
-    [isJ原版 || is朗讀音 || is通俗 || isJ2024, { 'ʡ': 'ʔ' }],
-    [isJ原版 || is朗讀音 || is通俗, { 'ɫ': 'l' }],
-    [isJ原版 || is朗讀音, { 'x': 'h' }],
-    [選項.見組非三等簡寫作軟腭音, { 'q': 'k', 'ɴ': 'ŋ', 'χ': 'x' }],
-    [選項.見組非三等簡寫作軟腭音 && is通俗, { 'ʁ': 'ɣ' }],
-    [選項.知組 === 'tɹ', { 'ʈ': 'tɹ', 'ɖ': 'dɹ', 'ɳ': 'nɹ' }],
-  ].reduce((prev, cur) => Object.assign(prev, cur[0] ? cur[1] : {}), {});
-
-  for (const [k, v] of Object.entries(舊版聲母字典)) {
-    if (音節.聲母.includes(k)) {
-      音節.替換('聲母', k, v);
-      break;
-    }
-  }
-}
-
-function 調整鈍C介音(音節) {
-  if (選項.鈍C介音.includes('∅')) return;
-  const 鈍C介音列表 = 選項.鈍C介音.split(' ').map(e => e.replace(/[開合唇非低]/g, ''));
-  const [鈍C開, 鈍C唇低, 鈍C唇非低, 鈍C合] = [...鈍C介音列表.slice(0, 2), ...鈍C介音列表.slice(-2)];
-  音節.介音 = when([
-    [音節.韻核 !== 'i' && '三等 鈍音 非 云母', [ // J 的云母一律拼作 w 且後無多餘介音。通俗的云母爲零聲母，後面再處理
-      [音節.介音 === 'w', 鈍C合],
-      [音節.介音 === '', [
-        ['幫組', [
-          ['歌陽韻', 鈍C唇低],
-          ['', 鈍C唇非低],
-        ]],
-        [isJ2024 && 音節.韻核 !== 'ɨ', 鈍C開],
-        [!['ɨ', 'u'].includes(音節.韻核) || '東尤韻', 鈍C開],
-      ]],
-    ]],
-    ['', 音節.介音],
-  ], '', true);
-}
-
-function 調整二等元音(音節) {
-  const 默認記號 = 'ˤ';
-  let 新記號 = 選項.二等元音記號;
-  if (!新記號 || 新記號 === 默認記號 || !音節.韻核.includes(默認記號)) return;
-
-  if (新記號[0] === '˞' && is`端組 或 來母 庚韻`) 新記號 = '';
-  音節.替換('韻核', 默認記號, 新記號);
-  if (音節.韻核 === 'e' && !音節.韻尾) { // 箉小韻，無附加符號時改作 -aj
-    音節.韻核 = 'a';
-    音節.韻尾 = 'j';
-  }
-}
-
-function 音值toJ(音節) {
-  if (選項.鈍C介音.includes('ɥ̈') && is`三等 非 東尤韻`) 音節.替換('韻核', 'u', 'ʉ');
-  if (isJ新版) return;
-
-  if (
-    音節.介音.includes('w') ||
-    音節.介音 === 'ɥ̈' ||
-    [...'ʉuo'].includes(音節.韻核) && is`(合口 或 鍾韻) 非 (幫組 或 云母)`
-  ) {
-    音節.聲母 += 'ʷ';
-    音節.替換('聲母', 'ʰʷ', 'ʷʰ');
-    音節.替換('聲母', 'jʷ', 'ɥ');
-    音節.替換('介音', 'w', '');
-    音節.替換('介音', 'j', 'ɥ');
-  }
-
-  音節.韻核 = when([
-    ['蒸韻', 'i'],
-    ['臻韻 開口', 'ɹ̩'],
-    ['侯韻 非 明母', 'ɘu'],
-
-    ['清韻', 'iæ'],
-    ['陽韻', (is`開口 或 A類` ? 'ɨ' : 'ʉ') + 'ɐ'],
-    ['鍾韻', 'ʉɔ'],
-
-    ['江韻', 'œˤ'],
-    ['凡韻', 'œ'],
-    ['', 音節.韻核],
-  ]);
-
-  音節.介音 = when([
-    [音節.聲母.includes('ʷ') && 音節.韻核[0] !== 'ʉ' && '精組 三等', 'ɹ'],
-    ['精組 三等 東尤韻', 'ɹ'],
-    [音節.韻核[0] === 'i' && (['j', 'ɥ'].includes(音節.介音) || '知組 或 來母'), ''],
-    [[...'iɨʉ'].includes(音節.韻核[0]) && (['j̈', 'ɥ̈'].includes(音節.介音) || '銳音'), ''],
-    [選項.知組 !== 'tɹ' && '知組 三等', 'ɹ'],
-    ['來母 三等', 'ɹ'],
-    ['', 音節.介音],
-  ]);
-
-  音節.韻尾 = {
-    微: 'i', 幽: 'u',
-    支: 'ɛ', 魚: 'ʌ', 虞: 'ɔ',
-  }[音韻地位.韻] ?? 音節.韻尾;
-}
-
-function 音值to朗讀音(音節) {
-  if (音節.聲母.replace('ʰ', '').length > 1) {
-    音節.聲母 = 音節.聲母[0] + '͡' + 音節.聲母.slice(1);
-  }
-
-  const hasW = 音節.聲母 === 'w' || 音節.介音.includes('w') || ['u', 'o'].includes(音節.韻核);
-  音節.替換('聲母', 'w', '');
-  音節.介音 = when([
-    [`三四等 非 ${四等韻}`, [ // 包含「地」「爹」「丟」等
-      ['幽韻', is`幫組` ? 'j' : 'ɥ'],
-      [[...'iea'].includes(音節.韻核[0]) || '蒸韻 或 AB類', [
-        ['B類 或 知莊組 或 蒸韻 鈍音', hasW ? 'ɻɥ' : 'ɻj'], // B
-        ['', hasW ? 'ɥ' : 'j'], // A
-      ]],
-      ['', is`幫組 或 尤韻` ? 'ɥ̈' : hasW ? 'ẅ' : 'j̈'], // C
-    ]],
-    ['二等 非 (端組 或 來母 庚韻)', is`知莊組` ? 'ɻ' + 音節.介音 : 音節.介音 + 'ɻ'],
-    [音節.韻核 === 'o' && '一等 非 (冬模韻 或 幫組)', 'w'],
-    ['', 音節.介音],
-  ]);
-  if (音節.聲母 === 'j' && ['j', 'ɥ'].includes(音節.介音)) 音節.聲母 = '';
-
-  if (音節.韻核.includes('ˤ')) {
-    音節.替換('韻核', 'eˤ', 'æ');
-    音節.替換('韻核', 'oˤ', 'æ');
-    音節.替換('韻核', 'aˤ', 'a');
-  } else {
-    音節.韻核 = when([
-      [`三四等 非 ${四等韻}`, [
-        ['蒸韻', 'i'],
-        ['臻韻 開口', 'i˞ '],
-        ['微韻', 'ɨ'],
-        ['幽韻', 'ÿ'],
-        [音節.韻核 === 'e' || '支清韻', 'ɛ'],
-        ['魚韻', 'ə'],
-        [音節.韻核 === 'o' || '虞韻', 'ɔ'],
-        ['陽韻', 'ɐ'],
-        ['嚴凡韻 幫組', 'ɞ'],
-        ['', 音節.韻核],
-      ]],
-      ['侯韻 非 幫組', 'ɘu'],
-      ['豪韻', 'ɑ'],
-      ['覃韻 或 咍灰韻 開口', 'ɐ'],
-      ['咍灰韻', 'ɔ̞'],
-      [音節.韻核 === 'ə', 'ɘ'],
-      ['', 音節.韻核],
-    ]);
-  }
-
-  音節.韻尾 = when([
-    ['通江攝', is`舒聲` ? 'ŋʷ' : 'kʷ'],
-    ['宕攝', is`舒聲` ? 'ŋ' : 'k'],
-    ['梗攝', is`舒聲` ? 'ɲ' : 'c'],
-    ['支魚虞幽韻', ''],
-    ['', 音節.韻尾],
-  ]);
-
-  [['j', 'i'], ['j̈', 'ɨ']].forEach(e => {
-    if (音節.韻核[0] === e[1] && (音節.聲母 || 音節.介音[0] === 'ɻ')) 音節.替換('介音', e[0], '');
-  });
-}
-
-function 音值to通俗(音節) {
-  const is小舌尾 = is`尤侯虞模歌東冬鍾江陽唐韻`;
-
-  if (音節.聲母 === 'w') {
-    音節.聲母 = '';
-    if (!音節.介音) 音節.介音 = 'ɨ';
-    音節.介音 += 'u';
-  }
-  if (is`蒸韻 B類`) 音節.韻核 = 'i';
-  音節.替換('介音', 'j', 'i');
-  音節.替換('介音', 'ɹ', 'ɨ');
-  音節.替換('介音', 'w', 'u');
-  音節.替換('介音', 'ʉ', 'ɨu');
-  if (is`銳音 三四等 非 ${四等韻}`) {
-    if (!is`端精組`) 音節.介音 = (is`莊組` ? 'ɨ' : 'i') + 音節.介音;
-    if (![...'iea'].includes(音節.韻核) || is小舌尾) 音節.替換('介音', 'i', 'ɨ');
-  }
-  if (is`支魚虞韻`) {
-    if (!['i', 'ɨ'].includes(音節.介音[0])) 音節.介音 = 音節.韻核.replace('u', 'ɨu') + 音節.介音;
-    音節.韻核 = 音節.韻尾;
-    音節.韻尾 = '';
-  }
-  if (音節.韻核 === 'u' && is小舌尾) 音節.介音 = 音節.介音.replace('u', '');
-  if (音節.韻核 === 'i' && 音節.介音 === 'u') 音節.介音 = 'iu';
-  if (音節.韻核 === 'o' && 音節.介音 && !音節.介音.includes('u')) 音節.介音 += 'u';
-  音節.替換('介音', 'iu', 'y');
-  音節.替換('介音', 'ɨu', 'ʉ');
-
-  if (音節.韻核.includes('ˤ')) {
-    音節.替換('韻核', 'eˤ', 'ɛ');
-    音節.替換('韻核', 'oˤ', 'ɔ');
-    音節.替換('韻核', 'aˤ', 'æ');
-  }
-  if (!is小舌尾) {
-    if (音節.韻核 === 'o') 音節.介音 += 'u';
-    音節.替換('韻核', 'u', 'ʉ');
-    音節.替換('韻核', 'ʌ', is`豪韻` ? 'a' : 'ə');
-    音節.替換('韻核', 'o', 'ə');
-    if (is`三四等`) 音節.替換('韻核', 'a', 'æ');
-  }
-  if (選項.後低元音.includes('歌陽唐') && is小舌尾) 音節.替換('韻核', 'a', 'ɑ');
-  if (音節.介音 === 音節.韻核) 音節.介音 = '';
-
-  音節.替換('韻尾', 'ɴ', 'ŋ');
-  音節.替換('韻尾', 'q', 'k');
+  return 選項.聲調記號.split(',').at('平上去入'.indexOf(音韻地位.聲) - is`全濁` * 4);
 }
 
 function get音節() {
   const 音節 = {
     聲母: get聲母(),
     介音: get介音(),
+    ...get音節核尾(),
     聲調: get聲調(),
-    替換(propertyName, from, to) { this[propertyName] = this[propertyName].replace(from, to); }
   };
-  [音節.韻核, 音節.韻尾] = get韻基();
+  if (!選項.RTR) 音節.聲母 = 音節.聲母.replace('̙', '');
+  if (is`幫滂母`) 音節.聲母 = 音節.聲母.replace('p̙', 選項.pRTR);
+  if (選項.ATR) 音節.介音 = when([
+    ['C類', 'ɣ'],
+    ['莊組 三等', 'ɹ'],
+    ['銳音 三等 非 以母', 'j'],
+    ['', ''],
+  ]) + 音節.介音;
+  const 小舌音替換字典 = { q: 'k', qʰ: 'kʰ', ɴ: 'ŋ', χ: 'x', ʁ: 'ɣ' };
+  if (!選項.小舌) 音節.聲母 = 小舌音替換字典[音節.聲母] ?? 音節.聲母;
+  if (!選項.小舌 || !選項.通江宕攝音節尾寫小舌音) 音節.尾 = 小舌音替換字典[音節.尾] ?? 音節.尾;
+  else if (音節.核 === 'ɑ') 音節.核 = 選項.後低元音;
+  if (is`支韻`) 音節.核 = 選項.支韻;
+  if (is`微韻 非 開口`) 音節.核 = 選項.微韻合口.slice(-2, -1);
+  if (選項.幫組拼ə時添加w介音 && ['ɨ', 'ə'].includes(音節.核) && is`幫組 非 曾攝`) 音節.介音 += 'w';
 
-  if (!選項.顯示純音位形式) 音位to音值(音節);
-  調整聲母(音節);
-  調整鈍C介音(音節);
-  if (isJ新版 || isJ原版) 音值toJ(音節);
-  else if (is朗讀音) 音值to朗讀音(音節);
-  else if (is通俗) 音值to通俗(音節);
-  調整二等元音(音節);
-
-  let 聲調記號插入位置 = ['̩', '͇', '̳', 'ɘu'].some(e => 音節.韻核.includes(e)) ? 2 : 1;
-  音節.韻基 = 音節.韻核 + 音節.韻尾;
+  if (is`四等` && 音節.核 !== 'e') 音節.介音 = 'j' + 音節.介音; // 爹小韻
+  if (音節.核[0] === 'i') 音節.介音 = 音節.介音.replace('j', '');
+  if (音節.核[0] === 'ɨ') 音節.介音 = 音節.介音.replace('ɣ', '');
+  if (['u', 'o'].includes(音節.核[0])) 音節.介音 = 音節.介音.replace('w', '');
+  音節.首 = 音節.聲母 + 音節.介音;
+  音節.韻基 = 音節.核 + 音節.尾;
   音節.帶調韻基 = 選項.聲調記號.includes('\u0301') ?
-    音節.韻核.slice(0, 聲調記號插入位置) + 音節.聲調 + 音節.韻核.slice(聲調記號插入位置) + 音節.韻尾 :
-    音節.韻核 + 音節.韻尾 + 音節.聲調;
+    音節.核.slice(0, 1) + 音節.聲調 + 音節.核.slice(1) + 音節.尾 :
+    音節.核 + 音節.尾 + 音節.聲調;
   音節.韻母 = 音節.介音 + 音節.韻基;
   音節.帶調韻母 = 音節.介音 + 音節.帶調韻基;
   return 音節;
 }
 
-if (!音韻地位) return get選項列表();
-調整音韻地位();
+if (選項.音韻地位正則化) 音韻地位正則化();
 const 音節 = get音節();
 return 音節.聲母 + 音節.帶調韻母;
