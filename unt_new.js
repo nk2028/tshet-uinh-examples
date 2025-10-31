@@ -16,7 +16,7 @@ const when = (...x) => 音韻地位.判斷(...x);
 
 if (!音韻地位) {
   /* global document */
-  let isZH = document?.documentElement?.lang?.startsWith('zh') ?? true;
+  let isZH = typeof document === 'undefined' || (document.documentElement?.lang?.startsWith('zh') ?? true);
   let prevRTR = 選項._prevRTR ?? true;
   let prevATR = 選項._prevATR ?? false;
   let prev小舌 = 選項._prev小舌 ?? true;
