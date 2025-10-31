@@ -4,7 +4,7 @@
  * [出處待公佈 / Source TBA]
  *
  * 過往 unt 擬音（切韻擬音 L、切韻擬音 J、切韻通俗擬音、切韻朗讀音）已移入「unt 過往擬音」推導方案，不建議使用
- * Previous versions of unt’s reconstruction have been moved to the derivation scheme “unt’ Legacy Reconstructions” and are no longer recommended for use
+ * Previous versions of unt’s reconstruction have been moved to the derivation scheme “unt’s Legacy Reconstructions” and are no longer recommended for use
  *
  * @author unt
  */
@@ -15,7 +15,7 @@ const is = (...x) => 音韻地位.屬於(...x);
 const when = (...x) => 音韻地位.判斷(...x);
 
 if (!音韻地位) {
-  let isZH = document?.documentElement?.lang?.startsWith('zh') ?? true;
+  let isZH = typeof document === 'undefined' || (document?.documentElement?.lang?.startsWith('zh') ?? true);
   let prevRTR = 選項._prevRTR ?? true;
   let prevATR = 選項._prevATR ?? false;
   let prev小舌 = 選項._prev小舌 ?? true;
@@ -50,7 +50,7 @@ if (!音韻地位) {
       text: isZH ? 'RTR 的 p' : 'RTR Diacritic on [p]',
       options: [
         { text: isZH ? '符號加在上方 p᫡' : 'Above [p᫡]', value: 'p᫡' },
-        { text: isZH ? '符號加在下方 p̙' : ' Below [p̙]', value: 'p̙' },
+        { text: isZH ? '符號加在下方 p̙' : 'Below [p̙]', value: 'p̙' },
       ],
     }],
 
@@ -118,11 +118,11 @@ if (!音韻地位) {
     ['幫組拼ə時添加w介音', false, {
       text: isZH ?
         選項.微韻合口 === 'wɨj' ?
-          `幫組拼 ɨ、ə 時添加 w 介音（蒸登韻除外）` :
-          `幫組拼 ə 時添加 w 介音（登韻除外）` :
+          '幫組拼 ɨ、ə 時添加 w 介音（蒸登韻除外）' :
+          '幫組拼 ə 時添加 w 介音（登韻除外）' :
         選項.微韻合口 === 'wɨj' ?
-          `Insert [w] Between Labials and [ɨ]/[ə]` :
-          `Insert [w] Between Labials and [ə]`,
+          'Insert [w] Between Labials and [ɨ]/[ə]' :
+          'Insert [w] Between Labials and [ə]',
       description: isZH ? null :
         `${選項.微韻合口 === 'wɨj' ?
           'Except for the 蒸 Zhēng and 登 Dēng rhymes' :
