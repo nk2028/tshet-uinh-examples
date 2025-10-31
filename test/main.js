@@ -13,6 +13,7 @@ const testCases = [
   ['karlgren', 'ɕi̯ɛu꞉'],
   ['wangli', '꜂ɕĭɛu'],
   ['panwuyun', 'ɕiᴇu˧˥'],
+  ['unt_new', 'ɕéw'],
   ['unt', 'ɕéw'],
   ['msoeg_v8', 'ɕiɛuʔ'],
   ['high_tang', 'ɕéw'],
