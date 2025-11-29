@@ -1,11 +1,12 @@
 /* 推導老國音
-
-音系：https://zh.wikiversity.org/zh-hant/%E8%80%81%E5%9C%8B%E9%9F%B3%E9%9F%B3%E7%B4%A0
-音變規則：https://zh.wikiversity.org/zh-hant/%E8%80%81%E5%9C%8B%E9%9F%B3%E8%88%87%E5%BB%A3%E9%9F%BB%E5%B0%8D%E6%AF%94
-字音來源：https://github.com/baopaau/rime-bepemefeve/blob/main/bepemefeve.dict.yaml
-注意「僞老國音」：https://www.bilibili.com/read/cv17377530/
-
-@author 307587 */
+ *
+ * 音系：https://zh.wikiversity.org/zh-hant/%E8%80%81%E5%9C%8B%E9%9F%B3%E9%9F%B3%E7%B4%A0
+ * 音變規則：https://zh.wikiversity.org/zh-hant/%E8%80%81%E5%9C%8B%E9%9F%B3%E8%88%87%E5%BB%A3%E9%9F%BB%E5%B0%8D%E6%AF%94
+ * 字音來源：https://github.com/baopaau/rime-bepemefeve/blob/main/bepemefeve.dict.yaml
+ * 注意「僞老國音」：https://www.bilibili.com/read/cv17377530/
+ *
+ * @author 307587
+ */
 
 /** @type { 音韻地位['屬於'] } */
 const is = (...x) => 音韻地位.屬於(...x);
@@ -68,7 +69,7 @@ const 聲母規則 = () => when([
 const 舒聲韻母規則 = () => when([
   // 果攝
   ['歌韻 一等', [['合口 非 疑母', 'ㄨㄛ'], ['', 'ㄛ']]],
-  ['歌韻 三等', [['脣音', 'ㄨㄛ'], ['合口', 'ㄩㄝ'], ['', 'ㄧㄝ']]], // 輕脣？
+  ['歌韻 三等', [['脣音', 'ㄨㄛ'], ['合口', 'ㄩㄝ'], ['', 'ㄧㄝ']]],
 
   // 假攝
   ['麻韻 二等', [['合口', 'ㄨㄚ'], ['牙喉音', 'ㄧㄚ'], ['', 'ㄚ']]],
