@@ -31,9 +31,12 @@ https://nk2028-1305783649.file.myqcloud.com/tshet-uinh-examples/<filename>
 - 推導《蒙古字韻》 (Extrapolated _Menggu Ziyun_): `mongol.js`
 - 推導《中原音韻》擬音 (Extrapolated Reconstruction of _Zhongyuan Yinyun_): `zhongyuan.js`
 
-**現代方言推導音 extrapolated pronunciations of modern dialects**
+**近代方言推導音 extrapolated pronunciations of early modern dialects**
 
 - 推導老國音 (Extrapolated Old National Pronunciation): `onp.js`
+
+**現代方言推導音 extrapolated pronunciations of modern dialects**
+
 - 推導普通話 (Extrapolated Putonghua): `putonghua.js`
 - 推導廣州話 (Extrapolated Cantonese): `gwongzau.js`
 - 推導上海話 (Extrapolated Shanghainese): `zaonhe.js`
