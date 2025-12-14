@@ -14,7 +14,7 @@ const is = (...x) => 音韻地位.屬於(...x);
 const when = (...x) => 音韻地位.判斷(...x);
 
 if (!音韻地位) return [
-  ['注音符號|標注方式', [2, {text: '國際音標', value: false}, {text: '注音符號', value: true}]],
+  ['注音符號|標注方式', [1, { text: '注音符號', value: true }, { text: '國際音標', value: false }]],
   '標注風格',
   ...(選項.注音符號 !== false ? [
     ['注音符號省略陰平調號|省略陰平調號', false],
