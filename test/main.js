@@ -28,6 +28,7 @@ const testCases = [
   ['zaonhe', 'sɔ̄'],
   ['ayaka_v8', 'seu'],
   ['yec_en_hua', 'A'],
+  ['zhongyuan_guanhua', 'ʂɔ˧˧'],
 ];
 
 const directorySchemata = new Set(readdirSync('.').flatMap(file => file !== (file = file.replace(/\.js$/, '')) && !file.endsWith('.config') ? [file] : []));
