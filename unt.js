@@ -19,20 +19,15 @@ if (!音韻地位) {
   let isZH = typeof document === 'undefined' || (document.documentElement?.lang?.startsWith('zh') ?? true);
   let prevRTR = 選項._prevRTR ?? true;
   let prevATR = 選項._prevATR ?? false;
-  let prev小舌 = 選項._prev小舌 ?? true;
   let currRTR = 選項.RTR ?? true;
   let currATR = 選項.ATR ?? false;
-  let curr小舌 = 選項.小舌 ?? true;
-  if (curr小舌 !== prev小舌 && !curr小舌) currRTR = false; // RTR => 見組非三等寫小舌音
   if (!currRTR && !currATR) { // RTR 和 ATR 中至少選一項
     if (currRTR !== prevRTR) currATR = true;
     else currRTR = true;
   }
-  if (currRTR !== prevRTR && currRTR) curr小舌 = true; // RTR => 見組非三等寫小舌音
   return [
     ['_prevRTR', currRTR, { reset: true, hidden: true }],
     ['_prevATR', currATR, { reset: true, hidden: true }],
-    ['_prev小舌', curr小舌, { reset: true, hidden: true }],
 
     isZH ? '非三等' : 'Type A: Divisions I, II & IV',
     ['RTR', currRTR, {
@@ -40,18 +35,16 @@ if (!音韻地位) {
       text: isZH ? '寫出 RTR（舌根偏後）符號' : 'Use RTR Diacritic',
       description: isZH ?
         `聲母下加├
-         見組除外，因爲見組非三等已經是小舌音，無需再加 RTR 符號
-         （寫出 RTR 符號時，見組非三等必寫小舌音）` :
+         * 見組（以及曉匣母）非三等寫小舌音時，則不額外添加 RTR 符號` :
         `Add the retracted tongue root (RTR) diacritic [├] to the initial
-         Except for Type-A dorsals (見 Jiàn group), which are already uvulars and do not require additional indication for RTR
-         (When applying the RTR diacritic, Type-A dorsals must be transcribed as uvulars)`,
+         * When transcribing Type-A dorsal initials (見 Jiàn group, 曉 Xiǎo, and 匣 Xiá) as uvulars, the RTR diacritic is unnecessary and will not be added`,
     }],
-    ['pRTR', 1, {
+    ['字母有降部時的RTR', 1, {
       hidden: !currRTR,
-      text: isZH ? 'RTR 的 p' : 'RTR Diacritic on [p]',
+      text: isZH ? '字母有降部時 RTR 符號加在' : 'For Symbols with Descenders Place RTR Diacritic',
       options: [
-        { text: isZH ? '符號加在上方 p᫡' : 'Above [p᫡]', value: 'p᫡' },
-        { text: isZH ? '符號加在下方 p̙' : 'Below [p̙]', value: 'p̙' },
+        { text: isZH ? '上方，如 p᫡' : 'Above, e.g. [p᫡]', value: '᫡' },
+        { text: isZH ? '下方，如 p̙' : 'Below, e.g. [p̙]', value: '̙' },
       ],
     }],
 
@@ -63,27 +56,25 @@ if (!音韻地位) {
         `鈍音聲母三等 C 類寫 ɣ 介音（代表軟腭近音 ɣ̞ = ɨ̯~ɯ̯）
          莊組三等寫 ɹ 介音
          其他銳音聲母三等寫 j 介音
-         （RTR 符號和 ATR 介音至少要寫出一方）` :
+         * RTR 符號和 ATR 介音至少要寫出一方` :
         `Add advanced tongue root (ATR) medials to Division-III syllables:
-         After non-coronal (grave) initials, Subdivision C: [ɣ] (representing the velar approximant [ɣ̞] = [ɨ̯~ɯ̯])
-         After retroflex sibilants (莊 Zhuāng group): [ɹ]
-         After other coronal (acute) initials: [j]
-         (At least one of RTR and ATR must be marked)`,
+         - After non-coronal (grave) initials, Subdivision C: [ɣ] (representing the velar approximant [ɣ̞] = [ɨ̯~ɯ̯])
+         - After retroflex sibilant initials (莊 Zhuāng group): [ɹ]
+         - After other coronal (acute) initials: [j]
+         * At least one of RTR and ATR must be marked`,
     }],
 
     isZH ? '小舌音' : 'Uvulars',
-    ['小舌', curr小舌, {
-      reset: curr小舌 !== prev小舌,
-      text: isZH ? '見組非三等寫小舌音' : 'Transcribe Type-A Dorsals as Uvulars',
-      description: isZH ? null : 'Dorsals = 見 Jiàn group',
+    ['見組非三等寫小舌音', true, {
+      text: isZH ? null : 'Transcribe Type-A Dorsal Initials as Uvulars',
+      description: isZH ? '也包括曉匣母非三等' : 'Type-A dorsal initials = 見 Jiàn group, 曉 Xiǎo, and 匣 Xiá',
     }],
     ['通江宕攝音節尾寫小舌音', true, {
-      hidden: !curr小舌,
       text: isZH ? null : 'Transcribe Back Dorsal Codas as Uvulars',
-      description: isZH ? null : 'Back dorsal codas = codas of the 通 Tōng, 江 Jiāng, and 宕 Dàng rhyme groups',
+      description: isZH ? '代表靠後的舌面音' : 'Back dorsal codas = codas of the 通 Tōng, 江 Jiāng, and 宕 Dàng rhyme groups',
     }],
     ['後低元音', [1, 'a', 'ɑ'], {
-      hidden: !curr小舌 || 選項.通江宕攝音節尾寫小舌音 === false,
+      hidden: 選項.通江宕攝音節尾寫小舌音 === false,
       text: isZH ? null : 'Low Back Vowel',
       description: isZH ?
         '宕攝音節尾寫小舌音時，前後低元音互補，可合併' :
@@ -143,16 +134,20 @@ function 音韻地位正則化() {
 
 function get聲母() {
   if (is`云母 開口 非 (深咸攝 入聲)`) return ''; // 云母開口爲零聲母，但煜、曄小韻（視爲“合口”）除外
-  return {
-    幫: 'p p̙', 滂: 'pʰ p̙ʰ', 並: 'b b̙', 明: 'm m̙',
-    端: '  t̙', 透: '   t̙ʰ', 定: '  d̙', 泥: '  n̙', 來: 'l l̙',
-    知: 'ʈ  ', 徹: 'ʈʰ   ', 澄: 'ɖ  ', 孃: 'ɳ  ',
-    見: 'k q', 溪: 'kʰ qʰ', 羣: 'ɡ  ', 疑: 'ŋ ɴ', 曉: 'x χ', 匣: 'ʁ', 云: 'w',
-    影: 'ʔ ʔ̙',
-    精: 'ts t̙s̙', 清: 'tsʰ t̙s̙ʰ', 從: 'dz d̙z̙', 心: 's s̙', 邪: 'z',
-    莊: 'tʂ   ', 初: 'tʂʰ    ', 崇: 'dʐ   ', 生: 'ʂ  ', 俟: 'ʐ',
-    章: 'tɕ   ', 昌: 'tɕʰ    ', 常: 'dʑ   ', 書: 'ɕ  ', 船: 'ʑ', 日: 'ɲ', 以: 'j',
-  }[音韻地位.母].trim().split(' ').at(is`三等` - 1);
+  let 聲母 = {
+    幫: 'p', 滂: 'pʰ', 並: 'b', 明: 'm',
+    端: 't', 透: 'tʰ', 定: 'd', 泥: 'n', 來: 'l',
+    知: 'ʈ', 徹: 'ʈʰ', 澄: 'ɖ', 孃: 'ɳ',
+    見: 'k', 溪: 'kʰ', 羣: 'ɡ', 疑: 'ŋ', 曉: 'x', 匣: 'ɣ', 云: 'w',
+    影: 'ʔ',
+    精: 'ts', 清: 'tsʰ', 從: 'dz', 心: 's', 邪: 'z',
+    莊: 'tʂ', 初: 'tʂʰ', 崇: 'dʐ', 生: 'ʂ', 俟: 'ʐ',
+    章: 'tɕ', 昌: 'tɕʰ', 常: 'dʑ', 書: 'ɕ', 船: 'ʑ', 日: 'ɲ', 以: 'j',
+  }[音韻地位.母];
+  if (is`(幫端精見影組 或 來母) 非 三等`) {
+    聲母 = [...聲母].map(c => c === 'ʰ' ? c : c + '̙').join('');
+  }
+  return 聲母;
 }
 
 function get介音() {
@@ -190,17 +185,16 @@ function get音節() {
     ...get音節核尾(),
     聲調: get聲調(),
   };
+  if (選項.見組非三等寫小舌音) 音節.聲母 = { k̙: 'q', k̙ʰ: 'qʰ', ŋ̙: 'ɴ', x̙: 'χ', ɣ̙: 'ʁ' }[音節.聲母] ?? 音節.聲母;
   if (!選項.RTR) 音節.聲母 = 音節.聲母.replace('̙', '');
-  if (is`幫滂母`) 音節.聲母 = 音節.聲母.replace('p̙', 選項.pRTR);
+  if (['p', 'ŋ', 'ɣ'].includes(音節.聲母[0])) 音節.聲母 = 音節.聲母.replace('̙', 選項.字母有降部時的RTR);
   if (選項.ATR) 音節.介音 = when([
     ['C類', 'ɣ'],
     ['莊組 三等', 'ɹ'],
     ['銳音 三等 非 以母', 'j'],
     ['', ''],
   ]) + 音節.介音;
-  const 小舌音替換字典 = { q: 'k', qʰ: 'kʰ', ɴ: 'ŋ', χ: 'x', ʁ: 'ɣ' };
-  if (!選項.小舌) 音節.聲母 = 小舌音替換字典[音節.聲母] ?? 音節.聲母;
-  if (!選項.小舌 || !選項.通江宕攝音節尾寫小舌音) 音節.尾 = 小舌音替換字典[音節.尾] ?? 音節.尾;
+  if (!選項.通江宕攝音節尾寫小舌音) 音節.尾 = { q: 'k', qʰ: 'kʰ', ɴ: 'ŋ', χ: 'x', ʁ: 'ɣ' }[音節.尾] ?? 音節.尾;
   else if (音節.核 === 'ɑ') 音節.核 = 選項.後低元音;
   if (is`支韻`) 音節.核 = 選項.支韻;
   if (is`微韻 非 開口`) 音節.核 = 選項.微韻合口.slice(-2, -1);
