@@ -43,6 +43,7 @@ https://nk2028-1305783649.file.myqcloud.com/tshet-uinh-examples/<filename>
 - 推導普通話 (Extrapolated Putonghua): `putonghua.js`
 - 推導廣州話 (Extrapolated Cantonese): `gwongzau.js`
 - 推導上海話 (Extrapolated Shanghainese): `zaonhe.js`
+- 推導日本語漢音 (Extrapolated Japanese Kan'on): `jp kan.js`
 
 **人造音系 artificial phonological system**
 
