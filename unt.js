@@ -69,16 +69,16 @@ if (!音韻地位) {
       text: isZH ? null : 'Transcribe Type-A Dorsal Initials as Uvulars',
       description: isZH ? '也包括曉匣母非三等' : 'Type-A dorsal initials = 見 Jiàn group, 曉 Xiǎo, and 匣 Xiá',
     }],
-    ['通江宕攝音節尾寫小舌音', true, {
+    ['通江宕攝音節尾寫小舌音', false, {
       text: isZH ? null : 'Transcribe Back Dorsal Codas as Uvulars',
       description: isZH ? '代表靠後的舌面音' : 'Back dorsal codas = codas of the 通 Tōng, 江 Jiāng, and 宕 Dàng rhyme groups',
     }],
-    ['後低元音', [1, 'a', 'ɑ'], {
-      hidden: 選項.通江宕攝音節尾寫小舌音 === false,
-      text: isZH ? null : 'Low Back Vowel',
+    ['後低元音寫a', true, {
+      hidden: 選項.通江宕攝音節尾寫小舌音 !== true,
+      text: isZH ? '後低元音寫 [a]' : 'Transcribe the Low Back Vowel as [a]',
       description: isZH ?
-        '宕攝音節尾寫小舌音時，前後低元音互補，可合併' :
-        'When transcribing the 宕 Dàng rhyme group codas as uvulars, the low front and back vowels are in complementary distribution and can be merged',
+        '宕攝音節尾寫小舌音時，前後低元音互補，可進一步合併' :
+        'When transcribing the 宕 Dàng rhyme group codas as uvulars, the low front and back vowels are in complementary distribution and can be further merged',
     }],
 
     isZH ? '其　他' : 'Misc',
@@ -144,9 +144,7 @@ function get聲母() {
     莊: 'tʂ', 初: 'tʂʰ', 崇: 'dʐ', 生: 'ʂ', 俟: 'ʐ',
     章: 'tɕ', 昌: 'tɕʰ', 常: 'dʑ', 書: 'ɕ', 船: 'ʑ', 日: 'ɲ', 以: 'j',
   }[音韻地位.母];
-  if (is`(幫端精見影組 或 來母) 非 三等`) {
-    聲母 = [...聲母].map(c => c === 'ʰ' ? c : c + '̙').join('');
-  }
+  if (is`(幫端精見影組 或 來母) 非 三等`) 聲母 = [...聲母].map(c => c === 'ʰ' ? c : c + '̙').join('');
   return 聲母;
 }
 
@@ -158,19 +156,19 @@ function get介音() {
 
 function get音節核尾() {
   let [韻列表, 核] = [
-    ['脂　│　　　│幽　│　　│　　│真臻　│侵　　', 'i'],
-    ['之　│微　　│　　│蒸　│　　│殷　　│　　　', 'ɨ'],
-    ['尤侯│＿＿＿│＿＿│＿＿│東＿│文＿＿│＿＿＿', 'u'],
-    ['支　│齊祭　│蕭宵│青　│　　│先仙　│鹽添　', 'e'],
-    ['佳　│皆　　│　　│耕　│　　│山　　│咸　　', 'eˤ'],
-    ['魚　│灰咍廢│豪　│登　│　　│元魂痕│覃嚴凡', 'ə'],
-    ['虞模│　　　│　　│　　│冬鍾│　　　│　　　', 'o'],
-    ['＿＿│＿＿＿│＿＿│＿＿│江＿│＿＿＿│＿＿＿', 'oˤ'],
-    ['麻　│夬　　│肴　│庚清│　　│刪　　│銜　　', is`二等` ? 'aˤ' : 'a'],
-    ['歌　│泰　　│　　│　　│陽唐│寒　　│談　　', 'ɑ'],
+    ['脂　│　　　│幽　│　　│真臻　│侵　　', 'i'],
+    ['之　│微　　│　　│蒸　│殷　　│　　　', 'ɨ'],
+    ['尤侯│＿＿＿│＿＿│東＿│文＿＿│＿＿＿', 'u'],
+    ['支　│齊祭　│蕭宵│青　│先仙　│鹽添　', 'e'],
+    ['佳　│皆　　│　　│耕　│山　　│咸　　', 'eˤ'],
+    ['魚　│灰咍廢│豪　│登　│元魂痕│覃嚴凡', 'ə'],
+    ['虞模│　　　│　　│冬鍾│　　　│　　　', 'o'],
+    ['＿＿│＿＿＿│＿＿│江＿│＿＿＿│＿＿＿', 'oˤ'],
+    ['麻　│夬　　│肴　│庚清│刪　　│銜　　', is`二等` ? 'aˤ' : 'a'],
+    ['歌　│泰　　│　　│陽唐│寒　　│談　　', 'ɑ'],
   ].find(e => e[0].includes(音韻地位.韻));
-  let 尾 = ['', ...'jwŋɴnm'][韻列表.split('│').findIndex(e => e.includes(音韻地位.韻))];
-  if (is`入聲`) 尾 = { ŋ: 'k', ɴ: 'q', n: 't', m: 'p' }[尾];
+  let 尾 = ['', ...'jwŋnm'][韻列表.split('│').findIndex(e => e.includes(音韻地位.韻))];
+  if (is`入聲`) 尾 = { ŋ: 'k', n: 't', m: 'p' }[尾];
   return { 核, 尾 };
 }
 
@@ -194,8 +192,10 @@ function get音節() {
     ['銳音 三等 非 以母', 'j'],
     ['', ''],
   ]) + 音節.介音;
-  if (!選項.通江宕攝音節尾寫小舌音) 音節.尾 = { q: 'k', qʰ: 'kʰ', ɴ: 'ŋ', χ: 'x', ʁ: 'ɣ' }[音節.尾] ?? 音節.尾;
-  else if (音節.核 === 'ɑ') 音節.核 = 選項.後低元音;
+  if (選項.通江宕攝音節尾寫小舌音) {
+    if (is`通江宕攝`) 音節.尾 = { k: 'q', ŋ: 'ɴ' }[音節.尾];
+    if (選項.後低元音寫a && 音節.核 === 'ɑ') 音節.核 = 'a';
+  }
   if (is`支韻`) 音節.核 = 選項.支韻;
   if (is`微韻 非 開口`) 音節.核 = 選項.微韻合口.slice(-2, -1);
   if (選項.幫組拼ə時添加w介音 && ['ɨ', 'ə'].includes(音節.核) && is`幫組 非 曾攝`) 音節.介音 += 'w';
