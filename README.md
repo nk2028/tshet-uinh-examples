@@ -4,8 +4,25 @@ JavaScript code examples to generate the derivatives of the Qieyun system using 
 
 ## Usage
 
+**Via CDN**
+
 ```
 https://nk2028-1305783649.file.myqcloud.com/tshet-uinh-examples/<filename>
+```
+
+**Via npm**
+
+```sh
+npm install --save tshet-uinh-examples
+```
+
+```javascript
+import TshetUinh from "tshet-uinh";
+import * as TshetUinhExamples from "tshet-uinh-examples";
+
+const 當前音韻地位 = TshetUinh.音韻地位.from描述("影開二銜入"); // 「押」
+const 推導白一平轉寫 = TshetUinhExamples.baxter({ 版本: "1992" });
+console.log(推導白一平轉寫(當前音韻地位)); // => "ʔæp"
 ```
 
 ## List of included examples
