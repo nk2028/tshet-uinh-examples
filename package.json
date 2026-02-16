@@ -1,6 +1,6 @@
 {
   "name": "tshet-uinh-examples",
-  "version": "20241008.0.0",
+  "version": "20260216.0.0",
   "description": "JavaScript code examples to generate the derivatives of the Qieyun system using TshetUinh.js",
   "type": "module",
   "main": "./dist/index.js",
