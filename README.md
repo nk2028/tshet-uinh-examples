@@ -60,6 +60,7 @@ console.log(推導白一平轉寫(當前音韻地位)); // => "ʔæp"
 - 推導普通話 (Extrapolated Putonghua): `putonghua.js`
 - 推導廣州話 (Extrapolated Cantonese): `gwongzau.js`
 - 推導上海話 (Extrapolated Shanghainese): `zaonhe.js`
+- 推導南京話 (Extrapolated Nankinese): `langjin.js`
 
 **人造音系 artificial phonological system**
 
