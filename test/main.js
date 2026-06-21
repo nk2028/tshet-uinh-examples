@@ -26,6 +26,7 @@ const testCases = [
   ['putonghua', 'shǎo'],
   ['gwongzau', 'siu2'],
   ['zaonhe', 'sɔ̄'],
+  ['taibu', 'shau3'],
   ['ayaka_v8', 'seu'],
   ['yec_en_hua', 'A'],
 ];
