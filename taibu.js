@@ -368,8 +368,8 @@ function 客拼轉IPA(讀音) {
     聲母: '',
     聲調: ''
   };
-  const 輔音韻尾正則匹配 = '(n[ng]?|[mbdgh])$';
-  const 首元音正則匹配 = '^(ii|i|u|[aeo][reo]?)';
+  const 輔音韻尾正則匹配 = /(ng|n|m|[bdg])$/;
+  const 首元音正則匹配 = /^(ii|i|u|[aeo][reo]?)/;
   const 轉換聲母 = {
     'm': 'm', 'n': 'n', 'ng': 'ŋ',
     'b': 'p', 'd': 't', 'g': 'k',
