@@ -18,7 +18,7 @@ const testCases = [
   ['msoeg_v8', 'ɕiɛuʔ'],
   ['high_tang', 'ɕéw'],
   ['mid_tang', 'ɕɛ́w'],
-  ['n_song', 'ɕjɛ́w'],
+  ['n_song', 'ʂjɛ́w'],
   ['mongol', 'ꡮꡠꡓ'],
   ['zhongyuan', 'ʂjɛw³'],
   ['onp', 'ㄕㄠˇ'],
