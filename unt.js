@@ -1,7 +1,8 @@
 /* unt 切韻擬音
  * unt’s Qieyun Reconstruction
  *
- * [出處待公佈 / Source TBA]
+ * 出處 Source:
+ * Wang, Tianheng & Xun Gong. 2026. Reconstructing pharyngealized vowels for *Qieyun* Division II in Middle Chinese. Diachronica. https://doi.org/10.1075/dia.25018.wan
  *
  * 過往 unt 擬音（切韻擬音 L、切韻擬音 J、切韻通俗擬音、切韻朗讀音）已移入「unt 過往擬音」推導方案，不建議使用
  * Previous versions of unt’s reconstruction have been moved to the derivation scheme “unt’s Legacy Reconstructions” and are no longer recommended for use
@@ -51,17 +52,26 @@ if (!音韻地位) {
     isZH ? '三　等' : 'Type B: Division III',
     ['ATR', currATR, {
       reset: currATR !== prevATR,
-      text: isZH ? '寫出 ATR（舌根偏前）介音' : 'Use ATR Medials',
+      text: isZH ? '寫出額外的 ATR（舌根偏前）介音' : 'Use Extra ATR Medials',
       description: isZH ?
-        `鈍音聲母三等 C 類寫 ɣ 介音（代表軟腭近音 ɣ̞ = ɨ̯~ɯ̯）
+        `鈍音聲母三等 C 類寫 ɰ/ɣ̞/ɣ 介音
          莊組三等寫 ɹ 介音
          其他銳音聲母三等寫 j 介音
          * RTR 符號和 ATR 介音至少要寫出一方` :
         `Add advanced tongue root (ATR) medials to Division-III syllables:
-         - After non-coronal (grave) initials, Subdivision C: [ɣ] (representing the velar approximant [ɣ̞] = [ɨ̯~ɯ̯])
+         - After non-coronal (grave) initials, Subdivision C: [ɰ/ɣ̞/ɣ]
          - After retroflex sibilant initials (莊 Zhuāng group): [ɹ]
          - After other coronal (acute) initials: [j]
          * At least one of RTR and ATR must be marked`,
+    }],
+    ['介音與元音同部位時省略', true, {
+      text: isZH ? null : 'Omit Medials Homorganic with the Vowel',
+      description: `ji → i\njwi → wi\n${currATR ? 選項.三C介音 + 'ɨ → ɨ' : ''}`,
+    }],
+    ['三C介音', [1, 'ɰ', 'ɣ̞', 'ɣ'], {
+      hidden: !currATR,
+      text: isZH ? '三 C 介音' : 'Division-IIIC Medial',
+      description: isZH ? '軟腭近音（ɨ~ɯ 對應的半元音）' : 'The velar approximant (the semivowel corresponding to [ɨ~ɯ])',
     }],
 
     isZH ? '小舌音' : 'Uvulars',
@@ -187,7 +197,7 @@ function get音節() {
   if (!選項.RTR) 音節.聲母 = 音節.聲母.replace(/̙/g, '');
   if (['p', 'ŋ', 'ɣ'].includes(音節.聲母[0])) 音節.聲母 = 音節.聲母.replace('̙', 選項.字母有降部時的RTR);
   if (選項.ATR) 音節.介音 = when([
-    ['C類', 'ɣ'],
+    ['C類', 選項.三C介音],
     ['莊組 三等', 'ɹ'],
     ['銳音 三等 非 以母', 'j'],
     ['', ''],
@@ -200,9 +210,11 @@ function get音節() {
   if (is`微韻 非 開口`) 音節.核 = 選項.微韻合口.slice(-2, -1);
   if (選項.幫組拼ə時添加w介音 && ['ɨ', 'ə'].includes(音節.核) && is`幫組 非 曾攝`) 音節.介音 += 'w';
 
-  if (is`四等` && 音節.核 !== 'e') 音節.介音 = 'j' + 音節.介音; // 爹小韻
-  if (音節.核[0] === 'i') 音節.介音 = 音節.介音.replace('j', '');
-  if (音節.核[0] === 'ɨ') 音節.介音 = 音節.介音.replace('ɣ', '');
+  if (is`四等` && 音節.核 === 'a') 音節.介音 = 'j' + 音節.介音; // 爹小韻
+  if (選項.介音與元音同部位時省略) {
+    if (音節.核[0] === 'i') 音節.介音 = 音節.介音.replace('j', '');
+    if (音節.核[0] === 'ɨ') 音節.介音 = 音節.介音.replace(選項.三C介音, '');
+  }
   if (['u', 'o'].includes(音節.核[0])) 音節.介音 = 音節.介音.replace('w', '');
   音節.首 = 音節.聲母 + 音節.介音;
   音節.韻基 = 音節.核 + 音節.尾;
