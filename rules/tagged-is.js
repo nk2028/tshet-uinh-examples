@@ -22,7 +22,7 @@ export default {
                 }
                 if (arg.type === 'Literal' && typeof arg.value === 'string') {
                   return fixer.replaceText(node, `is\`${
-                    arg.raw.slice(1, -1).replace(/\\('|")|`|\$\{/g, (match, escaped) => escaped || `\\${match}`)
+                    arg.raw.slice(1, -1).replace(/\\(('|")|.)|`|\$\{/g, (match, escaped, quote) => quote || `\\${escaped || match}`)
                   }\``);
                 }
                 return null;

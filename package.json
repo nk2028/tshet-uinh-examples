@@ -1,12 +1,21 @@
 {
   "name": "tshet-uinh-examples",
-  "version": "20241008.0.0",
-  "description": "JavaScript code examples to generate the derivatives of the Qieyun phonological system using qieyun-js",
+  "version": "20260629.0.1",
+  "description": "JavaScript code examples to generate the derivatives of the Qieyun system using TshetUinh.js",
   "type": "module",
-  "main": "index.js",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "default": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": ["dist"],
   "scripts": {
-    "lint": "eslint .",
-    "lint:fix": "eslint --fix .",
+    "lint": "eslint . --ignore-pattern dist/**/*",
+    "lint:fix": "eslint --fix . --ignore-pattern dist/**/*",
+    "build": "node build/main.js",
     "test": "node test/main.js"
   },
   "repository": {
@@ -19,7 +28,7 @@
     "qieyun"
   ],
   "author": "nk2028",
-  "license": "CC0-1.0",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/nk2028/tshet-uinh-examples/issues"
   },

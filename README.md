@@ -4,11 +4,30 @@ JavaScript code examples to generate the derivatives of the Qieyun system using 
 
 ## Usage
 
+**Via CDN**
+
 ```
 https://nk2028-1305783649.file.myqcloud.com/tshet-uinh-examples/<filename>
 ```
 
+**Via npm**
+
+```sh
+npm install --save tshet-uinh-examples
+```
+
+```javascript
+import TshetUinh from "tshet-uinh";
+import * as TshetUinhExamples from "tshet-uinh-examples";
+
+const 當前音韻地位 = TshetUinh.音韻地位.from描述("影開二銜入"); // 「押」
+const 推導白一平轉寫 = TshetUinhExamples.baxter({ 版本: "1992" });
+console.log(推導白一平轉寫(當前音韻地位)); // => "ʔæp"
+```
+
 ## List of included examples
+
+**音韻地位 phonological position:** `position.js`
 
 **切韻音系拼音或轉寫 romanization/transcription of the Qieyun system**
 
@@ -20,15 +39,21 @@ https://nk2028-1305783649.file.myqcloud.com/tshet-uinh-examples/<filename>
 - 高本漢擬音 (Bernhard Karlgren’s Reconstruction): `karlgren.js`
 - 王力擬音 (Wang Li’s Reconstruction): `wangli.js`
 - 潘悟雲擬音 (Pan Wuyun’s Reconstruction): `panwuyun.js`
-- unt 擬音 (unt’s Qieyun Reconstruction): `unt.js`
+- unt 擬音 (unt’s Reconstruction): `unt.js`
+- unt 過往擬音 (unt’s Legacy Reconstructions): `unt_legacy.js`
 - msoeg 擬音 V8 (msoeg’s Reconstruction V8): `msoeg_v8.js`
 
 **推導後世音系 extrapolated phonological system of later periods**
 
-- 推導盛中唐擬音 (Extrapolated Reconstruction of High and Middle Tang Chinese): `mid_tang.js`
-- 推導北宋擬音（聲音唱和圖） (Extrapolated Reconstruction of Northern Song Chinese (*Shing-im Chiang-xhua Dhu*)): `n_song.js`
+- 推導盛唐（平水韻）擬音 (Extrapolated Reconstruction of High Tang Chinese (*Pingshui Yun*)): `high_tang.js`
+- 推導中唐（韻圖）擬音 (Extrapolated Reconstruction of Middle Tang Chinese (*Yuntu*)): `mid_tang.js`
+- 推導北宋（聲音唱和圖）擬音 (Extrapolated Reconstruction of Northern Song Chinese (*Shengyin Changhe Tu*)): `n_song.js`
 - 推導《蒙古字韻》 (Extrapolated _Menggu Ziyun_): `mongol.js`
 - 推導《中原音韻》擬音 (Extrapolated Reconstruction of _Zhongyuan Yinyun_): `zhongyuan.js`
+
+**近代方言推導音 extrapolated pronunciations of early modern dialects**
+
+- 推導老國音 (Extrapolated Old National Pronunciation): `onp.js`
 
 **現代方言推導音 extrapolated pronunciations of modern dialects**
 
@@ -36,6 +61,8 @@ https://nk2028-1305783649.file.myqcloud.com/tshet-uinh-examples/<filename>
 - 推導廣州話 (Extrapolated Cantonese): `gwongzau.js`
 - 推導上海話 (Extrapolated Shanghainese): `zaonhe.js`
 - 推導南京話 (Extrapolated Nankinese): `langjin.js`
+- 推導香港客家話 (Extrapolated Hong Kong Hakka): `hionggong.js`
+- 推導梅州大埔客家話 (Extrapolated Meizhou Taibu Hakka): `taibu.js`
 
 **人造音系 artificial phonological system**
 
